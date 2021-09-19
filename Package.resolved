@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Domains",
+        "repositoryURL": "https://github.com/privacy-inc/domains.git",
+        "state": {
+          "branch": "main",
+          "revision": "f82fb2ffea741d9f3936104c8796fbbaa355477b",
+          "version": null
+        }
+      },
+      {
+        "package": "Archivable",
+        "repositoryURL": "https://github.com/archivable/package.git",
+        "state": {
+          "branch": "main",
+          "revision": "3a9639eff4c36dacd42a1ae95680ad83e1d3418a",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

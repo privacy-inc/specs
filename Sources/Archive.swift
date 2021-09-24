@@ -2,9 +2,6 @@ import Foundation
 import Archivable
 
 public struct Archive: Arch {
-    public static let version = UInt8()
-    public static let new = Self()
-    
     public var timestamp: UInt32
     
     public var data: Data {
@@ -13,7 +10,7 @@ public struct Archive: Arch {
         }
     }
     
-    private init() {
+    public init() {
         timestamp = 0
     }
     

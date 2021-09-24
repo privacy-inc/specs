@@ -2,10 +2,11 @@ import Foundation
 import Domains
 
 extension Access {
-    public struct Remote: Hashable {
+    public struct Remote: AccessType {
+        public let key = Access.remote
+        public let value: String
         public let domain: String
         public let suffix: String
-        let value: String
         
         init(value: String) {
             self.value = value
@@ -32,14 +33,6 @@ extension Access {
                                 .Scheme
                                 .https
                                 .rawValue)
-        }
-        
-        public func hash(into: inout Hasher) {
-            into.combine(value)
-        }
-        
-        public static func == (lhs: Self, rhs: Self) -> Bool {
-            lhs.value == rhs.value
         }
     }
 }

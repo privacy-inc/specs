@@ -1,9 +1,10 @@
 import Foundation
 
 extension Access {
-    public struct Embed {
-        public let prefix: String
+    public struct Embed: AccessType {
+        public let key = Access.embed
         public let value: String
+        let prefix: String
         
         init(value: String) {
             self.value = value

@@ -3,20 +3,20 @@ import Archivable
 
 public struct Website: Storable {
     public let title: String
-    public let access: Access
+    public let access: AccessType
     
     public var data: Data {
-        Data()
+        .init()
             .adding(title)
             .adding(access.data)
     }
     
     public init(data: inout Data) {
         title = data.string()
-        access = .init(data: &data)
+        access = Access.with(data: &data)
     }
     
-    init(title: String = "", access: Access) {
+    init(title: String = "", access: AccessType) {
         self.title = title
         self.access = access
     }
@@ -25,7 +25,7 @@ public struct Website: Storable {
         .init(title: title, access: access)
     }
     
-    func with(access: Access) -> Self {
+    func with(access: AccessType) -> Self {
         .init(title: title, access: access)
     }
 }

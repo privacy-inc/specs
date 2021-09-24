@@ -20,7 +20,7 @@ let package = Package(
     targets: [
         .target(
             name: "Specs",
-            dependencies: ["Archivable"],
+            dependencies: ["Archivable", "Domains"],
             path: "Sources"),
         .testTarget(
             name: "Tests",

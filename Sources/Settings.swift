@@ -12,4 +12,8 @@ public struct Settings: Storable {
     public init(data: inout Data) {
         search = .init(data: &data)
     }
+    
+    init() {
+        search = .init(engine: .google)
+    }
 }

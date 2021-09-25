@@ -18,6 +18,16 @@ final class ArchiveTests: XCTestCase {
     
     func testHistory() async {
         XCTAssertTrue(archive.history.isEmpty)
-//        archive.history = [(99, .init(title: "hello world", access: .ini))]
+        archive.history = [.init(id: 99, website: .init(url: URL(string: "https://avocado.org")!))]
+        archive = await Archive.prototype(data: archive.compressed)
+        XCTAssertEqual("https://avocado.org", archive.history.first?.website.access.value)
+        XCTAssertEqual(99, archive.history.first?.id)
+    }
+    
+    func testSettings() async {
+        XCTAssertEqual(.google, archive.settings.search.engine)
+        archive.settings.search = .init(engine: .ecosia)
+        archive = await Archive.prototype(data: archive.compressed)
+        XCTAssertEqual(.ecosia, archive.settings.search.engine)
     }
 }

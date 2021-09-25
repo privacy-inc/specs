@@ -19,7 +19,7 @@ public struct Search: Storable {
         components = engine.components
     }
     
-    func callAsFunction<Result>(search: String, result: (String) -> Result) -> Result? {
+    func callAsFunction(search: String) -> String? {
         search
             .trimmed {
                 $0.url
@@ -27,7 +27,6 @@ public struct Search: Storable {
                     ?? $0.partial
                     ?? query(search: $0)
             }
-            .map(result)
     }
     
     private func query(search: String) -> String? {

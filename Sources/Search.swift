@@ -19,7 +19,7 @@ public struct Search: Storable {
         components = engine.components
     }
     
-    func callAsFunction(search: String) -> String? {
+    func callAsFunction(_ search: String) -> String? {
         search
             .trimmed {
                 $0.url

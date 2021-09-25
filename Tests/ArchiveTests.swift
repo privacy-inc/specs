@@ -15,4 +15,9 @@ final class ArchiveTests: XCTestCase {
         archive = await Archive.prototype(data: archive.compressed)
         XCTAssertEqual(100, archive.index)
     }
+    
+    func testHistory() async {
+        XCTAssertTrue(archive.history.isEmpty)
+//        archive.history = [(99, .init(title: "hello world", access: .ini))]
+    }
 }

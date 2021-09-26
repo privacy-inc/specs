@@ -1,7 +1,7 @@
 import Foundation
 import Archivable
 
-public struct History: Storable {
+public struct History: Storable, Identifiable {
     public let id: Int
     public let website: Website
     

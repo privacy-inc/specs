@@ -1,12 +1,19 @@
 import Archivable
 
 extension Cloud where A == Archive {
-    public func search(_ search: String) async -> Int? {
-        guard let search = model.settings.search(search) else { return nil }
+    public func search(_ string: String) async throws -> Int {
         let id = model.index
-        model.history = model.history.adding(.init(id: id, website: .init(search: search)))
+        try await search(string, history: id)
         model.index += 1
-        await stream()
         return id
+    }
+    
+    public func search(_ string: String, history: Int) async throws {
+        guard let string = model.settings.search(string) else { throw Err.invalidSearch }
+        model.history = model
+            .history
+            .dropping(history)
+            .adding(.init(id: history, website: .init(search: string)))
+        await stream()
     }
 }

@@ -13,7 +13,7 @@ final class CloudSearchTests: XCTestCase {
     }
     
     func testFirsts() async {
-        let idFirst = await cloud.search("hello world")
+        let idFirst = try! await cloud.search("hello world")
         XCTAssertEqual(0, idFirst)
         
         var model = await cloud.model
@@ -21,7 +21,7 @@ final class CloudSearchTests: XCTestCase {
         XCTAssertEqual(1, model.index)
         XCTAssertTrue(model.history.first?.website.access.value.contains("hello") ?? false)
         
-        let idSecond = await cloud.search("lorem ipsum")
+        let idSecond = try! await cloud.search("lorem ipsum")
         XCTAssertEqual(1, idSecond)
         
         model = await cloud.model
@@ -33,8 +33,8 @@ final class CloudSearchTests: XCTestCase {
     }
     
     func testDuplicates() async {
-        _ = await cloud.search("hello world")
-        let last = await cloud.search("hello world")
+        _ = try! await cloud.search("hello world")
+        let last = try! await cloud.search("hello world")
         
         XCTAssertEqual(1, last)
         
@@ -42,6 +42,39 @@ final class CloudSearchTests: XCTestCase {
         XCTAssertEqual(1, model.history.count)
         XCTAssertEqual(1, model.history.first?.id)
         XCTAssertEqual(2, model.index)
+    }
+    
+    func testInvalidSearch() async {
+        _ = try? await cloud.search("")
+
+        let model = await cloud.model
+        XCTAssertTrue(model.history.isEmpty)
+    }
+    
+    func testReuseHistory() async {
+        let id = try! await cloud.search("hello world")
+        XCTAssertEqual(0, id)
+        
+        try! await cloud.search("lorem ipsum", history: id)
+        
+        let model = await cloud.model
+        XCTAssertEqual(0, model.history.first?.id)
+        XCTAssertEqual(1, model.history.count)
+        XCTAssertEqual(1, model.index)
+        XCTAssertTrue(model.history.first?.website.access.value.contains("lorem") ?? false)
+    }
+    
+    func testInvalidSearchReuse() async {
+        let id = try! await cloud.search("hello world")
+        XCTAssertEqual(0, id)
+        
+        try? await cloud.search("", history: id)
+        
+        let model = await cloud.model
+        XCTAssertEqual(0, model.history.first?.id)
+        XCTAssertEqual(1, model.history.count)
+        XCTAssertEqual(1, model.index)
+        XCTAssertTrue(model.history.first?.website.access.value.contains("hello") ?? false)
     }
     
     func testSaves() {
@@ -56,7 +89,7 @@ final class CloudSearchTests: XCTestCase {
             .store(in: &subs)
         
         Task {
-            _ = await self.cloud.search("something")
+            _ = try! await self.cloud.search("something")
         }
         
         waitForExpectations(timeout: 1)

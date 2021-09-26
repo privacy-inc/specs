@@ -16,4 +16,21 @@ extension Cloud where A == Archive {
             .adding(.init(id: history, website: .init(search: string)))
         await stream()
     }
+    
+    public func update(title: String, history: Int) async {
+        let original = model
+            .history
+            .first { $0.id == history }!
+            .website
+        
+        guard original.title != title else { return }
+        
+        let updated = original
+            .with(title: title)
+        model.history = model
+            .history
+            .dropping(history)
+            .adding(.init(id: history, website: updated))
+        await stream()
+    }
 }

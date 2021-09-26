@@ -43,4 +43,22 @@ final class CloudSearchTests: XCTestCase {
         XCTAssertEqual(1, model.history.first?.id)
         XCTAssertEqual(2, model.index)
     }
+    
+    func testSaves() {
+        let expect = expectation(description: "")
+        
+        cloud
+            .sink {
+                if $0.history.count == 1 {
+                    expect.fulfill()
+                }
+            }
+            .store(in: &subs)
+        
+        Task {
+            _ = await self.cloud.search("something")
+        }
+        
+        waitForExpectations(timeout: 1)
+    }
 }

@@ -120,11 +120,35 @@ public final actor Favicon {
             CGImageSourceCreateWithURL(url as CFURL, [kCGImageSourceShouldCache : false] as CFDictionary)!,
             0,
             [kCGImageSourceCreateThumbnailFromImageAlways : true,
+               kCGImageSourceCreateThumbnailWithTransform : true,
                       kCGImageSourceThumbnailMaxPixelSize : 36] as CFDictionary)
             .map {
                 .init(cgImage: $0)
             }
     }
+    
+//    private func output(for domain: String) {
+//        let url = path.appendingPathComponent(domain)
+//        
+//        guard
+//            let source = CGImageSourceCreateWithURL(url as NSURL, nil),
+//            let image = CGImageSourceCreateImageAtIndex(source, 0, nil)
+//        else { return nil }
+//        
+//        let context = CGContext(data: nil,
+//                                width: 36,
+//                                height: 36,
+//                                bitsPerComponent: image.bitsPerComponent,
+//                                bytesPerRow: 0,
+//                                space: image.colorSpace ?? .init(name: CGColorSpace.sRGB)!,
+//                                bitmapInfo: image.bitmapInfo.rawValue)
+//        context?.interpolationQuality = .high
+//        context?.draw(image, in: .init(origin: .zero, size: .init(width: 36, height: 36)))
+//
+//        guard let scaled = context?.makeImage() else { return nil }
+//
+//        return .init(cgImage: scaled)
+//    }
 }
 
 extension Favicon {
@@ -209,7 +233,7 @@ extension Favicon.Pub {
         }
     }
     
-    final class Contract {
+    struct Contract {
         private(set) weak var sub: Sub?
         
         init(sub: Sub) {

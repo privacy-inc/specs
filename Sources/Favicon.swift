@@ -12,7 +12,8 @@ import UIKit
 public final actor Favicon {
     private(set) var received = Set<String>()
     private(set) var publishers = [String : Pub]()
-    private let session: URLSession = {
+    
+    nonisolated private let session: URLSession = {
         var configuration = URLSessionConfiguration.ephemeral
         configuration.timeoutIntervalForRequest = 5
         configuration.timeoutIntervalForResource = 5

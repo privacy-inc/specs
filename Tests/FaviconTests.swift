@@ -1,5 +1,5 @@
 import XCTest
-import Combine
+import Combine/*
 @testable import Sleuth
 
 final class FaviconTests: XCTestCase {
@@ -139,3 +139,4 @@ final class FaviconTests: XCTestCase {
         waitForExpectations(timeout: 1)
     }
 }
+*/

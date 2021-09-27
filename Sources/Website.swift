@@ -16,8 +16,8 @@ public struct Website: Storable {
         access = Access.with(data: &data)
     }
     
-    init(url: URL) {
-        self.init(title: "", access: Access.with(url: url))
+    init(access: AccessType) {
+        self.init(title: "", access: access)
     }
     
     init(search: String) {

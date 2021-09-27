@@ -50,4 +50,14 @@ final class CloudHistoryTests: XCTestCase {
         
         waitForExpectations(timeout: 1)
     }
+    
+    func testReplaceOlder() async {
+        let first = await cloud.open(url: URL(string: "https://avocado.org")!)
+        let second = await cloud.open(url: URL(string: "https://avocado.org")!)
+        let model = await cloud.model
+        XCTAssertEqual(1, model.history.count)
+        XCTAssertEqual(1, model.index)
+        XCTAssertEqual(first, second)
+        XCTAssertEqual(0, first)
+    }
 }

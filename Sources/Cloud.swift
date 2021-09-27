@@ -1,3 +1,4 @@
+import Foundation
 import Archivable
 
 extension Cloud where A == Archive {
@@ -10,11 +11,24 @@ extension Cloud where A == Archive {
     
     public func search(_ string: String, history: Int) async throws {
         guard let string = model.settings.search(string) else { throw Err.invalidSearch }
-        model.history = model
+        await add(website: .init(search: string), history: history)
+    }
+    
+    public func open(url: URL) async -> Int {
+        let access = Access.with(url: url)
+        var id = model
             .history
-            .dropping(history)
-            .adding(.init(id: history, website: .init(search: string)))
-        await stream()
+            .first {
+                $0.website.access.value == access.value
+            }?.id
+        
+        if id == nil {
+            id = model.index
+            model.index += 1
+        }
+        
+        await add(website: .init(access: access), history: id!)
+        return id!
     }
     
     public func update(title: String, history: Int) async {
@@ -31,6 +45,14 @@ extension Cloud where A == Archive {
             .history
             .dropping(history)
             .adding(.init(id: history, website: updated))
+        await stream()
+    }
+    
+    private func add(website: Website, history: Int) async {
+        model.history = model
+            .history
+            .dropping(history)
+            .adding(.init(id: history, website: website))
         await stream()
     }
 }

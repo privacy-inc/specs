@@ -1,8 +1,8 @@
 import Foundation
 
 extension Script {
-    static let favicon = """
-function _privacy_incognit_favicon() {
+    static let _favicon = """
+function \(favicon.method) {
     const list = document.querySelectorAll("link[rel*='icon']");
     var icon = null;
     
@@ -44,7 +44,7 @@ function _privacy_incognit_favicon() {
         }
     }
 
-    webkit.messageHandlers.\(Message.favicon.rawValue).postMessage(icon);
+    return icon;
 }
 """
 }

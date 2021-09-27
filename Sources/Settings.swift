@@ -3,7 +3,6 @@ import Archivable
 
 public struct Settings: Storable {
     public internal(set) var search: Search
-    public let scripts = Script.favicon
     
     public var data: Data {
         .init()

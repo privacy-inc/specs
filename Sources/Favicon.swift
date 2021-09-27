@@ -12,7 +12,14 @@ import UIKit
 public final actor Favicon {
     private(set) var received = Set<String>()
     private(set) var publishers = [String : Pub]()
-    nonisolated private let session = URLSession(configuration: .background(withIdentifier: ""))
+    nonisolated private let session: URLSession = {
+        var configuration = URLSessionConfiguration.ephemeral
+        configuration.timeoutIntervalForRequest = 5
+        configuration.timeoutIntervalForResource = 5
+        configuration.waitsForConnectivity = true
+        configuration.allowsCellularAccess = true
+        return .init(configuration: configuration)
+    } ()
     
     private lazy var path: URL = {
         var url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("favicons")

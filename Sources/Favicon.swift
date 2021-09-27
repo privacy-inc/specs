@@ -182,7 +182,8 @@ public typealias Output = UIImage
         }
         
         private func clean() {
-            print("cleaning")
+            Swift.print("cleaning")
+            
             contracts = contracts
                 .filter {
                     $0.sub?.subscriber != nil
@@ -208,7 +209,7 @@ extension Favicon.Pub {
         }
     }
     
-    struct Contract {
+    final class Contract {
         private(set) weak var sub: Sub?
         
         init(sub: Sub) {

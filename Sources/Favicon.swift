@@ -53,21 +53,21 @@ public final actor Favicon {
         return publisher
     }
     
-    public func received(url: String, for domain: String) {
+    public func received(url: String, for domain: String) async {
+        validate(domain: domain)
+        received(domain: domain)
+        
+        print("pubs \(publishers.count)")
+        
+        guard
+            !domain.isEmpty,
+            !url.isEmpty,
+            let url = URL(string: url),
+            await publishers[domain]!.output == nil
+        else { return }
+        
         Task
             .detached(priority: .utility) {
-                await self.validate(domain: domain)
-                await self.received(domain: domain)
-                
-                await print("pubs \(self.publishers.count)")
-                
-                guard
-                    !domain.isEmpty,
-                    !url.isEmpty,
-                    let url = URL(string: url),
-                    await self.publishers[domain]!.output == nil
-                else { return }
-                
                 try? await self.fetch(url: url, for: domain)
             }
     }

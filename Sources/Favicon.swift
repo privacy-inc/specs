@@ -10,9 +10,9 @@ import UIKit
 #if os(macOS) || os(iOS)
 
 public final actor Favicon {
-    var received = Set<String>()
+    private(set) var received = Set<String>()
     private(set) var publishers = [String : Pub]()
-    private let session = URLSession(configuration: .background(withIdentifier: ""))
+    nonisolated private let session = URLSession(configuration: .background(withIdentifier: ""))
     
     private lazy var path: URL = {
         var url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("favicons")
@@ -32,46 +32,42 @@ public final actor Favicon {
     }
     
     public func publisher(for domain: String) -> Pub {
-        if publishers[domain] == nil {
-            publishers[domain] = .init()
-        }
+        validate(domain: domain)
         
-        Swift.print("pubs \(publishers.count)")
+        print("pubs \(publishers.count)")
         
         let publisher = publishers[domain]!
-        if publisher.output == nil {
-            Task
-                .detached(priority: .utility) {
-                    let url = await self.path.appendingPathComponent(domain)
+        let url = path.appendingPathComponent(domain)
+        
+        Task
+            .detached(priority: .utility) {
+                if await publisher.output == nil {
                     guard
                         FileManager.default.fileExists(atPath: url.path),
                         let output = (try? Data(contentsOf: url)).flatMap(Pub.Output.init(data:))
                     else { return }
                     await publisher.received(output: output)
                 }
-        }
+            }
         
         return publisher
     }
     
     public func received(url: String, for domain: String) {
-        if publishers[domain] == nil {
-            publishers[domain] = .init()
-        }
-        
-        Swift.print("pubs \(publishers.count)")
-        
-        guard
-            !domain.isEmpty,
-            !url.isEmpty,
-            let url = URL(string: url),
-            !received.contains(domain) || publishers[domain]!.output == nil
-        else { return }
-        
-        received.insert(domain)
-        
         Task
             .detached(priority: .utility) {
+                await self.validate(domain: domain)
+                await self.received(domain: domain)
+                
+                await print("pubs \(self.publishers.count)")
+                
+                guard
+                    !domain.isEmpty,
+                    !url.isEmpty,
+                    let url = URL(string: url),
+                    await self.publishers[domain]!.output == nil
+                else { return }
+                
                 try? await self.fetch(url: url, for: domain)
             }
     }
@@ -79,10 +75,11 @@ public final actor Favicon {
     public func clear() {
         publishers = [:]
         received = []
+        let path = self.path
         
         Task
             .detached(priority: .utility) {
-                try? await FileManager.default.removeItem(at: self.path)
+                try? FileManager.default.removeItem(at: path)
             }
     }
     
@@ -101,17 +98,26 @@ public final actor Favicon {
         try? FileManager.default.moveItem(at: location, to: path.appendingPathComponent(domain))
         await publishers[domain]!.received(output: output)
     }
+    
+    private func validate(domain: String) {
+        if publishers[domain] == nil {
+            publishers[domain] = .init()
+        }
+    }
+    
+    private func received(domain: String) {
+        received.insert(domain)
+    }
 }
 
 extension Favicon {
-    public final class Pub: Publisher {
-        
+    public final actor Pub: Publisher {
 #if os(macOS)
 public typealias Output = NSImage
 #elseif os(iOS)
 public typealias Output = UIImage
 #endif
-    
+
         public typealias Failure = Never
         private(set) var output: Output?
         private(set) var contracts = [Contract]()
@@ -121,7 +127,7 @@ public typealias Output = UIImage
             await send(output: output)
         }
         
-        nonisolated public func receive<S>(subscriber: S) where S : Subscriber, Failure == S.Failure, Output == S.Input {
+        public nonisolated func receive<S>(subscriber: S) where S : Subscriber, Failure == S.Failure, Output == S.Input {
             let sub = Sub(subscriber: .init(subscriber))
             subscriber.receive(subscription: sub)
             
@@ -132,7 +138,9 @@ public typealias Output = UIImage
         
         private func store(contract: Contract) async {
             contracts.append(contract)
+            
             Swift.print("pub contracts \(contracts.count)")
+            
             clean()
             if let output = output {
                 await MainActor

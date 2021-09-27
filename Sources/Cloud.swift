@@ -1,7 +1,7 @@
 import Foundation
 import Archivable
 
-extension Cloud where A == Archive {
+extension Cloud where Output == Archive {
     public func search(_ string: String) async throws -> Int {
         let id = model.index
         try await search(string, history: id)

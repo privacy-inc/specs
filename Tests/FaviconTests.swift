@@ -1,7 +1,28 @@
 import XCTest
-import Combine/*
-@testable import Sleuth
+import Combine
+@testable import Specs
 
+#if os(macOS) || os(iOS)
+
+final class FaviconTests: XCTestCase {
+    private var favicon: Favicon!
+    private var subs: Set<AnyCancellable>!
+    
+    override func setUp() {
+        favicon = .init()
+        subs = .init()
+    }
+    
+    func testDefaultDict() {
+        var di = [String : Favicon.Pub]()
+        let p = di["a", default: .init()]
+        XCTAssertEqual(1, di.count)
+    }
+}
+
+#endif
+
+/*
 final class FaviconTests: XCTestCase {
     private var favicon: Favicon!
     private var subs: Set<AnyCancellable>!

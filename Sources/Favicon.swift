@@ -15,8 +15,8 @@ public final actor Favicon {
     
     nonisolated private let session: URLSession = {
         var configuration = URLSessionConfiguration.ephemeral
-        configuration.timeoutIntervalForRequest = 5
-        configuration.timeoutIntervalForResource = 5
+        configuration.timeoutIntervalForRequest = 6
+        configuration.timeoutIntervalForResource = 6
         configuration.waitsForConnectivity = true
         configuration.allowsCellularAccess = true
         return .init(configuration: configuration)
@@ -126,29 +126,6 @@ public final actor Favicon {
                 .init(cgImage: $0)
             }
     }
-    
-//    private func output(for domain: String) {
-//        let url = path.appendingPathComponent(domain)
-//        
-//        guard
-//            let source = CGImageSourceCreateWithURL(url as NSURL, nil),
-//            let image = CGImageSourceCreateImageAtIndex(source, 0, nil)
-//        else { return nil }
-//        
-//        let context = CGContext(data: nil,
-//                                width: 36,
-//                                height: 36,
-//                                bitsPerComponent: image.bitsPerComponent,
-//                                bytesPerRow: 0,
-//                                space: image.colorSpace ?? .init(name: CGColorSpace.sRGB)!,
-//                                bitmapInfo: image.bitmapInfo.rawValue)
-//        context?.interpolationQuality = .high
-//        context?.draw(image, in: .init(origin: .zero, size: .init(width: 36, height: 36)))
-//
-//        guard let scaled = context?.makeImage() else { return nil }
-//
-//        return .init(cgImage: scaled)
-//    }
 }
 
 extension Favicon {

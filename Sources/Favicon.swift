@@ -45,15 +45,11 @@ public final actor Favicon {
         print("pubs \(publishers.count)")
         
         let publisher = publishers[domain]!
-        let url = path.appendingPathComponent(domain)
         
         Task
             .detached(priority: .utility) {
                 if await publisher.output == nil {
-                    guard
-                        FileManager.default.fileExists(atPath: url.path),
-                        let output = (try? Data(contentsOf: url)).flatMap(Pub.Output.init(data:))
-                    else { return }
+                    guard let output = await self.output(for: domain) else { return }
                     await publisher.received(output: output)
                 }
             }
@@ -94,16 +90,14 @@ public final actor Favicon {
     private func fetch(url: URL, for domain: String) async throws {
         let (location, response) = try await session.download(from: url)
         
-        guard
-            (response as? HTTPURLResponse)?.statusCode == 200,
-            let data = try? Data(contentsOf: location),
-            let output = Pub.Output.init(data: data)
-        else {
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
             try? FileManager.default.removeItem(at: location)
             return
         }
         
         try? FileManager.default.moveItem(at: location, to: path.appendingPathComponent(domain))
+        
+        guard let output = output(for: domain) else { return }
         await publishers[domain]!.received(output: output)
     }
     
@@ -115,6 +109,21 @@ public final actor Favicon {
     
     private func received(domain: String) {
         received.insert(domain)
+    }
+    
+    private func output(for domain: String) -> Pub.Output? {
+        let url = path.appendingPathComponent(domain)
+        
+        guard FileManager.default.fileExists(atPath: url.path) else { return nil }
+        
+        return CGImageSourceCreateThumbnailAtIndex(
+            CGImageSourceCreateWithURL(url as CFURL, [kCGImageSourceShouldCache : false] as CFDictionary)!,
+            0,
+            [kCGImageSourceCreateThumbnailFromImageAlways : true,
+                      kCGImageSourceThumbnailMaxPixelSize : 36] as CFDictionary)
+            .map {
+                .init(cgImage: $0)
+            }
     }
 }
 
@@ -150,6 +159,7 @@ public typealias Output = UIImage
             Swift.print("pub contracts \(contracts.count)")
             
             clean()
+            
             if let output = output {
                 await MainActor
                     .run {
@@ -160,6 +170,7 @@ public typealias Output = UIImage
         
         private func send(output: Output) async {
             clean()
+            
             let subscribers = contracts.compactMap(\.sub?.subscriber)
             await MainActor
                 .run {
@@ -171,6 +182,7 @@ public typealias Output = UIImage
         }
         
         private func clean() {
+            print("cleaning")
             contracts = contracts
                 .filter {
                     $0.sub?.subscriber != nil

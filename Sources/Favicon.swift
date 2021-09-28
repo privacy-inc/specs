@@ -120,17 +120,12 @@ public final actor Favicon {
     private func output(for domain: String) -> Pub.Output? {
         let url = path.appendingPathComponent(domain)
         
-        guard FileManager.default.fileExists(atPath: url.path) else { return nil }
+        guard
+            FileManager.default.fileExists(atPath: url.path),
+            let data = try? Data(contentsOf: url)
+        else { return nil }
         
-        return CGImageSourceCreateThumbnailAtIndex(
-            CGImageSourceCreateWithURL(url as CFURL, [kCGImageSourceShouldCache : false] as CFDictionary)!,
-            0,
-            [kCGImageSourceCreateThumbnailFromImageAlways : true,
-               kCGImageSourceCreateThumbnailWithTransform : true,
-                      kCGImageSourceThumbnailMaxPixelSize : 36] as CFDictionary)
-            .map {
-                .init(cgImage: $0)
-            }
+        return .init(data: data)
     }
 }
 

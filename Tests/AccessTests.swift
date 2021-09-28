@@ -46,6 +46,5 @@ final class AccessTests: XCTestCase {
         XCTAssertNotNil(prototyped)
         XCTAssertEqual(prototyped?.value, original?.value)
         XCTAssertEqual(prototyped?.domain, original?.domain)
-        XCTAssertEqual(prototyped?.suffix, original?.suffix)
     }
 }

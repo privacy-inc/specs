@@ -6,7 +6,6 @@ extension Access {
         public let key = Access.remote
         public let value: String
         public let domain: String
-        public let suffix: String
         
         init(value: String) {
             self.value = value
@@ -18,9 +17,9 @@ extension Access {
                 .components(separatedBy: ":")
                 .first!
             
-            let tld = Tld.deconstruct(url: base)
-            domain = tld.domain
-            suffix = tld.suffix
+            domain = {
+                $0.domain + $0.suffix
+            } (Tld.deconstruct(url: base))
         }
         
         public var url: URL? {

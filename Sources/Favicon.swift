@@ -107,7 +107,7 @@ public final actor Favicon {
         }
         let file = path.appendingPathComponent(domain)
         
-        if FileManager.default.fileExists(atPath: file.path) {
+        if FileManager.default.fileExists(atPath: file.absoluteString) {
             try! FileManager.default.removeItem(at: file)
         }
         
@@ -129,7 +129,7 @@ public final actor Favicon {
         Swift.print("url \(url)")
         
         guard
-            FileManager.default.fileExists(atPath: url.path),
+            FileManager.default.fileExists(atPath: url.absoluteString),
             let data = try? Data(contentsOf: url)
         else { return nil }
         

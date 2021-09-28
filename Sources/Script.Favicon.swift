@@ -11,7 +11,6 @@ function \(favicon.method) {
             if(list[i].getAttribute("rel") == rel && !list[i].href.endsWith('.svg')) {
                 return list[i].href;
             }
-            return null;
         }
     }
     

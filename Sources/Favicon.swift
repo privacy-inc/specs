@@ -104,8 +104,13 @@ public final actor Favicon {
             try? FileManager.default.removeItem(at: location)
             return
         }
+        let file = path.appendingPathComponent(domain)
         
-        try? FileManager.default.moveItem(at: location, to: path.appendingPathComponent(domain))
+        if FileManager.default.fileExists(atPath: file.path) {
+            try? FileManager.default.removeItem(at: file)
+        }
+        
+        try? FileManager.default.moveItem(at: location, to: file)
         
         guard let output = output(for: domain) else { return }
         await publishers[domain]!.received(output: output)

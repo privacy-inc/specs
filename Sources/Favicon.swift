@@ -10,8 +10,8 @@ import UIKit
 #if os(macOS) || os(iOS)
 
 public final actor Favicon {
-    private(set) var received = Set<String>()
-    private(set) var publishers = [String : Pub]()
+    private var received = Set<String>()
+    private var publishers = [String : Pub]()
     
     nonisolated private let session: URLSession = {
         var configuration = URLSessionConfiguration.ephemeral
@@ -59,22 +59,30 @@ public final actor Favicon {
         return publisher
     }
     
-    public func received(url: String, for access: Access.Remote) async {
-        validate(domain: access.domain)
-        received(domain: access.domain)
+    public func request(for access: AccessType) -> Bool {
+        (access as? Access.Remote)
+            .map {
+                !received.contains($0.domain) && !$0.domain.isEmpty
+            }
+        ?? false
+    }
+    
+    public func received(url: String, for access: AccessType) async {
+        guard let domain = (access as? Access.Remote)?.domain else { return }
+        
+        validate(domain: domain)
+        received.insert(domain)
         
         print("pubs \(publishers.count)")
         
         guard
-            !access.domain.isEmpty,
             !url.isEmpty,
-            let url = URL(string: url),
-            await publishers[access.domain]!.output == nil
+            let url = URL(string: url)
         else { return }
         
         Task
             .detached(priority: .utility) {
-                try? await self.fetch(url: url, for: access.domain)
+                try? await self.fetch(url: url, for: domain)
             }
     }
     
@@ -109,10 +117,6 @@ public final actor Favicon {
         }
     }
     
-    private func received(domain: String) {
-        received.insert(domain)
-    }
-    
     private func output(for domain: String) -> Pub.Output? {
         let url = path.appendingPathComponent(domain)
         
@@ -139,10 +143,10 @@ public typealias Output = UIImage
 #endif
 
         public typealias Failure = Never
-        private(set) var output: Output?
-        private(set) var contracts = [Contract]()
+        fileprivate private(set) var output: Output?
+        private var contracts = [Contract]()
         
-        func received(output: Output) async {
+        fileprivate func received(output: Output) async {
             self.output = output
             await send(output: output)
         }
@@ -195,7 +199,7 @@ public typealias Output = UIImage
     }
 }
     
-extension Favicon.Pub {
+private extension Favicon.Pub {
     final class Sub: Subscription {
         private(set) var subscriber: AnySubscriber<Output, Failure>?
         

@@ -4,17 +4,15 @@ extension Access {
     public struct Local: AccessType {
         public let key = Access.local
         public let value: String
-        public let path: String
-        let file: String
+        public let file: String
         let bookmark: Data
         
         init(value: String, bookmark: Data) {
             self.value = value
             self.bookmark = bookmark
-            path = value
+            file = value
                 .components(separatedBy: "://")
-                .last ?? ""
-            file = path
+                .last?
                 .components(separatedBy: "/")
                 .last ?? ""
         }

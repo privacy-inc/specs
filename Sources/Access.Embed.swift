@@ -4,7 +4,7 @@ extension Access {
     public struct Embed: AccessType {
         public let key = Access.embed
         public let value: String
-        let prefix: String
+        public let prefix: String
         
         init(value: String) {
             self.value = value

@@ -15,7 +15,7 @@ function \(favicon.method) {
 
     if (icon == null) {
         for (var i = 0; i < list.length; i++) {
-            if(list[i].getAttribute("rel") == "shortcut icon" && !list[i].href.endsWith('.svg')) {
+            if(list[i].getAttribute("rel") == "apple-touch-icon" && !list[i].href.endsWith('.svg')) {
                 icon = list[i].href;
                 break;
             }
@@ -23,7 +23,7 @@ function \(favicon.method) {
 
         if (icon == null) {
             for (var i = 0; i < list.length; i++) {
-                if(list[i].getAttribute("rel") == "alternate icon" && !list[i].href.endsWith('.svg')) {
+                if(list[i].getAttribute("rel") == "shortcut icon" && !list[i].href.endsWith('.svg')) {
                     icon = list[i].href;
                     break;
                 }
@@ -31,7 +31,7 @@ function \(favicon.method) {
 
             if (icon == null) {
                 for (var i = 0; i < list.length; i++) {
-                    if(list[i].getAttribute("rel") == "apple-touch-icon" && !list[i].href.endsWith('.svg')) {
+                    if(list[i].getAttribute("rel") == "alternate icon" && !list[i].href.endsWith('.svg')) {
                         icon = list[i].href;
                         break;
                     }

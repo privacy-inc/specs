@@ -104,9 +104,12 @@ public final actor Favicon {
             try? FileManager.default.removeItem(at: location)
             return
         }
-        
         let file = path.appendingPathComponent(domain)
-        try? FileManager.default.removeItem(at: file)
+        
+        if FileManager.default.fileExists(atPath: file.path) {
+            try? FileManager.default.removeItem(at: file)
+        }
+        
         try? FileManager.default.moveItem(at: location, to: file)
         
         guard let output = output(for: domain) else { return }
@@ -120,7 +123,13 @@ public final actor Favicon {
     }
     
     private func output(for domain: String) -> Pub.Output? {
-        guard let data = try? Data(contentsOf: path.appendingPathComponent(domain)) else { return nil }
+        let url = path.appendingPathComponent(domain)
+        
+        guard
+            FileManager.default.fileExists(atPath: url.path),
+            let data = try? Data(contentsOf: url)
+        else { return nil }
+        
         return .init(data: data)
     }
 }

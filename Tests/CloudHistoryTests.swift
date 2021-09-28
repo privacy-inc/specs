@@ -51,6 +51,45 @@ final class CloudHistoryTests: XCTestCase {
         waitForExpectations(timeout: 1)
     }
     
+    func testURL() {
+        let expect = expectation(description: "")
+        
+        cloud
+            .sink {
+                if $0.history.first?.website.access.value == "https://avocado.org" {
+                    expect.fulfill()
+                }
+            }
+            .store(in: &subs)
+        
+        Task {
+            let id = try! await self.cloud.search("something")
+            await self.cloud.update(url: URL(string: "https://avocado.org")!, history: id)
+        }
+        
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testIgnoreSameURL() {
+        let expect = expectation(description: "")
+        
+        cloud
+            .sink {
+                if $0.history.first?.website.access.value == "https://avocado.org" {
+                    expect.fulfill()
+                }
+            }
+            .store(in: &subs)
+        
+        Task {
+            let id = try! await self.cloud.search("something")
+            await self.cloud.update(url: URL(string: "https://avocado.org")!, history: id)
+            await self.cloud.update(url: URL(string: "https://avocado.org")!, history: id)
+        }
+        
+        waitForExpectations(timeout: 1)
+    }
+    
     func testReplaceOlder() async {
         let first = await cloud.open(url: URL(string: "https://avocado.org")!)
         let second = await cloud.open(url: URL(string: "https://avocado.org")!)

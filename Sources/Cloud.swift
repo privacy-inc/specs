@@ -48,6 +48,23 @@ extension Cloud where Output == Archive {
         await stream()
     }
     
+    public func update(url: URL, history: Int) async {
+        let original = model
+            .history
+            .first { $0.id == history }!
+            .website
+        
+        guard original.access.value != url.absoluteString else { return }
+        
+        let updated = original
+            .with(access: Access.with(url: url))
+        model.history = model
+            .history
+            .dropping(history)
+            .adding(.init(id: history, website: updated))
+        await stream()
+    }
+    
     private func add(website: Website, history: Int) async {
         model.history = model
             .history

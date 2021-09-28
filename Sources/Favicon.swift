@@ -120,12 +120,7 @@ public final actor Favicon {
     }
     
     private func output(for domain: String) -> Pub.Output? {
-        let url = path.appendingPathComponent(domain)
-        
-        guard
-            let data = try? Data(contentsOf: url)
-        else { return nil }
-        
+        guard let data = try? Data(contentsOf: path.appendingPathComponent(domain)) else { return nil }
         return .init(data: data)
     }
 }

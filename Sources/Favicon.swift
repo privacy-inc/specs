@@ -99,7 +99,7 @@ public final actor Favicon {
     
     private func fetch(url: URL, for domain: String) async throws {
         let (location, response) = try await session.download(from: url)
-        print(location)
+        Swift.print(location)
         
         guard (response as? HTTPURLResponse)?.statusCode == 200 else {
             try? FileManager.default.removeItem(at: location)
@@ -126,10 +126,12 @@ public final actor Favicon {
     private func output(for domain: String) -> Pub.Output? {
         let url = path.appendingPathComponent(domain)
         
-//        guard
-//            FileManager.default.fileExists(atPath: url.path),
-            let data = try! Data(contentsOf: url)
-//        else { return nil }
+        Swift.print("url \(url)")
+        
+        guard
+            FileManager.default.fileExists(atPath: url.path),
+            let data = try? Data(contentsOf: url)
+        else { return nil }
         
         return .init(data: data)
     }

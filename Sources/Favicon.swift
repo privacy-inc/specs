@@ -39,7 +39,9 @@ public final actor Favicon {
         
     }
     
-    public func publisher(for domain: String) -> Pub {
+    public func publisher(for access: AccessType) -> Pub? {
+        guard let domain = (access as? Access.Remote)?.domain else { return nil }
+        
         validate(domain: domain)
         
         print("pubs \(publishers.count)")
@@ -57,22 +59,22 @@ public final actor Favicon {
         return publisher
     }
     
-    public func received(url: String, for domain: String) async {
-        validate(domain: domain)
-        received(domain: domain)
+    public func received(url: String, for access: Access.Remote) async {
+        validate(domain: access.domain)
+        received(domain: access.domain)
         
         print("pubs \(publishers.count)")
         
         guard
-            !domain.isEmpty,
+            !access.domain.isEmpty,
             !url.isEmpty,
             let url = URL(string: url),
-            await publishers[domain]!.output == nil
+            await publishers[access.domain]!.output == nil
         else { return }
         
         Task
             .detached(priority: .utility) {
-                try? await self.fetch(url: url, for: domain)
+                try? await self.fetch(url: url, for: access.domain)
             }
     }
     

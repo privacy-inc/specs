@@ -22,15 +22,23 @@ final class SearchTests: XCTestCase {
     func testSearch() {
         XCTAssertEqual("https://www.ecosia.org/search?q=hello%20world", Search(engine: .ecosia)("hello world"))
         XCTAssertEqual("https://www.google.com/search?q=hello%20world", search("hello world"))
+        XCTAssertEqual("https://www.google.com/search?q=Hello%20World", search("Hello World"))
     }
     
     func testURL() {
         XCTAssertEqual("https://github.com", search("https://github.com"))
         XCTAssertEqual("https://hello.com/aguacate", search("hello.com/aguacate"))
+        XCTAssertEqual("https://hello.com/aguacate", search("hello.com/Aguacate"))
+        XCTAssertEqual("https://www.github.com", search("www.Github.Com"))
+        XCTAssertEqual("https://www.github.com", search("https://www.Github.com"))
+        XCTAssertEqual("https://www.github.com", search("https://www.Github.Com"))
+        XCTAssertEqual("https://www.google.com/search?q=Hello%20World", search("https://www.google.com/search?q=Hello%20World"))
     }
     
     func testPartialURL() {
         XCTAssertEqual("https://github.com", search("github.com"))
+        XCTAssertEqual("https://github.com", search("Github.com"))
+        XCTAssertEqual("https://github.com", search("Github.Com"))
     }
     
     func testDeeplinks() {
@@ -69,7 +77,6 @@ final class SearchTests: XCTestCase {
         XCTAssertEqual("https://www.google.com/search?q=/private/var/mobile/Containers/Data/Application/74C82CFA-C973-4CDD-ADDF-8DC95C6E3B11/tmp/image.png", search("/private/var/mobile/Containers/Data/Application/74C82CFA-C973-4CDD-ADDF-8DC95C6E3B11/tmp/image.png"))
         
         XCTAssertEqual("file:///Users/vaux/Downloads/about/index.html", search("file:///Users/vaux/Downloads/about/index.html"))
-        
     }
     
     func testHttp() {

@@ -49,7 +49,7 @@ private extension String {
             .flatMap(URL.init(string:)))
                 .flatMap {
                     $0.scheme != nil && ($0.host != nil || $0.query != nil)
-                        ? $0.absoluteString
+                        ? ($0.scheme?.contains("http") == true ? $0.absoluteString.urlCased : $0.absoluteString)
                         : nil
                 }
     }
@@ -69,14 +69,22 @@ private extension String {
                 && $0
                     .last
                     .flatMap {
-                        Tld.suffix[$0]
+                        Tld.suffix[$0.lowercased()]
                     } != nil
                 && !$0.first!.isEmpty
                 && !contains(" ")
-                ? URL.Scheme.https.rawValue + "://" + self
+                ? URL.Scheme.https.rawValue + "://" + lowercased()
                 : nil
         } (components(separatedBy: "/")
             .first!
             .components(separatedBy: "."))
+    }
+    
+    var urlCased: Self {
+        {
+            ($0.count > 1 ? $0.first! + "://" : "") + {
+                $0.first!.lowercased() + ($0.count > 1 ? "/" + $0.dropFirst().joined(separator: "/") : "")
+            } ($0.last!.components(separatedBy: "/"))
+        } (components(separatedBy: "://"))
     }
 }

@@ -6,39 +6,32 @@ function \(favicon.method) {
     const list = document.querySelectorAll("link[rel*='icon']");
     var icon = null;
     
-    for (var i = 0; i < list.length; i++) {
-        if(list[i].getAttribute("rel") == "icon" && !list[i].href.endsWith('.svg')) {
-            icon = list[i].href;
-            break;
+    function find(rel) {
+        for (var i = 0; i < list.length; i++) {
+            if(list[i].getAttribute("rel") == rel && !list[i].href.endsWith('.svg')) {
+                return list[i].href;
+            }
+            return null;
         }
     }
-
+    
+    icon = find("apple-touch-icon-precomposed");
+    
     if (icon == null) {
-        for (var i = 0; i < list.length; i++) {
-            if(list[i].getAttribute("rel") == "apple-touch-icon" && !list[i].href.endsWith('.svg')) {
-                icon = list[i].href;
-                break;
-            }
-        }
-
+        icon = find("apple-touch-icon");
+        
         if (icon == null) {
-            for (var i = 0; i < list.length; i++) {
-                if(list[i].getAttribute("rel") == "shortcut icon" && !list[i].href.endsWith('.svg')) {
-                    icon = list[i].href;
-                    break;
-                }
-            }
-
+            icon = find("icon");
+            
             if (icon == null) {
-                for (var i = 0; i < list.length; i++) {
-                    if(list[i].getAttribute("rel") == "alternate icon" && !list[i].href.endsWith('.svg')) {
-                        icon = list[i].href;
-                        break;
-                    }
-                }
-
+                icon = find("shortcut icon");
+                
                 if (icon == null) {
-                    icon = window.location.origin + "/favicon.ico";
+                    icon = find("alternate icon");
+                    
+                    if (icon == null) {
+                        icon = window.location.origin + "/favicon.ico";
+                    }
                 }
             }
         }

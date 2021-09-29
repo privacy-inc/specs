@@ -89,7 +89,7 @@ final class CloudSearchTests: XCTestCase {
             .store(in: &subs)
         
         Task {
-            _ = try! await self.cloud.search("something")
+            _ = try! await cloud.search("something")
         }
         
         waitForExpectations(timeout: 1)

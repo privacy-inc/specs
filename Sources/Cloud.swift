@@ -31,6 +31,22 @@ extension Cloud where Output == Archive {
         return id!
     }
     
+    public func bookmark(history: Int) async {
+        let bookmark = model
+            .history
+            .first { $0.id == history }!
+            .website
+        
+        model.bookmarks = model
+            .bookmarks
+            .filter {
+                $0.access.value != bookmark.access.value
+            }
+            + bookmark
+        
+        await stream()
+    }
+    
     public func update(title: String, history: Int) async {
         let original = model
             .history

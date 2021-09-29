@@ -24,8 +24,8 @@ final class CloudHistoryTests: XCTestCase {
             .store(in: &subs)
         
         Task {
-            let id = try! await self.cloud.search("something")
-            await self.cloud.update(title: "hello world", history: id)
+            let id = try! await cloud.search("something")
+            await cloud.update(title: "hello world", history: id)
         }
         
         waitForExpectations(timeout: 1)
@@ -43,9 +43,9 @@ final class CloudHistoryTests: XCTestCase {
             .store(in: &subs)
         
         Task {
-            let id = try! await self.cloud.search("something")
-            await self.cloud.update(title: "hello world", history: id)
-            await self.cloud.update(title: "hello world", history: id)
+            let id = try! await cloud.search("something")
+            await cloud.update(title: "hello world", history: id)
+            await cloud.update(title: "hello world", history: id)
         }
         
         waitForExpectations(timeout: 1)
@@ -63,8 +63,8 @@ final class CloudHistoryTests: XCTestCase {
             .store(in: &subs)
         
         Task {
-            let id = try! await self.cloud.search("something")
-            await self.cloud.update(url: URL(string: "https://avocado.org")!, history: id)
+            let id = try! await cloud.search("something")
+            await cloud.update(url: URL(string: "https://avocado.org")!, history: id)
         }
         
         waitForExpectations(timeout: 1)
@@ -82,9 +82,9 @@ final class CloudHistoryTests: XCTestCase {
             .store(in: &subs)
         
         Task {
-            let id = try! await self.cloud.search("something")
-            await self.cloud.update(url: URL(string: "https://avocado.org")!, history: id)
-            await self.cloud.update(url: URL(string: "https://avocado.org")!, history: id)
+            let id = try! await cloud.search("something")
+            await cloud.update(url: URL(string: "https://avocado.org")!, history: id)
+            await cloud.update(url: URL(string: "https://avocado.org")!, history: id)
         }
         
         waitForExpectations(timeout: 1)

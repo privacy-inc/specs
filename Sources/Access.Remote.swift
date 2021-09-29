@@ -25,13 +25,5 @@ extension Access {
         public var url: URL? {
             .init(string: value)
         }
-        
-        public var secure: Bool {
-            value
-                .hasPrefix(URL
-                                .Scheme
-                                .https
-                                .rawValue)
-        }
     }
 }

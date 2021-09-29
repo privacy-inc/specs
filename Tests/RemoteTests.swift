@@ -17,10 +17,4 @@ final class RemoteTests: XCTestCase {
         XCTAssertEqual("bbc.co.uk", Access.Remote(value: "https://bbc.co.uk").domain)
         XCTAssertEqual("privacy-inc.github.io", Access.Remote(value: "https://privacy-inc.github.io/about").domain)
     }
-    
-    func testSecure() {
-        XCTAssertTrue(Access.Remote(value: "https://www.aguacate.com").secure)
-        XCTAssertFalse(Access.Remote(value: "http://www.aguacate.com").secure)
-        XCTAssertFalse(Access.Remote(value: "ftp://www.aguacate.com").secure)
-    }
 }

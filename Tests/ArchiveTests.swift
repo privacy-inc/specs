@@ -24,6 +24,13 @@ final class ArchiveTests: XCTestCase {
         XCTAssertEqual(99, archive.history.first?.id)
     }
     
+    func testBookmarks() async {
+        XCTAssertTrue(archive.history.isEmpty)
+        archive.bookmarks = [.init(access: Access.with(url: URL(string: "https://avocado.org")!))]
+        archive = await Archive.prototype(data: archive.compressed)
+        XCTAssertEqual("https://avocado.org", archive.bookmarks.first?.access.value)
+    }
+    
     func testSettings() async {
         XCTAssertEqual(.google, archive.settings.search.engine)
         archive.settings.search = .init(engine: .ecosia)

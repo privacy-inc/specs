@@ -7,12 +7,12 @@ public struct Website: Storable {
     
     public var data: Data {
         .init()
-            .adding(title)
-            .adding(access.data)
+        .adding(UInt8.self, string: title)
+        .adding(access.data)
     }
     
     public init(data: inout Data) {
-        title = data.string()
+        title = data.string(UInt8.self)
         access = Access.with(data: &data)
     }
     

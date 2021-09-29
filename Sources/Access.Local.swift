@@ -31,8 +31,8 @@ extension Access {
         
         public var content: Data {
             .init()
-                .adding(value)
-                .wrapping(bookmark)
+            .adding(UInt16.self, string: value)
+            .wrapping(UInt16.self, data: bookmark)
         }
     }
 }

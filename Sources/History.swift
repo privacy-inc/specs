@@ -8,11 +8,11 @@ public struct History: Storable, Identifiable {
     public var data: Data {
         .init()
         .adding(UInt16(id))
-        .adding(website.data)
+        .adding(website)
     }
     
     public init(data: inout Data) {
-        self.init(id: .init(data.uInt16()), website: .init(data: &data))
+        self.init(id: .init(data.number() as UInt16), website: .init(data: &data))
     }
     
     init(id: Int, website: Website) {

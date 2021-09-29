@@ -3,6 +3,7 @@ import Archivable
 
 public struct Archive: Arch {
     public var timestamp: UInt32
+    public internal(set) var bookmarks: [Website]
     public internal(set) var history: [History]
     public internal(set) var settings: Settings
     var index: Int
@@ -10,14 +11,15 @@ public struct Archive: Arch {
     public var data: Data {
         .init()
         .adding(UInt16(index))
-        .adding(UInt16(history.count))
-        .adding(history.flatMap(\.data))
-        .adding(settings.data)
+        .adding(UInt16.self, collection: bookmarks)
+        .adding(UInt16.self, collection: history)
+        .adding(settings)
     }
     
     public init() {
         timestamp = 0
         index = 0
+        bookmarks = []
         history = []
         settings = .init()
     }
@@ -26,11 +28,9 @@ public struct Archive: Arch {
         var data = data
         self.timestamp = timestamp
         
-        index = .init(data.uInt16())
-        history = (0 ..< .init(data.uInt16()))
-            .map { _ in
-                .init(data: &data)
-            }
+        index = .init(data.number() as UInt16)
+        bookmarks = data.collection(UInt16.self)
+        history = data.collection(UInt16.self)
         settings = .init(data: &data)
     }
 }

@@ -24,6 +24,6 @@ extension AccessType {
     
     public var content: Data {
         .init()
-            .adding(value)
+        .adding(UInt16.self, string: value)
     }
 }

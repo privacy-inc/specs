@@ -6,7 +6,7 @@ public struct Settings: Storable {
     
     public var data: Data {
         .init()
-        .adding(search.data)
+        .adding(search)
     }
     
     public init(data: inout Data) {

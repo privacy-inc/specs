@@ -3,7 +3,7 @@ import Combine
 @testable import Archivable
 @testable import Specs
 
-final class CloudNavigateTests: XCTestCase {
+final class CloudURLTests: XCTestCase {
     private var cloud: Cloud<Archive>!
     private var subs: Set<AnyCancellable>!
     

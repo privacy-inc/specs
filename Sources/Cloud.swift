@@ -14,6 +14,22 @@ extension Cloud where Output == Archive {
         await add(website: .init(search: string), history: history)
     }
     
+    public func open(access: AccessType) async -> Int {
+        var id = model
+            .history
+            .first {
+                $0.website.access.value == access.value
+            }?.id
+        
+        if id == nil {
+            id = model.index
+            model.index += 1
+        }
+        
+        await add(website: .init(access: access), history: id!)
+        return id!
+    }
+    
     public func open(url: URL) async -> Int {
         let access = Access.with(url: url)
         var id = model

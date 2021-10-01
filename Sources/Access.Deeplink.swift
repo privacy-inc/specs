@@ -1,7 +1,7 @@
 import Foundation
 
 extension Access {
-    public struct Deeplink: AccessType {
+    public struct Deeplink: AccessURL {
         public let key = Access.deeplink
         public let value: String
         public let scheme: String

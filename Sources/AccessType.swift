@@ -8,10 +8,6 @@ public protocol AccessType: Storable {
 }
 
 extension AccessType {
-    public var url: URL? {
-        .init(string: value)
-    }
-    
     public init(data: inout Data) {
         fatalError()
     }
@@ -20,10 +16,5 @@ extension AccessType {
         .init()
             .adding(key.rawValue)
             .adding(content)
-    }
-    
-    public var content: Data {
-        .init()
-        .adding(UInt16.self, string: value)
     }
 }

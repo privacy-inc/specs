@@ -2,7 +2,7 @@ import Foundation
 import Domains
 
 extension Access {
-    public struct Remote: AccessType {
+    public struct Remote: AccessURL {
         public let key = Access.remote
         public let value: String
         public let domain: String

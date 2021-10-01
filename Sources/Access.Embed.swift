@@ -1,7 +1,7 @@
 import Foundation
 
 extension Access {
-    public struct Embed: AccessType {
+    public struct Embed: AccessURL {
         public let key = Access.embed
         public let value: String
         public let prefix: String

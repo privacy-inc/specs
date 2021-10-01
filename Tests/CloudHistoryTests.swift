@@ -99,4 +99,23 @@ final class CloudHistoryTests: XCTestCase {
         XCTAssertEqual(first, second)
         XCTAssertEqual(0, first)
     }
+    
+    func testDelete() {
+        let expect = expectation(description: "")
+        
+        cloud
+            .sink {
+                if $0.history.isEmpty && $0.index == 1 {
+                    expect.fulfill()
+                }
+            }
+            .store(in: &subs)
+        
+        Task {
+            let id = try! await cloud.search("something")
+            await cloud.delete(history: id)
+        }
+        
+        waitForExpectations(timeout: 1)
+    }
 }

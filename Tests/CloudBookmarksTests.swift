@@ -60,4 +60,87 @@ final class CloudBookmarksTests: XCTestCase {
         XCTAssertEqual(model.bookmarks.first?.access.value, model.bookmarks.last?.access.value)
         XCTAssertEqual(1, model.bookmarks.count)
     }
+    
+    func testDelete() {
+        let expect = expectation(description: "")
+        expect.expectedFulfillmentCount = 2
+        
+        cloud
+            .sink {
+                if $0.bookmarks.isEmpty && $0.index == 1 {
+                    expect.fulfill()
+                }
+            }
+            .store(in: &subs)
+        
+        Task {
+            let id = await cloud.open(url: URL(string: "https://avocado.org")!)
+            await cloud.bookmark(history: id)
+            await cloud.delete(bookmark: 0)
+        }
+        
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testMove() async {
+        let id1 = await cloud.open(url: URL(string: "https://lorem.com")!)
+        let id2 = await cloud.open(url: URL(string: "https://ipsum.com")!)
+        
+        await cloud.bookmark(history: id1)
+        await cloud.bookmark(history: id2)
+        
+        await cloud.move(bookmark: 1, to: 0)
+        
+        let model = await cloud.model
+        XCTAssertTrue(model.bookmarks.first?.access.value.contains("ipsum.com") ?? false)
+        XCTAssertTrue(model.bookmarks.last?.access.value.contains("lorem.com") ?? false)
+    }
+    
+    func testMoveSave() {
+        let expect = expectation(description: "")
+        
+        cloud
+            .sink {
+                if $0.bookmarks.first?.access.value.contains("ipsum.com") == true {
+                    expect.fulfill()
+                }
+            }
+            .store(in: &subs)
+        
+        Task {
+            let id1 = await cloud.open(url: URL(string: "https://lorem.com")!)
+            let id2 = await cloud.open(url: URL(string: "https://ipsum.com")!)
+            
+            await cloud.bookmark(history: id1)
+            await cloud.bookmark(history: id2)
+
+            await cloud.move(bookmark: 1, to: 0)
+        }
+        
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testDontSaveSame() {
+        let expect = expectation(description: "")
+        
+        cloud
+            .sink {
+                if $0.bookmarks.count == 2 {
+                    expect.fulfill()
+                }
+            }
+            .store(in: &subs)
+        
+        Task {
+            let id1 = await cloud.open(url: URL(string: "https://lorem.com")!)
+            let id2 = await cloud.open(url: URL(string: "https://ipsum.com")!)
+            
+            await cloud.bookmark(history: id1)
+            await cloud.bookmark(history: id2)
+
+            await cloud.move(bookmark: 1, to: 1)
+        }
+        
+        waitForExpectations(timeout: 1)
+    }
 }

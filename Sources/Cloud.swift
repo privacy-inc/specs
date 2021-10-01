@@ -97,6 +97,30 @@ extension Cloud where Output == Archive {
         await stream()
     }
     
+    public func move(bookmark: Int, to index: Int) async {
+        guard bookmark != index else { return }
+        
+        model.bookmarks = model
+            .bookmarks
+            .moving(from: bookmark, to: index)
+        
+        await stream()
+    }
+    
+    public func delete(history: Int) async {
+        model.history = model
+            .history
+            .dropping(history)
+        await stream()
+    }
+    
+    public func delete(bookmark: Int) async {
+        model
+            .bookmarks
+            .remove(at: bookmark)
+        await stream()
+    }
+    
     private func add(website: Website, history: Int) async {
         model.history = model
             .history

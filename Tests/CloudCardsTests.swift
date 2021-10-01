@@ -12,34 +12,81 @@ final class CloudCardsTests: XCTestCase {
         subs = []
     }
     
-    func testAdd() async {
-        _ = await cloud.open(url: URL(string: "https://lorem.com")!)
-        let id = await cloud.open(url: URL(string: "https://avocado.org")!)
-        _ = await cloud.open(url: URL(string: "https://ipsum.com")!)
-        
-        await cloud.update(title: "hello world", history: id)
-        await cloud.bookmark(history: id)
+    func testSwitch() async {
+        _ = await cloud.turn(card: .bookmarks, state: false)
         
         let model = await cloud.model
-        XCTAssertEqual(1, model.bookmarks.count)
-        XCTAssertEqual("hello world", model.bookmarks.first?.title)
-        XCTAssertTrue(model.bookmarks.first?.access.value.contains("avocado.org") ?? false)
+        XCTAssertFalse(model.cards.first { $0.id == .bookmarks }!.state)
     }
     
-    func testSave() {
+    func testMove() async {
+        _ = await cloud.move(card: .bookmarks, index: 0)
+        
+        let model = await cloud.model
+        XCTAssertEqual(.bookmarks, model.cards.first!.id)
+    }
+    
+    func testSwitchSave() {
         let expect = expectation(description: "")
+        expect.expectedFulfillmentCount = 2
         
         cloud
-            .sink {
-                if !$0.bookmarks.isEmpty {
-                    expect.fulfill()
-                }
+            .sink { _ in
+                expect.fulfill()
             }
             .store(in: &subs)
         
         Task {
-            let id = await cloud.open(url: URL(string: "https://avocado.org")!)
-            await cloud.bookmark(history: id)
+            _ = await cloud.turn(card: .bookmarks, state: false)
+        }
+        
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testMoveSave() {
+        let expect = expectation(description: "")
+        expect.expectedFulfillmentCount = 2
+        
+        cloud
+            .sink { _ in
+                expect.fulfill()
+            }
+            .store(in: &subs)
+        
+        Task {
+            _ = await cloud.move(card: .bookmarks, index: 0)
+        }
+        
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testSwitchSame() {
+        let expect = expectation(description: "")
+        
+        cloud
+            .sink { _ in
+                expect.fulfill()
+            }
+            .store(in: &subs)
+        
+        Task {
+            _ = await cloud.turn(card: .report, state: true)
+        }
+        
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testMoveSame() {
+        let expect = expectation(description: "")
+        
+        cloud
+            .sink { _ in
+                expect.fulfill()
+            }
+            .store(in: &subs)
+        
+        Task {
+            _ = await cloud.move(card: .report, index: 0)
         }
         
         waitForExpectations(timeout: 1)

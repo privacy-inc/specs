@@ -5,7 +5,7 @@ public struct Archive: Arch {
     public var timestamp: UInt32
     public internal(set) var bookmarks: [Website]
     public internal(set) var history: [History]
-    public internal(set) var cards: [Cards]
+    public internal(set) var cards: [Card]
     public internal(set) var settings: Settings
     var index: Int
     
@@ -14,8 +14,7 @@ public struct Archive: Arch {
         .adding(UInt16(index))
         .adding(UInt16.self, collection: bookmarks)
         .adding(UInt16.self, collection: history)
-        .adding(UInt8(cards.count))
-        .adding(cards.map(\.rawValue))
+        .adding(UInt8.self, collection: cards)
         .adding(settings)
     }
     
@@ -24,10 +23,10 @@ public struct Archive: Arch {
         index = 0
         bookmarks = []
         history = []
-        cards = [.report,
-                 .activity,
-                 .bookmarks,
-                 .history]
+        cards = [.init(id: .report),
+                 .init(id: .activity),
+                 .init(id: .bookmarks),
+                 .init(id: .history)]
         settings = .init()
     }
     
@@ -38,10 +37,7 @@ public struct Archive: Arch {
         index = .init(data.number() as UInt16)
         bookmarks = data.collection(UInt16.self)
         history = data.collection(UInt16.self)
-        cards = (0 ..< .init(data.number() as UInt8))
-            .map { _ in
-                .init(rawValue: data.number())!
-            }
+        cards = data.collection(UInt8.self)
         settings = .init(data: &data)
     }
 }

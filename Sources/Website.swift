@@ -1,7 +1,11 @@
 import Foundation
 import Archivable
 
-public struct Website: Storable {
+public struct Website: Storable, Identifiable {
+    public var id: String {
+        access.value
+    }
+    
     public let title: String
     public let access: AccessType
     

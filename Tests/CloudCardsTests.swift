@@ -70,7 +70,7 @@ final class CloudCardsTests: XCTestCase {
             .store(in: &subs)
         
         Task {
-            _ = await cloud.turn(card: .report, state: true)
+            _ = await cloud.turn(card: .trackers, state: true)
         }
         
         waitForExpectations(timeout: 1)
@@ -86,7 +86,7 @@ final class CloudCardsTests: XCTestCase {
             .store(in: &subs)
         
         Task {
-            _ = await cloud.move(card: .report, index: 0)
+            _ = await cloud.move(card: .trackers, index: 0)
         }
         
         waitForExpectations(timeout: 1)

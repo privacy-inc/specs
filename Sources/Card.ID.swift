@@ -3,7 +3,7 @@ import Foundation
 extension Card {
     public enum ID: UInt8 {
         case
-        report,
+        trackers,
         activity,
         bookmarks,
         history

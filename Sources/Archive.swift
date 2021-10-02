@@ -23,7 +23,7 @@ public struct Archive: Arch {
         index = 0
         bookmarks = []
         history = []
-        cards = [.init(id: .report),
+        cards = [.init(id: .trackers),
                  .init(id: .activity),
                  .init(id: .bookmarks),
                  .init(id: .history)]

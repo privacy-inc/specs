@@ -13,4 +13,10 @@ final class SettingsTests: XCTestCase {
         settings.search = .init(engine: .ecosia)
         XCTAssertEqual(.ecosia, settings.data.prototype(Settings.self).search.engine)
     }
+    
+    func testPolicy() {
+        XCTAssertEqual(.secure, settings.policy.level)
+        settings.policy = Policy.Standard()
+        XCTAssertEqual(.standard, settings.data.prototype(Settings.self).policy.level)
+    }
 }

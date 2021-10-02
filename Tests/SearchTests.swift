@@ -8,11 +8,6 @@ final class SearchTests: XCTestCase {
         search = .init(engine: .google)
     }
     
-    func testStorable() {
-        XCTAssertEqual(.google, Search(engine: .google).data.prototype(Search.self).engine)
-        XCTAssertEqual(.ecosia, Search(engine: .ecosia).data.prototype(Search.self).engine)
-    }
-    
     func testEmpty() {
         XCTAssertNil(search(""))
         XCTAssertNil(search(" "))

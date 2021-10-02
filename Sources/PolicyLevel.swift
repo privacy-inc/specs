@@ -1,21 +1,12 @@
 import Foundation
-import Archivable
 
-protocol PolicyLevel: Storable {
+public protocol PolicyLevel {
     var level: Policy { get }
     
     func route(host: [String], path: String?) -> Policy.Result
 }
 
 extension PolicyLevel {
-    public var data: Data {
-        .init([level.rawValue])
-    }
-    
-    public init(data: inout Data) {
-        fatalError()
-    }
-    
     func callAsFunction(_ url: URL) -> Policy.Result {
         url
             .scheme

@@ -1,18 +1,9 @@
 import Foundation
-import Archivable
 import Domains
 
-public struct Search: Storable {
+public struct Search {
     public let engine: Engine
     private let components: URLComponents
-    
-    public var data: Data {
-        .init([engine.rawValue])
-    }
-    
-    public init(data: inout Data) {
-        self.init(engine: .init(rawValue: data.removeFirst())!)
-    }
     
     init(engine: Engine) {
         self.engine = engine

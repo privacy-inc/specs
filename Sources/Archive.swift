@@ -7,11 +7,11 @@ public struct Archive: Arch {
     public internal(set) var history: [History]
     public internal(set) var cards: [Card]
     public internal(set) var settings: Settings
-    var index: Int
+    var index: UInt16
     
     public var data: Data {
         .init()
-        .adding(UInt16(index))
+        .adding(index)
         .adding(UInt16.self, collection: bookmarks)
         .adding(UInt16.self, collection: history)
         .adding(UInt8.self, collection: cards)
@@ -34,7 +34,7 @@ public struct Archive: Arch {
         var data = data
         self.timestamp = timestamp
         
-        index = .init(data.number() as UInt16)
+        index = data.number()
         bookmarks = data.collection(UInt16.self)
         history = data.collection(UInt16.self)
         cards = data.collection(UInt8.self)

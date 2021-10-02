@@ -1,7 +1,7 @@
 import Foundation
 
 extension Array where Element == History {
-    func dropping(_ id: Int) -> Self {
+    func dropping(_ id: UInt16) -> Self {
         filter {
             $0.id != id
         }

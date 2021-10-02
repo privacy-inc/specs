@@ -2,19 +2,19 @@ import Foundation
 import Archivable
 
 extension Cloud where Output == Archive {
-    public func search(_ string: String) async throws -> Int {
+    public func search(_ string: String) async throws -> UInt16 {
         let id = model.index
         try await search(string, history: id)
         model.index += 1
         return id
     }
     
-    public func search(_ string: String, history: Int) async throws {
+    public func search(_ string: String, history: UInt16) async throws {
         guard let string = model.settings.search(string) else { throw Err.invalidSearch }
         await add(website: .init(search: string), history: history)
     }
     
-    public func open(access: AccessType) async -> Int {
+    public func open(access: AccessType) async -> UInt16 {
         var id = model
             .history
             .first {
@@ -30,7 +30,7 @@ extension Cloud where Output == Archive {
         return id!
     }
     
-    public func open(url: URL) async -> Int {
+    public func open(url: URL) async -> UInt16 {
         let access = Access.with(url: url)
         var id = model
             .history
@@ -47,7 +47,7 @@ extension Cloud where Output == Archive {
         return id!
     }
     
-    public func bookmark(history: Int) async {
+    public func bookmark(history: UInt16) async {
         let bookmark = model
             .history
             .first { $0.id == history }!
@@ -63,7 +63,7 @@ extension Cloud where Output == Archive {
         await stream()
     }
     
-    public func update(title: String, history: Int) async {
+    public func update(title: String, history: UInt16) async {
         let original = model
             .history
             .first { $0.id == history }!
@@ -80,7 +80,7 @@ extension Cloud where Output == Archive {
         await stream()
     }
     
-    public func update(url: URL, history: Int) async {
+    public func update(url: URL, history: UInt16) async {
         let original = model
             .history
             .first { $0.id == history }!
@@ -107,7 +107,7 @@ extension Cloud where Output == Archive {
         await stream()
     }
     
-    public func delete(history: Int) async {
+    public func delete(history: UInt16) async {
         model.history = model
             .history
             .dropping(history)
@@ -145,7 +145,7 @@ extension Cloud where Output == Archive {
         await stream()
     }
     
-    private func add(website: Website, history: Int) async {
+    private func add(website: Website, history: UInt16) async {
         model.history = model
             .history
             .dropping(history)

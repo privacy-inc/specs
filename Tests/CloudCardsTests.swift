@@ -17,6 +17,7 @@ final class CloudCardsTests: XCTestCase {
         
         let model = await cloud.model
         XCTAssertFalse(model.cards.first { $0.id == .bookmarks }!.state)
+        XCTAssertEqual(4, model.cards.count)
     }
     
     func testMove() async {
@@ -24,6 +25,7 @@ final class CloudCardsTests: XCTestCase {
         
         let model = await cloud.model
         XCTAssertEqual(.bookmarks, model.cards.first!.id)
+        XCTAssertEqual(4, model.cards.count)
     }
     
     func testSwitchSave() {

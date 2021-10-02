@@ -1,7 +1,7 @@
 import Foundation
 import Archivable
 
-public struct Card: Storable, Identifiable {
+public struct Card: Storable, Identifiable, Equatable {
     public let id: ID
     public let state: Bool
 

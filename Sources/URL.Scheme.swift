@@ -8,7 +8,7 @@ extension URL {
         ftp,
         gmsg
         
-        var policy: Policy {
+        var policy: Policy.Result {
             switch self {
             case .http, .https:
                 return .allow

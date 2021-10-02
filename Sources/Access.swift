@@ -11,13 +11,13 @@ public enum Access: UInt8 {
     static func with(data: inout Data) -> AccessType {
         switch Self(rawValue: data.removeFirst())! {
         case .remote:
-            return Remote(value: data.string(UInt16.self))
+            return Remote(value: data.string(size: UInt16.self))
         case .local:
-            return Local(value: data.string(UInt16.self), bookmark: data.unwrap(UInt16.self))
+            return Local(value: data.string(size: UInt16.self), bookmark: data.unwrap(size: UInt16.self))
         case .deeplink:
-            return Deeplink(value: data.string(UInt16.self))
+            return Deeplink(value: data.string(size: UInt16.self))
         case .embed:
-            return Embed(value: data.string(UInt16.self))
+            return Embed(value: data.string(size: UInt16.self))
         }
     }
     

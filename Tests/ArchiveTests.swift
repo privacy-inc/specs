@@ -45,4 +45,12 @@ final class ArchiveTests: XCTestCase {
         archive = await Archive.prototype(data: archive.compressed)
         XCTAssertEqual(3, archive.cards.count)
     }
+    
+    func testBlocked() async {
+        archive.blocked = archive
+            .blocked
+            .with(domains: ["hello", "world"])
+        archive = await Archive.prototype(data: archive.compressed)
+        XCTAssertEqual(["hello", "world"], archive.blocked.domains)
+    }
 }

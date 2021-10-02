@@ -11,12 +11,12 @@ public struct Website: Storable, Identifiable {
     
     public var data: Data {
         .init()
-        .adding(UInt16.self, string: title)
+        .adding(size: UInt16.self, string: title)
         .adding(access.data)
     }
     
     public init(data: inout Data) {
-        title = data.string(UInt16.self)
+        title = data.string(size: UInt16.self)
         access = Access.with(data: &data)
     }
     

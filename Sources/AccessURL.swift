@@ -11,6 +11,6 @@ extension AccessURL {
     
     public var content: Data {
         .init()
-        .adding(UInt16.self, string: value)
+        .adding(size: UInt16.self, string: value)
     }
 }

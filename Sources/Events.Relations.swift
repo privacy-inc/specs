@@ -26,6 +26,21 @@ extension Events {
             self.trackers = trackers
         }
         
+        func width(domain: Domain) -> Self {
+            .init(domains: domains + domain, trackers: trackers)
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         func with(domains: [Domain]) -> Self {
             .init(domains: domains, trackers: trackers)
         }

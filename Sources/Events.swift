@@ -38,14 +38,35 @@ public struct Events: Storable {
             .timestamp { timestamp, timestamps in
                 domains
                     .index(element: domain) { domain, domains in
-                        .init(domains: domains, trackers: trackers, timestamps: timestamps, relations: relations
-                                .width(item: .init(timestamp: timestamp, domain: domain)))
+                        .init(domains: domains,
+                              trackers: trackers,
+                              timestamps: timestamps,
+                              relations: relations
+                                .with(item: .init(timestamp: timestamp, domain: domain)))
                     }
             }
     }
     
     func block(tracker: String, domain: String) -> Self {
-        self
+        timestamps
+            .timestamp { timestamp, timestamps in
+                domains
+                    .index(element: domain) { domain, domains in
+                        trackers
+                            .index(element: tracker) { tracker, trackers in
+                                relations
+                                    .items
+                                    .index(element: .init(timestamp: timestamp, domain: domain)) { item, items in
+                                        .init(domains: domains,
+                                              trackers: trackers,
+                                              timestamps: timestamps,
+                                              relations: relations
+                                                .with(items: items)
+                                                .with(tracker: .init(relation: item, tracker: tracker)))
+                                    }
+                            }
+                    }
+            }
     }
     
     func with(domains: [String]) -> Self {

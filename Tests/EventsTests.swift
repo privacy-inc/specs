@@ -62,11 +62,11 @@ final class EventsTests: XCTestCase {
         let events = Events()
             .block(tracker: "google.com", domain: "avocado.org")
         XCTAssertEqual(1, events.timestamps.count)
-//        XCTAssertGreaterThanOrEqual(events.timestamps.first!, now)
+        XCTAssertGreaterThanOrEqual(events.timestamps.first!, now)
         XCTAssertEqual(1, events.domains.count)
         XCTAssertEqual("avocado.org", events.domains.first)
         XCTAssertEqual(1, events.trackers.count)
-        XCTAssertEqual("google.org", events.trackers.first)
+        XCTAssertEqual("google.com", events.trackers.first)
         XCTAssertEqual(1, events.relations.items.count)
         XCTAssertEqual(1, events.relations.trackers.count)
         XCTAssertEqual(0, events.relations.items.first?.timestamp)
@@ -82,7 +82,18 @@ final class EventsTests: XCTestCase {
         XCTAssertEqual(1, events.timestamps.count)
         XCTAssertEqual(2, events.domains.count)
         XCTAssertEqual(1, events.trackers.count)
+        XCTAssertEqual(2, events.relations.items.count)
+        XCTAssertEqual(2, events.relations.trackers.count)
+    }
+    
+    func testShareRelation() {
+        let events = Events()
+            .block(tracker: "google.com", domain: "avocado.org")
+            .block(tracker: "some.com", domain: "avocado.org")
+        XCTAssertEqual(1, events.timestamps.count)
+        XCTAssertEqual(1, events.domains.count)
+        XCTAssertEqual(2, events.trackers.count)
         XCTAssertEqual(1, events.relations.items.count)
-        XCTAssertEqual(1, events.relations.trackers.count)
+        XCTAssertEqual(2, events.relations.trackers.count)
     }
 }

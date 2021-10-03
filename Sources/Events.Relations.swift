@@ -26,8 +26,12 @@ extension Events {
             self.trackers = trackers
         }
         
-        func width(item: Item) -> Self {
+        func with(item: Item) -> Self {
             .init(items: items + item, trackers: trackers)
+        }
+        
+        func with(tracker: Tracker) -> Self {
+            .init(items: items, trackers: trackers + tracker)
         }
         
         func with(items: [Item]) -> Self {

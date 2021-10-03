@@ -2,7 +2,7 @@ import Foundation
 import Archivable
 
 extension Events.Relations {
-    public struct Domain: Storable {
+    public struct Item: Storable {
         let timestamp: UInt16
         let domain: UInt16
         

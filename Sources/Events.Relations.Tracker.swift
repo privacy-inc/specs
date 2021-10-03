@@ -3,22 +3,22 @@ import Archivable
 
 extension Events.Relations {
     public struct Tracker: Storable {
-        let timestamp: UInt16
+        let relation: UInt16
         let tracker: UInt16
         
         public var data: Data {
             .init()
-            .adding(timestamp)
+            .adding(relation)
             .adding(tracker)
         }
         
         public init(data: inout Data) {
-            timestamp = data.number()
+            relation = data.number()
             tracker = data.number()
         }
         
-        init(timestamp: Int, tracker: Int) {
-            self.timestamp = .init(timestamp)
+        init(relation: Int, tracker: Int) {
+            self.relation = .init(relation)
             self.tracker = .init(tracker)
         }
     }

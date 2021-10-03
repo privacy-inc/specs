@@ -46,11 +46,11 @@ final class ArchiveTests: XCTestCase {
         XCTAssertEqual(3, archive.cards.count)
     }
     
-    func testBlocked() async {
-        archive.blocked = archive
-            .blocked
+    func testEvents() async {
+        archive.events = archive
+            .events
             .with(domains: ["hello", "world"])
         archive = await Archive.prototype(data: archive.compressed)
-        XCTAssertEqual(["hello", "world"], archive.blocked.domains)
+        XCTAssertEqual(["hello", "world"], archive.events.domains)
     }
 }

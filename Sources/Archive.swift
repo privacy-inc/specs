@@ -6,7 +6,7 @@ public struct Archive: Arch {
     public internal(set) var bookmarks: [Website]
     public internal(set) var history: [History]
     public internal(set) var cards: [Card]
-    public internal(set) var blocked: Blocked
+    public internal(set) var events: Events
     public internal(set) var settings: Settings
     var index: UInt16
     
@@ -16,7 +16,7 @@ public struct Archive: Arch {
         .adding(size: UInt16.self, collection: bookmarks)
         .adding(size: UInt16.self, collection: history)
         .adding(size: UInt8.self, collection: cards)
-        .adding(blocked)
+        .adding(events)
         .adding(settings)
     }
     
@@ -29,7 +29,7 @@ public struct Archive: Arch {
                  .init(id: .activity),
                  .init(id: .bookmarks),
                  .init(id: .history)]
-        blocked = .init()
+        events = .init()
         settings = .init()
     }
     
@@ -41,7 +41,7 @@ public struct Archive: Arch {
         bookmarks = data.collection(size: UInt16.self)
         history = data.collection(size: UInt16.self)
         cards = data.collection(size: UInt8.self)
-        blocked = .init(data: &data)
+        events = .init(data: &data)
         settings = .init(data: &data)
     }
 }

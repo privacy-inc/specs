@@ -35,13 +35,13 @@ final class EventsTests: XCTestCase {
         XCTAssertEqual(0, events.allowed.first?.domain)
     }
     
-    func testDuplicateDomain() {
+    func testDontDuplicateDomain() {
         let events = Events()
             .allow(domain: "avocado.org")
             .allow(domain: "avocado.org")
         XCTAssertEqual(1, events.timestamps.count)
         XCTAssertEqual(1, events.domains.count)
-        XCTAssertEqual(2, events.allowed.count)
+        XCTAssertEqual(1, events.allowed.count)
     }
     
     func testTimestampsPerMinute() {

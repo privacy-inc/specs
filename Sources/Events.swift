@@ -38,39 +38,28 @@ public struct Events: Storable {
     }
     
     func allow(domain: String) -> Self {
-        timestamps
-            .timestamp { timestamp, timestamps in
-                domains
-                    .index(element: domain) { domain, domains in
-                    .init(
-                        allowed: allowed + .init(timestamp: timestamp, domain: domain),
-                        blocked: blocked,
-                        domains: domains,
-                        trackers: trackers,
-                        timestamps: timestamps)
-                    }
-            }
+        allow(domain: domain) { _, allowed, domains, timestamps in
+            .init(
+                allowed: allowed,
+                blocked: blocked,
+                domains: domains,
+                trackers: trackers,
+                timestamps: timestamps)
+        }
     }
     
     func block(tracker: String, domain: String) -> Self {
-        timestamps
-            .timestamp { timestamp, timestamps in
-                domains
-                    .index(element: domain) { domain, domains in
-                        trackers
-                            .index(element: tracker) { tracker, trackers in
-                                allowed
-                                    .index(element: .init(timestamp: timestamp, domain: domain)) { allow, allowed in
-                                    .init(
-                                        allowed: allowed,
-                                        blocked: blocked + .init(relation: allow, tracker: tracker),
-                                        domains: domains,
-                                        trackers: trackers,
-                                        timestamps: timestamps)
-                                    }
-                            }
-                    }
-            }
+        allow(domain: domain) { allow, allowed, domains, timestamps in
+            trackers
+                .index(element: tracker) { tracker, trackers in
+                .init(
+                    allowed: allowed,
+                    blocked: blocked + .init(relation: allow, tracker: tracker),
+                    domains: domains,
+                    trackers: trackers,
+                    timestamps: timestamps)
+                }
+        }
     }
     
     func with(allowed: [Allowed]) -> Self {
@@ -91,5 +80,18 @@ public struct Events: Storable {
     
     func with(timestamps: [UInt32]) -> Self {
         .init(allowed: allowed, blocked: blocked, domains: domains, trackers: trackers, timestamps: timestamps)
+    }
+    
+    private func allow(domain: String, transform: (Int, [Allowed], [String], [UInt32]) -> Self) -> Self {
+        timestamps
+            .timestamp { timestamp, timestamps in
+                domains
+                    .index(element: domain) { domain, domains in
+                        allowed
+                            .index(element: .init(timestamp: timestamp, domain: domain)) { allow, allowed in
+                                transform(allow, allowed, domains, timestamps)
+                            }
+                    }
+            }
     }
 }

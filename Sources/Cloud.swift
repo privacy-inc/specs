@@ -134,7 +134,7 @@ extension Cloud where Output == Archive {
             case .allow:
                 Task
                     .detached(priority: .utility) {
-                        await self.allow(history: history)
+                        await self.allow(url: url)
                     }
             case let .block(tracker):
                 Task
@@ -171,8 +171,8 @@ extension Cloud where Output == Archive {
         await stream()
     }
     
-    private func allow(history: UInt16) async {
-        guard let remote = website(history: history).access as? Access.Remote else { return }
+    private func allow(url: URL) async {
+        guard let remote = Access.with(url: url) as? Access.Remote else { return }
         model.events = model.events.allow(domain: remote.domain)
         
         await stream()

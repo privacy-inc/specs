@@ -14,24 +14,24 @@ final class CloudPolicyTests: XCTestCase {
     
     func testBlock() {
         let expect = expectation(description: "")
-        expect.expectedFulfillmentCount = 3
         
         cloud
             .dropFirst()
             .sink {
-                if $0.events.allowed.count == 1 && $0.events.blocked.count == 1 {
+                if $0.events.domains.count == 2 {
                     XCTAssertEqual(1, $0.events.trackers.count)
-                    XCTAssertEqual(1, $0.events.domains.count)
+                    XCTAssertEqual(1, $0.events.blocked.count)
+                    XCTAssertEqual(2, $0.events.allowed.count)
                     XCTAssertEqual(1, $0.events.timestamps.count)
                     XCTAssertEqual("googleapis", $0.events.trackers.first)
                     XCTAssertEqual("avocado.org", $0.events.domains.first)
+                    XCTAssertEqual("google.com", $0.events.domains.last)
                     XCTAssertEqual(0, $0.events.allowed.first?.domain)
                     XCTAssertEqual(0, $0.events.allowed.first?.timestamp)
                     XCTAssertEqual(0, $0.events.blocked.first?.relation)
                     XCTAssertEqual(0, $0.events.blocked.first?.tracker)
+                    expect.fulfill()
                 }
-                
-                expect.fulfill()
             }
             .store(in: &subs)
         
@@ -45,7 +45,7 @@ final class CloudPolicyTests: XCTestCase {
             }
             
             if case .allow = await cloud.policy(history: id, url: URL(string: "https://google.com")!) {
-                
+
             } else {
                 XCTFail()
             }

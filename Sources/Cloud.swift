@@ -15,11 +15,7 @@ extension Cloud where Output == Archive {
     }
     
     public func open(access: AccessType) async -> UInt16 {
-        var id = model
-            .history
-            .first {
-                $0.website.access.value == access.value
-            }?.id
+        var id = id(access: access)
         
         if id == nil {
             id = model.index
@@ -32,11 +28,7 @@ extension Cloud where Output == Archive {
     
     public func open(url: URL) async -> UInt16 {
         let access = Access.with(url: url)
-        var id = model
-            .history
-            .first {
-                $0.website.access.value == access.value
-            }?.id
+        var id = id(access: access)
         
         if id == nil {
             id = model.index
@@ -48,10 +40,7 @@ extension Cloud where Output == Archive {
     }
     
     public func bookmark(history: UInt16) async {
-        let bookmark = model
-            .history
-            .first { $0.id == history }!
-            .website
+        let bookmark = website(history: history)
         
         model.bookmarks = model
             .bookmarks
@@ -64,10 +53,7 @@ extension Cloud where Output == Archive {
     }
     
     public func update(title: String, history: UInt16) async {
-        let original = model
-            .history
-            .first { $0.id == history }!
-            .website
+        let original = website(history: history)
         
         guard original.title != title else { return }
         
@@ -81,10 +67,7 @@ extension Cloud where Output == Archive {
     }
     
     public func update(url: URL, history: UInt16) async {
-        let original = model
-            .history
-            .first { $0.id == history }!
-            .website
+        let original = website(history: history)
         
         guard original.access.value != url.absoluteString else { return }
         
@@ -145,11 +128,60 @@ extension Cloud where Output == Archive {
         await stream()
     }
     
+    public func policy(history: UInt16, url: URL) -> Policy.Result {
+        {
+            switch $0 {
+            case .allow:
+                Task
+                    .detached(priority: .utility) {
+                        await self.allow(history: history)
+                    }
+            case let .block(tracker):
+                Task
+                    .detached(priority: .utility) {
+                        await self.block(history: history, tracker: tracker)
+                    }
+            default:
+                break
+            }
+            return $0
+        } (model.settings.policy(url))
+    }
+    
+    private func id(access: AccessType) -> UInt16? {
+        model
+            .history
+            .first {
+                $0.website.access.value == access.value
+            }?.id
+    }
+    
+    private func website(history: UInt16) -> Website {
+        model
+            .history
+            .first { $0.id == history }!
+            .website
+    }
+    
     private func add(website: Website, history: UInt16) async {
         model.history = model
             .history
             .dropping(history)
             .adding(.init(id: history, website: website))
+        await stream()
+    }
+    
+    private func allow(history: UInt16) async {
+        guard let remote = website(history: history).access as? Access.Remote else { return }
+        model.events = model.events.allow(domain: remote.domain)
+        
+        await stream()
+    }
+    
+    private func block(history: UInt16, tracker: String) async {
+        guard let remote = website(history: history).access as? Access.Remote else { return }
+        model.events = model.events.block(tracker: tracker, domain: remote.domain)
+        
         await stream()
     }
 }

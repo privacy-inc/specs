@@ -7,19 +7,18 @@ final class EventsTests: XCTestCase {
             .with(domains: ["hello", "world"])
             .with(trackers: ["lorem"])
             .with(timestamps: [5, 6])
-            .with(relations: .init()
-                    .with(items: [.init(timestamp: 45, domain: 56), .init(timestamp: 5, domain: 5)])
-                    .with(trackers: [.init(relation: 451, tracker: 543), .init(relation: 99, tracker: 0)]))
+            .with(allowed: [.init(timestamp: 45, domain: 56), .init(timestamp: 5, domain: 5)])
+            .with(blocked: [.init(relation: 451, tracker: 543), .init(relation: 99, tracker: 0)])
         let parsed = events.data.prototype(Events.self)
         XCTAssertEqual(["hello", "world"], parsed.domains)
         XCTAssertEqual(["lorem"], parsed.trackers)
         XCTAssertEqual([5, 6], parsed.timestamps)
-        XCTAssertEqual(2, parsed.relations.items.count)
-        XCTAssertEqual(45, parsed.relations.items.first?.timestamp)
-        XCTAssertEqual(56, parsed.relations.items.first?.domain)
-        XCTAssertEqual(2, parsed.relations.trackers.count)
-        XCTAssertEqual(451, parsed.relations.trackers.first?.relation)
-        XCTAssertEqual(543, parsed.relations.trackers.first?.tracker)
+        XCTAssertEqual(2, parsed.allowed.count)
+        XCTAssertEqual(45, parsed.allowed.first?.timestamp)
+        XCTAssertEqual(56, parsed.allowed.first?.domain)
+        XCTAssertEqual(2, parsed.blocked.count)
+        XCTAssertEqual(451, parsed.blocked.first?.relation)
+        XCTAssertEqual(543, parsed.blocked.first?.tracker)
     }
     
     func testAllow() {
@@ -30,10 +29,10 @@ final class EventsTests: XCTestCase {
         XCTAssertGreaterThanOrEqual(events.timestamps.first!, now)
         XCTAssertEqual(1, events.domains.count)
         XCTAssertEqual("avocado.org", events.domains.first)
-        XCTAssertEqual(1, events.relations.items.count)
-        XCTAssertTrue(events.relations.trackers.isEmpty)
-        XCTAssertEqual(0, events.relations.items.first?.timestamp)
-        XCTAssertEqual(0, events.relations.items.first?.domain)
+        XCTAssertEqual(1, events.allowed.count)
+        XCTAssertTrue(events.blocked.isEmpty)
+        XCTAssertEqual(0, events.allowed.first?.timestamp)
+        XCTAssertEqual(0, events.allowed.first?.domain)
     }
     
     func testDuplicateDomain() {
@@ -42,7 +41,7 @@ final class EventsTests: XCTestCase {
             .allow(domain: "avocado.org")
         XCTAssertEqual(1, events.timestamps.count)
         XCTAssertEqual(1, events.domains.count)
-        XCTAssertEqual(2, events.relations.items.count)
+        XCTAssertEqual(2, events.allowed.count)
     }
     
     func testTimestampsPerMinute() {
@@ -67,12 +66,12 @@ final class EventsTests: XCTestCase {
         XCTAssertEqual("avocado.org", events.domains.first)
         XCTAssertEqual(1, events.trackers.count)
         XCTAssertEqual("google.com", events.trackers.first)
-        XCTAssertEqual(1, events.relations.items.count)
-        XCTAssertEqual(1, events.relations.trackers.count)
-        XCTAssertEqual(0, events.relations.items.first?.timestamp)
-        XCTAssertEqual(0, events.relations.items.first?.domain)
-        XCTAssertEqual(0, events.relations.trackers.first?.relation)
-        XCTAssertEqual(0, events.relations.trackers.first?.tracker)
+        XCTAssertEqual(1, events.allowed.count)
+        XCTAssertEqual(1, events.blocked.count)
+        XCTAssertEqual(0, events.allowed.first?.timestamp)
+        XCTAssertEqual(0, events.allowed.first?.domain)
+        XCTAssertEqual(0, events.blocked.first?.relation)
+        XCTAssertEqual(0, events.blocked.first?.tracker)
     }
     
     func testDuplicateTracker() {
@@ -82,8 +81,8 @@ final class EventsTests: XCTestCase {
         XCTAssertEqual(1, events.timestamps.count)
         XCTAssertEqual(2, events.domains.count)
         XCTAssertEqual(1, events.trackers.count)
-        XCTAssertEqual(2, events.relations.items.count)
-        XCTAssertEqual(2, events.relations.trackers.count)
+        XCTAssertEqual(2, events.allowed.count)
+        XCTAssertEqual(2, events.blocked.count)
     }
     
     func testShareRelation() {
@@ -93,7 +92,7 @@ final class EventsTests: XCTestCase {
         XCTAssertEqual(1, events.timestamps.count)
         XCTAssertEqual(1, events.domains.count)
         XCTAssertEqual(2, events.trackers.count)
-        XCTAssertEqual(1, events.relations.items.count)
-        XCTAssertEqual(2, events.relations.trackers.count)
+        XCTAssertEqual(1, events.allowed.count)
+        XCTAssertEqual(2, events.blocked.count)
     }
 }

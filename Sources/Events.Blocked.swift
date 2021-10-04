@@ -1,8 +1,8 @@
 import Foundation
 import Archivable
 
-extension Events.Relations {
-    public struct Tracker: Storable {
+extension Events {
+    public struct Blocked: Storable {
         let relation: UInt16
         let tracker: UInt16
         

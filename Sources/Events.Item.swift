@@ -2,7 +2,7 @@ import Foundation
 import Archivable
 
 extension Events {
-    public struct Allowed: Storable, Equatable {
+    public struct Item: Storable, Equatable {
         let timestamp: UInt16
         let domain: UInt16
         

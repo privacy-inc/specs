@@ -2,7 +2,7 @@ import Foundation
 import Archivable
 
 public struct Events: Storable {
-    public let allowed: [Allowed]
+    public let items: [Item]
     public let blocked: [Blocked]
     public let domains: [String]
     public let trackers: [String]
@@ -10,7 +10,7 @@ public struct Events: Storable {
     
     public var data: Data {
         .init()
-        .adding(size: UInt16.self, collection: allowed)
+        .adding(size: UInt16.self, collection: items)
         .adding(size: UInt16.self, collection: blocked)
         .adding(collection: UInt16.self, strings: UInt8.self, items: domains)
         .adding(collection: UInt16.self, strings: UInt8.self, items: trackers)
@@ -18,7 +18,7 @@ public struct Events: Storable {
     }
     
     public init(data: inout Data) {
-        allowed = data.collection(size: UInt16.self)
+        items = data.collection(size: UInt16.self)
         blocked = data.collection(size: UInt16.self)
         domains = data.items(collection: UInt16.self, strings: UInt8.self)
         trackers = data.items(collection: UInt16.self, strings: UInt8.self)
@@ -26,21 +26,21 @@ public struct Events: Storable {
     }
     
     init() {
-        self.init(allowed: [], blocked: [], domains: [], trackers: [], timestamps: [])
+        self.init(items: [], blocked: [], domains: [], trackers: [], timestamps: [])
     }
     
-    private init(allowed: [Allowed], blocked: [Blocked], domains: [String], trackers: [String], timestamps: [UInt32]) {
-        self.allowed = allowed
+    private init(items: [Item], blocked: [Blocked], domains: [String], trackers: [String], timestamps: [UInt32]) {
+        self.items = items
         self.blocked = blocked
         self.domains = domains
         self.trackers = trackers
         self.timestamps = timestamps
     }
     
-    func allow(domain: String) -> Self {
-        allow(domain: domain) { _, allowed, domains, timestamps in
+    func add(domain: String) -> Self {
+        add(domain: domain) { _, items, domains, timestamps in
             .init(
-                allowed: allowed,
+                items: items,
                 blocked: blocked,
                 domains: domains,
                 trackers: trackers,
@@ -49,12 +49,12 @@ public struct Events: Storable {
     }
     
     func block(tracker: String, domain: String) -> Self {
-        allow(domain: domain) { allow, allowed, domains, timestamps in
+        add(domain: domain) { item, items, domains, timestamps in
             trackers
                 .index(element: tracker) { tracker, trackers in
                 .init(
-                    allowed: allowed,
-                    blocked: blocked + .init(relation: allow, tracker: tracker),
+                    items: items,
+                    blocked: blocked + .init(relation: item, tracker: tracker),
                     domains: domains,
                     trackers: trackers,
                     timestamps: timestamps)
@@ -62,34 +62,34 @@ public struct Events: Storable {
         }
     }
     
-    func with(allowed: [Allowed]) -> Self {
-        .init(allowed: allowed, blocked: blocked, domains: domains, trackers: trackers, timestamps: timestamps)
+    func with(items: [Item]) -> Self {
+        .init(items: items, blocked: blocked, domains: domains, trackers: trackers, timestamps: timestamps)
     }
     
     func with(blocked: [Blocked]) -> Self {
-        .init(allowed: allowed, blocked: blocked, domains: domains, trackers: trackers, timestamps: timestamps)
+        .init(items: items, blocked: blocked, domains: domains, trackers: trackers, timestamps: timestamps)
     }
     
     func with(domains: [String]) -> Self {
-        .init(allowed: allowed, blocked: blocked, domains: domains, trackers: trackers, timestamps: timestamps)
+        .init(items: items, blocked: blocked, domains: domains, trackers: trackers, timestamps: timestamps)
     }
     
     func with(trackers: [String]) -> Self {
-        .init(allowed: allowed, blocked: blocked, domains: domains, trackers: trackers, timestamps: timestamps)
+        .init(items: items, blocked: blocked, domains: domains, trackers: trackers, timestamps: timestamps)
     }
     
     func with(timestamps: [UInt32]) -> Self {
-        .init(allowed: allowed, blocked: blocked, domains: domains, trackers: trackers, timestamps: timestamps)
+        .init(items: items, blocked: blocked, domains: domains, trackers: trackers, timestamps: timestamps)
     }
     
-    private func allow(domain: String, transform: (Int, [Allowed], [String], [UInt32]) -> Self) -> Self {
+    private func add(domain: String, transform: (Int, [Item], [String], [UInt32]) -> Self) -> Self {
         timestamps
             .timestamp { timestamp, timestamps in
                 domains
                     .index(element: domain) { domain, domains in
-                        allowed
-                            .index(element: .init(timestamp: timestamp, domain: domain)) { allow, allowed in
-                                transform(allow, allowed, domains, timestamps)
+                        items
+                            .index(element: .init(timestamp: timestamp, domain: domain)) { item, items in
+                                transform(item, items, domains, timestamps)
                             }
                     }
             }

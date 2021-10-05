@@ -173,7 +173,7 @@ extension Cloud where Output == Archive {
     
     private func allow(url: URL) async {
         guard let remote = Access.with(url: url) as? Access.Remote else { return }
-        model.events = model.events.allow(domain: remote.domain)
+        model.events = model.events.add(domain: remote.domain)
         
         await stream()
     }

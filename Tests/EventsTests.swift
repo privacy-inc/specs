@@ -7,8 +7,11 @@ final class EventsTests: XCTestCase {
             .with(domains: ["hello", "world"])
             .with(trackers: ["lorem"])
             .with(timestamps: [5, 6])
-            .with(items: [.init(timestamp: 45, domain: 56), .init(timestamp: 5, domain: 5)])
-            .with(blocked: [.init(relation: 451, tracker: 543), .init(relation: 99, tracker: 0)])
+            .with(items: [.init(timestamp: 45, domain: 56)
+                            .with(tracker: 543)
+                            .with(tracker: 321),
+                          .init(timestamp: 5, domain: 5)
+                            .with(tracker: 0)])
         let parsed = events.data.prototype(Events.self)
         XCTAssertEqual(["hello", "world"], parsed.domains)
         XCTAssertEqual(["lorem"], parsed.trackers)
@@ -16,9 +19,10 @@ final class EventsTests: XCTestCase {
         XCTAssertEqual(2, parsed.items.count)
         XCTAssertEqual(45, parsed.items.first?.timestamp)
         XCTAssertEqual(56, parsed.items.first?.domain)
-        XCTAssertEqual(2, parsed.blocked.count)
-        XCTAssertEqual(451, parsed.blocked.first?.relation)
-        XCTAssertEqual(543, parsed.blocked.first?.tracker)
+        XCTAssertEqual(2, parsed.items.first?.trackers.count)
+        XCTAssertTrue(parsed.items.first?.trackers.contains(543) ?? false)
+        XCTAssertTrue(parsed.items.first?.trackers.contains(321) ?? false)
+        XCTAssertEqual(0, parsed.items.last?.trackers.first)
     }
     
     func testAdd() {
@@ -30,7 +34,7 @@ final class EventsTests: XCTestCase {
         XCTAssertEqual(1, events.domains.count)
         XCTAssertEqual("avocado.org", events.domains.first)
         XCTAssertEqual(1, events.items.count)
-        XCTAssertTrue(events.blocked.isEmpty)
+        XCTAssertTrue(events.items.first?.trackers.isEmpty ?? false)
         XCTAssertEqual(0, events.items.first?.timestamp)
         XCTAssertEqual(0, events.items.first?.domain)
     }
@@ -67,14 +71,24 @@ final class EventsTests: XCTestCase {
         XCTAssertEqual(1, events.trackers.count)
         XCTAssertEqual("google.com", events.trackers.first)
         XCTAssertEqual(1, events.items.count)
-        XCTAssertEqual(1, events.blocked.count)
+        XCTAssertEqual(1, events.items.first?.trackers.count)
         XCTAssertEqual(0, events.items.first?.timestamp)
         XCTAssertEqual(0, events.items.first?.domain)
-        XCTAssertEqual(0, events.blocked.first?.relation)
-        XCTAssertEqual(0, events.blocked.first?.tracker)
+        XCTAssertEqual(0, events.items.first?.trackers.first)
     }
     
     func testDuplicateTracker() {
+        let events = Events()
+            .block(tracker: "google.com", domain: "avocado.org")
+            .block(tracker: "google.com", domain: "avocado.org")
+        XCTAssertEqual(1, events.timestamps.count)
+        XCTAssertEqual(1, events.domains.count)
+        XCTAssertEqual(1, events.trackers.count)
+        XCTAssertEqual(1, events.items.count)
+        XCTAssertEqual(1, events.items.first?.trackers.count)
+    }
+    
+    func testDuplicateTrackerDifferentDomain() {
         let events = Events()
             .block(tracker: "google.com", domain: "avocado.org")
             .block(tracker: "google.com", domain: "lorem.org")
@@ -82,7 +96,8 @@ final class EventsTests: XCTestCase {
         XCTAssertEqual(2, events.domains.count)
         XCTAssertEqual(1, events.trackers.count)
         XCTAssertEqual(2, events.items.count)
-        XCTAssertEqual(2, events.blocked.count)
+        XCTAssertEqual(1, events.items.first?.trackers.count)
+        XCTAssertEqual(1, events.items.last?.trackers.count)
     }
     
     func testShareRelation() {
@@ -93,6 +108,6 @@ final class EventsTests: XCTestCase {
         XCTAssertEqual(1, events.domains.count)
         XCTAssertEqual(2, events.trackers.count)
         XCTAssertEqual(1, events.items.count)
-        XCTAssertEqual(2, events.blocked.count)
+        XCTAssertEqual(2, events.items.first?.trackers.count)
     }
 }

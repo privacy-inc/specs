@@ -20,7 +20,7 @@ final class CloudPolicyTests: XCTestCase {
             .sink {
                 if $0.events.domains.count == 2 {
                     XCTAssertEqual(1, $0.events.trackers.count)
-                    XCTAssertEqual(1, $0.events.blocked.count)
+                    XCTAssertEqual(1, $0.events.items.first?.trackers.count)
                     XCTAssertEqual(2, $0.events.items.count)
                     XCTAssertEqual(1, $0.events.timestamps.count)
                     XCTAssertEqual("googleapis", $0.events.trackers.first)
@@ -28,8 +28,8 @@ final class CloudPolicyTests: XCTestCase {
                     XCTAssertEqual("google.com", $0.events.domains.last)
                     XCTAssertEqual(0, $0.events.items.first?.domain)
                     XCTAssertEqual(0, $0.events.items.first?.timestamp)
-                    XCTAssertEqual(0, $0.events.blocked.first?.relation)
-                    XCTAssertEqual(0, $0.events.blocked.first?.tracker)
+                    XCTAssertEqual(1, $0.events.items.first?.trackers.count)
+                    XCTAssertEqual(0, $0.events.items.first?.trackers.first)
                     expect.fulfill()
                 }
             }

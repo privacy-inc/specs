@@ -1,7 +1,7 @@
 import Foundation
 
 extension Settings.Configuration {
-    public enum Prevent: UInt8 {
+    public enum Autoplay: UInt8 {
         case
         none,
         audio,

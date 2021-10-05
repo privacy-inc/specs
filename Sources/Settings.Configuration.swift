@@ -3,7 +3,7 @@ import Archivable
 
 extension Settings {
     public struct Configuration: Storable {
-        public let prevent: Prevent
+        public let autoplay: Autoplay
         public let javascript: Bool
         public let popups: Bool
         public let location: Bool
@@ -35,8 +35,8 @@ extension Settings {
             fatalError()
         }
         
-        private init(prevent: Prevent, javascript: Bool, popups: Bool, location: Bool, timers: Bool, dark: Bool, ads: Bool, screen: Bool, cookies: Bool, http: Bool, third: Bool) {
-            self.prevent = prevent
+        private init(autoplay: Autoplay, javascript: Bool, popups: Bool, location: Bool, timers: Bool, dark: Bool, ads: Bool, screen: Bool, cookies: Bool, http: Bool, third: Bool) {
+            self.autoplay = autoplay
             self.javascript = javascript
             self.popups = popups
             self.location = location

@@ -25,17 +25,59 @@ extension Settings {
         
         public var data: Data {
             .init()
+            .adding(autoplay.rawValue)
+            .adding(javascript)
+            .adding(popups)
+            .adding(location)
+            .adding(timers)
+            .adding(dark)
+            .adding(ads)
+            .adding(screen)
+            .adding(cookies)
+            .adding(http)
+            .adding(third)
         }
         
         public init(data: inout Data) {
-            fatalError()
+            autoplay = .init(rawValue: data.number())!
+            javascript = data.bool()
+            popups = data.bool()
+            location = data.bool()
+            timers = data.bool()
+            dark = data.bool()
+            ads = data.bool()
+            screen = data.bool()
+            cookies = data.bool()
+            http = data.bool()
+            third = data.bool()
         }
         
         init() {
-            fatalError()
+            self.init(
+                autoplay: .none,
+                javascript: true,
+                popups: false,
+                location: false,
+                timers: true,
+                dark: true,
+                ads: false,
+                screen: false,
+                cookies: false,
+                http: false,
+                third: true)
         }
         
-        private init(autoplay: Autoplay, javascript: Bool, popups: Bool, location: Bool, timers: Bool, dark: Bool, ads: Bool, screen: Bool, cookies: Bool, http: Bool, third: Bool) {
+        private init(autoplay: Autoplay,
+                     javascript: Bool,
+                     popups: Bool,
+                     location: Bool,
+                     timers: Bool,
+                     dark: Bool,
+                     ads: Bool,
+                     screen: Bool,
+                     cookies: Bool,
+                     http: Bool,
+                     third: Bool) {
             self.autoplay = autoplay
             self.javascript = javascript
             self.popups = popups
@@ -49,8 +91,159 @@ extension Settings {
             self.third = third
         }
         
+        func with(autoplay: Autoplay) -> Self {
+            .init(autoplay: autoplay,
+                  javascript: javascript,
+                  popups: popups,
+                  location: location,
+                  timers: timers,
+                  dark: dark,
+                  ads: ads,
+                  screen: screen,
+                  cookies: cookies,
+                  http: http,
+                  third: third)
+        }
         
+        func with(javascript: Bool) -> Self {
+            .init(autoplay: autoplay,
+                  javascript: javascript,
+                  popups: popups,
+                  location: location,
+                  timers: timers,
+                  dark: dark,
+                  ads: ads,
+                  screen: screen,
+                  cookies: cookies,
+                  http: http,
+                  third: third)
+        }
         
+        func with(popups: Bool) -> Self {
+            .init(autoplay: autoplay,
+                  javascript: javascript,
+                  popups: popups,
+                  location: location,
+                  timers: timers,
+                  dark: dark,
+                  ads: ads,
+                  screen: screen,
+                  cookies: cookies,
+                  http: http,
+                  third: third)
+        }
+        
+        func with(location: Bool) -> Self {
+            .init(autoplay: autoplay,
+                  javascript: javascript,
+                  popups: popups,
+                  location: location,
+                  timers: timers,
+                  dark: dark,
+                  ads: ads,
+                  screen: screen,
+                  cookies: cookies,
+                  http: http,
+                  third: third)
+        }
+        
+        func with(timers: Bool) -> Self {
+            .init(autoplay: autoplay,
+                  javascript: javascript,
+                  popups: popups,
+                  location: location,
+                  timers: timers,
+                  dark: dark,
+                  ads: ads,
+                  screen: screen,
+                  cookies: cookies,
+                  http: http,
+                  third: third)
+        }
+        
+        func with(dark: Bool) -> Self {
+            .init(autoplay: autoplay,
+                  javascript: javascript,
+                  popups: popups,
+                  location: location,
+                  timers: timers,
+                  dark: dark,
+                  ads: ads,
+                  screen: screen,
+                  cookies: cookies,
+                  http: http,
+                  third: third)
+        }
+        
+        func with(ads: Bool) -> Self {
+            .init(autoplay: autoplay,
+                  javascript: javascript,
+                  popups: popups,
+                  location: location,
+                  timers: timers,
+                  dark: dark,
+                  ads: ads,
+                  screen: screen,
+                  cookies: cookies,
+                  http: http,
+                  third: third)
+        }
+        
+        func with(screen: Bool) -> Self {
+            .init(autoplay: autoplay,
+                  javascript: javascript,
+                  popups: popups,
+                  location: location,
+                  timers: timers,
+                  dark: dark,
+                  ads: ads,
+                  screen: screen,
+                  cookies: cookies,
+                  http: http,
+                  third: third)
+        }
+        
+        func with(cookies: Bool) -> Self {
+            .init(autoplay: autoplay,
+                  javascript: javascript,
+                  popups: popups,
+                  location: location,
+                  timers: timers,
+                  dark: dark,
+                  ads: ads,
+                  screen: screen,
+                  cookies: cookies,
+                  http: http,
+                  third: third)
+        }
+        
+        func with(http: Bool) -> Self {
+            .init(autoplay: autoplay,
+                  javascript: javascript,
+                  popups: popups,
+                  location: location,
+                  timers: timers,
+                  dark: dark,
+                  ads: ads,
+                  screen: screen,
+                  cookies: cookies,
+                  http: http,
+                  third: third)
+        }
+        
+        func with(third: Bool) -> Self {
+            .init(autoplay: autoplay,
+                  javascript: javascript,
+                  popups: popups,
+                  location: location,
+                  timers: timers,
+                  dark: dark,
+                  ads: ads,
+                  screen: screen,
+                  cookies: cookies,
+                  http: http,
+                  third: third)
+        }
         
         /*
         

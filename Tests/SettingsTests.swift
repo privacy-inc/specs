@@ -22,7 +22,14 @@ final class SettingsTests: XCTestCase {
         XCTAssertEqual(.standard, settings.data.prototype(Settings.self).policy.level)
     }
     
-    
+    func testConfiguration() {
+        XCTAssertEqual(.none, settings.configuration.autoplay)
+        settings = settings
+            .with(configuration: settings
+                    .configuration
+                    .with(autoplay: .video))
+        XCTAssertEqual(.video, settings.data.prototype(Settings.self).configuration.autoplay)
+    }
     
     
     

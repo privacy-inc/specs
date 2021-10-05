@@ -10,12 +10,13 @@ public struct Settings: Storable {
         .init()
         .adding(search.engine.rawValue)
         .adding(policy.level.rawValue)
+        .adding(configuration)
     }
     
     public init(data: inout Data) {
         search = .init(engine: .init(rawValue: data.removeFirst())!)
         policy = Policy.with(data: &data)
-        configuration = .init()
+        configuration = .init(data: &data)
     }
     
     init() {

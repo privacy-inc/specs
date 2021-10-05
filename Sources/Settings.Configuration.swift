@@ -15,10 +15,9 @@ extension Settings {
         public let http: Bool
         public let third: Bool
         
-        public var scripts: Scripts {
-            .init(start: dark ? Script.dark : "",
-                  end: (screen ? "" : Script.scroll)
-                  + (timers ? "" : Script.timers))
+        public var scripts: String {
+            (screen ? "" : Script.scroll)
+            + (timers ? "" : Script.timers)
         }
         
         public var blockers: String {

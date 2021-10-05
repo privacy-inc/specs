@@ -1,7 +1,7 @@
 import Foundation
 
 extension Script {
-    static let dark = """
+    static let _dark = """
 function _privacy_incognit_make_dark(element) {
     if (!element.hasAttribute('_privacy_incognit_dark_mode')) {
         element.setAttribute('_privacy_incognit_dark_mode', 1);

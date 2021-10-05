@@ -42,23 +42,21 @@ final class SettingsConfigurationTests: XCTestCase {
     
     func testTimers() {
         XCTAssertTrue(configuration.timers)
-        XCTAssertFalse(configuration.scripts.end.contains(Script.timers))
+        XCTAssertFalse(configuration.scripts.contains(Script.timers))
         
         configuration = configuration
             .with(timers: false)
-        XCTAssertTrue(configuration.scripts.end.contains(Script.timers))
+        XCTAssertTrue(configuration.scripts.contains(Script.timers))
         XCTAssertFalse(configuration.data.prototype(Settings.Configuration.self).timers)
     }
     
     func testDark() {
         XCTAssertTrue(configuration.dark)
         XCTAssertTrue(configuration._blockers.contains(.antidark))
-        XCTAssertTrue(configuration.scripts.start.contains(Script.dark))
         
         configuration = configuration
             .with(dark: false)
         XCTAssertFalse(configuration._blockers.contains(.antidark))
-        XCTAssertFalse(configuration.scripts.start.contains(Script.dark))
         XCTAssertFalse(configuration.data.prototype(Settings.Configuration.self).dark)
     }
     
@@ -75,12 +73,12 @@ final class SettingsConfigurationTests: XCTestCase {
     func testScreen() {
         XCTAssertFalse(configuration.screen)
         XCTAssertTrue(configuration._blockers.contains(.screen))
-        XCTAssertTrue(configuration.scripts.end.contains(Script.scroll))
+        XCTAssertTrue(configuration.scripts.contains(Script.scroll))
         
         configuration = configuration
             .with(screen: true)
         XCTAssertFalse(configuration._blockers.contains(.screen))
-        XCTAssertFalse(configuration.scripts.end.contains(Script.scroll))
+        XCTAssertFalse(configuration.scripts.contains(Script.scroll))
         XCTAssertTrue(configuration.data.prototype(Settings.Configuration.self).screen)
     }
     

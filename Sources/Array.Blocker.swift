@@ -13,7 +13,8 @@ extension Array where Element == Blocker.Rule {
             .reduce(into: [URL.Allow : Set<String>]()) {
                 if case let .css(css) = $1.action,
                    case let .url(url) = $1.trigger {
-                    $0[url, default: []].formUnion(css)
+                    $0[url, default: []]
+                        .formUnion(css)
                 }
             }
             .map {

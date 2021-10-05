@@ -33,7 +33,8 @@ final class ArchiveTests: XCTestCase {
     
     func testSettings() async {
         XCTAssertEqual(.google, archive.settings.search.engine)
-        archive.settings.search = .init(engine: .ecosia)
+        archive.settings = archive.settings
+            .with(search: .init(engine: .ecosia))
         archive = await Archive.prototype(data: archive.compressed)
         XCTAssertEqual(.ecosia, archive.settings.search.engine)
     }

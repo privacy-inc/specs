@@ -19,8 +19,9 @@ extension Settings {
             .init(start: "", end: "")
         }
         
-        public var blocking: String {
-            ""
+        public var blockers: String {
+            _blockers
+                .rules
         }
         
         public var data: Data {
@@ -36,6 +37,36 @@ extension Settings {
             .adding(cookies)
             .adding(http)
             .adding(third)
+        }
+        
+        var _blockers: Set<Blocker> {
+            var rules = Set<Blocker>()
+            
+            if !cookies {
+                rules.insert(.cookies)
+            }
+            
+            if !http {
+                rules.insert(.http)
+            }
+            
+            if !ads {
+                rules.insert(.ads)
+            }
+            
+            if !screen {
+                rules.insert(.screen)
+            }
+            
+            if dark {
+                rules.insert(.antidark)
+            }
+            
+            if !third {
+                rules.insert(.third)
+            }
+            
+            return rules
         }
         
         public init(data: inout Data) {

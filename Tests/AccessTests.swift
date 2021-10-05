@@ -13,7 +13,7 @@ final class AccessTests: XCTestCase {
     
     func testWithDataDeepLink() {
         let original = Access.with(url: URL(string: "privacy://hello%20world")!) as? Access.Deeplink
-        var data = original?.data ?? .init()
+        var data = original!.data
         let prototyped = Access.with(data: &data) as? Access.Deeplink
         XCTAssertNotNil(prototyped)
         XCTAssertEqual(prototyped?.value, original?.value)

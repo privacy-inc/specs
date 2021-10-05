@@ -2,19 +2,22 @@ import Foundation
 
 extension Access {
     public struct Local: AccessType {
+        public var file: String {
+            value
+                .components(separatedBy: "://")
+                .last?
+                .components(separatedBy: "/")
+                .last ?? ""
+        }
+        
         public let key = Access.local
         public let value: String
-        public let file: String
+        
         let bookmark: Data
         
         init(value: String, bookmark: Data) {
             self.value = value
             self.bookmark = bookmark
-            file = value
-                .components(separatedBy: "://")
-                .last?
-                .components(separatedBy: "/")
-                .last ?? ""
         }
         
         public func open(completion: (_ file: URL, _ directory: URL) -> Void) {

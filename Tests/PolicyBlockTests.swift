@@ -150,7 +150,8 @@ final class PolicyBlockTests: XCTestCase {
         "https://tags.knewz.com/prod/ncg/cookie.html",
         "https://tags.penews.com/prod/ncg/cookie.html",
         "https://cdn.cxense.com/sp1.html#ver=1&typ=pgv&rnd=kufr1ojq2yz1r39j&sid=9222318613852486900&loc=https%3A%2F%2Fwww.wsj.com%2Fpodcasts%2Fthe-journal&new=0&arf=0&ltm=1633539172742&ref=https%3A%2F%2Fwww.google.com%2F&tzo=-120&res=390x844&dpr=3&col=32&bln=en-US&chs=UTF-8&cks=kufr1onbweu1oqyf&ckp=kufr1on453vtmowz&glb=&wsz=390x714&cp_ver=2.44&cp_testGroup=57&cp_env=prod&cp_topDomain=wsj.com&cp_retina=y&cp_template=Full&cp_access=free&cp_section=Podcasts&cp_subscriber=nonsubscriber&cp_isSubscriber=n&cp_edition=naus&cp_bucket=7&cp_ab_bucket=5&cp_pageContentTypeDetai=default&cp_pageSiteProduct=WSJ",
-        "https://cookies.giphy.com/global-cookies.233969e709c857c558c404d7dd7d5715e707acfa.html"
+        "https://cookies.giphy.com/global-cookies.233969e709c857c558c404d7dd7d5715e707acfa.html",
+        "https://pandg.tapad.com/tag?gdpr=1&gdpr_consent=CPNqnEZPNqnEZAcABBENBvCgAAAAAAAAACiQAAAAAAAA.YAAAAAAAAAAA&referrer_url=&page_url=https%3A%2F%2Fwww.reuters.com%2F&owner=P%26G&bp_id=freestar"
     ]
     
     override func setUp() {

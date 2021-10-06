@@ -15,6 +15,7 @@ public struct Events: Storable {
     
     public var report: [Report] {
         items
+            .reversed()
             .reduce(into: []) {
                 $0.append(.init(
                     date: .init(timestamp: timestamps[.init($1.timestamp)]),

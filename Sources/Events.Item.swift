@@ -2,19 +2,19 @@ import Foundation
 import Archivable
 
 extension Events {
-    public struct Item: Storable {
+    struct Item: Storable {
         let timestamp: UInt16
         let domain: UInt16
         let trackers: Set<UInt16>
         
-        public var data: Data {
+        var data: Data {
             .init()
             .adding(timestamp)
             .adding(domain)
             .adding(size: UInt8.self, collection: trackers)
         }
         
-        public init(data: inout Data) {
+        init(data: inout Data) {
             timestamp = data.number()
             domain = data.number()
             trackers = .init(data.collection(size: UInt8.self))

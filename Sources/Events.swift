@@ -2,10 +2,16 @@ import Foundation
 import Archivable
 
 public struct Events: Storable {
-    public let items: [Item]
-    public let domains: [String]
-    public let trackers: [String]
-    public let timestamps: [UInt32]
+    let items: [Item]
+    let domains: [String]
+    let trackers: [String]
+    let timestamps: [UInt32]
+    
+    public var prevented: Int {
+        items
+            .map(\.trackers.count)
+            .reduce(0, +)
+    }
     
     public var data: Data {
         .init()

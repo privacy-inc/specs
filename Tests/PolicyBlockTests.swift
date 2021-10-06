@@ -137,7 +137,20 @@ final class PolicyBlockTests: XCTestCase {
         "https://p.midserved.com/prebidlink/18825/j.html?i=11602",
         "https://user-sync.adxpremium.services/load-cookie.html?gdpr=0&gdpr_consent=",
         "https://p.adservd.com/prebidlink/18825/j.html?i=6961",
-        "https://cdn.appdynamics.com/adrum-xd.64575a4f0ccc435ef3de4778c280c647.html"
+        "https://cdn.appdynamics.com/adrum-xd.64575a4f0ccc435ef3de4778c280c647.html",
+        "https://us.tags.newscgp.com/prod/ncg/cookie.html",
+        "https://www.ncaudienceexchange.com/prod/ncg/cookie.html",
+        "https://tags.realtor.com/prod/ncg/cookie.html",
+        "https://tags.barrons.com/prod/ncg/cookie.html",
+        "https://tags.mansionglobal.com/prod/ncg/cookie.html",
+        "https://tags.marketwatch.com/prod/ncg/cookie.html",
+        "https://tags.nypost.com/prod/ncg/cookie.html",
+        "https://tags.decider.com/prod/ncg/cookie.html",
+        "https://tags.pagesix.com/prod/ncg/cookie.html",
+        "https://tags.knewz.com/prod/ncg/cookie.html",
+        "https://tags.penews.com/prod/ncg/cookie.html",
+        "https://cdn.cxense.com/sp1.html#ver=1&typ=pgv&rnd=kufr1ojq2yz1r39j&sid=9222318613852486900&loc=https%3A%2F%2Fwww.wsj.com%2Fpodcasts%2Fthe-journal&new=0&arf=0&ltm=1633539172742&ref=https%3A%2F%2Fwww.google.com%2F&tzo=-120&res=390x844&dpr=3&col=32&bln=en-US&chs=UTF-8&cks=kufr1onbweu1oqyf&ckp=kufr1on453vtmowz&glb=&wsz=390x714&cp_ver=2.44&cp_testGroup=57&cp_env=prod&cp_topDomain=wsj.com&cp_retina=y&cp_template=Full&cp_access=free&cp_section=Podcasts&cp_subscriber=nonsubscriber&cp_isSubscriber=n&cp_edition=naus&cp_bucket=7&cp_ab_bucket=5&cp_pageContentTypeDetai=default&cp_pageSiteProduct=WSJ",
+        "https://cookies.giphy.com/global-cookies.233969e709c857c558c404d7dd7d5715e707acfa.html"
     ]
     
     override func setUp() {

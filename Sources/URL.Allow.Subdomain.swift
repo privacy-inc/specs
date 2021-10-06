@@ -10,6 +10,7 @@ extension URL.Allow {
         tarifvergleich,
         mobileads,
         sourcepointcmp,
-        tracking
+        tracking,
+        cookies
     }
 }

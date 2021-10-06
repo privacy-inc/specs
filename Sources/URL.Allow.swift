@@ -24,7 +24,8 @@ extension URL {
         bloomberg,
         forbes,
         immobilienscout24,
-        huffpost
+        huffpost,
+        giphy
         
         var tld: Tld {
             switch self {
@@ -46,7 +47,8 @@ extension URL {
                  .medium,
                  .bloomberg,
                  .forbes,
-                 .huffpost:
+                 .huffpost,
+                 .giphy:
                 return .com
             case .thelocal,
                  .spiegel,
@@ -93,6 +95,8 @@ extension URL {
                 return [.sourcepointcmp]
             case .immobilienscout24:
                 return [.tracking]
+            case .giphy:
+                return [.cookies]
             default:
                 return []
             }

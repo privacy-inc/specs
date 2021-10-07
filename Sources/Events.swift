@@ -29,7 +29,14 @@ public struct Events: Storable {
     }
     
     public var stats: Stats {
-        .init(timeline: timestamps.timeline)
+        .init(timeline: timestamps.timeline,
+              since: timestamps
+                .first
+                .map(Date.init(timestamp:))
+              ?? .now,
+              count: items.count,
+              domains: nil,
+              trackers: nil)
     }
     
     public var data: Data {

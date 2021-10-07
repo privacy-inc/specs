@@ -28,6 +28,10 @@ public struct Events: Storable {
             }
     }
     
+    public var stats: Stats {
+        .init(timeline: timestamps.timeline)
+    }
+    
     public var data: Data {
         .init()
         .adding(size: UInt16.self, collection: items)

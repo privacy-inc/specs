@@ -110,4 +110,19 @@ final class EventsTests: XCTestCase {
         XCTAssertEqual(1, events.items.count)
         XCTAssertEqual(2, events.items.first?.trackers.count)
     }
+    
+    func testStatsTimelineEmpty() {
+        XCTAssertEqual([], Events().stats.timeline)
+    }
+    
+    func testStatsTimeline() {
+        XCTAssertEqual([1, 1, 0, 0, 1, 1, 0, 0, 0, 0], Events()
+                        .with(timestamps: [
+                            Date(timeIntervalSinceNow: -60 * 60 * 24 * 6.9).timestamp,
+                            Date(timeIntervalSinceNow: -60 * 60 * 24 * 6.1).timestamp,
+                            Date(timeIntervalSinceNow: -60 * 60 * 24 * 4).timestamp,
+                            Date(timeIntervalSinceNow: -60 * 60 * 24 * 3.2).timestamp])
+                        .stats
+                        .timeline)
+    }
 }

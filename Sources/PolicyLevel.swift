@@ -3,7 +3,7 @@ import Foundation
 public protocol PolicyLevel {
     var level: Policy { get }
     
-    func route(host: [String], path: String?) -> Policy.Result
+    func route(url: URL) -> Policy.Result
 }
 
 extension PolicyLevel {
@@ -17,24 +17,25 @@ extension PolicyLevel {
                     .map {
                         switch $0.policy {
                         case .allow:
-                            return url
-                                .host
-                                .map {
-                                    (Array($0
-                                            .components(separatedBy: ".")
-                                            .dropLast()),
-                                     url
-                                        .path
-                                        .components(separatedBy: "/")
-                                        .dropFirst()
-                                        .first)
-                                }
-                                .map {
-                                    !$0.0.isEmpty
-                                        ? route(host: $0.0, path: $0.1)
-                                        : .ignore
-                                }
-                            ?? .ignore
+                            return route(url: url)
+//                            return url
+//                                .host
+//                                .map {
+//                                    (host: Array($0
+//                                            .components(separatedBy: ".")
+//                                            .dropLast()),
+//                                     path: url
+//                                        .path
+//                                        .components(separatedBy: "/")
+//                                        .dropFirst()
+//                                        .first)
+//                                }
+//                                .map {
+//                                    !$0.0.isEmpty
+//                                        ? route(host: $0.host, path: $0.path)
+//                                        : .ignore
+//                                }
+//                            ?? .ignore
                         default:
                             return $0.policy
                         }
@@ -44,7 +45,7 @@ extension PolicyLevel {
             ?? .ignore
     }
     
-    func route(host: [String], path: String?) -> Policy.Result {
+    func route(url: URL) -> Policy.Result {
         .allow
     }
 }

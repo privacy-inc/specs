@@ -23,7 +23,7 @@ final class CloudPolicyTests: XCTestCase {
                     XCTAssertEqual(1, $0.events.items.first?.trackers.count)
                     XCTAssertEqual(2, $0.events.items.count)
                     XCTAssertEqual(1, $0.events.timestamps.count)
-                    XCTAssertEqual("googleapis", $0.events.trackers.first)
+                    XCTAssertEqual("something.googleapis.com", $0.events.trackers.first)
                     XCTAssertEqual("avocado.org", $0.events.domains.first)
                     XCTAssertEqual("google.com", $0.events.domains.last)
                     XCTAssertEqual(0, $0.events.items.first?.domain)
@@ -38,7 +38,7 @@ final class CloudPolicyTests: XCTestCase {
         Task {
             let id = await cloud.open(url: URL(string: "https://avocado.org")!)
             
-            if case .block = await cloud.policy(history: id, url: URL(string: "https://googleapis.com")!) {
+            if case .block = await cloud.policy(history: id, url: URL(string: "https://something.googleapis.com")!) {
                 
             } else {
                 XCTFail()

@@ -1,13 +1,13 @@
 import Foundation
+import Domains
 
 extension URL {
-    enum Deny: String, CaseIterable {
+    enum Deny: String {
         case
         pubmatic,
         dianomi,
         hotjar,
         media,
-        googleapis,
         adalliance,
         yieldlab,
         emsservice,
@@ -42,7 +42,6 @@ extension URL {
         apostropheemailcompetence,
         googlesyndication,
         doubleclick,
-        cloudfront,
         adnxs,
         tinypass,
         lijit,
@@ -121,6 +120,7 @@ extension URL {
         penews,
         cxense,
         tapad,
+        guim,
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
         google_analytics = "google-analytics",
@@ -134,5 +134,12 @@ extension URL {
         _1rx = "1rx",
         onetag_sys = "onetag-sys",
         _360yield = "360yield"
+        
+        static func result(domain: Domain) -> Policy.Result? {
+            Self(rawValue: domain.name)
+                .map {
+                    .block($0.rawValue)
+                }
+        }
     }
 }

@@ -2,7 +2,7 @@ import Foundation
 import Domains
 
 extension URL {
-    enum Allow: String, CaseIterable {
+    enum Allow: String {
         case
         ecosia,
         google,
@@ -25,7 +25,8 @@ extension URL {
         forbes,
         immobilienscout24,
         huffpost,
-        giphy
+        giphy,
+        theguardian
         
         var tld: Tld {
             switch self {
@@ -48,7 +49,8 @@ extension URL {
                  .bloomberg,
                  .forbes,
                  .huffpost,
-                 .giphy:
+                 .giphy,
+                 .theguardian:
                 return .com
             case .thelocal,
                  .spiegel,
@@ -57,7 +59,7 @@ extension URL {
             }
         }
         
-        var path: [Path] {
+        private var path: [Path] {
             switch self {
             case .google:
                 return [.pagead,
@@ -77,7 +79,7 @@ extension URL {
             }
         }
         
-        var subdomain: [Subdomain] {
+        private var subdomain: [Subdomain] {
             switch self {
             case .twitter:
                 return [.platform]
@@ -97,9 +99,50 @@ extension URL {
                 return [.tracking]
             case .giphy:
                 return [.cookies]
+            case .theguardian:
+                return [.sourcepoint]
             default:
                 return []
             }
+        }
+        
+        static func result(domain: Domain, url: URL) -> Policy.Result? {
+            Self(rawValue: domain.name)
+                .map { allow in
+                    allow
+                        .subdomain(domain: domain)
+                    ?? allow
+                        .path(domain: domain, url: url)
+                    ?? .allow
+                }
+        }
+        
+        private func subdomain(domain: Domain) -> Policy.Result? {
+            domain
+                .prefix
+                .last
+                .flatMap { prefix in
+                    subdomain
+                        .map(\.rawValue)
+                        .contains(prefix)
+                    ? .block(prefix + "." + domain.minimal)
+                    : nil
+                }
+        }
+        
+        private func path(domain: Domain, url: URL) -> Policy.Result? {
+            url
+                .path
+                .components(separatedBy: "/")
+                .dropFirst()
+                .first
+                .flatMap { component in
+                    path
+                        .map(\.rawValue)
+                        .contains(component)
+                    ? .block(domain.minimal + "/" + component)
+                    : nil
+                }
         }
     }
 }

@@ -37,9 +37,6 @@ public struct Events: Storable {
     public var stats: Stats {
         .init(timeline: timestamps.timeline,
               websites: items.count,
-              incidents: items
-                .map(\.trackers.count)
-                .reduce(0, +),
               domains: domains.isEmpty
               ? nil
               : (top: items

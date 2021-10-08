@@ -2,15 +2,21 @@ import Foundation
 import Archivable
 
 public struct Events: Storable {
-    public let timestamps: [UInt32]
     let items: [Item]
     let domains: [String]
     let trackers: [String]
+    let timestamps: [UInt32]
     
     public var prevented: Int {
         items
             .map(\.trackers.count)
             .reduce(0, +)
+    }
+    
+    public var since: Date? {
+        timestamps
+            .first
+            .map(Date.init(timestamp:))
     }
     
     public var report: [Report] {
@@ -30,13 +36,25 @@ public struct Events: Storable {
     
     public var stats: Stats {
         .init(timeline: timestamps.timeline,
-              since: timestamps
-                .first
-                .map(Date.init(timestamp:))
-              ?? .now,
-              count: items.count,
-              domains: nil,
-              trackers: nil)
+              websites: items.count,
+              incidents: items
+                .map(\.trackers.count)
+                .reduce(0, +),
+              domains: domains.isEmpty
+              ? nil
+              : (top: items
+                    .map {
+                        domains[.init($0.domain)]
+                    }
+                    .top, count: domains.count),
+              trackers: trackers.isEmpty
+              ? nil
+              : (top: items
+                    .flatMap(\.trackers)
+                    .map {
+                        trackers[.init($0)]
+                    }
+                    .top, count: trackers.count))
     }
     
     public var data: Data {

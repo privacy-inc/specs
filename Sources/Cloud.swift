@@ -1,5 +1,6 @@
 import Foundation
 import Archivable
+import Domains
 
 extension Cloud where Output == Archive {
     public func search(_ string: String) async throws -> UInt16 {
@@ -148,19 +149,19 @@ extension Cloud where Output == Archive {
         } (model.settings.policy(url))
     }
     
+    public func website(history: UInt16) -> Website {
+        model
+            .history
+            .first { $0.id == history }!
+            .website
+    }
+    
     private func id(access: AccessType) -> UInt16? {
         model
             .history
             .first {
                 $0.website.access.value == access.value
             }?.id
-    }
-    
-    private func website(history: UInt16) -> Website {
-        model
-            .history
-            .first { $0.id == history }!
-            .website
     }
     
     private func add(website: Website, history: UInt16) async {
@@ -172,8 +173,8 @@ extension Cloud where Output == Archive {
     }
     
     private func allow(url: URL) async {
-        guard let remote = Access.with(url: url) as? Access.Remote else { return }
-        model.events = model.events.add(domain: remote.domain)
+        guard let host = url.host else { return }
+        model.events = model.events.add(domain: Tld.domain(host: host).minimal)
         
         await stream()
     }

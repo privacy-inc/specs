@@ -32,7 +32,7 @@ final class PolicyStandardTests: XCTestCase {
                 ($0, policy(URL(string: $0)!))
             }
             .forEach {
-                if case .ignore = $0.1 { } else {
+                if case .ignore = $0.1.result { } else {
                     XCTFail("\($0.1): \($0.0)")
                 }
             }
@@ -44,7 +44,7 @@ final class PolicyStandardTests: XCTestCase {
                 ($0, policy(URL(string: $0)!))
             }
             .forEach {
-                if case .allow = $0.1 { } else {
+                if case .allow = $0.1.result { } else {
                     XCTFail("\($0.1): \($0.0)")
                 }
             }
@@ -56,7 +56,7 @@ final class PolicyStandardTests: XCTestCase {
                 ($0, policy(URL(string: $0)!))
             }
             .forEach {
-                if case .external = $0.1 { } else {
+                if case .external = $0.1.result { } else {
                     XCTFail("\($0.1): \($0.0)")
                 }
             }

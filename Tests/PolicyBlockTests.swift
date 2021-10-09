@@ -164,7 +164,7 @@ final class PolicyBlockTests: XCTestCase {
                 ($0, policy(URL(string: $0)!))
             }
             .forEach {
-                if case .block = $0.1 { } else {
+                if case .block = $0.1.result { } else {
                     XCTFail("\($0.1): \($0.0)")
                 }
             }

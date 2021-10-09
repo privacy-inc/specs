@@ -106,18 +106,18 @@ extension URL {
             }
         }
         
-        static func result(domain: Domain, url: URL) -> Policy.Result? {
+        static func validation(domain: Domain, url: URL) -> Policy.Validation? {
             Self(rawValue: domain.name)
                 .map { allow in
                     allow
                         .subdomain(domain: domain)
                     ?? allow
                         .path(domain: domain, url: url)
-                    ?? .allow
+                    ?? .allow(domain: domain)
                 }
         }
         
-        private func subdomain(domain: Domain) -> Policy.Result? {
+        private func subdomain(domain: Domain) -> Policy.Validation? {
             domain
                 .prefix
                 .last
@@ -125,12 +125,12 @@ extension URL {
                     subdomain
                         .map(\.rawValue)
                         .contains(prefix)
-                    ? .block(prefix + "." + domain.minimal)
+                    ? .block(tracker: prefix + "." + domain.minimal)
                     : nil
                 }
         }
         
-        private func path(domain: Domain, url: URL) -> Policy.Result? {
+        private func path(domain: Domain, url: URL) -> Policy.Validation? {
             url
                 .path
                 .components(separatedBy: "/")
@@ -140,7 +140,7 @@ extension URL {
                     path
                         .map(\.rawValue)
                         .contains(component)
-                    ? .block(domain.minimal + "/" + component)
+                    ? .block(tracker: domain.minimal + "/" + component)
                     : nil
                 }
         }

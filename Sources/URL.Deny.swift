@@ -135,10 +135,10 @@ extension URL {
         onetag_sys = "onetag-sys",
         _360yield = "360yield"
         
-        static func result(domain: Domain) -> Policy.Result? {
+        static func validation(domain: Domain) -> Policy.Validation? {
             Self(rawValue: domain.name)
                 .map {
-                    .block($0.rawValue)
+                    .block(tracker: $0.rawValue)
                 }
         }
     }

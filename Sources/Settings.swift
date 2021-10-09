@@ -3,8 +3,8 @@ import Archivable
 
 public struct Settings: Storable {
     public let search: Search
-    public let policy: PolicyLevel
     public let configuration: Configuration
+    let policy: PolicyLevel
     
     public var data: Data {
         .init()

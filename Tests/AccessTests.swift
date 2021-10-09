@@ -45,6 +45,6 @@ final class AccessTests: XCTestCase {
         let prototyped = Access.with(data: &data) as? Access.Remote
         XCTAssertNotNil(prototyped)
         XCTAssertEqual(prototyped?.value, original?.value)
-        XCTAssertEqual(prototyped?.domain, original?.domain)
+        XCTAssertEqual(prototyped?.domain.minimal, original?.domain.minimal)
     }
 }

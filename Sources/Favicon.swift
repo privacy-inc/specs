@@ -40,7 +40,7 @@ public final actor Favicon {
     }
     
     public func publisher(for access: AccessType) -> Pub? {
-        guard let domain = (access as? Access.Remote)?.domain.lowercased() else { return nil }
+        guard let domain = (access as? Access.Remote)?.domain.minimal.lowercased() else { return nil }
         
         validate(domain: domain)
         
@@ -61,14 +61,15 @@ public final actor Favicon {
     
     public func request(for access: AccessType) -> Bool {
         (access as? Access.Remote)
+            .map(\.domain.minimal)
             .map {
-                !received.contains($0.domain.lowercased()) && !$0.domain.isEmpty
+                !received.contains($0.lowercased()) && !$0.isEmpty
             }
         ?? false
     }
     
     public func received(url: String, for access: AccessType) async {
-        guard let domain = (access as? Access.Remote)?.domain.lowercased() else { return }
+        guard let domain = (access as? Access.Remote)?.domain.minimal.lowercased() else { return }
         
         validate(domain: domain)
         received.insert(domain)

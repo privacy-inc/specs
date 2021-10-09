@@ -7,10 +7,10 @@ extension URL {
         cloudfront,
         googleapis
         
-        static func result(domain: Domain) -> Policy.Result? {
+        static func validation(domain: Domain) -> Policy.Validation? {
             Self(rawValue: domain.suffix.first!)
                 .map { _ in
-                    .block(domain.minimal)
+                    .block(tracker: domain.minimal)
                 }
         }
     }

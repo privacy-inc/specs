@@ -5,7 +5,7 @@ extension Policy {
     struct Secure: PolicyLevel {
         let level = Policy.secure
         
-        func route(url: URL) -> Result {
+        func route(url: URL) -> Validation {
             url
                 .host
                 .map(Tld.domain(host:))
@@ -14,14 +14,14 @@ extension Policy {
                     ? .ignore
                     : URL
                         .Allow
-                        .result(domain: domain, url: url)
+                        .validation(domain: domain, url: url)
                     ?? URL
                         .Deny
-                        .result(domain: domain)
+                        .validation(domain: domain)
                     ?? URL
                         .Toplevel
-                        .result(domain: domain)
-                    ?? .allow
+                        .validation(domain: domain)
+                    ?? .allow(domain: domain)
                 }
             ?? .ignore
         }

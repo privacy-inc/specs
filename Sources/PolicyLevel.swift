@@ -1,43 +1,27 @@
 import Foundation
 
-public protocol PolicyLevel {
+protocol PolicyLevel {
     var level: Policy { get }
     
-    func route(url: URL) -> Policy.Result
+    func route(url: URL) -> Policy.Validation
 }
 
 extension PolicyLevel {
-    func callAsFunction(_ url: URL) -> Policy.Result {
+    func callAsFunction(_ url: URL) -> Policy.Validation {
         url
             .scheme
             .map {
                 URL.Embed(rawValue: $0)
-                    .map(\.policy)
+                    .map(\.validation)
                 ?? URL.Scheme(rawValue: $0)
                     .map {
                         switch $0.policy {
-                        case .allow:
+                        case .accept:
                             return route(url: url)
-//                            return url
-//                                .host
-//                                .map {
-//                                    (host: Array($0
-//                                            .components(separatedBy: ".")
-//                                            .dropLast()),
-//                                     path: url
-//                                        .path
-//                                        .components(separatedBy: "/")
-//                                        .dropFirst()
-//                                        .first)
-//                                }
-//                                .map {
-//                                    !$0.0.isEmpty
-//                                        ? route(host: $0.host, path: $0.path)
-//                                        : .ignore
-//                                }
-//                            ?? .ignore
-                        default:
-                            return $0.policy
+                        case .ignore:
+                            return .ignore
+                        case let .block(tracker):
+                            return .block(tracker: tracker)
                         }
                     }
                 ?? .external
@@ -45,7 +29,7 @@ extension PolicyLevel {
             ?? .ignore
     }
     
-    func route(url: URL) -> Policy.Result {
+    func route(url: URL) -> Policy.Validation {
         .allow
     }
 }

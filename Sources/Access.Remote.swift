@@ -3,7 +3,7 @@ import Domains
 
 extension Access {
     public struct Remote: AccessURL {
-        public var domain: String {
+        public var domain: Domain {
             value
                 .replacingOccurrences(of: "https://", with: "")
                 .replacingOccurrences(of: "http://", with: "")
@@ -11,9 +11,7 @@ extension Access {
                 .first!
                 .components(separatedBy: ":")
                 .first
-                .map(Tld.domain(host:))
-                .map(\.minimal)
-            ?? ""
+                .map(Tld.domain(host:))!
         }
         
         public let key = Access.remote

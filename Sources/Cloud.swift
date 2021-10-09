@@ -131,21 +131,21 @@ extension Cloud where Output == Archive {
     
     public func policy(history: UInt16, url: URL) -> Policy.Result {
         {
-            switch $0 {
-            case .allow:
+            switch $0.event {
+            case let .allow(domain):
                 Task
                     .detached(priority: .utility) {
-                        await self.allow(url: url)
+                        await self.allow(domain: domain)
                     }
             case let .block(tracker):
                 Task
                     .detached(priority: .utility) {
                         await self.block(history: history, tracker: tracker)
                     }
-            default:
+            case .none:
                 break
             }
-            return $0
+            return $0.result
         } (model.settings.policy(url))
     }
     
@@ -172,16 +172,14 @@ extension Cloud where Output == Archive {
         await stream()
     }
     
-    private func allow(url: URL) async {
-        guard let host = url.host else { return }
-        model.events = model.events.add(domain: Tld.domain(host: host).minimal)
-        
+    private func allow(domain: Domain) async {
+        model.events = model.events.add(domain: domain.minimal)
         await stream()
     }
     
     private func block(history: UInt16, tracker: String) async {
         guard let remote = website(history: history).access as? Access.Remote else { return }
-        model.events = model.events.block(tracker: tracker, domain: remote.domain)
+        model.events = model.events.block(tracker: tracker, domain: remote.domain.minimal)
         
         await stream()
     }

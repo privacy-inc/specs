@@ -5,13 +5,31 @@ extension Script {
 function \(favicon.method) {
     const list = document.querySelectorAll("link[rel*='icon']");
     var icon = null;
-    
+
     function find(rel) {
+        var found = null;
+        var maxSize = 0;
         for (var i = 0; i < list.length; i++) {
-            if(list[i].getAttribute("rel") == rel && !list[i].href.endsWith('.svg')) {
-                return list[i].href;
+            if (list[i].getAttribute("rel") == rel && !list[i].href.endsWith('.svg')) {
+                var sizes = list[i].getAttribute("sizes");
+                var size = 0;
+                
+                if (sizes != undefined) {
+                    var split = sizes.split("x");
+                    if (split.length == 2) {
+                        size = split[0] / 1;
+                        console.log(size);
+                    }
+                }
+                
+                if (size > maxSize || maxSize == 0) {
+                    found = list[i].href;
+                    maxSize = size;
+                }
             }
         }
+        
+        return found;
     }
     
     icon = find("apple-touch-icon-precomposed");

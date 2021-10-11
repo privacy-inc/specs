@@ -3,6 +3,7 @@ import Foundation
 public enum Script {
     case
     favicon,
+    content,
     dark,
     unpromise
     
@@ -10,6 +11,8 @@ public enum Script {
         switch self {
         case .favicon:
             return Self._favicon
+        case .content:
+            return Self._content
         case .dark:
             return Self._dark
         case .unpromise:

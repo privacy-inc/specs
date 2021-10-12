@@ -4,7 +4,8 @@ public enum Script {
     case
     favicon,
     dark,
-    unpromise
+    unpromise,
+    find
     
     public var script: String {
         switch self {
@@ -14,6 +15,8 @@ public enum Script {
             return Self._dark
         case .unpromise:
             return Self._unpromise
+        case .find:
+            return Self._find
         }
     }
     

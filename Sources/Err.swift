@@ -1,6 +1,11 @@
 import Foundation
 
-enum Err: Error {
-    case
-    invalidSearch
+public struct Err {
+    public let url: URL
+    public let description: String
+    
+    public init(url: URL, description: String) {
+        self.url = url
+        self.description = description
+    }
 }

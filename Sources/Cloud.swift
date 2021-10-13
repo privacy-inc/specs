@@ -11,7 +11,7 @@ extension Cloud where Output == Archive {
     }
     
     public func search(_ string: String, history: UInt16) async throws {
-        guard let string = model.settings.search(string) else { throw Err.invalidSearch }
+        guard let string = model.settings.search(string) else { throw Err.ID.invalidSearch }
         await add(website: .init(search: string), history: history)
     }
     

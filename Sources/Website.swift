@@ -24,8 +24,8 @@ public struct Website: Storable, Identifiable {
         self.init(title: "", access: access)
     }
     
-    init(search: String) {
-        self.init(title: "", access: Access.Remote(value: search))
+    init(url: URL) {
+        self.init(title: "", access: Access.with(url: url))
     }
     
     private init(title: String, access: AccessType) {

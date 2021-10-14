@@ -3,6 +3,7 @@ import Foundation
 extension Err {
     enum ID: Error {
         case
-        invalidSearch
+        invalidSearch,
+        invalidURL
     }
 }

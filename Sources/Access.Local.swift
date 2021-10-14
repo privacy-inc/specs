@@ -2,14 +2,6 @@ import Foundation
 
 extension Access {
     public struct Local: AccessType {
-        public var file: String {
-            value
-                .components(separatedBy: "://")
-                .last?
-                .components(separatedBy: "/")
-                .last ?? ""
-        }
-        
         public let key = Access.local
         public let value: String
         

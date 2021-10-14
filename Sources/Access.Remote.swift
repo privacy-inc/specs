@@ -2,7 +2,7 @@ import Foundation
 import Domains
 
 extension Access {
-    public struct Remote: AccessURL {
+    public struct Remote: AccessType {
         public var domain: Domain {
             value
                 .replacingOccurrences(of: "https://", with: "")
@@ -17,12 +17,17 @@ extension Access {
         public let key = Access.remote
         public let value: String
         
-        init(value: String) {
-            self.value = value
-        }
-        
         public var url: URL? {
             .init(string: value)
+        }
+        
+        public var content: Data {
+            .init()
+            .adding(size: UInt16.self, string: value)
+        }
+        
+        init(value: String) {
+            self.value = value
         }
     }
 }

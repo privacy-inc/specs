@@ -15,9 +15,9 @@ public enum Access: UInt8 {
         case .local:
             return Local(value: data.string(size: UInt16.self), bookmark: data.unwrap(size: UInt16.self))
         case .deeplink:
-            return Deeplink(value: data.string(size: UInt16.self))
+            return Other(key: .deeplink, value: data.string(size: UInt16.self))
         case .embed:
-            return Embed(value: data.string(size: UInt16.self))
+            return Other(key: .embed, value: data.string(size: UInt16.self))
         }
     }
     
@@ -28,7 +28,7 @@ public enum Access: UInt8 {
                 .scheme
                 .flatMap(URL.Embed.init(rawValue:))
                 .map { _ in
-                    Embed(value: url.absoluteString)
+                    Other(key: .embed, value: url.absoluteString)
                 }
                 ?? { scheme -> AccessType in
                     switch scheme {
@@ -37,7 +37,7 @@ public enum Access: UInt8 {
                     default:
                         return url.scheme == nil
                             ? Remote(value: url.absoluteString)
-                            : Deeplink(value: url.absoluteString)
+                            : Other(key: .deeplink, value: url.absoluteString)
                     }
                 } (url
                     .scheme

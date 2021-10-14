@@ -44,8 +44,6 @@ public final actor Favicon {
         
         validate(domain: domain)
         
-        print("pubs \(publishers.count)")
-        
         let publisher = publishers[domain]!
         
         Task
@@ -73,8 +71,6 @@ public final actor Favicon {
         
         validate(domain: domain)
         received.insert(domain)
-        
-        print("pubs \(publishers.count)")
         
         guard
             !url.isEmpty,
@@ -164,8 +160,6 @@ public typealias Output = UIImage
         private func store(contract: Contract) async {
             contracts.append(contract)
             
-            Swift.print("pub contracts \(contracts.count)")
-            
             clean()
             
             if let output = output {
@@ -190,8 +184,6 @@ public typealias Output = UIImage
         }
         
         private func clean() {
-            Swift.print("cleaning")
-            
             contracts = contracts
                 .filter {
                     $0.sub?.subscriber != nil

@@ -1,12 +1,9 @@
 import Foundation
 
 extension String {
-    func components<T>(transform: ([Self]) throws -> [T]) rethrows -> [T] {
-        try {
-            guard $0.isEmpty else {
-                return try transform($0)
-            }
-            throw Err.ID.invalidURL
+    func components<T>(transform: ([Self]) -> [T]) -> [T] {
+        {
+            $0.isEmpty ? [] : transform($0)
         } (trimmingCharacters(in: .whitespacesAndNewlines)
             .components(separatedBy: " ")
             .filter {

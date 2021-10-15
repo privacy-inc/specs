@@ -157,10 +157,10 @@ extension Cloud where Output == Archive {
             .website
     }
     
-    public func autocomplete(search: String) async throws -> [Complete] {
-        try search
+    public func autocomplete(search: String) async -> [Complete] {
+        search
             .components { components in
-                let complete = model
+                model
                     .bookmarks
                     .reduce(into: [Complete]()) {
                         $0.add(website: $1, location: .bookmark, comparing: components)
@@ -173,8 +173,6 @@ extension Cloud where Output == Archive {
                         $0.add(website: $1, location: .history, comparing: components)
                     }
                     .ordered
-                guard !complete.isEmpty else { throw Err.ID.invalidAutocomplete }
-                return complete
             }
     }
     

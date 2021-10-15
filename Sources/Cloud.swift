@@ -46,7 +46,7 @@ extension Cloud where Output == Archive {
     }
     
     public func bookmark(history: UInt16) async {
-        let bookmark = website(history: history)
+        guard let bookmark = website(history: history) else { return }
         
         model.bookmarks = model
             .bookmarks
@@ -59,7 +59,7 @@ extension Cloud where Output == Archive {
     }
     
     public func update(title: String, history: UInt16) async {
-        let original = website(history: history)
+        guard let original = website(history: history) else { return }
         
         guard original.title != title else { return }
         
@@ -73,7 +73,7 @@ extension Cloud where Output == Archive {
     }
     
     public func update(url: URL, history: UInt16) async {
-        let original = website(history: history)
+        guard let original = website(history: history) else { return }
         
         guard original.access.value != url.absoluteString else { return }
         
@@ -154,10 +154,10 @@ extension Cloud where Output == Archive {
         } (model.settings.policy(url))
     }
     
-    public func website(history: UInt16) -> Website {
+    public func website(history: UInt16) -> Website? {
         model
             .history
-            .first { $0.id == history }!
+            .first { $0.id == history }?
             .website
     }
     
@@ -202,7 +202,7 @@ extension Cloud where Output == Archive {
     }
     
     private func block(history: UInt16, tracker: String) async {
-        guard let remote = website(history: history).access as? Access.Remote else { return }
+        guard let remote = website(history: history)?.access as? Access.Remote else { return }
         model.events = model.events.block(tracker: tracker, domain: remote.domain.minimal)
         
         await stream()

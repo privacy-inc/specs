@@ -5,12 +5,16 @@ public enum Policy: UInt8 {
     secure,
     standard
     
-    static func with(data: inout Data) -> PolicyLevel {
-        switch Self(rawValue: data.removeFirst())! {
+    static func with(level: Self) -> PolicyLevel {
+        switch level {
         case .secure:
             return Secure()
         case .standard:
             return Standard()
         }
+    }
+    
+    static func with(data: inout Data) -> PolicyLevel {
+        with(level: .init(rawValue: data.removeFirst())!)
     }
 }

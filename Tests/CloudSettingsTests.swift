@@ -12,6 +12,18 @@ final class CloudSettingsTests: XCTestCase {
         subs = []
     }
     
+    func testSearch() {
+        mutate {
+            await self.cloud.update(search: .ecosia)
+        }
+    }
+    
+    func testPolicy() {
+        mutate {
+            await self.cloud.update(policy: .standard)
+        }
+    }
+    
     func testAutoplay() {
         mutate {
             await self.cloud.update(autoplay: .all)

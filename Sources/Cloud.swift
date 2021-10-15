@@ -180,6 +180,22 @@ extension Cloud where Output == Archive {
             }
     }
     
+    public func update(search: Search.Engine) async {
+        guard search != model.settings.search.engine else { return }
+        model.settings = model
+            .settings
+            .with(search: .init(engine: search))
+        await stream()
+    }
+    
+    public func update(policy: Policy) async {
+        guard policy != model.settings.policy.level else { return }
+        model.settings = model
+            .settings
+            .with(policy: Policy.with(level: policy))
+        await stream()
+    }
+    
     public func update(autoplay: Settings.Configuration.Autoplay) async {
         await update(configuration: model
                 .settings

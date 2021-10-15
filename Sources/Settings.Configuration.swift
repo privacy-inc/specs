@@ -2,7 +2,7 @@ import Foundation
 import Archivable
 
 extension Settings {
-    public struct Configuration: Storable {
+    public struct Configuration: Storable, Equatable {
         public let autoplay: Autoplay
         public let javascript: Bool
         public let popups: Bool

@@ -180,6 +180,83 @@ extension Cloud where Output == Archive {
             }
     }
     
+    public func update(autoplay: Settings.Configuration.Autoplay) async {
+        await update(configuration: model
+                .settings
+                .configuration
+                .with(autoplay: autoplay))
+    }
+    
+    public func update(javascript: Bool) async {
+        await update(configuration: model
+                .settings
+                .configuration
+                .with(javascript: javascript))
+    }
+    
+    public func update(popups: Bool) async {
+        await update(configuration: model
+                .settings
+                .configuration
+                .with(popups: popups))
+    }
+    
+    public func update(location: Bool) async {
+        await update(configuration: model
+                .settings
+                .configuration
+                .with(location: location))
+    }
+    
+    public func update(timers: Bool) async {
+        await update(configuration: model
+                .settings
+                .configuration
+                .with(timers: timers))
+    }
+    
+    public func update(dark: Bool) async {
+        await update(configuration: model
+                .settings
+                .configuration
+                .with(dark: dark))
+    }
+    
+    public func update(ads: Bool) async {
+        await update(configuration: model
+                .settings
+                .configuration
+                .with(ads: ads))
+    }
+    
+    public func update(screen: Bool) async {
+        await update(configuration: model
+                .settings
+                .configuration
+                .with(screen: screen))
+    }
+    
+    public func update(cookies: Bool) async {
+        await update(configuration: model
+                .settings
+                .configuration
+                .with(cookies: cookies))
+    }
+    
+    public func update(http: Bool) async {
+        await update(configuration: model
+                .settings
+                .configuration
+                .with(http: http))
+    }
+    
+    public func update(third: Bool) async {
+        await update(configuration: model
+                .settings
+                .configuration
+                .with(third: third))
+    }
+    
     private func id(access: AccessType) -> UInt16? {
         model
             .history
@@ -205,6 +282,14 @@ extension Cloud where Output == Archive {
         guard let remote = website(history: history)?.access as? Access.Remote else { return }
         model.events = model.events.block(tracker: tracker, domain: remote.domain.minimal)
         
+        await stream()
+    }
+    
+    private func update(configuration: Settings.Configuration) async {
+        guard configuration != model.settings.configuration else { return }
+        model.settings = model
+            .settings
+            .with(configuration: configuration)
         await stream()
     }
 }

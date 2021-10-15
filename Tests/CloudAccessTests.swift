@@ -48,4 +48,16 @@ final class CloudAccessTests: XCTestCase {
         
         waitForExpectations(timeout: 1)
     }
+    
+    func testOpenWithHistory() async {
+        _ = await cloud.open(url: URL(string: "https://avocado.org")!)
+        let idSecond = await cloud.open(url: URL(string: "https://something.org")!)
+        
+        let access = await cloud.model.history.last!.website.access
+        await cloud.open(access: access, history: idSecond)
+        
+        let model = await cloud.model
+        XCTAssertEqual(1, model.history.count)
+        XCTAssertEqual(2, model.index)
+    }
 }

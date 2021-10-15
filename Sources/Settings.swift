@@ -6,6 +6,10 @@ public struct Settings: Storable {
     public let configuration: Configuration
     let policy: PolicyLevel
     
+    public var secure: Bool {
+        policy.level == .secure
+    }
+    
     public var data: Data {
         .init()
         .adding(search.engine.rawValue)

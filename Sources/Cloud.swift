@@ -163,7 +163,7 @@ extension Cloud where Output == Archive {
                 let complete = model
                     .bookmarks
                     .reduce(into: [Complete]()) {
-                        $0.add(website: $1, location: .history, comparing: components)
+                        $0.add(website: $1, location: .bookmark, comparing: components)
                     }
                     .ordered
                 + model

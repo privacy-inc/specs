@@ -40,4 +40,20 @@ public struct Website: Storable, Identifiable {
     func with(access: AccessType) -> Self {
         .init(title: title, access: access)
     }
+    
+    func matches(strings: [String]) -> Int {
+        title
+            .rating(components: strings)
+        + access
+            .value
+            .rating(components: strings)
+    }
+}
+
+private extension String {
+    func rating(components: [String]) -> Int {
+        components
+            .filter(localizedCaseInsensitiveContains)
+            .count
+    }
 }

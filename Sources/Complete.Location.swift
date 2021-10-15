@@ -1,7 +1,7 @@
 import Foundation
 
 extension Complete {
-    public enum Location {
+    public enum Location: String {
         case
         bookmark,
         history

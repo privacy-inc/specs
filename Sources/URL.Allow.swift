@@ -26,7 +26,9 @@ extension URL {
         immobilienscout24,
         huffpost,
         giphy,
-        theguardian
+        theguardian,
+        wp,
+        wordpress
         
         var tld: Tld {
             switch self {
@@ -50,7 +52,9 @@ extension URL {
                  .forbes,
                  .huffpost,
                  .giphy,
-                 .theguardian:
+                 .theguardian,
+                 .wp,
+                 .wordpress:
                 return .com
             case .thelocal,
                  .spiegel,
@@ -101,6 +105,10 @@ extension URL {
                 return [.cookies]
             case .theguardian:
                 return [.sourcepoint]
+            case .wp:
+                return [.widgets]
+            case .wordpress:
+                return [.public_api]
             default:
                 return []
             }

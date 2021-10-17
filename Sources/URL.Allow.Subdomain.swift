@@ -12,6 +12,8 @@ extension URL.Allow {
         sourcepoint,
         sourcepointcmp,
         tracking,
-        cookies
+        cookies,
+        widgets,
+        public_api = "public-api"
     }
 }

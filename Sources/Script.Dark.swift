@@ -48,6 +48,7 @@ const _privacy_incognit_style = document.createElement('style');
 _privacy_incognit_style.innerHTML = "\
 \
 :root, html, body {\
+    background-image: none !important;\
     background-color: #252228 !important;\
 }\
 a, a *, :not(a p) {\

@@ -5,7 +5,8 @@ public enum Script {
     favicon,
     dark,
     unpromise,
-    find
+    find,
+    text
     
     public var script: String {
         switch self {
@@ -17,6 +18,8 @@ public enum Script {
             return Self._unpromise
         case .find:
             return Self._find
+        case .text:
+            return Self._text
         }
     }
     

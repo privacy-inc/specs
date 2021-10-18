@@ -30,7 +30,8 @@ enum Blocker: CaseIterable {
                                                                  ".video-ads.ytp-ad-module"])),
                     .init(trigger: .url(.bloomberg), action: .css([".leaderboard-wrapper"])),
                     .init(trigger: .url(.forbes), action: .css([".top-ad-container"])),
-                    .init(trigger: .url(.huffpost), action: .css(["#advertisement-thamba"]))]
+                    .init(trigger: .url(.huffpost), action: .css(["#advertisement-thamba"])),
+                    .init(trigger: .url(.wordpress), action: .css([".inline-ad-slot"]))]
         case .screen:
             return [.init(trigger: .url(.google), action: .css(["#consent-bump",
                                                                 "#lb",

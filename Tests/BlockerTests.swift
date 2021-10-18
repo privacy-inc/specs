@@ -54,6 +54,9 @@ final class BlockerTests: XCTestCase {
         
         XCTAssertTrue(BlockerParser(content: Set([.ads]).rules)
                         .css(url: "huffpost.com", selectors: ["#advertisement-thamba"]))
+        
+        XCTAssertTrue(BlockerParser(content: Set([.ads]).rules)
+                        .css(url: "wordpress.com", selectors: [".inline-ad-slot"]))
     }
     
     func testScreen() {

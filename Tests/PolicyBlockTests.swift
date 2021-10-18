@@ -157,7 +157,8 @@ final class PolicyBlockTests: XCTestCase {
         "https://csync.smilewanted.com/drop_cookie_sw.php",
         "https://sync.smartadserver.com/getuid?gdpr_consent=&nwid=2491&url=https://csync.smilewanted.com/set_partner_userid_get/smart/%5Bsas_uid%5D",
         "https://b1h.zemanta.com/usersync/prebidtest?gdpr=0&gdpr_consent=&us_privacy=&cb=https%3A%2F%2Fcsync.smilewanted.com%2Fset_partner_userid_get%2Foutbrain%2F__ZUID__",
-        "https://sync.adotmob.com/cookie/smilewanted?r=https%3A%2F%2Fcsync.smilewanted.com%2Fset_partner_userid_get%2Fadotmob%2F%7Bamob_user_id%7D&gdpr=0&gdpr_consent="
+        "https://sync.adotmob.com/cookie/smilewanted?r=https%3A%2F%2Fcsync.smilewanted.com%2Fset_partner_userid_get%2Fadotmob%2F%7Bamob_user_id%7D&gdpr=0&gdpr_consent=",
+        "https://bh.contextweb.com/visitormatch"
     ]
     
     override func setUp() {

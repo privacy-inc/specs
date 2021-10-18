@@ -31,7 +31,10 @@ enum Blocker: CaseIterable {
                     .init(trigger: .url(.bloomberg), action: .css([".leaderboard-wrapper"])),
                     .init(trigger: .url(.forbes), action: .css([".top-ad-container"])),
                     .init(trigger: .url(.huffpost), action: .css(["#advertisement-thamba"])),
-                    .init(trigger: .url(.wordpress), action: .css([".inline-ad-slot"]))]
+                    .init(trigger: .url(.wordpress), action: .css([".inline-ad-slot"])),
+                    .init(trigger: .all, action: .css(["[id*='google_ads']",
+                                                       "[id*='ezoic']",
+                                                       "[class*='ezoic']"]))]
         case .screen:
             return [.init(trigger: .url(.google), action: .css(["#consent-bump",
                                                                 "#lb",

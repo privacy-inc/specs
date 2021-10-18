@@ -46,6 +46,16 @@ struct BlockerParser {
         }
     }
     
+    func css(selectors: [String]) -> Bool {
+        dictionary.contains {
+            ($0["action"]!["type"] as! String) == "css-display-none"
+                && ($0["action"]!["selector"] as! String)
+                .components(separatedBy: ", ")
+                .intersection(other: selectors).count == selectors.count
+                && ($0["trigger"]!["url-filter"] as! String) == ".*"
+        }
+    }
+    
     func amount(url: String) -> Int {
         dictionary.filter {
             ($0["trigger"]?["if-domain"] as? [String])?.first == "*" + url

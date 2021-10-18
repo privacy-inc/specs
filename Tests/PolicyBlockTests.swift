@@ -153,7 +153,11 @@ final class PolicyBlockTests: XCTestCase {
         "https://cookies.giphy.com/global-cookies.233969e709c857c558c404d7dd7d5715e707acfa.html",
         "https://pandg.tapad.com/tag?gdpr=1&gdpr_consent=CPNqnEZPNqnEZAcABBENBvCgAAAAAAAAACiQAAAAAAAA.YAAAAAAAAAAA&referrer_url=&page_url=https%3A%2F%2Fwww.reuters.com%2F&owner=P%26G&bp_id=freestar",
         "https://widgets.wp.com/likes/master.html?ver=20210831#ver=20210831&origin=https://londonhollywood.wordpress.com",
-        "https://public-api.wordpress.com/wp-admin/rest-proxy/#https://widgets.wp.com"
+        "https://public-api.wordpress.com/wp-admin/rest-proxy/#https://widgets.wp.com",
+        "https://csync.smilewanted.com/drop_cookie_sw.php",
+        "https://sync.smartadserver.com/getuid?gdpr_consent=&nwid=2491&url=https://csync.smilewanted.com/set_partner_userid_get/smart/%5Bsas_uid%5D",
+        "https://b1h.zemanta.com/usersync/prebidtest?gdpr=0&gdpr_consent=&us_privacy=&cb=https%3A%2F%2Fcsync.smilewanted.com%2Fset_partner_userid_get%2Foutbrain%2F__ZUID__",
+        "https://sync.adotmob.com/cookie/smilewanted?r=https%3A%2F%2Fcsync.smilewanted.com%2Fset_partner_userid_get%2Fadotmob%2F%7Bamob_user_id%7D&gdpr=0&gdpr_consent="
     ]
     
     override func setUp() {

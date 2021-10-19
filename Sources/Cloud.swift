@@ -273,6 +273,22 @@ extension Cloud where Output == Archive {
                 .with(third: third))
     }
     
+    public func forgetHistory() async {
+        _forgetHistory()
+        await stream()
+    }
+    
+    public func forgetActivity() async {
+        _forgetActivity()
+        await stream()
+    }
+    
+    public func forget() async {
+        _forgetHistory()
+        _forgetActivity()
+        await stream()
+    }
+    
     private func id(access: AccessType) -> UInt16? {
         model
             .history
@@ -307,5 +323,14 @@ extension Cloud where Output == Archive {
             .settings
             .with(configuration: configuration)
         await stream()
+    }
+    
+    public func _forgetHistory() {
+        model.history = []
+        model.index = 0
+    }
+    
+    public func _forgetActivity() {
+        model.events = .init()
     }
 }

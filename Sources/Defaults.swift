@@ -2,17 +2,23 @@ import Foundation
 
 public enum Defaults: String {
     case
-    _rated,
-    _created
+    rated,
+    created,
+    premium
 
-    public static var rated: Bool {
-        get { self[._rated] as? Bool ?? false }
-        set { self[._rated] = newValue }
+    public static var hasRated: Bool {
+        get { self[.rated] as? Bool ?? false }
+        set { self[.rated] = newValue }
     }
     
-    public static var created: Date? {
-        get { self[._created] as? Date }
-        set { self[._created] = newValue }
+    public static var isPremium: Bool {
+        get { self[.premium] as? Bool ?? false }
+        set { self[.premium] = newValue }
+    }
+    
+    public static var wasCreated: Date? {
+        get { self[.created] as? Date }
+        set { self[.created] = newValue }
     }
     
     private static subscript(_ key: Self) -> Any? {

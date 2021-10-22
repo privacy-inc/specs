@@ -47,7 +47,7 @@ document.addEventListener('webkitAnimationStart', _privacy_incognit_event, false
 const _privacy_incognit_style = document.createElement('style');
 _privacy_incognit_style.innerHTML = "\
 \
-:root, html, body {\
+:root, html, body, header {\
     background-image: none !important;\
     background-color: #252228 !important;\
 }\

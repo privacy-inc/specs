@@ -3,36 +3,34 @@ import Foundation
 extension Script {
     static let _dark = """
 function _privacy_incognit_make_dark(element) {
-    if (!element.hasAttribute('_privacy_incognit_dark_mode')) {
-        element.setAttribute('_privacy_incognit_dark_mode', 1);
+    element.setAttribute('_privacy_incognit_dark_mode', 1);
 
-        const text_color = getComputedStyle(element).getPropertyValue("color");
-        const background_color = getComputedStyle(element).getPropertyValue("background-color");
+    const text_color = getComputedStyle(element).getPropertyValue("color");
+    const background_color = getComputedStyle(element).getPropertyValue("background-color");
 
-        if (text_color != "rgb(206, 204, 207)" && text_color != "rgb(124, 170, 223)") {
-            if (element.tagName == "A") {
-                element.style.setProperty("color", "#7caadf", "important");
-            } else {
-                element.style.setProperty("color", "#cecccf", "important");
-            }
+    if (text_color != "rgb(206, 204, 207)" && text_color != "rgb(124, 170, 223)") {
+        if (element.tagName == "A") {
+            element.style.setProperty("color", "#7caadf", "important");
+        } else {
+            element.style.setProperty("color", "#cecccf", "important");
         }
+    }
 
-        if (getComputedStyle(element).getPropertyValue("box-shadow") != "none") {
-            element.style.setProperty("box-shadow", "none", "important");
-        }
+    if (getComputedStyle(element).getPropertyValue("box-shadow") != "none") {
+        element.style.setProperty("box-shadow", "none", "important");
+    }
 
-        if (getComputedStyle(element).getPropertyValue("background").includes("gradient")) {
-            element.style.setProperty("background", "none", "important");
-        }
+    if (getComputedStyle(element).getPropertyValue("background").includes("gradient")) {
+        element.style.setProperty("background", "none", "important");
+    }
 
-        if (background_color != "rgb(37, 34, 40)" && background_color != "rgba(0, 0, 0, 0)" && background_color != "rgb(0, 0, 0)") {
-            let alpha = 1;
-            const rgba = background_color.match(/[\\d.]+/g);
-            if (rgba.length > 3) {
-               alpha = rgba[3];
-            }
-            element.style.setProperty("background-color", "rgba(37, 34, 40, " + alpha + ")", "important");
+    if (background_color != "rgb(37, 34, 40)" && background_color != "rgba(0, 0, 0, 0)" && background_color != "rgb(0, 0, 0)") {
+        let alpha = 1;
+        const rgba = background_color.match(/[\\d.]+/g);
+        if (rgba.length > 3) {
+           alpha = rgba[3];
         }
+        element.style.setProperty("background-color", "rgba(37, 34, 40, " + alpha + ")", "important");
     }
 }
 

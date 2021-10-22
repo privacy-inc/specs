@@ -18,7 +18,6 @@ function \(favicon.method) {
                     var split = sizes.split("x");
                     if (split.length == 2) {
                         size = split[0] / 1;
-                        console.log(size);
                     }
                 }
                 

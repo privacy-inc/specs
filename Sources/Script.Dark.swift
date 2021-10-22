@@ -3,32 +3,36 @@ import Foundation
 extension Script {
     static let _dark = """
 function _privacy_incognit_make_dark(element) {
-    const text_color = getComputedStyle(element).getPropertyValue("color");
-    const background_color = getComputedStyle(element).getPropertyValue("background-color");
+    if (!element.hasAttribute('_privacy_incognit_dark_mode')) {
+        element.setAttribute('_privacy_incognit_dark_mode', 1);
 
-    if (text_color != "rgb(206, 204, 207)" && text_color != "rgb(124, 170, 223)") {
-        if (element.tagName == "A") {
-            element.style.setProperty("color", "#7caadf", "important");
-        } else {
-            element.style.setProperty("color", "#cecccf", "important");
+        const text_color = getComputedStyle(element).getPropertyValue("color");
+        const background_color = getComputedStyle(element).getPropertyValue("background-color");
+
+        if (text_color != "rgb(206, 204, 207)" && text_color != "rgb(124, 170, 223)") {
+            if (element.tagName == "A") {
+                element.style.setProperty("color", "#7caadf", "important");
+            } else {
+                element.style.setProperty("color", "#cecccf", "important");
+            }
         }
-    }
 
-    if (getComputedStyle(element).getPropertyValue("box-shadow") != "none") {
-        element.style.setProperty("box-shadow", "none", "important");
-    }
-
-    if (getComputedStyle(element).getPropertyValue("background").includes("gradient")) {
-        element.style.setProperty("background", "none", "important");
-    }
-
-    if (background_color != "rgb(37, 34, 40)" && background_color != "rgba(0, 0, 0, 0)" && background_color != "rgb(0, 0, 0)") {
-        let alpha = 1;
-        const rgba = background_color.match(/[\\d.]+/g);
-        if (rgba.length > 3) {
-           alpha = rgba[3];
+        if (getComputedStyle(element).getPropertyValue("box-shadow") != "none") {
+            element.style.setProperty("box-shadow", "none", "important");
         }
-        element.style.setProperty("background-color", "rgba(37, 34, 40, " + alpha + ")", "important");
+
+        if (getComputedStyle(element).getPropertyValue("background").includes("gradient")) {
+            element.style.setProperty("background", "none", "important");
+        }
+
+        if (background_color != "rgb(37, 34, 40)" && background_color != "rgba(0, 0, 0, 0)" && background_color != "rgb(0, 0, 0)") {
+            let alpha = 1;
+            const rgba = background_color.match(/[\\d.]+/g);
+            if (rgba.length > 3) {
+               alpha = rgba[3];
+            }
+            element.style.setProperty("background-color", "rgba(37, 34, 40, " + alpha + ")", "important");
+        }
     }
 }
 
@@ -43,7 +47,7 @@ document.addEventListener('webkitAnimationStart', _privacy_incognit_event, false
 const _privacy_incognit_style = document.createElement('style');
 _privacy_incognit_style.innerHTML = "\
 \
-:root, html, body {\
+:root, html, body, header {\
     background-image: none !important;\
     background-color: #252228 !important;\
 }\
@@ -78,7 +82,7 @@ document.addEventListener('readystatechange', event => {
             document.head.appendChild(_privacy_incognit_style);
             break;
         case "complete":
-            document.body.querySelectorAll('*').forEach(_privacy_incognit_make_dark)
+            document.body.querySelectorAll(":not([_privacy_incognit_dark_mode])").forEach(_privacy_incognit_make_dark);
             break;
         default:
             break;

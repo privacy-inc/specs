@@ -36,9 +36,24 @@ function _privacy_incognit_make_dark(element) {
     }
 }
 
+function _privacy_incognit_loop(node) {
+    _privacy_incognit_make_dark(node);
+    
+    var nodes = node.childNodes;
+    for (var i = 0; i <nodes.length; i++) {
+        if(!nodes[i]) {
+            continue;
+        }
+
+        if(nodes[i].childNodes.length > 0) {
+            _privacy_incognit_loop(nodes[i]);
+        }
+    }
+}
+
 const _privacy_incognit_event = function(_privacy_incognit_event) {
     if (_privacy_incognit_event.animationName == '_privacy_incognit_node') {
-        _privacy_incognit_make_dark(_privacy_incognit_event.target);
+        _privacy_incognit_loop(_privacy_incognit_event.target);
     }
 }
         
@@ -47,7 +62,7 @@ document.addEventListener('webkitAnimationStart', _privacy_incognit_event, false
 const _privacy_incognit_style = document.createElement('style');
 _privacy_incognit_style.innerHTML = "\
 \
-:root, html, body, header {\
+:root, html, body {\
     background-image: none !important;\
     background-color: #252228 !important;\
 }\

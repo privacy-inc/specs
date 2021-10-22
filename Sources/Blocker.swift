@@ -86,7 +86,8 @@ enum Blocker: CaseIterable {
                     .init(trigger: .url(.nytimes), action: .css([".expanded-dock"])),
                     .init(trigger: .url(.wordpress), action: .css(["#cmp-app-container"]))]
         case .antidark:
-            return [.init(trigger: .url(.google), action: .css([".P1Ycoe"]))]
+            return [.init(trigger: .url(.google), action: .css([".P1Ycoe",
+                                                                "#sDeBje"]))]
         case .third:
             return [.init(trigger: .script, action: .block)]
         }

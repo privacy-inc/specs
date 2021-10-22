@@ -80,10 +80,7 @@ document.addEventListener('readystatechange', event => {
             document.head.appendChild(_privacy_incognit_style);
             break;
         case "complete":
-            let nodes = document.querySelectorAll(":not([_privacy_incognit_dark_mode])");
-            for (let c = 0; c < nodes.length; c++) {
-                _privacy_incognit_make_dark(nodes[c]);
-            }
+            document.body.querySelectorAll('*').forEach(_privacy_incognit_make_dark)
             break;
         default:
             break;

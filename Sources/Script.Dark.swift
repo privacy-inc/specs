@@ -3,8 +3,6 @@ import Foundation
 extension Script {
     static let _dark = """
 function _privacy_incognit_make_dark(element) {
-    element.setAttribute('_privacy_incognit_dark_mode', 1);
-
     const text_color = getComputedStyle(element).getPropertyValue("color");
     const background_color = getComputedStyle(element).getPropertyValue("background-color");
 

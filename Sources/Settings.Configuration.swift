@@ -20,11 +20,6 @@ extension Settings {
             + (timers ? "" : Script.timers)
         }
         
-        public var blockers: String {
-            _blockers
-                .rules
-        }
-        
         public var data: Data {
             .init()
             .adding(autoplay.rawValue)
@@ -38,36 +33,6 @@ extension Settings {
             .adding(cookies)
             .adding(http)
             .adding(third)
-        }
-        
-        var _blockers: Set<Blocker> {
-            var rules = Set<Blocker>()
-            
-            if !cookies {
-                rules.insert(.cookies)
-            }
-            
-            if !http {
-                rules.insert(.http)
-            }
-            
-            if !ads {
-                rules.insert(.ads)
-            }
-            
-            if !screen {
-                rules.insert(.screen)
-            }
-            
-            if dark {
-                rules.insert(.antidark)
-            }
-            
-            if !third {
-                rules.insert(.third)
-            }
-            
-            return rules
         }
         
         public init(data: inout Data) {
@@ -121,6 +86,11 @@ extension Settings {
             self.cookies = cookies
             self.http = http
             self.third = third
+        }
+        
+        public func blockers(dark: Bool) -> String {
+            _blockers(dark: dark)
+                .rules
         }
         
         func with(autoplay: Autoplay) -> Self {
@@ -275,6 +245,36 @@ extension Settings {
                   cookies: cookies,
                   http: http,
                   third: third)
+        }
+        
+        func _blockers(dark: Bool) -> Set<Blocker> {
+            var rules = Set<Blocker>()
+            
+            if !cookies {
+                rules.insert(.cookies)
+            }
+            
+            if !http {
+                rules.insert(.http)
+            }
+            
+            if !ads {
+                rules.insert(.ads)
+            }
+            
+            if !screen {
+                rules.insert(.screen)
+            }
+            
+            if !third {
+                rules.insert(.third)
+            }
+            
+            if self.dark && dark {
+                rules.insert(.antidark)
+            }
+            
+            return rules
         }
     }
 }

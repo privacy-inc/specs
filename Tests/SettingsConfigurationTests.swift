@@ -52,63 +52,65 @@ final class SettingsConfigurationTests: XCTestCase {
     
     func testDark() {
         XCTAssertTrue(configuration.dark)
-        XCTAssertTrue(configuration._blockers.contains(.antidark))
+        XCTAssertTrue(configuration._blockers(dark: true).contains(.antidark))
+        XCTAssertFalse(configuration._blockers(dark: false).contains(.antidark))
         
         configuration = configuration
             .with(dark: false)
-        XCTAssertFalse(configuration._blockers.contains(.antidark))
+        XCTAssertFalse(configuration._blockers(dark: true).contains(.antidark))
+        XCTAssertFalse(configuration._blockers(dark: false).contains(.antidark))
         XCTAssertFalse(configuration.data.prototype(Settings.Configuration.self).dark)
     }
     
     func testAds() {
         XCTAssertFalse(configuration.ads)
-        XCTAssertTrue(configuration._blockers.contains(.ads))
+        XCTAssertTrue(configuration._blockers(dark: false).contains(.ads))
         
         configuration = configuration
             .with(ads: true)
-        XCTAssertFalse(configuration._blockers.contains(.ads))
+        XCTAssertFalse(configuration._blockers(dark: false).contains(.ads))
         XCTAssertTrue(configuration.data.prototype(Settings.Configuration.self).ads)
     }
     
     func testScreen() {
         XCTAssertFalse(configuration.screen)
-        XCTAssertTrue(configuration._blockers.contains(.screen))
+        XCTAssertTrue(configuration._blockers(dark: false).contains(.screen))
         XCTAssertTrue(configuration.scripts.contains(Script.scroll))
         
         configuration = configuration
             .with(screen: true)
-        XCTAssertFalse(configuration._blockers.contains(.screen))
+        XCTAssertFalse(configuration._blockers(dark: false).contains(.screen))
         XCTAssertFalse(configuration.scripts.contains(Script.scroll))
         XCTAssertTrue(configuration.data.prototype(Settings.Configuration.self).screen)
     }
     
     func testCookies() {
         XCTAssertFalse(configuration.cookies)
-        XCTAssertTrue(configuration._blockers.contains(.cookies))
+        XCTAssertTrue(configuration._blockers(dark: false).contains(.cookies))
         
         configuration = configuration
             .with(cookies: true)
-        XCTAssertFalse(configuration._blockers.contains(.cookies))
+        XCTAssertFalse(configuration._blockers(dark: false).contains(.cookies))
         XCTAssertTrue(configuration.data.prototype(Settings.Configuration.self).cookies)
     }
     
     func testHttp() {
         XCTAssertFalse(configuration.http)
-        XCTAssertTrue(configuration._blockers.contains(.http))
+        XCTAssertTrue(configuration._blockers(dark: false).contains(.http))
         
         configuration = configuration
             .with(http: true)
-        XCTAssertFalse(configuration._blockers.contains(.http))
+        XCTAssertFalse(configuration._blockers(dark: false).contains(.http))
         XCTAssertTrue(configuration.data.prototype(Settings.Configuration.self).http)
     }
     
     func testThird() {
         XCTAssertTrue(configuration.third)
-        XCTAssertFalse(configuration._blockers.contains(.third))
+        XCTAssertFalse(configuration._blockers(dark: false).contains(.third))
         
         configuration = configuration
             .with(third: false)
-        XCTAssertTrue(configuration._blockers.contains(.third))
+        XCTAssertTrue(configuration._blockers(dark: false).contains(.third))
         XCTAssertFalse(configuration.data.prototype(Settings.Configuration.self).third)
     }
     
@@ -117,6 +119,6 @@ final class SettingsConfigurationTests: XCTestCase {
                                 .allCases
                                 .filter {
                                     $0 != .third
-                                }), configuration._blockers)
+                        }), configuration._blockers(dark: true))
     }
 }

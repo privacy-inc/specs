@@ -158,7 +158,12 @@ final class PolicyBlockTests: XCTestCase {
         "https://sync.smartadserver.com/getuid?gdpr_consent=&nwid=2491&url=https://csync.smilewanted.com/set_partner_userid_get/smart/%5Bsas_uid%5D",
         "https://b1h.zemanta.com/usersync/prebidtest?gdpr=0&gdpr_consent=&us_privacy=&cb=https%3A%2F%2Fcsync.smilewanted.com%2Fset_partner_userid_get%2Foutbrain%2F__ZUID__",
         "https://sync.adotmob.com/cookie/smilewanted?r=https%3A%2F%2Fcsync.smilewanted.com%2Fset_partner_userid_get%2Fadotmob%2F%7Bamob_user_id%7D&gdpr=0&gdpr_consent=",
-        "https://bh.contextweb.com/visitormatch"
+        "https://bh.contextweb.com/visitormatch",
+        "https://cdn.connectad.io/connectmyusers.php?gdpr=1&gdpr_consent=CPOiG34POiG34DlA8AENByCsAP_AAH_AACiQITNf_X__b3_n-_79__t0eY1f9_7_v-0zjhfdt-8N2f_X_L8X_2M7vF36pr4KuR4ku3bBIQdtHOncTUmx6olVrzPsbk2Mr7NKJ7Pkmnsbe2dYGH9_n93T_ZKZ7______7________________________-_____9____________9_______wQmAJMNS8gC7EscGTaNKoUQIwrCQ6AUAFFAMLRFYQMrgp2VwEeoIWACE1ARgRAgxBRgwCAAQCAJCIgJADwQCIAiAQAAgBUgIQAEbAILACwMAgAFANCxAigCECQgyOCo5TAgIkWignsrAEoO9jTCEMssAKBR_RUYCJQggWBkJCwcxwBICXCyQAAA&us_privacy=1---&",
+        "https://biddr.brealtime.com/check.html?gdpr=1&gdpr_consent=CPOiG34POiG34DlA8AENByCsAP_AAH_AACiQITNf_X__b3_n-_79__t0eY1f9_7_v-0zjhfdt-8N2f_X_L8X_2M7vF36pr4KuR4ku3bBIQdtHOncTUmx6olVrzPsbk2Mr7NKJ7Pkmnsbe2dYGH9_n93T_ZKZ7______7________________________-_____9____________9_______wQmAJMNS8gC7EscGTaNKoUQIwrCQ6AUAFFAMLRFYQMrgp2VwEeoIWACE1ARgRAgxBRgwCAAQCAJCIgJADwQCIAiAQAAgBUgIQAEbAILACwMAgAFANCxAigCECQgyOCo5TAgIkWignsrAEoO9jTCEMssAKBR_RUYCJQggWBkJCwcxwBICXCyQAAA",
+        "https://x.bidswitch.net/sync?ssp=rtaplus&user_id=3QIqbft1fvjAkSHrKJQy3DmiOQOwk7ZRAU5lGzTh&gdpr=1&gdpr_consent=CPOiG34POiG34DlA8AENByCsAP_AAH_AACiQITNf_X__b3_n-_79__t0eY1f9_7_v-0zjhfdt-8N2f_X_L8X_2M7vF36pr4KuR4ku3bBIQdtHOncTUmx6olVrzPsbk2Mr7NKJ7Pkmnsbe2dYGH9_n93T_ZKZ7______7________________________-_____9____________9_______wQmAJMNS8gC7EscGTaNKoUQIwrCQ6AUAFFAMLRFYQMrgp2VwEeoIWACE1ARgRAgxBRgwCAAQCAJCIgJADwQCIAiAQAAgBUgIQAEbAILACwMAgAFANCxAigCECQgyOCo5TAgIkWignsrAEoO9jTCEMssAKBR_RUYCJQggWBkJCwcxwBICXCyQAAA",
+        "https://cm.adform.net/cookie?redirect_url=https%3A%2F%2Fsync.connectad.io%2Fumatch%2F1%3Fbidder%3Dadform%26dataid%3Ddata4%26uuid%3D%24UID",
+        "https://prebid-match.dotomi.com/match/bounce/current?version=1&networkId=72582&rurl=https%3A%2F%2Fsync.connectad.io%2Fumatch%2F1%3Fbidder%3Dconversant%26dataid%3Ddata20%26uuid%3D"
     ]
     
     override func setUp() {

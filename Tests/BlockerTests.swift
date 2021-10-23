@@ -61,7 +61,8 @@ final class BlockerTests: XCTestCase {
         XCTAssertTrue(BlockerParser(content: Set([.ads]).rules)
                         .css(selectors: ["[id*='google_ads']",
                                          "[id*='ezoic']",
-                                         "[class*='ezoic']"]))
+                                         "[class*='ezoic']",
+                                         "[id*='adngin']"]))
     }
     
     func testScreen() {

@@ -163,7 +163,10 @@ final class PolicyBlockTests: XCTestCase {
         "https://biddr.brealtime.com/check.html?gdpr=1&gdpr_consent=CPOiG34POiG34DlA8AENByCsAP_AAH_AACiQITNf_X__b3_n-_79__t0eY1f9_7_v-0zjhfdt-8N2f_X_L8X_2M7vF36pr4KuR4ku3bBIQdtHOncTUmx6olVrzPsbk2Mr7NKJ7Pkmnsbe2dYGH9_n93T_ZKZ7______7________________________-_____9____________9_______wQmAJMNS8gC7EscGTaNKoUQIwrCQ6AUAFFAMLRFYQMrgp2VwEeoIWACE1ARgRAgxBRgwCAAQCAJCIgJADwQCIAiAQAAgBUgIQAEbAILACwMAgAFANCxAigCECQgyOCo5TAgIkWignsrAEoO9jTCEMssAKBR_RUYCJQggWBkJCwcxwBICXCyQAAA",
         "https://x.bidswitch.net/sync?ssp=rtaplus&user_id=3QIqbft1fvjAkSHrKJQy3DmiOQOwk7ZRAU5lGzTh&gdpr=1&gdpr_consent=CPOiG34POiG34DlA8AENByCsAP_AAH_AACiQITNf_X__b3_n-_79__t0eY1f9_7_v-0zjhfdt-8N2f_X_L8X_2M7vF36pr4KuR4ku3bBIQdtHOncTUmx6olVrzPsbk2Mr7NKJ7Pkmnsbe2dYGH9_n93T_ZKZ7______7________________________-_____9____________9_______wQmAJMNS8gC7EscGTaNKoUQIwrCQ6AUAFFAMLRFYQMrgp2VwEeoIWACE1ARgRAgxBRgwCAAQCAJCIgJADwQCIAiAQAAgBUgIQAEbAILACwMAgAFANCxAigCECQgyOCo5TAgIkWignsrAEoO9jTCEMssAKBR_RUYCJQggWBkJCwcxwBICXCyQAAA",
         "https://cm.adform.net/cookie?redirect_url=https%3A%2F%2Fsync.connectad.io%2Fumatch%2F1%3Fbidder%3Dadform%26dataid%3Ddata4%26uuid%3D%24UID",
-        "https://prebid-match.dotomi.com/match/bounce/current?version=1&networkId=72582&rurl=https%3A%2F%2Fsync.connectad.io%2Fumatch%2F1%3Fbidder%3Dconversant%26dataid%3Ddata20%26uuid%3D"
+        "https://prebid-match.dotomi.com/match/bounce/current?version=1&networkId=72582&rurl=https%3A%2F%2Fsync.connectad.io%2Fumatch%2F1%3Fbidder%3Dconversant%26dataid%3Ddata20%26uuid%3D",
+        "https://apps.sascdn.com/rtb/transparency/handler/st.min.html?%7b%22bid%22%3a%22454126288478692342%22%2c%22adomain%22%3a%22lp.fuer-verbraucher.info%22%2c%22page%22%3a%22932545%22%2c%22format%22%3a%2262362%22%2c%22crid%22%3a%22-2527687349157075550%22%2c%22dsp%22%3a%22305%22%2c%22buyer%22%3a%22182473%22%2c%22cid%22%3a%22-2527687349157075550%22%2c%22adid%22%3a%22-2527687349157075550%22%2c%22hash%22%3a%22-8945917549808096272%22%7d",
+        "https://cdn3.doubleverify.com/bst2tv3.html",
+        "https://secure-ds.serving-sys.com/resources/PROD/html5/72046/20211001/1076180168/65645078514770014/index.html?v=_2_139_1_0&n=1&sHost=secure-ds.serving-sys.com"
     ]
     
     override func setUp() {

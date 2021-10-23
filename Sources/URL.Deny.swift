@@ -131,6 +131,8 @@ extension URL {
         bidswitch,
         adform,
         dotomi,
+        sascdn,
+        doubleverify,
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
         google_analytics = "google-analytics",
@@ -143,7 +145,8 @@ extension URL {
         _3lift = "3lift",
         _1rx = "1rx",
         onetag_sys = "onetag-sys",
-        _360yield = "360yield"
+        _360yield = "360yield",
+        serving_sys = "serving-sys"
         
         static func validation(domain: Domain) -> Policy.Validation? {
             Self(rawValue: domain.name)

@@ -68,6 +68,21 @@ extension Cloud where Output == Archive {
                 + website
             }
         
+        browses
+            .compactMap { browse in
+                URL(string: browse.page.access!)
+                    .map {
+                        Website(url: $0)
+                            .with(title: browse.page.title)
+                    }
+            }
+            .forEach { website in
+                model.history = model
+                    .history
+                    .adding(.init(id: model.index, website: website))
+                model.index += 1
+            }
+        
         await stream()
         try? FileManager.default.removeItem(at: url)
     }

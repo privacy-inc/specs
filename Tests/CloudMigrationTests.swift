@@ -53,7 +53,7 @@ final class CloudMigrationTests: XCTestCase {
             await migrate()
         }
         
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: 5)
     }
     
     func testRemoves() async {
@@ -70,6 +70,20 @@ final class CloudMigrationTests: XCTestCase {
         XCTAssertEqual("https://www.google.com/search?q=Weather%20Berlin", model.bookmarks.first?.access.value)
         XCTAssertEqual("EXPLAINED: How German citizenship differs from permanent residency", model.bookmarks.last?.title)
         XCTAssertEqual("https://www.thelocal.de/20211020/explained-how-german-citizenship-differs-from-permanent-residency/", model.bookmarks.last?.access.value)
+    }
+    
+    func testWebsites() async {
+        await migrate()
+        let model = await cloud.model
+        
+        XCTAssertEqual(1830, model.history.count)
+        XCTAssertEqual(2290, model.history.first?.id)
+        XCTAssertEqual("Igoumenitsa - Wikipedia", model.history.first?.website.title)
+        XCTAssertEqual("https://en.wikipedia.org/wiki/Igoumenitsa", model.history.first?.website.access.value)
+        XCTAssertEqual("Adrien Brody: ‘Actors are attention seekers. But I’m an introvert’ | Adrien Brody | The Guardian", model.history.last?.website.title)
+        XCTAssertEqual("https://www.theguardian.com/global/2021/oct/24/adrien-brody-interview-actors-are-attention-seekers-but-i-am-an-introvert", model.history.last?.website.access.value)
+        XCTAssertEqual(0, model.history.last?.id)
+        XCTAssertEqual(2291, model.index)
     }
     
     @discardableResult private func migrate() async -> URL {

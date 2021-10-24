@@ -41,5 +41,26 @@ extension Cloud where Output == Archive {
             .filter {
                 $0.access != nil
             }
+        
+        guard !bookmarks.isEmpty || !browses.isEmpty else { return }
+        
+        bookmarks
+            .compactMap { bookmark in
+                URL(string: bookmark.access!)
+                    .map {
+                        .init(url: $0)
+                            .with(title: bookmark.title)
+                    }
+            }
+            .forEach { website in
+                model.bookmarks = model
+                    .bookmarks
+                    .filter {
+                        $0.access.value != website.access.value
+                    }
+                + website
+            }
+        
+        await stream()
     }
 }

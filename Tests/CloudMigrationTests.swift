@@ -16,11 +16,44 @@ final class CloudMigrationTests: XCTestCase {
         await cloud.migrate(url: URL(fileURLWithPath: "/some.txt"))
     }
     
+    func testInvalidNotSaving() {
+        let expect = expectation(description: "")
+        
+        cloud
+            .sink { _ in
+                expect.fulfill()
+            }
+            .store(in: &subs)
+        
+        Task {
+            await cloud.migrate(url: URL(fileURLWithPath: "/some.txt"))
+        }
+        
+        waitForExpectations(timeout: 1)
+    }
+    
     func testInvalidData() async {
         let data = Data("hello world".utf8)
         let url = FileManager.default.temporaryDirectory.appendingPathComponent("Privacy.archive")
         try! data.write(to: url)
         await cloud.migrate(url: url)
+    }
+    
+    func testSaves() {
+        let expect = expectation(description: "")
+        expect.expectedFulfillmentCount = 2
+        
+        cloud
+            .sink { _ in
+                expect.fulfill()
+            }
+            .store(in: &subs)
+        
+        Task {
+            await migrate()
+        }
+        
+        waitForExpectations(timeout: 1)
     }
     
     func testBookmarks() async {
@@ -29,9 +62,9 @@ final class CloudMigrationTests: XCTestCase {
         
         XCTAssertEqual(14, model.bookmarks.count)
         XCTAssertEqual("Weather Berlin - Google Search", model.bookmarks.first?.title)
-        XCTAssertEqual("https://www.google.com?q=weather+berlin", model.bookmarks.first?.access.value)
-        XCTAssertEqual("Explained", model.bookmarks.last?.title)
-        XCTAssertEqual("https://thelocal", model.bookmarks.last?.access.value)
+        XCTAssertEqual("https://www.google.com/search?q=Weather%20Berlin", model.bookmarks.first?.access.value)
+        XCTAssertEqual("EXPLAINED: How German citizenship differs from permanent residency", model.bookmarks.last?.title)
+        XCTAssertEqual("https://www.thelocal.de/20211020/explained-how-german-citizenship-differs-from-permanent-residency/", model.bookmarks.last?.access.value)
     }
     
     private func migrate() async {

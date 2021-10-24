@@ -56,6 +56,11 @@ final class CloudMigrationTests: XCTestCase {
         waitForExpectations(timeout: 1)
     }
     
+    func testRemoves() async {
+        let url = await migrate()
+        XCTAssertFalse(FileManager.default.fileExists(atPath: url.path))
+    }
+    
     func testBookmarks() async {
         await migrate()
         let model = await cloud.model
@@ -67,10 +72,11 @@ final class CloudMigrationTests: XCTestCase {
         XCTAssertEqual("https://www.thelocal.de/20211020/explained-how-german-citizenship-differs-from-permanent-residency/", model.bookmarks.last?.access.value)
     }
     
-    private func migrate() async {
+    @discardableResult private func migrate() async -> URL {
         let data = try! Data(contentsOf: Bundle.module.url(forResource: "Privacy", withExtension: "archive")!)
         let url = FileManager.default.temporaryDirectory.appendingPathComponent("Privacy.archive")
         try! data.write(to: url)
         await cloud.migrate(url: url)
+        return url
     }
 }

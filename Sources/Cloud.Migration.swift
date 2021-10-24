@@ -2,7 +2,14 @@ import Foundation
 import Archivable
 
 extension Cloud where Output == Archive {
-    public func migrate(url: URL) async {
+    public func migrate() {
+        Task
+            .detached(priority: .utility) { [weak self] in
+                await self?.migrate(url: FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Privacy.archive"))
+            }
+    }
+    
+    func migrate(url: URL) async {
         guard
             FileManager.default.fileExists(atPath: url.path),
             let compressed = try? Data(contentsOf: url),
@@ -62,5 +69,6 @@ extension Cloud where Output == Archive {
             }
         
         await stream()
+        try? FileManager.default.removeItem(at: url)
     }
 }

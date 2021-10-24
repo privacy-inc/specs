@@ -22,4 +22,22 @@ final class CloudMigrationTests: XCTestCase {
         try! data.write(to: url)
         await cloud.migrate(url: url)
     }
+    
+    func testBookmarks() async {
+        await migrate()
+        let model = await cloud.model
+        
+        XCTAssertEqual(14, model.bookmarks.count)
+        XCTAssertEqual("Weather Berlin - Google Search", model.bookmarks.first?.title)
+        XCTAssertEqual("https://www.google.com?q=weather+berlin", model.bookmarks.first?.access.value)
+        XCTAssertEqual("Explained", model.bookmarks.last?.title)
+        XCTAssertEqual("https://thelocal", model.bookmarks.last?.access.value)
+    }
+    
+    private func migrate() async {
+        let data = try! Data(contentsOf: Bundle.module.url(forResource: "Privacy", withExtension: "archive")!)
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent("Privacy.archive")
+        try! data.write(to: url)
+        await cloud.migrate(url: url)
+    }
 }

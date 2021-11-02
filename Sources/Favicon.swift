@@ -143,6 +143,7 @@ public typealias Output = UIImage
         
         fileprivate func received(output: Output) async {
             self.output = output
+            clean()
             await send(output: output)
         }
         
@@ -150,8 +151,11 @@ public typealias Output = UIImage
             let sub = Sub(subscriber: .init(subscriber))
             subscriber.receive(subscription: sub)
             
+            let contract = Contract(sub: sub)
+            
             Task {
-                await store(contract: .init(sub: sub))
+                await store(contract: contract)
+                await send(contract: contract)
             }
         }
         
@@ -159,25 +163,19 @@ public typealias Output = UIImage
             contracts.append(contract)
             
             clean()
-            
-            if let output = output {
-                await MainActor
-                    .run {
-                        _ = contract.sub?.subscriber?.receive(output)
-                    }
+        }
+        
+        @MainActor private func send(contract: Contract) async {
+            if let output = await output {
+                _ = contract.sub?.subscriber?.receive(output)
             }
         }
         
-        private func send(output: Output) async {
-            clean()
-            
-            let subscribers = contracts.compactMap(\.sub?.subscriber)
-            await MainActor
-                .run {
-                    subscribers
-                        .forEach {
-                            _ = $0.receive(output)
-                        }
+        @MainActor private func send(output: Output) async {
+            await contracts
+                .compactMap(\.sub?.subscriber)
+                .forEach {
+                    _ = $0.receive(output)
                 }
         }
         

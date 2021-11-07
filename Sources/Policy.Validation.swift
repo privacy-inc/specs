@@ -2,7 +2,7 @@ import Foundation
 import Domains
 
 extension Policy {
-    struct Validation {
+    public struct Validation {
         static let allow = Self(result: .allow, event: .none)
         static let ignore = Self(result: .ignore, event: .none)
         static let external = Self(result: .external, event: .none)

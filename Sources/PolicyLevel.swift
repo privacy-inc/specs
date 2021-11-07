@@ -1,6 +1,6 @@
 import Foundation
 
-protocol PolicyLevel {
+public protocol PolicyLevel {
     var level: Policy { get }
     
     func route(url: URL) -> Policy.Validation

@@ -4,11 +4,7 @@ import Archivable
 public struct Settings: Storable {
     public let search: Search
     public let configuration: Configuration
-    let policy: PolicyLevel
-    
-    public var secure: Bool {
-        policy.level == .secure
-    }
+    public let policy: PolicyLevel
     
     public var data: Data {
         .init()

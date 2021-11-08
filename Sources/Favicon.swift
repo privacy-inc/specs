@@ -144,7 +144,9 @@ public typealias Output = UIImage
         fileprivate func received(output: Output) async {
             self.output = output
             clean()
-            await send(output: output)
+            await send(subscribers: contracts
+                        .compactMap(\.sub?.subscriber),
+                       output: output)
         }
         
         public nonisolated func receive<S>(subscriber: S) where S : Subscriber, Failure == S.Failure, Output == S.Input {
@@ -171,9 +173,8 @@ public typealias Output = UIImage
             }
         }
         
-        @MainActor private func send(output: Output) async {
-            await contracts
-                .compactMap(\.sub?.subscriber)
+        @MainActor private func send(subscribers: [AnySubscriber<Output, Failure>], output: Output) {
+            subscribers
                 .forEach {
                     _ = $0.receive(output)
                 }

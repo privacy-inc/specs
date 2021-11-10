@@ -181,7 +181,8 @@ public typealias Output = UIImage
         }
         
         private func clean() {
-            contracts = contracts
+            let all = contracts
+            contracts = all
                 .filter {
                     $0.sub?.subscriber != nil
                 }

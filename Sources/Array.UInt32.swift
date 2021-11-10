@@ -20,7 +20,7 @@ extension Array where Element == UInt32 {
     func timestamp<T>(result: (Int, Self) -> T) -> T {
         last
             .flatMap {
-                .init(timestamp: $0) > Calendar.current.date(byAdding: .minute, value: -1, to: .now)!
+                .init(timestamp: $0) > Calendar.current.date(byAdding: .minute, value: -10, to: .now)!
                 ? count - 1
                 : nil
             }

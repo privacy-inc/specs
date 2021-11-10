@@ -48,14 +48,18 @@ final class EventsTests: XCTestCase {
         XCTAssertEqual(1, events.items.count)
     }
     
-    func testTimestampsPerMinute() {
+    func testTimestampsPer10Minutes() {
         let now = UInt32.now
         XCTAssertEqual(1, Events()
                         .with(timestamps: [now - 59])
                         .add(domain: "avocado.org")
                         .timestamps.count)
-        XCTAssertEqual(2, Events()
+        XCTAssertEqual(1, Events()
                         .with(timestamps: [now - 61])
+                        .add(domain: "avocado.org")
+                        .timestamps.count)
+        XCTAssertEqual(2, Events()
+                        .with(timestamps: [now - 601])
                         .add(domain: "avocado.org")
                         .timestamps.count)
     }

@@ -144,7 +144,9 @@ public typealias Output = UIImage
         fileprivate func received(output: Output) async {
             self.output = output
             clean()
-            await send(subscribers: contracts
+            
+            let all = contracts
+            await send(subscribers: all
                         .compactMap(\.sub?.subscriber),
                        output: output)
         }

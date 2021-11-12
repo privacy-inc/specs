@@ -171,7 +171,8 @@ final class PolicyBlockTests: XCTestCase {
         "https://crb.kargo.com/api/v1/initsync/bf0a3071-4750-4f09-9c97-83e3ae341fdf?partners=Tapad,ttd,mediamath,DBM,LiveRamp",
         "https://advotion.g2afse.com/click?pid=3&offer_id=456&sub1=483095687932982111&sub2=3601336",
         "https://vol.marketland.me/YxTJqR/?utm_source=10800&utm_campaign=8653518&clck=618eb56b43ce580001c38ae8&sid=",
-        "https://manageintenselyprecisethefile.vip/-H7Fr_x2-O-u4Hcs89qwoSOMLJ5-IDf27xhs90ElWg4?clck=618eb56b43ce580001c38ae8&sid="
+        "https://manageintenselyprecisethefile.vip/-H7Fr_x2-O-u4Hcs89qwoSOMLJ5-IDf27xhs90ElWg4?clck=618eb56b43ce580001c38ae8&sid=",
+        "https://thaudray.com/?rb=Y6IPmu8Kf9EM-EOnOtkkTz6deHU-2oWbDJonj_yptOy9h0WXWD-d3qP0t14ZSdv-S41ry6BzED2ZMvBnJ7IQ5HZS_IYL0T_E-szgLF8Tu7k987R2sriwIl7yONeZOPQn81NrZ402TuHg-2NAIXVKe86Ynbnwb_XJ9JXTkZhBdnItSVA2aGrinHxsfXuCSZ6IRxFJYMFl8gzDBW6c1xPed-pVM4-4Sstct8FNnhCJgVLb48NMnx3p47Ke9QKuXoB8WU4UcLuhuXzTx5V_SECaKw%3D%3D&zoneid=4485965&request_ab2=0&fs=0&cf=0&sw=1792&sh=1120&sah=1017&wx=0&wy=1120&ww=0&wh=0&cw=955&wiw=955&wih=937&wfc=2&pl=https%3A%2F%2Fyt5s.com%2Fen14&drf=https%3A%2F%2Fwww.google.com%2F&np=1&pt=0&nb=1&ng=1&ix=0&nw=1&tb=false&js_build=2&bs=148c9b58-e6fc-44a0-b7be-1cf9875119f3&userId=95eabf212c7c43bb8159e08c0a2216bf&fallback=disabled-by-server"
     ]
     
     override func setUp() {

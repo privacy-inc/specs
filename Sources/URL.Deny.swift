@@ -138,6 +138,7 @@ extension URL {
         g2afse,
         marketland,
         manageintenselyprecisethefile,
+        thaudray,
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
         google_analytics = "google-analytics",

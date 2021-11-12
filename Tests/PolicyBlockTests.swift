@@ -168,7 +168,10 @@ final class PolicyBlockTests: XCTestCase {
         "https://cdn3.doubleverify.com/bst2tv3.html",
         "https://secure-ds.serving-sys.com/resources/PROD/html5/72046/20211001/1076180168/65645078514770014/index.html?v=_2_139_1_0&n=1&sHost=secure-ds.serving-sys.com",
         "https://pre.ads.justpremium.com/v/1.0/t/sync?gdpr=1&gdpr_consent=CPPT4dCPPT4dCAGABCENB0CgAP_AAEKAAAYgHpgZ5DpUTWHAUXJ8QvsAGYQWVkQUAWACCBCAIiABAAEAMLQAg0AAsASAAAACAAIAoBIBAAAECAAEAUAAQAAEAAEgAAAAgAAIIABEABEAAAAAAAoCAAAAEAAIAAARAAAAmAAAA2KEAGCAlAAQIAAAgCAAAIAEAAEAAAAAAIErQAgBmgJWARGQBAAmAEcAXmAz4RAEAEMAkQBSIDPhAAEAEgSBQAAsACoAGQAOAAeABAADIAGgAPIAiACKAEwAJ4AbwA5gB-AEIAIaARABEgCWAFKALcAYYA1QB-gEDAI0ARwAuYBigDcAHEAPQAhsBIgChwFIgLzAZ8A04BuoQACACQNAHAC4AIYAgoBaQEiAKRAZ8GAAgHUFQBgAmABcAI4AWkBeYDPhQAEAgo6BgAAsACoAGQAOAAgABkADQAHgAPoAiACKAEwAJ8AXABdADEAG8AOYAfgBDQCIAIkASwAmABSgCxAFuAMMAaIA_QCBgEcALSAXMAxQBuADiAHUAPQAhsBF4CRAFDgLzAYkAywBnwDTgGqgN1AcWOAFAAXABIAF8AgoBCACLAF1AMCAa8BEBCAkAAsADIATAAuABiADeALEAjgBaQC5gGKAOoAegBIgC2gGJAM-AaqQABABfAIKSgLgALAAyABwAHgARAAmABcADEAIaARABEgClAFuANUAjgBaQDFAG4AOoAi8BIgC8wGWAM-JABAALgBfALqAa8pAgAAWABUADIAHAAQAAyABoADyAIgAigBMACeAGIAOYAfgBDQCIAIkAUoAsQBbgDRAGqAP0AjgBcwDcAHoAReAkQBQ4C8wGfAN1KACAALgAkAC-ARYAnYBdQDFAGvA.YAAAAAAAAAAA",
-        "https://crb.kargo.com/api/v1/initsync/bf0a3071-4750-4f09-9c97-83e3ae341fdf?partners=Tapad,ttd,mediamath,DBM,LiveRamp"
+        "https://crb.kargo.com/api/v1/initsync/bf0a3071-4750-4f09-9c97-83e3ae341fdf?partners=Tapad,ttd,mediamath,DBM,LiveRamp",
+        "https://advotion.g2afse.com/click?pid=3&offer_id=456&sub1=483095687932982111&sub2=3601336",
+        "https://vol.marketland.me/YxTJqR/?utm_source=10800&utm_campaign=8653518&clck=618eb56b43ce580001c38ae8&sid=",
+        "https://manageintenselyprecisethefile.vip/-H7Fr_x2-O-u4Hcs89qwoSOMLJ5-IDf27xhs90ElWg4?clck=618eb56b43ce580001c38ae8&sid="
     ]
     
     override func setUp() {

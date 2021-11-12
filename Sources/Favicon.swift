@@ -143,12 +143,8 @@ public typealias Output = UIImage
         
         fileprivate func received(output: Output) async {
             self.output = output
-            clean()
-            
-            let all = contracts
-            await send(subscribers: all
-                        .compactMap(\.sub?.subscriber),
-                       output: output)
+            await clean()
+            await send(contracts: contracts, output: output)
         }
         
         public nonisolated func receive<S>(subscriber: S) where S : Subscriber, Failure == S.Failure, Output == S.Input {
@@ -159,53 +155,67 @@ public typealias Output = UIImage
             
             Task {
                 await store(contract: contract)
-                await send(contract: contract)
+                
+                if let output = await output {
+                    await sub.send(output: output)
+                }
             }
         }
         
         private func store(contract: Contract) async {
             contracts.append(contract)
-            
-            clean()
+            await clean()
         }
         
-        @MainActor private func send(contract: Contract) async {
-            if let output = await output {
-                _ = contract.sub?.subscriber?.receive(output)
+        private func send(contracts: [Contract], output: Output) async {
+            for contract in contracts {
+                await contract.sub?.send(output: output)
             }
         }
         
-        @MainActor private func send(subscribers: [AnySubscriber<Output, Failure>], output: Output) {
-            subscribers
-                .forEach {
-                    _ = $0.receive(output)
-                }
-        }
-        
-        private func clean() {
+        private func clean() async {
             let all = contracts
-            contracts = all
-                .filter {
-                    $0.sub?.subscriber != nil
+            var active = [Contract]()
+            for contract in all {
+                if await contract.sub?.subscriber != nil {
+                    active.append(contract)
                 }
+            }
+            contracts = active
         }
     }
 }
     
 private extension Favicon.Pub {
-    final class Sub: Subscription {
+    final actor Sub: Subscription {
         private(set) var subscriber: AnySubscriber<Output, Failure>?
         
         init(subscriber: AnySubscriber<Output, Failure>) {
             self.subscriber = subscriber
         }
         
-        func cancel() {
+        func send(output: Output) async {
+            if let subscriber = subscriber {
+                await send(subscriber: subscriber, output: output)
+            }
+        }
+        
+        nonisolated func cancel() {
+            Task {
+                await clear()
+            }
+        }
+        
+        nonisolated func request(_: Subscribers.Demand) {
+
+        }
+        
+        private func clear() {
             subscriber = nil
         }
         
-        func request(_: Subscribers.Demand) {
-
+        @MainActor private func send(subscriber: AnySubscriber<Output, Failure>, output: Output) {
+            _ = subscriber.receive(output)
         }
     }
     

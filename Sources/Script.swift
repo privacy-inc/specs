@@ -6,7 +6,8 @@ public enum Script {
     dark,
     unpromise,
     find,
-    text
+    text,
+    location
     
     public var script: String {
         switch self {
@@ -20,6 +21,8 @@ public enum Script {
             return Self._find
         case .text:
             return Self._text
+        case .location:
+            return Self._location
         }
     }
     
@@ -27,6 +30,8 @@ public enum Script {
         switch self {
         case .favicon:
             return "GoPrivacyApp_favicon()"
+        case .location:
+            return "GoPrivacyApp_location"
         default:
             return ""
         }

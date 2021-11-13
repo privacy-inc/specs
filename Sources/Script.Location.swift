@@ -2,10 +2,9 @@ import Foundation
 
 extension Script {
     static let _location = """
-navigator.geolocation.getCurrentPosition = function(success, error, options) {
-    var promise = window.webkit.messageHandlers.\(Script.location.method).postMessage("\(Script.location.method)");
-    await promise;
-    
+navigator.geolocation.getCurrentPosition = async function(success, error, options) {
+    var promise = await webkit.messageHandlers.\(Script.location.method).postMessage("\(Script.location.method)");
+
     if (success != null, promise != null) {
         var position = {
            coords: {

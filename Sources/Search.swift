@@ -64,7 +64,7 @@ private extension String {
                     } != nil
                 && !$0.first!.isEmpty
                 && !contains(" ")
-                ? URL.Scheme.https.rawValue + "://" + lowercased()
+                ? URL.Scheme.https.rawValue + "://" + self
                 : nil
         } (components(separatedBy: "/")
             .first!

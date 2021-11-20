@@ -23,17 +23,18 @@ final class SearchTests: XCTestCase {
     func testURL() {
         XCTAssertEqual("https://github.com", search("https://github.com"))
         XCTAssertEqual("https://hello.com/aguacate", search("hello.com/aguacate"))
-        XCTAssertEqual("https://hello.com/aguacate", search("hello.com/Aguacate"))
-        XCTAssertEqual("https://www.github.com", search("www.Github.Com"))
+        XCTAssertEqual("https://hello.com/Aguacate", search("hello.com/Aguacate"))
+        XCTAssertEqual("https://www.Github.Com", search("www.Github.Com"))
         XCTAssertEqual("https://www.github.com", search("https://www.Github.com"))
         XCTAssertEqual("https://www.github.com", search("https://www.Github.Com"))
         XCTAssertEqual("https://www.google.com/search?q=Hello%20World", search("https://www.google.com/search?q=Hello%20World"))
+        XCTAssertEqual("https://andymatuschak.org/files/papers/Apple%20Human%20Interface%20Guidelines%201987.pdf", search("andymatuschak.org/files/papers/Apple%20Human%20Interface%20Guidelines%201987.pdf"))
     }
     
     func testPartialURL() {
         XCTAssertEqual("https://github.com", search("github.com"))
-        XCTAssertEqual("https://github.com", search("Github.com"))
-        XCTAssertEqual("https://github.com", search("Github.Com"))
+        XCTAssertEqual("https://Github.com", search("Github.com"))
+        XCTAssertEqual("https://Github.Com", search("Github.Com"))
     }
     
     func testDeeplinks() {

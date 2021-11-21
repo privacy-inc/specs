@@ -139,6 +139,7 @@ extension URL {
         marketland,
         manageintenselyprecisethefile,
         thaudray,
+        mediago,
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
         google_analytics = "google-analytics",

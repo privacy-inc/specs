@@ -153,7 +153,8 @@ extension URL {
         _1rx = "1rx",
         onetag_sys = "onetag-sys",
         _360yield = "360yield",
-        serving_sys = "serving-sys"
+        serving_sys = "serving-sys",
+        ad_score = "ad-score"
         
         static func validation(domain: Domain) -> Policy.Validation? {
             Self(rawValue: domain.name)

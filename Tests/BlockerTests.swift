@@ -62,7 +62,8 @@ final class BlockerTests: XCTestCase {
                         .css(selectors: ["[id*='google_ads']",
                                          "[id*='ezoic']",
                                          "[class*='ezoic']",
-                                         "[id*='adngin']"]))
+                                         "[id*='adngin']",
+                                         "[class*='adwrapper']"]))
     }
     
     func testScreen() {

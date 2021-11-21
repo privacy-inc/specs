@@ -35,7 +35,8 @@ enum Blocker: CaseIterable {
                     .init(trigger: .all, action: .css(["[id*='google_ads']",
                                                        "[id*='ezoic']",
                                                        "[class*='ezoic']",
-                                                       "[id*='adngin']"]))]
+                                                       "[id*='adngin']",
+                                                       "[class*='adwrapper']"]))]
         case .screen:
             return [.init(trigger: .url(.google), action: .css(["#consent-bump",
                                                                 "#lb",

@@ -140,6 +140,14 @@ extension URL {
         manageintenselyprecisethefile,
         thaudray,
         mediago,
+        ad4m,
+        sportradarserving,
+        bannerflow,
+        adcell,
+        mcdart,
+        awin1,
+        intelliad,
+        betrad,
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
         google_analytics = "google-analytics",
@@ -154,7 +162,9 @@ extension URL {
         onetag_sys = "onetag-sys",
         _360yield = "360yield",
         serving_sys = "serving-sys",
-        ad_score = "ad-score"
+        ad_score = "ad-score",
+        ad_srv = "ad-srv",
+        jeans_direct = "jeans-direct"
         
         static func validation(domain: Domain) -> Policy.Validation? {
             Self(rawValue: domain.name)

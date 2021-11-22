@@ -63,7 +63,7 @@ final class BlockerTests: XCTestCase {
                                          "[id*='ezoic']",
                                          "[class*='ezoic']",
                                          "[id*='adngin']",
-                                         "[class*='adwrapper']"]))
+                                         ".adwrapper"]))
     }
     
     func testScreen() {

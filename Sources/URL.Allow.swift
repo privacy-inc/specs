@@ -78,6 +78,8 @@ extension URL {
                 return [.ads]
             case .bloomberg:
                 return [.subscription_offer]
+            case .pinterest:
+                return [.ct_html]
             default:
                 return []
             }

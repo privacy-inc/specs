@@ -10,6 +10,7 @@ extension URL.Allow {
         ads,
         tr,
         plugins = "v2.2",
-        subscription_offer = "subscription-offer"
+        subscription_offer = "subscription-offer",
+        ct_html = "ct.html"
     }
 }

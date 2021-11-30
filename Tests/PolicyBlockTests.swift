@@ -186,7 +186,8 @@ final class PolicyBlockTests: XCTestCase {
         "https://www.jeans-direct.de/images/jeansdirect-imgp.jpg",
         "https://c.betrad.com/ba.html?r170201",
         "https://www.pinterest.com/ct.html",
-        "https://www.recaptcha.net/recaptcha/enterprise/anchor?ar=1&k=6Ldx7ZkUAAAAAF3SZ05DRL2Kdh911tCa3qFP0-0r&co=aHR0cHM6Ly93d3cucGludGVyZXN0LmNvbTo0NDM.&hl=en&v=_7Co1fh8iT2hcjvquYJ_3zSP&size=invisible&cb=c9nze39hejjz"
+        "https://www.recaptcha.net/recaptcha/enterprise/anchor?ar=1&k=6Ldx7ZkUAAAAAF3SZ05DRL2Kdh911tCa3qFP0-0r&co=aHR0cHM6Ly93d3cucGludGVyZXN0LmNvbTo0NDM.&hl=en&v=_7Co1fh8iT2hcjvquYJ_3zSP&size=invisible&cb=c9nze39hejjz",
+        "https://images-na.ssl-images-amazon.com/images/S/apesafeframe/ape-dev/ape/sf/desktop/sf-1.50.0247773.html"
     ]
     
     override func setUp() {

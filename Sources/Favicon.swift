@@ -40,9 +40,7 @@ public final actor Favicon {
     }
     
     public func publisher(for icon: String) -> Pub? {
-        if publishers[icon] == nil {
-            publishers[icon] = .init()
-        }
+        validate(domain: icon)
         
         let publisher = publishers[icon]!
         
@@ -69,6 +67,7 @@ public final actor Favicon {
     public func received(url: String, for access: AccessType) async {
         guard let domain = (access as? Access.Remote)?.domain.minimal.lowercased() else { return }
         
+        validate(domain: domain)
         received.insert(domain)
         
         guard
@@ -110,6 +109,12 @@ public final actor Favicon {
         
         guard let output = output(for: domain) else { return }
         await publishers[domain]!.received(output: output)
+    }
+    
+    private func validate(domain: String) {
+        if publishers[domain] == nil {
+            publishers[domain] = .init()
+        }
     }
     
     private func output(for domain: String) -> Pub.Output? {

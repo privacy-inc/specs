@@ -9,7 +9,7 @@ extension URL.Allow {
         account,
         ads,
         tr,
-        plugins = "v2.2",
+        plugins,
         subscription_offer = "subscription-offer",
         ct_html = "ct.html"
     }

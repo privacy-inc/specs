@@ -187,7 +187,9 @@ final class PolicyBlockTests: XCTestCase {
         "https://c.betrad.com/ba.html?r170201",
         "https://www.pinterest.com/ct.html",
         "https://www.recaptcha.net/recaptcha/enterprise/anchor?ar=1&k=6Ldx7ZkUAAAAAF3SZ05DRL2Kdh911tCa3qFP0-0r&co=aHR0cHM6Ly93d3cucGludGVyZXN0LmNvbTo0NDM.&hl=en&v=_7Co1fh8iT2hcjvquYJ_3zSP&size=invisible&cb=c9nze39hejjz",
-        "https://images-na.ssl-images-amazon.com/images/S/apesafeframe/ape-dev/ape/sf/desktop/sf-1.50.0247773.html"
+        "https://images-na.ssl-images-amazon.com/images/S/apesafeframe/ape-dev/ape/sf/desktop/sf-1.50.0247773.html",
+        "https://i.liadm.com/s/c/a-06la?s=&cim=&ps=true&ls=true&duid=40c9b4ad50d8--01fnv0czcp8afy2b8pt7pwcnjm&ppid=0&euns=0&ci=0&version=sc-v0.2.0&nosync=false&monitorExternalSyncs=false&",
+        "https://www.facebook.com/v2.12/plugins/login_button.php?app_id=153705428005595&channel=https%3A%2F%2Fstaticxx.facebook.com%2Fx%2Fconnect%2Fxd_arbiter%2F%3Fversion%3D46%23cb%3Df14dc34a21757ba%26domain%3Dwww.exberliner.com%26is_canvas%3Dfalse%26origin%3Dhttps%253A%252F%252Fwww.exberliner.com%252Ffd56615b3bfa7%26relation%3Dparent.parent&container_width=0&locale=en_US&login_text=%20or%20login%20with%20Facebook&sdk=joey"
     ]
     
     override func setUp() {

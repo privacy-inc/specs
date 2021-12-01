@@ -141,18 +141,15 @@ extension URL {
         }
         
         private func path(domain: Domain, url: URL) -> Policy.Validation? {
-            url
+            for component in url
                 .path
                 .components(separatedBy: "/")
                 .dropFirst()
-                .first
-                .flatMap { component in
-                    path
-                        .map(\.rawValue)
-                        .contains(component)
-                    ? .block(tracker: domain.minimal + "/" + component)
-                    : nil
-                }
+                    .prefix(2) {
+                guard path.map(\.rawValue).contains(component) else { continue }
+                return .block(tracker: domain.minimal + "/" + component)
+            }
+            return nil
         }
     }
 }

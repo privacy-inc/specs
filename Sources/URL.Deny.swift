@@ -167,7 +167,8 @@ extension URL {
         ad_score = "ad-score",
         ad_srv = "ad-srv",
         jeans_direct = "jeans-direct",
-        ssl_images_amazon = "ssl-images-amazon"
+        ssl_images_amazon = "ssl-images-amazon",
+        illuma_tech = "illuma-tech"
         
         static func validation(domain: Domain) -> Policy.Validation? {
             Self(rawValue: domain.name)

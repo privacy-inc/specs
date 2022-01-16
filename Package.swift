@@ -25,7 +25,6 @@ let package = Package(
         .testTarget(
             name: "Tests",
             dependencies: ["Specs"],
-            path: "Tests",
-            resources: [.process("Resources")]),
+            path: "Tests"),
     ]
 )

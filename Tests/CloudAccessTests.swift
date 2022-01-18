@@ -8,7 +8,7 @@ final class CloudAccessTests: XCTestCase {
     private var subs: Set<AnyCancellable>!
     
     override func setUp() {
-        cloud = .ephemeral
+        cloud = .init()
         subs = []
     }
     

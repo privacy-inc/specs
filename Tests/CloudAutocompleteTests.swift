@@ -6,7 +6,7 @@ final class CloudAutocompleteTests: XCTestCase {
     private var cloud: Cloud<Archive>!
     
     override func setUp() {
-        cloud = .ephemeral
+        cloud = .init()
     }
     
     func testEmpty() async {

@@ -150,6 +150,10 @@ extension URL {
         betrad,
         recaptcha,
         liadm,
+        makespram,
+        fastdnr,
+        tipico,
+        gaietyastonished,
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
         google_analytics = "google-analytics",
@@ -168,7 +172,8 @@ extension URL {
         ad_srv = "ad-srv",
         jeans_direct = "jeans-direct",
         ssl_images_amazon = "ssl-images-amazon",
-        illuma_tech = "illuma-tech"
+        illuma_tech = "illuma-tech",
+        boot_upfree_bestheavilyfile = "boot-upfree-bestheavilyfile"
         
         static func validation(domain: Domain) -> Policy.Validation? {
             Self(rawValue: domain.name)

@@ -98,4 +98,9 @@ final class SearchTests: XCTestCase {
     func testIsFirstLevelTld() {
         XCTAssertEqual("https://www.google.com/search?q=total.0", search("total.0"))
     }
+    
+    func testIsData() {
+        XCTAssertEqual("data:text/html;charset=utf-8;base64,PGltZyBzcmM9Imh0dHBzOi8vc25hbW1hci1qdW1udGFsLmNvbS9mYXZpY29uLmljbyI+",
+                       search("data:text/html;charset=utf-8;base64,PGltZyBzcmM9Imh0dHBzOi8vc25hbW1hci1qdW1udGFsLmNvbS9mYXZpY29uLmljbyI+"))
+    }
 }

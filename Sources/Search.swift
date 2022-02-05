@@ -13,7 +13,9 @@ public struct Search {
     func callAsFunction(_ search: String) -> String? {
         search
             .trimmed {
-                $0.url
+                $0.hasPrefix(URL.Embed.data.rawValue + ":") || $0.hasPrefix(URL.Embed.file.rawValue + ":")
+                ? $0
+                : $0.url
                     ?? $0.file
                     ?? $0.partial
                     ?? query(search: $0)

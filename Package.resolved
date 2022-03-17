@@ -1,25 +1,23 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "Domains",
-        "repositoryURL": "https://github.com/privacy-inc/domains.git",
-        "state": {
-          "branch": "main",
-          "revision": "0448eceecc9913a17931c8f74f4a0126e66970bb",
-          "version": null
-        }
-      },
-      {
-        "package": "Archivable",
-        "repositoryURL": "https://github.com/archivable/package.git",
-        "state": {
-          "branch": "main",
-          "revision": "830f0af4a6c474b4caa43e5c99c9cca9d55079b2",
-          "version": null
-        }
+  "pins" : [
+    {
+      "identity" : "domains",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/privacy-inc/domains.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e81be3b7cbb380e7ad882612f8c1c3d5f67f7984"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "package",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/archivable/package.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "15193042edd33e75875ce5aef64762e466fa7d3e"
+      }
+    }
+  ],
+  "version" : 2
 }

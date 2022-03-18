@@ -14,6 +14,7 @@ extension URL.Allow {
         tracking,
         cookies,
         widgets,
+        analytics,
         public_api = "public-api"
     }
 }

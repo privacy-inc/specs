@@ -201,7 +201,9 @@ final class PolicyBlockTests: XCTestCase {
         "https://lp.interwetten.de/de/page/100-nkb-de?&bn=PopUnder-SB-Popunder-Default-DE-text-9313-Popunder-SR&utm_source=coop&utm_medium=9313_Sportradar_DE&utm_campaign=100_bonus&utm_term=popunder&utm_content=lang_de",
         "https://ak.hetaruvg.com/4/4370757",
         "https://app.usercentrics.eu/latest/cdcs-iframe-index.html",
-        "https://hal90002.redintelligence.net/request_content.php?s=60210700107797804354384011902002&a=b3deb960"
+        "https://hal90002.redintelligence.net/request_content.php?s=60210700107797804354384011902002&a=b3deb960",
+        "https://static.yieldmo.com/partner.min.html?partners=b%2Cc%2Ce%2Cf%2Cs%2Ct%2Cl%2Cpub&gdpr=1&gdpr_consent=CPWDa_PPWDa_PEsABBENCHCoAP_AAH_AABBYHQpB7T7HbSFD6P59fLsUMAhXxliEC-QgCASBB2ABQAKQIAwCkmAQFASgBAACAAAgICZBAQIMCAgACUABQABAAAEkAAAABAAIIAAAiAEAAAAIAAACAIAAAAAIAAAAEAQAmwgAAIIACAAABAAAAAAAAAAAAAAAAgdCgHsLsdtIUNo_Gk8uxQgCFdGUIQL4CAIAIEHYAAAApAgDAKQQBAABKAAAAIAACAgJgEBAggACAABQAFAAEAAAAAAAAAAAAggAACIAQAAAAgAAAIAgAAAAAgAAAAABACBCAAAggAIAAAAAAAAAAAAAAAAAAACAAA.f_gAAAAAAAA",
+        "https://ups.analytics.yahoo.com/ups/58543/occ?gdpr=1&gdpr_consent=CPWDa_PPWDa_PEsABBENCHCoAP_AAH_AABBYHQpB7T7HbSFD6P59fLsUMAhXxliEC-QgCASBB2ABQAKQIAwCkmAQFASgBAACAAAgICZBAQIMCAgACUABQABAAAEkAAAABAAIIAAAiAEAAAAIAAACAIAAAAAIAAAAEAQAmwgAAIIACAAABAAAAAAAAAAAAAAAAgdCgHsLsdtIUNo_Gk8uxQgCFdGUIQL4CAIAIEHYAAAApAgDAKQQBAABKAAAAIAACAgJgEBAggACAABQAFAAEAAAAAAAAAAAAggAACIAQAAAAgAAAIAgAAAAAgAAAAABACBCAAAggAIAAAAAAAAAAAAAAAAAAACAAA.f_gAAAAAAAA"
     ]
     
     override func setUp() {

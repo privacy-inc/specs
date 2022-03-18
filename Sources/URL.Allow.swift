@@ -28,38 +28,19 @@ extension URL {
         giphy,
         theguardian,
         wp,
-        wordpress
+        wordpress,
+        yahoo
         
         var tld: Tld {
             switch self {
             case .ecosia:
                 return .org
-            case .google,
-                 .youtube,
-                 .instagram,
-                 .twitter,
-                 .reuters,
-                 .pinterest,
-                 .facebook,
-                 .bbc,
-                 .reddit,
-                 .snapchat,
-                 .linkedin,
-                 .nyt,
-                 .nytimes,
-                 .medium,
-                 .bloomberg,
-                 .forbes,
-                 .huffpost,
-                 .giphy,
-                 .theguardian,
-                 .wp,
-                 .wordpress:
-                return .com
             case .thelocal,
                  .spiegel,
                  .immobilienscout24:
                 return .de
+            default:
+                return .com
             }
         }
         
@@ -111,6 +92,8 @@ extension URL {
                 return [.widgets]
             case .wordpress:
                 return [.public_api]
+            case .yahoo:
+                return [.analytics]
             default:
                 return []
             }

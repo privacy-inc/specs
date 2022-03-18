@@ -65,7 +65,7 @@ final class BlockerTests: XCTestCase {
                                          "[id*='adngin']",
                                          ".adwrapper",
                                          ".ad-wrapper",
-                                         ".ad_placeholder"]))
+                                         "[class*='ad_placeholder']"]))
     }
     
     func testScreen() {

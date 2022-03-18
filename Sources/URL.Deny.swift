@@ -159,6 +159,7 @@ extension URL {
         interwetten,
         hetaruvg,
         usercentrics,
+        redintelligence,
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
         google_analytics = "google-analytics",

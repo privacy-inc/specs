@@ -217,7 +217,9 @@ final class PolicyBlockTests: XCTestCase {
         "https://chaturbate.com/embed/cursed_ellie/?join_overlay=1&campaign=taOsB&embed_video_only=1&disable_sound=1&tour=dTm0&mobileRedirect=auto&target=_blank",
         "https://videotxxx.com/embed/16031801/?promo=23760&source=0",
         "https://txxx.com/embed/16031801/?promo=23760&source=0",
-        "https://bqnqrr53.com/saber/ball/nomad/"
+        "https://bqnqrr53.com/saber/ball/nomad/",
+        "https://syndication.realsrv.com/ads-iframe-display.php?idzone=2047881&type=300x250&p=https%3A%2F%2Fpornzog.com%2Fsearch%2F%3Fs%3Djapan%2Bfeet%2Bmissionary&dt=1648130640798&sub=0&tags=&screen_resolution=1728x1117",
+        "https://mrtbbnr.com/get/?go=1&data=eyJpbXAiOlt7ImJpZGZsb29yIjowLCJzZWN1cmUiOjEsImV4dCI6eyJpZCI6MTcxMSwic2l0ZV9pZCI6ODUwMzIyNzcsInR5cGUiOiJiYW5uZXIiLCJzcGFjZWlkIjoxNzExLCJpZHpvbmUiOjQ0NTgyMDIsInpvbmUiOiJpbnBfaW52aWRlb19wYXVzZSIsImFkX3RhZ3MiOiJTdHJhaWdodCUyQ1RlZW5zJTJDQW1hdGV1ciUyQ0JydW5ldHRlJTJDVG95cyUyQ0N1bm5pbGluZ3VzJTJDV2ViY2FtIiwidGl0bGUiOiJMYWxvYWxlc2lzd2luZ2VyJTIwLSUyMFNoZSUyMExpa2VzJTIwVG8lMjBPcGVuJTIwVXAlMjBUbyUyMEJlJTIwRnVja2VkJTIwUG9ybiUyMFZpZGVvIiwic3ViaWQiOiI4NTAzMjI3NyIsIm1vIjoiIiwidmUiOiIiLCJsYWJlbHMiOiIiLCJ1dG0xIjoibWNrIiwidXRtMiI6IjEwMTIxIiwidXRtMyI6Ijg1MDMyMjc3IiwidXRtNCI6IiJ9LCJiYW5uZXIiOnsidyI6MzAwLCJoIjoyNTB9fV0sInNpdGUiOnsiaWQiOiI4NTAzMjI3NyIsInBhZ2UiOiJodHRwcyUzQS8vaW5wb3JuLmNvbS92aWRlby8yODA2MDkvbGFsb2FsZXNpc3dpbmdlci1zaGUtbGlrZXMtdG8tb3Blbi11cC10by1iZS1mdWNrZWQvJTNGY2FtcGFpZ24lM0QxMDEyMSJ9LCJkZXZpY2UiOnsidyI6MTcyOCwiaCI6MTExN30sInVzZXIiOnsiaWQiOiIxMTJhYTIyNzMwMGZjMGI5ZmNlNzViZWM4MDA5MTgyMSJ9LCJleHQiOnsiZHQiOjE2NDgxMzA2MDI2NDR9fQ=="
     ]
     
     override func setUp() {

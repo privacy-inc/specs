@@ -208,7 +208,16 @@ final class PolicyBlockTests: XCTestCase {
         "https://flash.doubleclick-analytics.com/advertising/campain/react/xham_footer.php?campaign_id=28",
         "https://ads.seppsmedia.com/live/live.php",
         "https://www.big7.com/register/index_lp43.html?wmb=131",
-        "https://dsl.1und1.de/?ps_id=P646246906"
+        "https://dsl.1und1.de/?ps_id=P646246906",
+        "https://e-static.pornmd.com/iframesearch/index.html?width=300px&exclude=pornhub&height=40px&orientation=straight&button=5&color=f90&campaign=pornhub-maintenance",
+        "https://privatehomeclips.com/embed/4784485/?promo=23760&source=0",
+        "https://rtbbnr.com/get/?go=1&data=eyJpbXAiOlt7InNlY3VyZSI6MSwiZXh0Ijp7ImlkIjo1NSwic2l0ZV9pZCI6MzM4NjExODksInR5cGUiOiJiYW5uZXIiLCJzcGFjZWlkIjo1NSwiaWR6b25lIjoyMDQ3ODc5LCJ6b25lIjoicHpfbnR2X2NfZGVza3RvcCIsImFkX3RhZ3MiOiIiLCJ0aXRsZSI6IkFtYXRldXIlMjB0ZWVuJTIwZ2lybGZyaWVuZCUyMGh1Z2UlMjBjdW1zaG90JTIwaW4lMjBtb3V0aCUyMC0lMjBQb3JuWm9nJTIwRnJlZSUyMFBvcm4lMjBDbGlwcyIsInN1YmlkIjoiMCIsIm1vIjoiIiwidmUiOiIiLCJsYWJlbHMiOiIiLCJ1dG0xIjoiIiwidXRtMiI6IiIsInV0bTMiOiIiLCJ1dG00IjoiIn0sImJhbm5lciI6eyJ3IjozMDAsImgiOjI1MH19XSwic2l0ZSI6eyJpZCI6IjMzODYxMTg5IiwicGFnZSI6Imh0dHBzJTNBLy9wb3Juem9nLmNvbS92aWRlby8xMTcwOTg0MC9hbWF0ZXVyLXRlZW4tZ2lybGZyaWVuZC1odWdlLWN1bXNob3QtaW4tbW91dGgvIn0sImRldmljZSI6eyJ3IjoxNzI4LCJoIjoxMTE3fSwidXNlciI6eyJpZCI6IjVlN2Q5OTQxMjY4OTE2NmQ5YTA2YzhjMDU1M2I1NmU4In0sImV4dCI6eyJkdCI6MTY0ODEyOTkyNDYwOX19",
+        "https://btds.zog.link/in/58/?idzone=2047887&screen_resolution=1728x1117&ad_sub=0&sp=$%7BSECOND_PRICE%7D&site_id=&zone=ssp_cpm&w=300&h=250&bid=0.0050&utm1=&utm2=&utm3=&utm4=&katds_labels=&ic=IAB3&mo=&ve=&g_referer=https%3A%2F%2Fpornzog.com%2Fvideo%2F11709840%2Famateur-teen-girlfriend-huge-cumshot-in-mouth%2F&ad_tags=",
+        "https://12112336.pix-cdn.org/m/p/0/11/11508/yPndOg0m.html?__OS_FAMILY__=mac_osx&__OS_TYPE__=computer&__GEOIP_COUNTRY_SHORT__=DE&__IP2L_MOBILE__=&__BROWSER_FAMILY__=safari&OS_FAMILY=mac_osx&OS_TYPE=computer&COUNTRY_ISO_CODE=DE&MOBILE_BRAND=&BROWSER_FAMILY=safari&DOMAIN=pornzog.com&PRICE=0.0050&PRICING_MODEL=cpm&CAMPAIGN_ID=37319&CLICK_ID=591ba358-ff77-4e09-b035-dfae6182e132&id_zone=2047881&site=pornzog.com&out_name=37319%7C4317%7Ccpm%7C0.0020%7C%24%200.0050&campaign_id=37319&price=0.0050&pricebox_price=0.0020&pricing_model=cpm&click_id=591ba358-ff77-4e09-b035-dfae6182e132&priority=%5BPRIORITY%5D&ad_sub=0&utm1=%7B%7Butm1%7D%7D&utm2=%7B%7Butm2%7D%7D&utm3=%7B%7Butm3%7D%7D&utm4=%7B%7Butm4%7D%7D",
+        "https://chaturbate.com/embed/cursed_ellie/?join_overlay=1&campaign=taOsB&embed_video_only=1&disable_sound=1&tour=dTm0&mobileRedirect=auto&target=_blank",
+        "https://videotxxx.com/embed/16031801/?promo=23760&source=0",
+        "https://txxx.com/embed/16031801/?promo=23760&source=0",
+        "https://bqnqrr53.com/saber/ball/nomad/"
     ]
     
     override func setUp() {

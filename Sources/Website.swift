@@ -7,7 +7,7 @@ public struct Website: Storable, Identifiable {
     }
     
     public let title: String
-    public let access: AccessType
+    public let access: any AccessType
     
     public var data: Data {
         .init()
@@ -20,7 +20,7 @@ public struct Website: Storable, Identifiable {
         access = Access.with(data: &data)
     }
     
-    init(access: AccessType) {
+    init(access: any AccessType) {
         self.init(title: "", access: access)
     }
     
@@ -28,7 +28,7 @@ public struct Website: Storable, Identifiable {
         self.init(title: "", access: Access.with(url: url))
     }
     
-    private init(title: String, access: AccessType) {
+    private init(title: String, access: any AccessType) {
         self.title = title
         self.access = access
     }
@@ -37,7 +37,7 @@ public struct Website: Storable, Identifiable {
         .init(title: title, access: access)
     }
     
-    func with(access: AccessType) -> Self {
+    func with(access: any AccessType) -> Self {
         .init(title: title, access: access)
     }
     

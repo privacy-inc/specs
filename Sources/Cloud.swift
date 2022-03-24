@@ -16,7 +16,7 @@ extension Cloud where Output == Archive {
         await add(website: .init(url: url), history: history)
     }
     
-    public func open(access: AccessType) async -> UInt16 {
+    public func open<A>(access: A) async -> UInt16 where A : AccessType {
         var id = id(access: access)
         
         if id == nil {
@@ -28,7 +28,7 @@ extension Cloud where Output == Archive {
         return id!
     }
     
-    public func open(access: AccessType, history: UInt16) async {
+    public func open<A>(access: A, history: UInt16) async where A : AccessType {
         await add(website: .init(access: access), history: history)
     }
     
@@ -289,7 +289,7 @@ extension Cloud where Output == Archive {
         await stream()
     }
     
-    private func id(access: AccessType) -> UInt16? {
+    private func id(access: any AccessType) -> UInt16? {
         model
             .history
             .first {

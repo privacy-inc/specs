@@ -8,7 +8,7 @@ public enum Access: UInt8 {
     deeplink,
     embed
     
-    static func with(data: inout Data) -> AccessType {
+    static func with(data: inout Data) -> any AccessType {
         switch Self(rawValue: data.removeFirst())! {
         case .remote:
             return Remote(value: data.string(size: UInt16.self))
@@ -21,7 +21,7 @@ public enum Access: UInt8 {
         }
     }
     
-    static func with(url: URL) -> AccessType {
+    static func with(url: URL) -> any AccessType {
         url.isFileURL
             ? Local(value: url.absoluteString, bookmark: url.deletingLastPathComponent().bookmark)
             : url
@@ -30,7 +30,7 @@ public enum Access: UInt8 {
                 .map { _ in
                     Other(key: .embed, value: url.absoluteString)
                 }
-                ?? { scheme -> AccessType in
+                ?? { scheme -> any AccessType in
                     switch scheme {
                     case .https, .http, .ftp:
                         return Remote(value: url.absoluteString)

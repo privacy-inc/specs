@@ -55,7 +55,7 @@ public final actor Favicon {
         return publisher
     }
     
-    public func request(for access: AccessType) -> Bool {
+    public func request<A>(for access: A) -> Bool where A : AccessType {
         (access as? Access.Remote)
             .map(\.domain.minimal)
             .map {
@@ -64,7 +64,7 @@ public final actor Favicon {
         ?? false
     }
     
-    public func received(url: String, for access: AccessType) async {
+    public func received<A>(url: String, for access: A) async where A : AccessType {
         guard let domain = (access as? Access.Remote)?.domain.minimal.lowercased() else { return }
         
         validate(domain: domain)

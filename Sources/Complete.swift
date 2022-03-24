@@ -6,7 +6,7 @@ public struct Complete: Identifiable {
     }
     
     public let title: String
-    public let access: AccessType
+    public let access: any AccessType
     public let location: Location
     public let domain: String?
     let matches: Int

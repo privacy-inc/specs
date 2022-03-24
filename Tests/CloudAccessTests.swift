@@ -19,7 +19,7 @@ final class CloudAccessTests: XCTestCase {
         let idSecond = await cloud.open(url: URL(string: "https://something.org")!)
         XCTAssertEqual(1, idSecond)
         
-        let access = await cloud.model.history.first!.website.access
+        let access = await cloud.model.history.first!.website.access as! Access.Remote
         let idThird = await cloud.open(access: access)
         
         XCTAssertNotEqual(idFirst, idSecond)
@@ -43,7 +43,7 @@ final class CloudAccessTests: XCTestCase {
         
         Task {
             _ = await cloud.open(url: URL(string: "https://avocado.org")!)
-            _ = await cloud.open(access: Access.with(url: URL(string: "https://something.com")!))
+            _ = await cloud.open(access: Access.with(url: URL(string: "https://something.com")!) as! Access.Remote)
         }
         
         waitForExpectations(timeout: 1)
@@ -53,7 +53,7 @@ final class CloudAccessTests: XCTestCase {
         _ = await cloud.open(url: URL(string: "https://avocado.org")!)
         let idSecond = await cloud.open(url: URL(string: "https://something.org")!)
         
-        let access = await cloud.model.history.last!.website.access
+        let access = await cloud.model.history.last!.website.access as! Access.Remote
         await cloud.open(access: access, history: idSecond)
         
         let model = await cloud.model

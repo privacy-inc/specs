@@ -40,7 +40,8 @@ enum Blocker: CaseIterable {
                                                        ".ad-wrapper",
                                                        "[class*='ad_placeholder']",
                                                        ".traffic-stars",
-                                                       "[class*='ads-block']"]))]
+                                                       "[class*='ads-block']",
+                                                       "[class*='wio-']"]))]
         case .screen:
             return [.init(trigger: .url(.google), action: .css(["#consent-bump",
                                                                 "#lb",

@@ -4,7 +4,7 @@ import Archivable
 public struct Settings: Storable {
     public let search: Search
     public let configuration: Configuration
-    public let policy: PolicyLevel
+    public let policy: any PolicyLevel
     
     public var data: Data {
         .init()
@@ -25,7 +25,7 @@ public struct Settings: Storable {
         configuration = .init()
     }
     
-    private init(search: Search, policy: PolicyLevel, configuration: Configuration) {
+    private init(search: Search, policy: any PolicyLevel, configuration: Configuration) {
         self.search = search
         self.policy = policy
         self.configuration = configuration
@@ -35,7 +35,7 @@ public struct Settings: Storable {
         .init(search: search, policy: policy, configuration: configuration)
     }
     
-    func with(policy: PolicyLevel) -> Self {
+    func with(policy: any PolicyLevel) -> Self {
         .init(search: search, policy: policy, configuration: configuration)
     }
     

@@ -5,7 +5,7 @@ public enum Policy: UInt8 {
     secure,
     standard
     
-    static func with(level: Self) -> PolicyLevel {
+    static func with(level: Self) -> any PolicyLevel {
         switch level {
         case .secure:
             return Secure()
@@ -14,7 +14,7 @@ public enum Policy: UInt8 {
         }
     }
     
-    static func with(data: inout Data) -> PolicyLevel {
+    static func with(data: inout Data) -> any PolicyLevel {
         with(level: .init(rawValue: data.removeFirst())!)
     }
 }

@@ -29,7 +29,8 @@ extension URL {
         theguardian,
         wp,
         wordpress,
-        yahoo
+        yahoo,
+        _1und1 = "1und1"
         
         var tld: Tld {
             switch self {
@@ -37,7 +38,8 @@ extension URL {
                 return .org
             case .thelocal,
                  .spiegel,
-                 .immobilienscout24:
+                 .immobilienscout24,
+                 ._1und1:
                 return .de
             default:
                 return .com
@@ -94,6 +96,8 @@ extension URL {
                 return [.public_api]
             case .yahoo:
                 return [.analytics]
+            case ._1und1:
+                return [.dsl]
             default:
                 return []
             }

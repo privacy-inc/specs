@@ -15,6 +15,7 @@ extension URL.Allow {
         cookies,
         widgets,
         analytics,
+        dsl,
         public_api = "public-api"
     }
 }

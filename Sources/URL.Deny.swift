@@ -162,6 +162,8 @@ extension URL {
         redintelligence,
         yieldmo,
         faphouse,
+        seppsmedia,
+        big7,
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
         google_analytics = "google-analytics",
@@ -181,7 +183,8 @@ extension URL {
         jeans_direct = "jeans-direct",
         ssl_images_amazon = "ssl-images-amazon",
         illuma_tech = "illuma-tech",
-        boot_upfree_bestheavilyfile = "boot-upfree-bestheavilyfile"
+        boot_upfree_bestheavilyfile = "boot-upfree-bestheavilyfile",
+        doubleclick_analytics = "doubleclick-analytics"
         
         static func validation(domain: Domain) -> Policy.Validation? {
             Self(rawValue: domain.name)

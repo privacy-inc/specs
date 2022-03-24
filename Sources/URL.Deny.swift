@@ -165,15 +165,18 @@ extension URL {
         seppsmedia,
         big7,
         pornmd,
-//        privatehomeclips,
         rtbbnr,
         zog,
         chaturbate,
-//        videotxxx,
-//        txxx,
         bqnqrr53,
         realsrv,
         mrtbbnr,
+        tsyndicate,
+        bestcontentfood,
+        nnteens,
+        sexad,
+        strpjmp,
+        cams,
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
         google_analytics = "google-analytics",
@@ -195,7 +198,9 @@ extension URL {
         illuma_tech = "illuma-tech",
         boot_upfree_bestheavilyfile = "boot-upfree-bestheavilyfile",
         doubleclick_analytics = "doubleclick-analytics",
-        pix_cdn = "pix-cdn"
+        pix_cdn = "pix-cdn",
+        saturn_j1407b = "saturn-j1407b",
+        hip_97166b = "hip-97166b"
         
         static func validation(domain: Domain) -> Policy.Validation? {
             Self(rawValue: domain.name)

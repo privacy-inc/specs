@@ -167,7 +167,7 @@ extension URL {
         pornmd,
         privatehomeclips,
         rtbbnr,
-        zog,
+//        zog,
         chaturbate,
         videotxxx,
         txxx,

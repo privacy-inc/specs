@@ -70,7 +70,9 @@ enum Blocker: CaseIterable {
                                                                    ".R361B",
                                                                    ".NXc7H.jLuN9.X6gVd",
                                                                    ".f11OC"])),
-                    .init(trigger: .url(.twitter), action: .css([".css-1dbjc4n.r-aqfbo4.r-1p0dtai.r-1d2f490.r-12vffkv.r-1xcajam.r-zchlnj"])),
+                    .init(trigger: .url(.twitter), action: .css([
+                        ".css-1dbjc4n.r-aqfbo4.r-1p0dtai.r-1d2f490.r-12vffkv.r-1xcajam.r-zchlnj",
+                        "#layers"])),
                     .init(trigger: .url(.reuters), action: .css(["#onetrust-consent-sdk",
                                                                  "#newReutersModal"])),
                     .init(trigger: .url(.thelocal), action: .css(["#qc-cmp2-container",

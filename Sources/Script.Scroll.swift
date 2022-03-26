@@ -10,6 +10,11 @@ if (_privacy_incognit_splitted.length > 1) {
             style.innerHTML = ":root, body { overflow-y: visible !important; }";
             document.head.appendChild(style);
             break;
+    case "twitter":
+            var style = document.createElement('style');
+            style.innerHTML = ":root, html { overflow-y: visible !important; }";
+            document.head.appendChild(style);
+            break;
     case "youtube":
             var style = document.createElement('style');
             style.innerHTML = "body { position: unset !important; }";

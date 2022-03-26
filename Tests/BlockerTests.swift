@@ -109,7 +109,8 @@ final class BlockerTests: XCTestCase {
         
         XCTAssertTrue(BlockerParser(content: Set([.screen]).rules)
                         .css(url: "twitter.com", selectors: [
-                                ".css-1dbjc4n.r-aqfbo4.r-1p0dtai.r-1d2f490.r-12vffkv.r-1xcajam.r-zchlnj"]))
+                                ".css-1dbjc4n.r-aqfbo4.r-1p0dtai.r-1d2f490.r-12vffkv.r-1xcajam.r-zchlnj",
+                                "#layers"]))
         
         XCTAssertTrue(BlockerParser(content: Set([.screen]).rules)
                         .css(url: "reuters.com", selectors: ["#onetrust-consent-sdk",

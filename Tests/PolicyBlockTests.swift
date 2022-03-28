@@ -229,7 +229,8 @@ final class PolicyBlockTests: XCTestCase {
         "https://engine.phn.doublepimp.com/fp.engine?id=e9bdc161-535e-4bf9-8955-7dec61697fb5&rand=20848&ver=async&time=-120&referrerUrl=https%3A%2F%2Fwww.nudevista.com%2F&subId=&tid=&abr=false&res=1728x1117&stdTime=60&fpe=1&curl=https%3A%2F%2Fwww.nudevista.com%2F%3Fq%3Dultra%2Bviolet%26s%3Dt%26start%3D25&kw=&spt=0",
         "https://crjpingate.com/pu/?psid=ed_ndvistkontx&site=jsm&target=rttr&utm_medium=partner&utm_source=nvsta&category=girl&ms_notrack=1",
         "https://crpop.livejasmin.com/pu/play?ms_rnd=1648379676.53955&pstool=300_31&psid=ed_ndvistkontx&site=jsm&utm_medium=partner&utm_source=nvsta&category=girl&origin=engine.phn.doublepimp.com",
-        "https://a.exosrv.com/iframe.php?idzone=3500847&size=300x250"
+        "https://a.exosrv.com/iframe.php?idzone=3500847&size=300x250",
+        "https://a.adtng.com/get/10005363?time=1592491455431&atc=406084&apb=CiRjMzgwMTNmOC1mYzVkLTQ3NTgtOTJiMi1lZGIyYmI0N2FlZWYQsjYYBiDbpvEBMMTkGDjl_aUBQAFIC1gBAXygZQ_uUbDLHI"
     ]
     
     override func setUp() {

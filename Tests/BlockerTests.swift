@@ -59,24 +59,21 @@ final class BlockerTests: XCTestCase {
                         .css(url: "wordpress.com", selectors: [".inline-ad-slot"]))
         
         XCTAssertTrue(BlockerParser(content: Set([.ads]).rules)
-                        .css(selectors: ["[id*='ezoic']",
+                        .css(selectors: ["[id*='google_ads']",
+                                         "[id*='ezoic']",
                                          "[class*='ezoic']",
                                          "[id*='adngin']",
-                                         "[class*='wio-']",
                                          ".adwrapper",
+                                         ".ad-wrapper",
+                                         "[class*='ad_placeholder']",
                                          ".traffic-stars",
-                                         "[id*='_ad']",
-                                         "[id*='ad_']",
-                                         "[id*='ads_']",
-                                         "[id*='-ad']",
-                                         "[id*='ad-']",
-                                         "[id*='ads-']",
-                                         "[class*='_ad']",
-                                         "[class*='ad_']",
-                                         "[class*='ads_']",
-                                         "[class*='-ad']",
-                                         "[class*='ad-']",
-                                         "[class*='ads-']"]))
+                                         "[class*='ads-block']",
+                                         "[class*='wio-']",
+                                         ".ad-footer",
+                                         "#ad-footer",
+                                         "[class*='ad-support']",
+                                         "[class*='-top-ad']",
+                                         ".ad-container"]))
     }
     
     func testScreen() {

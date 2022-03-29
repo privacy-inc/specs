@@ -82,14 +82,10 @@ extension URL {
             case .google:
                 return [.accounts,
                         .mobileads]
-            case .bloomberg:
-                return [.sourcepointcmp]
             case .immobilienscout24:
                 return [.tracking]
             case .giphy:
                 return [.cookies]
-            case .theguardian:
-                return [.sourcepoint]
             case .wp:
                 return [.widgets]
             case .wordpress:

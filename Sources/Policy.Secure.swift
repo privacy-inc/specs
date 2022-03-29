@@ -13,6 +13,9 @@ extension Policy {
                     domain.suffix.isEmpty
                     ? .ignore
                     : URL
+                        .Subdomain
+                        .validation(domain: domain)
+                    ?? URL
                         .Allow
                         .validation(domain: domain, url: url)
                     ?? URL

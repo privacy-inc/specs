@@ -9,8 +9,6 @@ extension URL.Allow {
         accounts,
         tarifvergleich,
         mobileads,
-        sourcepoint,
-        sourcepointcmp,
         tracking,
         cookies,
         widgets,

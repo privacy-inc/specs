@@ -26,7 +26,6 @@ extension URL {
         immobilienscout24,
         huffpost,
         giphy,
-        theguardian,
         wp,
         wordpress,
         yahoo,

@@ -184,6 +184,8 @@ extension URL {
         exosrv,
         adtng,
         retargetly,
+        dailymotion,
+        adstune,
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
         google_analytics = "google-analytics",

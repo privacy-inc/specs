@@ -11,14 +11,16 @@ final class MigrationTests: XCTestCase {
     
     func testMigrate() async {
         archive.history = archive.history.adding(.init(id: 34, website: .init(url: URL(string: "https://avocado.org")!)))
+        archive.history = archive.history.adding(.init(id: 36, website: .init(access: Access.Local(value: "some/local/file", bookmark: .init()))))
+        archive.history = archive.history.adding(.init(id: 38, website: .init(access: Access.Other(key: .deeplink, value: "dffsdf"))))
         archive.bookmarks += [archive.history.first!.website]
         archive.index = 99
         archive.settings = archive.settings.with(search: .init(engine: .ecosia))
         
-        archive.events.add(domain: "avocado.org")
-        archive.events.block(tracker: "evil", domain: "something.com")
-        archive.events.block(tracker: "evil2", domain: "something.com")
-        archive.events.block(tracker: "evil3", domain: "hello.com")
+        archive.events = archive.events.add(domain: "avocado.org")
+        archive.events = archive.events.block(tracker: "evil", domain: "something.com")
+        archive.events = archive.events.block(tracker: "evil2", domain: "something.com")
+        archive.events = archive.events.block(tracker: "evil3", domain: "hello.com")
         
         let migrated = await Archive.prototype(data: archive.compressed)
         XCTAssertEqual(99, migrated.index)

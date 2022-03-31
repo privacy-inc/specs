@@ -55,18 +55,14 @@ public final actor Favicon {
         return publisher
     }
     
-    public func request(for website: Website) -> Bool {
-        website.doma
-            .map(\.domain.minimal)
-            .map {
-                !received.contains($0.lowercased()) && !$0.isEmpty
-            }
-        ?? false
+    public func request(for website: String) -> Bool {
+        {
+            !$0.isEmpty && !received.contains($0)
+        } (website.domain)
     }
     
-    public func received(url: String, for access: any AccessType) async {
-        guard let domain = (access as? Access.Remote)?.domain.minimal.lowercased() else { return }
-        
+    public func received(url: String, for website: String) async {
+        let domain = website.domain
         validate(domain: domain)
         received.insert(domain)
         

@@ -1,7 +1,7 @@
 import Foundation
 
 extension Err {
-    enum ID: Error {
+    enum Id: Error {
         case
         invalidSearch,
         invalidURL

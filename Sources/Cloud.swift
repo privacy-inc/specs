@@ -3,36 +3,14 @@ import Archivable
 import Domains
 
 extension Cloud where Output == Archive {
-    public func search(_ string: String) async throws -> UInt16 {
-        let id = model.index
-        try await search(string, history: id)
-        model.index += 1
-        return id
+    public func search(_ string: String) async throws -> URL {
+        guard let string = model.settings.search(string) else { throw Err.Id.invalidSearch }
+        await open(website: .init(id: string, title: ""))
+        guard let url = URL(string: string) else { throw Err.Id.invalidURL }
+        return url
     }
     
-    public func search(_ string: String, history: UInt16) async throws {
-        guard let string = model.settings.search(string) else { throw Err.ID.invalidSearch }
-        guard let url = URL(string: string) else { throw Err.ID.invalidURL }
-        await add(website: .init(url: url), history: history)
-    }
-    
-    public func open(access: any AccessType) async -> UInt16 {
-        var id = id(access: access)
-        
-        if id == nil {
-            id = model.index
-            model.index += 1
-        }
-        
-        await open(access: access, history: id!)
-        return id!
-    }
-    
-    public func open(access: any AccessType, history: UInt16) async {
-        await add(website: .init(access: access), history: history)
-    }
-    
-    public func open(url: URL) async -> UInt16 {
+    public func open(url: URL) async {
         let access = Access.with(url: url)
         var id = id(access: access)
         
@@ -45,20 +23,33 @@ extension Cloud where Output == Archive {
         return id!
     }
     
-    public func bookmark(history: UInt16) async {
-        guard let bookmark = website(history: history) else { return }
+    public func open(website: Website) async {
+        model.history = model
+            .history
+            .adding(website)
+        await stream()
+    }
+    
+    public func bookmark(url: URL, title: String) async {
+        let bookmark = Website(id: url.absoluteString, title: title)
         
         model.bookmarks = model
             .bookmarks
             .filter {
-                $0.access.value != bookmark.access.value
+                $0.id != bookmark.id
             }
             + bookmark
         
         await stream()
     }
     
-    public func update(title: String, history: UInt16) async {
+    public func update(title: String, url: URL) async {
+        model
+            .history
+            .remove {
+                $0.id == url.absoluteString
+            }
+        
         guard let original = website(history: history) else { return }
         
         guard original.title != title else { return }
@@ -128,13 +119,6 @@ extension Cloud where Output == Archive {
             }
             return $0.result
         } (model.settings.policy(url))
-    }
-    
-    public func website(history: UInt16) -> Website? {
-        model
-            .history
-            .first { $0.id == history }?
-            .website
     }
     
     public func autocomplete(search: String) async -> [Complete] {
@@ -271,14 +255,6 @@ extension Cloud where Output == Archive {
             .first {
                 $0.website.access.value == access.value
             }?.id
-    }
-    
-    private func add(website: Website, history: UInt16) async {
-        model.history = model
-            .history
-            .dropping(history)
-            .adding(.init(id: history, website: website))
-        await stream()
     }
     
     private func allow(domain: Domain) async {

@@ -26,9 +26,8 @@ final class MigrationTests: XCTestCase {
         
         let migrated = await Archive.prototype(data: archive.compressed)
         XCTAssertEqual(2, migrated.history.count)
-        XCTAssertEqual("https://avocado.org", migrated.history.first?.website.id)
-        XCTAssertEqual("https://ttt.com", migrated.history.last?.website.id)
-        XCTAssertEqual(34, migrated.history.first?.id)
+        XCTAssertEqual("https://avocado.org", migrated.history.first?.id)
+        XCTAssertEqual("https://ttt.com", migrated.history.last?.id)
         XCTAssertEqual(1, migrated.bookmarks.count)
         XCTAssertEqual("https://avocado.org", migrated.bookmarks.first?.id)
         XCTAssertEqual(.ecosia, migrated.settings.search.engine)

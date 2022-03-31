@@ -34,8 +34,10 @@ public struct Archive: Arch {
         
         if version == 0 {
             let legacy = await Archive_v0(version: 0, timestamp: 0, data: data)
-            bookmarks = legacy.bookmarks
-            history = legacy.history
+//            bookmarks = legacy.bookmarks
+//            history = legacy.history
+            bookmarks = []
+            history = []
             settings = legacy.settings
             events = legacy.events
         } else {

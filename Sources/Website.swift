@@ -1,31 +1,9 @@
 import Foundation
-import Domains
 import Archivable
 
 public struct Website: Storable, Identifiable {
-    public var id: String
+    public let id: String
     public let title: String
-    
-    public var domain: Domain {
-        id
-            .replacingOccurrences(of: "https://", with: "")
-            .replacingOccurrences(of: "http://", with: "")
-            .components(separatedBy: "/")
-            .first!
-            .components(separatedBy: ":")
-            .first
-            .map(Tld.domain(host:))!
-    }
-    
-    public var icon: String? {
-        domain
-            .minimal
-            .lowercased()
-    }
-    
-    public var url: URL? {
-        .init(string: id)
-    }
     
     public var data: Data {
         .init()
@@ -38,7 +16,7 @@ public struct Website: Storable, Identifiable {
         title = data.string(size: UInt16.self)
     }
     
-    private init(id: String, title: String) {
+    init(id: String, title: String) {
         self.id = id
         self.title = title
     }

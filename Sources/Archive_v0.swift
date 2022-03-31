@@ -1,20 +1,16 @@
 import Foundation
 import Archivable
 
-public struct Archive: Arch {
-    public static var version: UInt8 {
-        1
-    }
-    
-    public var timestamp: UInt32
-    public internal(set) var bookmarks: [Website]
-    public internal(set) var history: [History]
-    public internal(set) var cards: [Card]
-    public internal(set) var events: Events
-    public internal(set) var settings: Settings
+struct Archive_v0: Arch {
+    var timestamp: UInt32
+    var bookmarks: [Website]
+    var history: [History]
+    var cards: [Card]
+    var events: Events
+    var settings: Settings
     var index: UInt16
     
-    public var data: Data {
+    var data: Data {
         .init()
         .adding(index)
         .adding(size: UInt16.self, collection: bookmarks)
@@ -24,7 +20,7 @@ public struct Archive: Arch {
         .adding(settings)
     }
     
-    public init() {
+    init() {
         timestamp = 0
         index = 0
         bookmarks = []
@@ -37,7 +33,7 @@ public struct Archive: Arch {
         settings = .init()
     }
     
-    public init(version: UInt8, timestamp: UInt32, data: Data) async {
+    init(version: UInt8, timestamp: UInt32, data: Data) async {
         var data = data
         self.timestamp = timestamp
         

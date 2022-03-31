@@ -2,8 +2,8 @@ import Foundation
 import Domains
 
 extension Access {
-    public struct Remote: AccessType {
-        public var domain: Domain {
+    struct Remote: AccessType {
+        var domain: Domain {
             value
                 .replacingOccurrences(of: "https://", with: "")
                 .replacingOccurrences(of: "http://", with: "")
@@ -14,20 +14,20 @@ extension Access {
                 .map(Tld.domain(host:))!
         }
         
-        public var icon: String? {
+        var icon: String? {
             domain
                 .minimal
                 .lowercased()
         }
         
-        public let key = Access.remote
-        public let value: String
+        let key = Access.remote
+        let value: String
         
-        public var url: URL? {
+        var url: URL? {
             .init(string: value)
         }
         
-        public var content: Data {
+        var content: Data {
             .init()
             .adding(size: UInt16.self, string: value)
         }

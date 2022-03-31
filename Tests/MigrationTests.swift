@@ -25,7 +25,6 @@ final class MigrationTests: XCTestCase {
         archive.events = archive.events.block(tracker: "evil3", domain: "hello.com")
         
         let migrated = await Archive.prototype(data: archive.compressed)
-        XCTAssertEqual(99, migrated.index)
         XCTAssertEqual(2, migrated.history.count)
         XCTAssertEqual("https://avocado.org", migrated.history.first?.website.id)
         XCTAssertEqual("https://ttt.com", migrated.history.last?.website.id)

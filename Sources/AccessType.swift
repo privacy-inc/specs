@@ -1,7 +1,9 @@
 import Foundation
 import Archivable
 
-public protocol AccessType: Storable {
+#warning("sunset")
+
+protocol AccessType: Storable {
     var key: Access { get }
     var value: String { get }
     var content: Data { get }
@@ -9,15 +11,15 @@ public protocol AccessType: Storable {
 }
 
 extension AccessType {
-    public var icon: String? {
+    var icon: String? {
         nil
     }
     
-    public init(data: inout Data) {
+    init(data: inout Data) {
         fatalError()
     }
     
-    public var data: Data {
+    var data: Data {
         .init()
             .adding(key.rawValue)
             .adding(content)

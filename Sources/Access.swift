@@ -1,7 +1,9 @@
 import Foundation
 import Archivable
 
-public enum Access: UInt8 {
+#warning("sunset")
+
+enum Access: UInt8 {
     case
     remote,
     local,

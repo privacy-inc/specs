@@ -55,8 +55,8 @@ public final actor Favicon {
         return publisher
     }
     
-    public func request(for access: any AccessType) -> Bool {
-        (access as? Access.Remote)
+    public func request(for website: Website) -> Bool {
+        website.doma
             .map(\.domain.minimal)
             .map {
                 !received.contains($0.lowercased()) && !$0.isEmpty

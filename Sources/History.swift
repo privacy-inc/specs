@@ -1,21 +1,23 @@
 import Foundation
 import Archivable
 
-public struct History: Storable, Identifiable {
-    public let id: UInt16
-    public let website: Website
+#warning("sunset")
+
+struct History: Storable, Identifiable {
+    let id: UInt16
+    let website: Website_v0
     
-    public var data: Data {
+    var data: Data {
         .init()
         .adding(id)
         .adding(website)
     }
     
-    public init(data: inout Data) {
+    init(data: inout Data) {
         self.init(id: data.number(), website: .init(data: &data))
     }
     
-    init(id: UInt16, website: Website) {
+    init(id: UInt16, website: Website_v0) {
         self.id = id
         self.website = website
     }

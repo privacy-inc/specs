@@ -1,51 +1,60 @@
 import Foundation
+import Domains
 import Archivable
 
 public struct Website: Storable, Identifiable {
-    public var id: String {
-        access.value
+    public var id: String
+    public let title: String
+    
+    public var domain: Domain {
+        id
+            .replacingOccurrences(of: "https://", with: "")
+            .replacingOccurrences(of: "http://", with: "")
+            .components(separatedBy: "/")
+            .first!
+            .components(separatedBy: ":")
+            .first
+            .map(Tld.domain(host:))!
     }
     
-    public let title: String
-    public let access: any AccessType
+    public var icon: String? {
+        domain
+            .minimal
+            .lowercased()
+    }
+    
+    public var url: URL? {
+        .init(string: id)
+    }
     
     public var data: Data {
         .init()
+        .adding(size: UInt16.self, string: id)
         .adding(size: UInt16.self, string: title)
-        .adding(access.data)
     }
     
     public init(data: inout Data) {
+        id = data.string(size: UInt16.self)
         title = data.string(size: UInt16.self)
-        access = Access.with(data: &data)
     }
     
-    init(access: any AccessType) {
-        self.init(title: "", access: access)
-    }
-    
-    init(url: URL) {
-        self.init(title: "", access: Access.with(url: url))
-    }
-    
-    private init(title: String, access: any AccessType) {
+    private init(id: String, title: String) {
+        self.id = id
         self.title = title
-        self.access = access
+    }
+    
+    func with(id: String) -> Self {
+        .init(id: id, title: title)
     }
     
     func with(title: String) -> Self {
-        .init(title: title, access: access)
-    }
-    
-    func with(access: any AccessType) -> Self {
-        .init(title: title, access: access)
+        .init(id: id, title: title)
     }
     
     func matches(strings: [String]) -> Int {
         title
             .rating(components: strings)
-        + access
-            .value
+        + id
             .rating(components: strings)
     }
 }

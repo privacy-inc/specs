@@ -1,9 +1,9 @@
 import Foundation
 
 extension Access {
-    public struct Local: AccessType {
-        public let key = Access.local
-        public let value: String
+    struct Local: AccessType {
+        let key = Access.local
+        let value: String
         
         let bookmark: Data
         
@@ -12,7 +12,7 @@ extension Access {
             self.bookmark = bookmark
         }
         
-        public func open(completion: (_ file: URL, _ directory: URL) -> Void) {
+        func open(completion: (_ file: URL, _ directory: URL) -> Void) {
             bookmark
                 .url
                 .flatMap { directory in
@@ -24,7 +24,7 @@ extension Access {
                 .map(completion)
         }
         
-        public var content: Data {
+        var content: Data {
             .init()
             .adding(size: UInt16.self, string: value)
             .wrapping(size: UInt16.self, data: bookmark)

@@ -1,9 +1,11 @@
 import Foundation
 import Archivable
 
+#warning("sunset")
+
 struct Archive_v0: Arch {
     var timestamp: UInt32
-    var bookmarks: [Website]
+    var bookmarks: [Website_v0]
     var history: [History]
     var cards: [Card]
     var events: Events

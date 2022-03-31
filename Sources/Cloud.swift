@@ -110,30 +110,6 @@ extension Cloud where Output == Archive {
         await stream()
     }
     
-    public func turn(card: Card.ID, state: Bool) async {
-        guard model.cards.first(where: { $0.id == card })?.state != state else { return }
-        
-        model.cards = model
-            .cards
-            .mutating {
-                $0.id == card
-            } transform: {
-                $0.with(state: state)
-            }
-        await stream()
-    }
-    
-    public func move(card: Card.ID, index: Int) async {
-        guard model.cards.firstIndex(where: { $0.id == card }) != index else { return }
-        
-        model.cards = model
-            .cards
-            .moving(criteria: {
-                $0.id == card
-            }, to: index)
-        await stream()
-    }
-    
     public func policy(history: UInt16, url: URL) -> Policy.Result {
         {
             switch $0.event {

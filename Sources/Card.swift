@@ -1,17 +1,19 @@
 import Foundation
 import Archivable
 
-public struct Card: Storable, Identifiable, Equatable {
-    public let id: ID
-    public let state: Bool
+#warning("sunset")
 
-    public var data: Data {
+struct Card: Storable, Identifiable, Equatable {
+    let id: ID
+    let state: Bool
+
+    var data: Data {
         .init()
         .adding(id.rawValue)
         .adding(state)
     }
     
-    public init(data: inout Data) {
+    init(data: inout Data) {
         id = .init(rawValue: data.number())!
         state = data.bool()
     }

@@ -39,14 +39,6 @@ final class ArchiveTests: XCTestCase {
         XCTAssertEqual(.ecosia, archive.settings.search.engine)
     }
     
-    func testCards() async {
-        XCTAssertEqual(4, archive.cards.count)
-        archive.cards.remove(at: 0)
-        XCTAssertEqual(3, archive.cards.count)
-        archive = await Archive.prototype(data: archive.compressed)
-        XCTAssertEqual(3, archive.cards.count)
-    }
-    
     func testEvents() async {
         archive.events = archive
             .events

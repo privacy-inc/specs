@@ -11,16 +11,8 @@ extension Cloud where Output == Archive {
     }
     
     public func open(url: URL) async {
-        let access = Access.with(url: url)
-        var id = id(access: access)
-        
-        if id == nil {
-            id = model.index
-            model.index += 1
-        }
-        
-        await add(website: .init(access: access), history: id!)
-        return id!
+        guard case .remote = Router.with(url: url) else { return }
+        await open(website: .init(id: url.absoluteString, title: ""))
     }
     
     public func open(website: Website) async {
@@ -31,6 +23,8 @@ extension Cloud where Output == Archive {
     }
     
     public func bookmark(url: URL, title: String) async {
+        guard case .remote = Router.with(url: url) else { return }
+        
         let bookmark = Website(id: url.absoluteString, title: title)
         
         model.bookmarks = model
@@ -44,36 +38,22 @@ extension Cloud where Output == Archive {
     }
     
     public func update(title: String, url: URL) async {
-        model
-            .history
-            .remove {
-                $0.id == url.absoluteString
-            }
+        guard case .remote = Router.with(url: url) else { return }
         
-        guard let original = website(history: history) else { return }
-        
-        guard original.title != title else { return }
-        
-        let updated = original
-            .with(title: title)
         model.history = model
             .history
-            .dropping(history)
-            .adding(.init(id: history, website: updated))
+            .adding(.init(id: url.absoluteString, title: title))
+        
         await stream()
     }
     
     public func update(url: URL, history: UInt16) async {
-        guard let original = website(history: history) else { return }
+        guard case .remote = Router.with(url: url) else { return }
         
-        guard original.access.value != url.absoluteString else { return }
-        
-        let updated = original
-            .with(access: Access.with(url: url))
         model.history = model
             .history
-            .dropping(history)
-            .adding(.init(id: history, website: updated))
+            .adding(.init(id: url.absoluteString, title: ""))
+        
         await stream()
     }
     
@@ -87,10 +67,10 @@ extension Cloud where Output == Archive {
         await stream()
     }
     
-    public func delete(history: UInt16) async {
-        model.history = model
-            .history
-            .dropping(history)
+    public func delete(history: Int) async {
+        model
+            .bookmarks
+            .remove(at: history)
         await stream()
     }
     

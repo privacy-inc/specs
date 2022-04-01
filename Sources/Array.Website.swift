@@ -2,9 +2,11 @@ import Foundation
 
 extension Array where Element == Website {
     func adding(_ element: Element) -> Self {
-        [element] + filter {
-            $0.id != element.id
-        }
+        { id in
+            [element] + filter {
+                $0.id.schemeless != id
+            }
+        } (element.id.schemeless)
     }
     
     func filter(strings: [String]) -> Self {

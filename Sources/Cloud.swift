@@ -47,13 +47,17 @@ extension Cloud where Output == Archive {
         await stream()
     }
     
-    public func update(url: URL, history: UInt16) async {
-        guard case .remote = Router.with(url: url) else { return }
-        
-        model.history = model
+    public func delete(history: Int) async {
+        model
             .history
-            .adding(.init(id: url.absoluteString, title: ""))
-        
+            .remove(at: history)
+        await stream()
+    }
+    
+    public func delete(bookmark: Int) async {
+        model
+            .bookmarks
+            .remove(at: bookmark)
         await stream()
     }
     
@@ -64,20 +68,6 @@ extension Cloud where Output == Archive {
             .bookmarks
             .moving(from: bookmark, to: index)
         
-        await stream()
-    }
-    
-    public func delete(history: Int) async {
-        model
-            .bookmarks
-            .remove(at: history)
-        await stream()
-    }
-    
-    public func delete(bookmark: Int) async {
-        model
-            .bookmarks
-            .remove(at: bookmark)
         await stream()
     }
     

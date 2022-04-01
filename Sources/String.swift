@@ -3,8 +3,7 @@ import Domains
 
 extension String {
     public var domain: String {
-        replacingOccurrences(of: "https://", with: "")
-            .replacingOccurrences(of: "http://", with: "")
+        schemeless
             .components(separatedBy: "/")
             .first!
             .components(separatedBy: ":")
@@ -12,6 +11,11 @@ extension String {
             .map(Tld.domain(host:))!
             .minimal
             .lowercased()
+    }
+    
+    var schemeless: String {
+        replacingOccurrences(of: "https://", with: "")
+            .replacingOccurrences(of: "http://", with: "")
     }
     
     func rating(components: [String]) -> Int {

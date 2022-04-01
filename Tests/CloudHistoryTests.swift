@@ -2,7 +2,7 @@ import XCTest
 import Combine
 @testable import Archivable
 @testable import Specs
-/*
+
 final class CloudHistoryTests: XCTestCase {
     private var cloud: Cloud<Archive, MockContainer>!
     private var subs: Set<AnyCancellable>!
@@ -12,111 +12,55 @@ final class CloudHistoryTests: XCTestCase {
         subs = []
     }
     
-    func testTitle() {
-        let expect = expectation(description: "")
+    func testOpenURL() async {
+        await cloud.open(url: .init(string: "avocado.org")!)
+        var model = await cloud.model
+        XCTAssertEqual(1, model.history.count)
+        XCTAssertEqual("avocado.org", model.history.first?.id)
+        XCTAssertEqual("", model.history.first?.title)
         
-        cloud
-            .sink {
-                if $0.history.first?.website.title == "hello world" {
-                    expect.fulfill()
-                }
-            }
-            .store(in: &subs)
+        await cloud.open(url: .init(string: "data:some")!)
+        await cloud.open(url: .init(string: "file:///local/file.txt")!)
+        await cloud.open(url: .init(string: "hello://unfresh")!)
         
-        Task {
-            let id = try! await cloud.search("something")
-            await cloud.update(title: "hello world", history: id)
-        }
-        
-        waitForExpectations(timeout: 1)
+        model = await cloud.model
+        XCTAssertEqual(1, model.history.count)
     }
     
-    func testIgnoreSameTitle() {
-        let expect = expectation(description: "")
-        
-        cloud
-            .sink {
-                if $0.history.first?.website.title == "hello world" {
-                    expect.fulfill()
-                }
-            }
-            .store(in: &subs)
-        
-        Task {
-            let id = try! await cloud.search("something")
-            await cloud.update(title: "hello world", history: id)
-            await cloud.update(title: "hello world", history: id)
-        }
-        
-        waitForExpectations(timeout: 1)
-    }
-    
-    func testURL() {
-        let expect = expectation(description: "")
-        
-        cloud
-            .sink {
-                if $0.history.first?.website.access.value == "https://avocado.org" {
-                    expect.fulfill()
-                }
-            }
-            .store(in: &subs)
-        
-        Task {
-            let id = try! await cloud.search("something")
-            await cloud.update(url: URL(string: "https://avocado.org")!, history: id)
-        }
-        
-        waitForExpectations(timeout: 1)
-    }
-    
-    func testIgnoreSameURL() {
-        let expect = expectation(description: "")
-        
-        cloud
-            .sink {
-                if $0.history.first?.website.access.value == "https://avocado.org" {
-                    expect.fulfill()
-                }
-            }
-            .store(in: &subs)
-        
-        Task {
-            let id = try! await cloud.search("something")
-            await cloud.update(url: URL(string: "https://avocado.org")!, history: id)
-            await cloud.update(url: URL(string: "https://avocado.org")!, history: id)
-        }
-        
-        waitForExpectations(timeout: 1)
-    }
-    
-    func testReplaceOlder() async {
-        let first = await cloud.open(url: URL(string: "https://avocado.org")!)
-        let second = await cloud.open(url: URL(string: "https://avocado.org")!)
+    func testUpdateTitle() async {
+        let url = try! await cloud.search("something")
+        await cloud.update(title: "hello world", url: url)
         let model = await cloud.model
         XCTAssertEqual(1, model.history.count)
-        XCTAssertEqual(1, model.index)
-        XCTAssertEqual(first, second)
-        XCTAssertEqual(0, first)
+        XCTAssertEqual(url.absoluteString, model.history.first?.id)
+        XCTAssertEqual("hello world", model.history.first?.title)
     }
     
-    func testDelete() {
-        let expect = expectation(description: "")
+    func testReplace() async {
+        await cloud.open(url: URL(string: "https://first.org")!)
+        await cloud.open(url: URL(string: "https://second.org")!)
+        await cloud.open(url: URL(string: "https://third.org")!)
+        await cloud.open(url: URL(string: "https://first.org")!)
         
-        cloud
-            .sink {
-                if $0.history.isEmpty && $0.index == 1 {
-                    expect.fulfill()
-                }
-            }
-            .store(in: &subs)
+        var model = await cloud.model
+        XCTAssertEqual(3, model.history.count)
+        XCTAssertEqual("https://first.org", model.history.first?.id)
+        XCTAssertEqual("https://second.org", model.history.last?.id)
         
-        Task {
-            let id = try! await cloud.search("something")
-            await cloud.delete(history: id)
-        }
+        await cloud.open(url: URL(string: "http://first.org")!)
         
-        waitForExpectations(timeout: 1)
+        model = await cloud.model
+        XCTAssertEqual(3, model.history.count)
+        XCTAssertEqual("http://first.org", model.history.first?.id)
+    }
+    
+    func testDelete() async {
+        await cloud.open(url: URL(string: "https://first.org")!)
+        await cloud.open(url: URL(string: "https://second.org")!)
+        await cloud.delete(history: 1)
+        
+        let model = await cloud.model
+        XCTAssertEqual(1, model.history.count)
+        XCTAssertEqual("https://second.org", model.history.first?.id)
     }
 }
-*/

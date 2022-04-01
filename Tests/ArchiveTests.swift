@@ -1,7 +1,7 @@
 import XCTest
 @testable import Archivable
 @testable import Specs
-/*
+
 final class ArchiveTests: XCTestCase {
     private var archive: Archive!
     
@@ -9,26 +9,20 @@ final class ArchiveTests: XCTestCase {
         archive = .init()
     }
     
-    func testIndex() async {
-        XCTAssertEqual(0, archive.index)
-        archive.index = 100
-        archive = await Archive.prototype(data: archive.compressed)
-        XCTAssertEqual(100, archive.index)
-    }
-    
     func testHistory() async {
         XCTAssertTrue(archive.history.isEmpty)
-        archive.history = [.init(id: 99, website: .init(access: Access.with(url: URL(string: "https://avocado.org")!)))]
+        archive.history = [.init(id: "https://avocado.org", title: "avoca")]
         archive = await Archive.prototype(data: archive.compressed)
-        XCTAssertEqual("https://avocado.org", archive.history.first?.website.access.value)
-        XCTAssertEqual(99, archive.history.first?.id)
+        XCTAssertEqual("https://avocado.org", archive.history.first?.id)
+        XCTAssertEqual("avoca", archive.history.first?.title)
     }
     
     func testBookmarks() async {
         XCTAssertTrue(archive.history.isEmpty)
-        archive.bookmarks = [.init(access: Access.with(url: URL(string: "https://avocado.org")!))]
+        archive.bookmarks = [.init(id: "https://avocado.org", title: "avoca")]
         archive = await Archive.prototype(data: archive.compressed)
-        XCTAssertEqual("https://avocado.org", archive.bookmarks.first?.access.value)
+        XCTAssertEqual("https://avocado.org", archive.bookmarks.first?.id)
+        XCTAssertEqual("avoca", archive.bookmarks.first?.title)
     }
     
     func testSettings() async {
@@ -38,13 +32,4 @@ final class ArchiveTests: XCTestCase {
         archive = await Archive.prototype(data: archive.compressed)
         XCTAssertEqual(.ecosia, archive.settings.search.engine)
     }
-    
-    func testEvents() async {
-        archive.events = archive
-            .events
-            .with(domains: ["hello", "world"])
-        archive = await Archive.prototype(data: archive.compressed)
-        XCTAssertEqual(["hello", "world"], archive.events.domains)
-    }
 }
-*/

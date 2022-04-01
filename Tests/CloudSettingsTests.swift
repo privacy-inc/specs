@@ -1,107 +1,89 @@
 import XCTest
-import Combine
 @testable import Archivable
 @testable import Specs
 
 final class CloudSettingsTests: XCTestCase {
     private var cloud: Cloud<Archive, MockContainer>!
-    private var subs: Set<AnyCancellable>!
     
     override func setUp() {
         cloud = .init()
-        subs = []
     }
     
-    func testSearch() {
-        mutate {
-            await self.cloud.update(search: .ecosia)
-        }
+    func testSearch() async {
+        await cloud.update(search: .ecosia)
+        let value = await cloud.model.settings.search
+        XCTAssertEqual(.ecosia, value)
     }
     
-    func testPolicy() {
-        mutate {
-            await self.cloud.update(policy: .standard)
-        }
+    func testPolicy() async {
+        await cloud.update(policy: .standard)
+        let value = await cloud.model.settings.policy
+        XCTAssertEqual(.standard, value)
     }
     
-    func testAutoplay() {
-        mutate {
-            await self.cloud.update(autoplay: .all)
-        }
+    func testAutoplay() async {
+        await cloud.update(autoplay: .all)
+        let value = await cloud.model.settings.configuration.autoplay
+        XCTAssertEqual(.all, value)
     }
     
-    func testJavascript() {
-        mutate {
-            await self.cloud.update(javascript: false)
-        }
+    func testJavascript() async {
+        await cloud.update(javascript: false)
+        let value = await cloud.model.settings.configuration.javascript
+        XCTAssertFalse(value)
     }
     
-    func testPopups() {
-        mutate {
-            await self.cloud.update(popups: true)
-        }
+    func testPopups() async {
+        await cloud.update(popups: true)
+        let value = await cloud.model.settings.configuration.popups
+        XCTAssertTrue(value)
     }
     
-    func testLocation() {
-        mutate {
-            await self.cloud.update(location: true)
-        }
+    func testLocation() async {
+        await cloud.update(location: true)
+        let value = await cloud.model.settings.configuration.location
+        XCTAssertTrue(value)
     }
     
-    func testTimers() {
-        mutate {
-            await self.cloud.update(timers: false)
-        }
+    func testTimers() async {
+        await cloud.update(timers: false)
+        let value = await cloud.model.settings.configuration.timers
+        XCTAssertFalse(value)
     }
     
-    func testDark() {
-        mutate {
-            await self.cloud.update(dark: false)
-        }
+    func testDark() async {
+        await cloud.update(dark: false)
+        let value = await cloud.model.settings.configuration.dark
+        XCTAssertFalse(value)
     }
     
-    func testAds() {
-        mutate {
-            await self.cloud.update(ads: true)
-        }
+    func testAds() async {
+        await cloud.update(ads: true)
+        let value = await cloud.model.settings.configuration.ads
+        XCTAssertTrue(value)
     }
     
-    func testScreen() {
-        mutate {
-            await self.cloud.update(screen: true)
-        }
+    func testScreen() async {
+        await cloud.update(screen: true)
+        let value = await cloud.model.settings.configuration.screen
+        XCTAssertTrue(value)
     }
     
-    func testCookies() {
-        mutate {
-            await self.cloud.update(cookies: true)
-        }
+    func testCookies() async {
+        await cloud.update(cookies: true)
+        let value = await cloud.model.settings.configuration.cookies
+        XCTAssertTrue(value)
     }
     
-    func testHttp() {
-        mutate {
-            await self.cloud.update(http: true)
-        }
+    func testHttp() async {
+        await cloud.update(http: true)
+        let value = await cloud.model.settings.configuration.http
+        XCTAssertTrue(value)
     }
     
-    func testThird() {
-        mutate {
-            await self.cloud.update(third: false)
-        }
-    }
-    
-    private func mutate(operation: @escaping @Sendable () async -> Void) {
-        let expect = expectation(description: "")
-        expect.expectedFulfillmentCount = 2
-        
-        cloud
-            .sink { _ in
-                expect.fulfill()
-            }
-            .store(in: &subs)
-        
-        Task(operation: operation)
-        
-        waitForExpectations(timeout: 1)
+    func testThird() async {
+        await cloud.update(third: false)
+        let value = await cloud.model.settings.configuration.third
+        XCTAssertFalse(value)
     }
 }

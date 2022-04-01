@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Err: Equatable {
+public struct Fail: Equatable {
     public let url: URL
     public let description: String
     

@@ -63,7 +63,11 @@ extension Cloud where Output == Archive {
     public func policy(request: URL, from url: URL) async -> Policy.Response {
         let response = model.settings.policy(request)
         if case let .block(tracker) = response {
+            model.tracking = model
+                .tracking
+                .with(tracker: tracker, on: url.absoluteString.domain)
             
+            await stream()
         }
         return response
     }
@@ -173,7 +177,7 @@ extension Cloud where Output == Archive {
     
     public func forget() async {
         model.history = []
-        #warning("forget trackers")
+        model.tracking = .init()
         await stream()
     }
     

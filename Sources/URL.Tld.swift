@@ -9,8 +9,8 @@ extension URL {
         
         static func response(for domain: Domain, on: URL) -> Policy.Response? {
             Self(rawValue: domain.suffix.first!)
-                .map { _ in
-                    .block(domain.minimal)
+                .map {
+                    .block($0.rawValue)
                 }
         }
     }

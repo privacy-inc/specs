@@ -11,9 +11,11 @@ final class CloudForgetTests: XCTestCase {
     
     func testClear() async {
         await cloud.open(url: URL(string: "https://avocado.org")!)
+        _ = await cloud.policy(request: .init(string: "https://something.googleapis.com")!, from: .init(string: "https://google.com")!)
         await cloud.forget()
         
         let model = await cloud.model
         XCTAssertTrue(model.history.isEmpty)
+        XCTAssertEqual(0, model.tracking.total)
     }
 }

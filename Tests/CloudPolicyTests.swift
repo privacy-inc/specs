@@ -15,7 +15,10 @@ final class CloudPolicyTests: XCTestCase {
     }
     
     func testBlock() async {
-        if case .block = await cloud.policy(request: .init(string: "https://something.googleapis.com")!, from: .init(string: "https://google.com")!) { } else {
+        if case .block = await cloud.policy(request: .init(string: "https://something.googleapis.com")!, from: .init(string: "https://google.com")!) {
+            let tracking = await cloud.model.tracking.items(for: "google.com")
+            XCTAssertEqual([.init(tracker: "googleapis", count: 1)], tracking)
+        } else {
             XCTFail()
         }
     }

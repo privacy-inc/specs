@@ -8,14 +8,14 @@ extension URL {
         ftp,
         gmsg
         
-        var policy: Policy {
+        var response: Policy.Response {
             switch self {
             case .http, .https:
-                return .accept
+                return .allow
             case .ftp:
                 return .ignore
             case .gmsg:
-                return .block("mobileads.google.com")
+                return .block(Allow.Subdomain.mobileads.rawValue)
             }
         }
     }

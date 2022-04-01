@@ -13,8 +13,8 @@ extension URL {
                 .last
                 .flatMap { prefix in
                     Self(rawValue: prefix)
-                        .map { _ in
-                                .block(prefix + "." + domain.minimal)
+                        .map {
+                            .block($0.rawValue)
                         }
                 }
         }

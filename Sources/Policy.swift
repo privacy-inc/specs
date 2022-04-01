@@ -14,14 +14,9 @@ public enum Policy: UInt8 {
                     .map(\.response)
                 ?? URL.Scheme(rawValue: $0)
                     .map {
-                        switch $0.policy {
-                        case .accept:
-                            return route(url: url)
-                        case .ignore:
-                            return .ignore
-                        case let .block(tracker):
-                            return .block(tracker)
-                        }
+                        let response = $0.response
+                        guard response == .allow else { return response }
+                        return route(url: url)
                     }
                 ?? .external
             }

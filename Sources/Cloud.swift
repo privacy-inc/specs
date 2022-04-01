@@ -204,19 +204,9 @@ extension Cloud where Output == Archive {
                 .with(third: third))
     }
     
-    public func forgetHistory() async {
-        model.history = []
-        await stream()
-    }
-    
-    public func forgetActivity() async {
-        _forgetActivity()
-        await stream()
-    }
-    
     public func forget() async {
         model.history = []
-        _forgetActivity()
+        #warning("forget trackers")
         await stream()
     }
     
@@ -238,9 +228,5 @@ extension Cloud where Output == Archive {
             .settings
             .with(configuration: configuration)
         await stream()
-    }
-    
-    public func _forgetActivity() {
-        model.events = .init()
     }
 }

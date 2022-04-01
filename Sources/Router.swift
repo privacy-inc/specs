@@ -1,6 +1,6 @@
 import Foundation
 
-enum Router {
+enum Router: Equatable {
     case
     remote,
     deeplink,

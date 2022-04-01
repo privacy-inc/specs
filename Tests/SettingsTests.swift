@@ -16,10 +16,10 @@ final class SettingsTests: XCTestCase {
     }
     
     func testPolicy() {
-//        XCTAssertEqual(.secure, settings.policy.level)
-//        settings = settings
-//            .with(policy: Policy.Standard())
-//        XCTAssertEqual(.standard, settings.data.prototype(Settings.self).policy.level)
+        XCTAssertEqual(.secure, settings.policy)
+        settings = settings
+            .with(policy: .standard)
+        XCTAssertEqual(.standard, settings.data.prototype(Settings.self).policy)
     }
     
     func testConfiguration() {

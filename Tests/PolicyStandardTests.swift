@@ -41,7 +41,7 @@ final class PolicyStandardTests: XCTestCase {
     func testAllow() {
         listB
             .map {
-                ($0, policy(URL(string: $0)!))
+                ($0, policy(.init(string: $0)!))
             }
             .forEach {
                 if case .allow = $0.1 { } else {
@@ -53,7 +53,7 @@ final class PolicyStandardTests: XCTestCase {
     func testExternal() {
         listC
             .map {
-                ($0, policy(URL(string: $0)!))
+                ($0, policy(.init(string: $0)!))
             }
             .forEach {
                 if case .external = $0.1 { } else {

@@ -2,7 +2,7 @@ import XCTest
 @testable import Specs
 
 final class PolicyAllowTests: XCTestCase {
-    private var policy: PolicyLevel!
+    private var policy: Policy!
     private let list = [
         "https://www.ecosia.org",
         "https://www.theguardian.com/email/form/footer/today-uk",
@@ -19,16 +19,16 @@ final class PolicyAllowTests: XCTestCase {
     ]
     
     override func setUp() {
-        policy = Policy.Secure()
+        policy = .secure
     }
     
     func testAllow() {
         list
             .map {
-                ($0, policy(URL(string: $0)!))
+                ($0, policy(.init(string: $0)!))
             }
             .forEach {
-                if case .allow = $0.1.result { } else {
+                if case .allow = $0.1 { } else {
                     XCTFail("\($0.1): \($0.0)")
                 }
             }

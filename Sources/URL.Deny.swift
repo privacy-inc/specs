@@ -2,7 +2,7 @@ import Foundation
 import Domains
 
 extension URL {
-    enum Deny: String {
+    enum Deny: String, URLPolicy {
         case
         pubmatic,
         dianomi,
@@ -212,10 +212,10 @@ extension URL {
         saturn_j1407b = "saturn-j1407b",
         hip_97166b = "hip-97166b"
         
-        static func validation(domain: Domain) -> Policy.Validation? {
+        static func response(for domain: Domain, on: URL) -> Policy.Response? {
             Self(rawValue: domain.name)
                 .map {
-                    .block(tracker: $0.rawValue)
+                    .block($0.rawValue)
                 }
         }
     }

@@ -7,7 +7,7 @@ extension URL {
         data,
         file
         
-        var validation: Policy.Validation {
+        var response: Policy.Response {
             switch self {
             case .about:
                 return .ignore

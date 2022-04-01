@@ -2,7 +2,7 @@ import XCTest
 @testable import Specs
 
 final class PolicyStandardTests: XCTestCase {
-    private var policy: PolicyLevel!
+    private var policy: Policy!
     
     private let listA =  [
         "about:blank",
@@ -23,16 +23,16 @@ final class PolicyStandardTests: XCTestCase {
     ]
     
     override func setUp() {
-        policy = Policy.Standard()
+        policy = .standard
     }
     
     func testIgnore() {
         listA
             .map {
-                ($0, policy(URL(string: $0)!))
+                ($0, policy(.init(string: $0)!))
             }
             .forEach {
-                if case .ignore = $0.1.result { } else {
+                if case .ignore = $0.1 { } else {
                     XCTFail("\($0.1): \($0.0)")
                 }
             }
@@ -44,7 +44,7 @@ final class PolicyStandardTests: XCTestCase {
                 ($0, policy(URL(string: $0)!))
             }
             .forEach {
-                if case .allow = $0.1.result { } else {
+                if case .allow = $0.1 { } else {
                     XCTFail("\($0.1): \($0.0)")
                 }
             }
@@ -56,7 +56,7 @@ final class PolicyStandardTests: XCTestCase {
                 ($0, policy(URL(string: $0)!))
             }
             .forEach {
-                if case .external = $0.1.result { } else {
+                if case .external = $0.1 { } else {
                     XCTFail("\($0.1): \($0.0)")
                 }
             }

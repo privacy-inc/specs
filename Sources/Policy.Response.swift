@@ -2,11 +2,11 @@ import Foundation
 import Domains
 
 extension Policy {
-    public enum Result {
+    public enum Response {
         case
         external,
         ignore,
         allow,
-        block
+        block(String)
     }
 }

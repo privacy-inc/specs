@@ -2,7 +2,7 @@ import Foundation
 import Domains
 
 extension URL {
-    enum Allow: String {
+    enum Allow: String, URLPolicy {
         case
         ecosia,
         google,
@@ -98,18 +98,18 @@ extension URL {
             }
         }
         
-        static func validation(domain: Domain, url: URL) -> Policy.Validation? {
+        static func response(for domain: Domain, on: URL) -> Policy.Response? {
             Self(rawValue: domain.name)
-                .map { allow in
-                    allow
+                .map { allowing in
+                    allowing
                         .subdomain(domain: domain)
-                    ?? allow
-                        .path(domain: domain, url: url)
-                    ?? .allow(domain: domain)
+                    ?? allowing
+                        .path(domain: domain, url: on)
+                    ?? .allow
                 }
         }
         
-        private func subdomain(domain: Domain) -> Policy.Validation? {
+        private func subdomain(domain: Domain) -> Policy.Response? {
             domain
                 .prefix
                 .last
@@ -117,19 +117,19 @@ extension URL {
                     subdomain
                         .map(\.rawValue)
                         .contains(prefix)
-                    ? .block(tracker: prefix + "." + domain.minimal)
+                    ? .block(prefix + "." + domain.minimal)
                     : nil
                 }
         }
         
-        private func path(domain: Domain, url: URL) -> Policy.Validation? {
+        private func path(domain: Domain, url: URL) -> Policy.Response? {
             for component in url
                 .path
                 .components(separatedBy: "/")
                 .dropFirst()
                     .prefix(2) {
                 guard path.map(\.rawValue).contains(component) else { continue }
-                return .block(tracker: domain.minimal + "/" + component)
+                return .block(domain.minimal + "/" + component)
             }
             return nil
         }

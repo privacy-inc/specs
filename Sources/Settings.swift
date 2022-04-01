@@ -4,28 +4,28 @@ import Archivable
 public struct Settings: Storable {
     public let search: Search
     public let configuration: Configuration
-    public let policy: any PolicyLevel
+    public let policy: Policy
     
     public var data: Data {
         .init()
         .adding(search.engine.rawValue)
-        .adding(policy.level.rawValue)
+        .adding(policy.rawValue)
         .adding(configuration)
     }
     
     public init(data: inout Data) {
         search = .init(engine: .init(rawValue: data.removeFirst())!)
-        policy = Policy.with(data: &data)
+        policy = .init(rawValue: data.removeFirst())!
         configuration = .init(data: &data)
     }
     
     init() {
         search = .init(engine: .google)
-        policy = Policy.Secure()
+        policy = .secure
         configuration = .init()
     }
     
-    private init(search: Search, policy: any PolicyLevel, configuration: Configuration) {
+    private init(search: Search, policy: Policy, configuration: Configuration) {
         self.search = search
         self.policy = policy
         self.configuration = configuration
@@ -35,7 +35,7 @@ public struct Settings: Storable {
         .init(search: search, policy: policy, configuration: configuration)
     }
     
-    func with(policy: any PolicyLevel) -> Self {
+    func with(policy: Policy) -> Self {
         .init(search: search, policy: policy, configuration: configuration)
     }
     

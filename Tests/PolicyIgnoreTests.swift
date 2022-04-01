@@ -2,7 +2,7 @@ import XCTest
 @testable import Specs
 
 final class PolicyIgnoreTests: XCTestCase {
-    private var policy: PolicyLevel!
+    private var policy: Policy!
     private let list =  [
         "about:blank",
         "about:srcdoc",
@@ -12,16 +12,16 @@ final class PolicyIgnoreTests: XCTestCase {
     ]
     
     override func setUp() {
-        policy = Policy.Secure()
+        policy = .secure
     }
     
     func test() {
         list
             .map {
-                ($0, policy(URL(string: $0)!))
+                ($0, policy(.init(string: $0)!))
             }
             .forEach {
-                if case .ignore = $0.1.result { } else {
+                if case .ignore = $0.1 { } else {
                     XCTFail("\($0.1): \($0.0)")
                 }
             }

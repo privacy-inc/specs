@@ -60,24 +60,12 @@ extension Cloud where Output == Archive {
         await stream()
     }
     
-    public func policy(history: UInt16, url: URL) -> Policy.Result {
-        {
-            switch $0.event {
-            case let .allow(domain):
-                Task
-                    .detached(priority: .utility) {
-                        await self.allow(domain: domain)
-                    }
-            case let .block(tracker):
-                Task
-                    .detached(priority: .utility) {
-                        await self.block(history: history, tracker: tracker)
-                    }
-            case .none:
-                break
-            }
-            return $0.result
-        } (model.settings.policy(url))
+    public func policy(request: URL, from url: URL) async -> Policy.Response {
+        let response = model.settings.policy(url)
+        if case let .block(tracker) = response {
+            
+        }
+        return response
     }
     
     public func autocomplete(search: String) async -> [Website] {
@@ -99,11 +87,10 @@ extension Cloud where Output == Archive {
     }
     
     public func update(policy: Policy) async {
-        guard policy != model.settings.policy.level else { return }
-        model.settings = model
-            .settings
-            .with(policy: Policy.with(level: policy))
-        await stream()
+//        await update(configuration: model
+//                .settings
+//                .configuration
+//                .with(policy: policy))
     }
     
     public func update(autoplay: Settings.Configuration.Autoplay) async {
@@ -187,18 +174,6 @@ extension Cloud where Output == Archive {
         model.history = []
         #warning("forget trackers")
         await stream()
-    }
-    
-    private func allow(domain: Domain) async {
-        model.events = model.events.add(domain: domain.minimal)
-        await stream()
-    }
-    
-    private func block(history: UInt16, tracker: String) async {
-//        guard let remote = website(history: history)?.access as? Access.Remote else { return }
-//        model.events = model.events.block(tracker: tracker, domain: remote.domain.minimal)
-//
-//        await stream()
     }
     
     private func update(configuration: Settings.Configuration) async {

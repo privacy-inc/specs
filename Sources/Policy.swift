@@ -1,20 +1,57 @@
 import Foundation
+import Domains
 
 public enum Policy: UInt8 {
     case
     secure,
     standard
     
-    static func with(level: Self) -> any PolicyLevel {
-        switch level {
+    func callAsFunction(_ url: URL) -> Response {
+        url
+            .scheme
+            .map {
+                URL.Embed(rawValue: $0)
+                    .map(\.response)
+                ?? URL.Scheme(rawValue: $0)
+                    .map {
+                        switch $0.policy {
+                        case .accept:
+                            return route(url: url)
+                        case .ignore:
+                            return .ignore
+                        case let .block(tracker):
+                            return .block(tracker)
+                        }
+                    }
+                ?? .external
+            }
+            ?? .ignore
+    }
+    
+    private func route(url: URL) -> Response {
+        switch self {
         case .secure:
-            return Secure()
+            return url
+                .host
+                .map(Tld.domain(host:))
+                .map { domain in
+                    guard !domain.suffix.isEmpty else { return .ignore }
+                    
+                    for policy in Self.policies {
+                        guard let response = policy.response(for: domain, on: url) else { continue }
+                        return response
+                    }
+                    
+                    return .allow
+                }
+            ?? .ignore
         case .standard:
-            return Standard()
+            return .allow
         }
     }
     
-    static func with(data: inout Data) -> any PolicyLevel {
-        with(level: .init(rawValue: data.removeFirst())!)
-    }
+    private static let policies: [URLPolicy.Type] = [URL.Subdomain.self,
+                                                     URL.Allow.self,
+                                                     URL.Deny.self,
+                                                     URL.Toplevel.self]
 }

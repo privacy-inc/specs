@@ -2,7 +2,7 @@ import XCTest
 @testable import Specs
 
 final class PolicyBlockTests: XCTestCase {
-    private var policy: PolicyLevel!
+    private var policy: Policy!
     private let list =  [
         "https://sourcepoint.theguardian.com/index.html?message_id=343252&consentUUID=4debba32-1827-4286-b168-cd0a6068f5f5&requestUUID=0a3ee8d3-cc2e-43b1-99ba-ceb02302f3e5&preload_message=true)",
         "https://tags.crwdcntrl.net/lt/shared/1/lt.iframe.html",
@@ -239,16 +239,16 @@ final class PolicyBlockTests: XCTestCase {
     ]
     
     override func setUp() {
-        policy = Policy.Secure()
+        policy = .secure
     }
     
     func test() {
         list
             .map {
-                ($0, policy(URL(string: $0)!))
+                ($0, policy(.init(string: $0)!))
             }
             .forEach {
-                if case .block = $0.1.result { } else {
+                if case .block = $0.1 { } else {
                     XCTFail("\($0.1): \($0.0)")
                 }
             }

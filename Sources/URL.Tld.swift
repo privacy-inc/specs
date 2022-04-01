@@ -2,15 +2,15 @@ import Foundation
 import Domains
 
 extension URL {
-    enum Toplevel: String {
+    enum Toplevel: String, URLPolicy {
         case
         cloudfront,
         googleapis
         
-        static func validation(domain: Domain) -> Policy.Validation? {
+        static func response(for domain: Domain, on: URL) -> Policy.Response? {
             Self(rawValue: domain.suffix.first!)
                 .map { _ in
-                    .block(tracker: domain.minimal)
+                    .block(domain.minimal)
                 }
         }
     }

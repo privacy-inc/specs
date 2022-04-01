@@ -2,7 +2,7 @@ import Foundation
 import Domains
 
 extension URL {
-    enum Subdomain: String, URLPolicy {
+    enum Subdomain: String, Responser {
         case
         sourcepoint,
         sourcepointcmp

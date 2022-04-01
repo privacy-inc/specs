@@ -2,7 +2,7 @@ import Foundation
 import Domains
 
 extension URL {
-    enum Deny: String, URLPolicy {
+    enum Deny: String, Responser {
         case
         pubmatic,
         dianomi,

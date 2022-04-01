@@ -2,7 +2,7 @@ import Foundation
 import Domains
 
 extension URL {
-    enum Toplevel: String, URLPolicy {
+    enum Toplevel: String, Responser {
         case
         cloudfront,
         googleapis

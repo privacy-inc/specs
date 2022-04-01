@@ -50,7 +50,7 @@ public enum Policy: UInt8 {
         }
     }
     
-    private static let policies: [URLPolicy.Type] = [URL.Subdomain.self,
+    private static let policies: [Responser.Type] = [URL.Subdomain.self,
                                                      URL.Allow.self,
                                                      URL.Deny.self,
                                                      URL.Toplevel.self]

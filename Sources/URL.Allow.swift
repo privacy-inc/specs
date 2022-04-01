@@ -2,7 +2,7 @@ import Foundation
 import Domains
 
 extension URL {
-    enum Allow: String, URLPolicy {
+    enum Allow: String, Responser {
         case
         ecosia,
         google,

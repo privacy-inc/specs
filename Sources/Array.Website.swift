@@ -14,10 +14,10 @@ extension Array where Element == Website {
         .filter {
             $0.matches > 0
         }
-        .sorted {
-            $0.matches == $1.matches
-                ? $0.website.title.localizedCaseInsensitiveCompare($1.website.title) == .orderedAscending
-                : $0.matches > $1.matches
+        .sorted { (first: (website: Website, matches: Int), second: (website: Website, matches: Int)) -> Bool in
+            first.matches == second.matches
+                ? first.website.title.localizedCaseInsensitiveCompare(second.website.title) == .orderedAscending
+                : first.matches > second.matches
         }
         .map(\.website)
     }

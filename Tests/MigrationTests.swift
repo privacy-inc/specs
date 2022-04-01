@@ -1,7 +1,7 @@
 import XCTest
 @testable import Archivable
 @testable import Specs
-
+/*
 final class MigrationTests: XCTestCase {
     private var archive: Archive_v0!
     
@@ -33,3 +33,4 @@ final class MigrationTests: XCTestCase {
         XCTAssertEqual(.ecosia, migrated.settings.search.engine)
     }
 }
+*/

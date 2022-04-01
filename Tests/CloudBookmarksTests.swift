@@ -2,7 +2,7 @@ import XCTest
 import Combine
 @testable import Archivable
 @testable import Specs
-
+/*
 final class CloudBookmarksTests: XCTestCase {
     private var cloud: Cloud<Archive, MockContainer>!
     private var subs: Set<AnyCancellable>!
@@ -144,3 +144,4 @@ final class CloudBookmarksTests: XCTestCase {
         waitForExpectations(timeout: 1)
     }
 }
+*/

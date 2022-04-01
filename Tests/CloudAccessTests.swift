@@ -2,7 +2,7 @@ import XCTest
 import Combine
 @testable import Archivable
 @testable import Specs
-
+/*
 final class CloudAccessTests: XCTestCase {
     private var cloud: Cloud<Archive, MockContainer>!
     private var subs: Set<AnyCancellable>!
@@ -61,3 +61,4 @@ final class CloudAccessTests: XCTestCase {
         XCTAssertEqual(2, model.index)
     }
 }
+*/

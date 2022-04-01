@@ -205,7 +205,7 @@ extension Cloud where Output == Archive {
     }
     
     public func forgetHistory() async {
-        _forgetHistory()
+        model.history = []
         await stream()
     }
     
@@ -215,17 +215,9 @@ extension Cloud where Output == Archive {
     }
     
     public func forget() async {
-        _forgetHistory()
+        model.history = []
         _forgetActivity()
         await stream()
-    }
-    
-    private func id(access: any AccessType) -> UInt16? {
-        model
-            .history
-            .first {
-                $0.website.access.value == access.value
-            }?.id
     }
     
     private func allow(domain: Domain) async {
@@ -234,10 +226,10 @@ extension Cloud where Output == Archive {
     }
     
     private func block(history: UInt16, tracker: String) async {
-        guard let remote = website(history: history)?.access as? Access.Remote else { return }
-        model.events = model.events.block(tracker: tracker, domain: remote.domain.minimal)
-        
-        await stream()
+//        guard let remote = website(history: history)?.access as? Access.Remote else { return }
+//        model.events = model.events.block(tracker: tracker, domain: remote.domain.minimal)
+//
+//        await stream()
     }
     
     private func update(configuration: Settings.Configuration) async {
@@ -246,11 +238,6 @@ extension Cloud where Output == Archive {
             .settings
             .with(configuration: configuration)
         await stream()
-    }
-    
-    public func _forgetHistory() {
-        model.history = []
-        model.index = 0
     }
     
     public func _forgetActivity() {

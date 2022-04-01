@@ -2,7 +2,7 @@ import XCTest
 import Combine
 @testable import Archivable
 @testable import Specs
-
+/*
 final class CloudSearchTests: XCTestCase {
     private var cloud: Cloud<Archive, MockContainer>!
     private var subs: Set<AnyCancellable>!
@@ -95,3 +95,4 @@ final class CloudSearchTests: XCTestCase {
         waitForExpectations(timeout: 1)
     }
 }
+*/

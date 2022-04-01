@@ -4,12 +4,15 @@ import XCTest
 
 final class CloudAutocompleteTests: XCTestCase {
     private var cloud: Cloud<Archive, MockContainer>!
-/*
+
     override func setUp() {
         cloud = .init()
     }
     
-    func testEmpty() async {
+    func testEmptySearch() async {
+        await cloud.open(url: URL(string: "https://aguacate.org")!)
+        await cloud.update(title: "hello world", url: .init(string: "https://aguacate.org")!)
+        
         var result = await cloud.autocomplete(search: "")
         XCTAssertTrue(result.isEmpty)
         
@@ -20,77 +23,74 @@ final class CloudAutocompleteTests: XCTestCase {
         XCTAssertTrue(result.isEmpty)
     }
     
-    func testNothing() async {
+    func testEmptyWebsites() async {
         let result = await cloud.autocomplete(search: "hello world")
         XCTAssertTrue(result.isEmpty)
     }
     
     func testTitle() async {
-        let id = await cloud.open(url: URL(string: "https://aguacate.org")!)
-        await cloud.update(title: "lorem ipsum", history: id)
+        await cloud.open(url: .init(string: "https://aguacate.org")!)
+        await cloud.update(title: "lorem ipsum", url: .init(string: "https://aguacate.org")!)
         
         let result = await cloud.autocomplete(search: "lorem")
         XCTAssertEqual(1, result.count)
-        XCTAssertEqual("https://aguacate.org", result.first?.access.value)
+        XCTAssertEqual("https://aguacate.org", result.first?.id)
         XCTAssertEqual("lorem ipsum", result.first?.title)
-        XCTAssertEqual("aguacate.org", result.first?.domain)
     }
     
     func testURL() async {
-        _ = await cloud.open(url: URL(string: "https://aguacate.org")!)
+        await cloud.open(url: .init(string: "https://aguacate.org")!)
         
         let result = await cloud.autocomplete(search: "agua")
         XCTAssertEqual(1, result.count)
-        XCTAssertEqual("https://aguacate.org", result.first?.access.value)
+        XCTAssertEqual("https://aguacate.org", result.first?.id)
         XCTAssertEqual("", result.first?.title)
-        XCTAssertEqual("aguacate.org", result.first?.domain)
     }
     
     func testSort() async {
-        let id1 = await cloud.open(url: URL(string: "https://aguacate.org")!)
-        await cloud.update(title: "lorem ipsum", history: id1)
+        let url1 = URL(string: "https://aguacate.org")!
+        let url2 = URL(string: "https://lorem.org")!
+        let url3 = URL(string: "https://loremipsum.org/1")!
+        let url4 = URL(string: "https://loremipsum.org/0")!
         
-        let id2 = await cloud.open(url: URL(string: "https://lorem.org")!)
-        await cloud.update(title: "hello world", history: id2)
+        await cloud.open(url: url1)
+        await cloud.update(title: "lorem ipsum", url: url1)
         
-        let id3 = await cloud.open(url: URL(string: "https://loremipsum.org/1")!)
-        await cloud.update(title: "ipsum lorem", history: id3)
+        await cloud.open(url: url2)
+        await cloud.update(title: "hello world", url: url2)
         
-        let id4 = await cloud.open(url: URL(string: "https://loremipsum.org/0")!)
-        await cloud.update(title: "ipsum lorem", history: id4)
+        await cloud.open(url: url3)
+        await cloud.update(title: "ipsum lorem", url: url3)
         
-        _ = await cloud.open(url: URL(string: "https://ipsum.org")!)
+        await cloud.open(url: url4)
+        await cloud.update(title: "ipsum lorem", url: url4)
         
-        _ = await cloud.open(url: URL(string: "https://fdafsas.org")!)
-        
-        _ = await cloud.open(url: URL(string: "https://orem.org")!)
-        
-        _ = await cloud.open(url: URL(string: "https://im.org")!)
+        await cloud.open(url: .init(string: "https://ipsum.org")!)
+        await cloud.open(url: .init(string: "https://fdafsas.org")!)
+        await cloud.open(url: .init(string: "https://orem.org")!)
+        await cloud.open(url: .init(string: "https://im.org")!)
         
         let result = await cloud.autocomplete(search: "lorem ipsum")
         XCTAssertEqual(5, result.count)
-        XCTAssertEqual("https://loremipsum.org/0", result.first?.access.value)
+        XCTAssertEqual(url4.absoluteString, result.first?.id)
         XCTAssertEqual("ipsum lorem", result.first?.title)
-        XCTAssertEqual("loremipsum.org", result.first?.domain)
         
-        XCTAssertEqual("https://loremipsum.org/1", result[1].access.value)
+        XCTAssertEqual(url3.absoluteString, result[1].id)
         XCTAssertEqual("ipsum lorem", result[1].title)
-        XCTAssertEqual("loremipsum.org", result[1].domain)
         
-        XCTAssertEqual("https://lorem.org", result.last?.access.value)
+        XCTAssertEqual(url2.absoluteString, result.last?.id)
         XCTAssertEqual("hello world", result.last?.title)
-        XCTAssertEqual("lorem.org", result.last?.domain)
     }
     
     func testSortTitles() async {
-        let id1 = await cloud.open(url: URL(string: "https://aguacate.org")!)
-        await cloud.update(title: "world", history: id1)
+        await cloud.open(url: .init(string: "https://aguacate.org")!)
+        await cloud.update(title: "world", url: .init(string: "https://aguacate.org")!)
         
-        let id2 = await cloud.open(url: URL(string: "https://lorem.org")!)
-        await cloud.update(title: "hello", history: id2)
+        await cloud.open(url: .init(string: "https://lorem.org")!)
+        await cloud.update(title: "hello", url: .init(string: "https://lorem.org")!)
         
         let result = await cloud.autocomplete(search: "hello world")
         XCTAssertEqual("hello", result.first?.title)
         XCTAssertEqual("world", result.last?.title)
-    }*/
+    }
 }

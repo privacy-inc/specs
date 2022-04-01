@@ -51,11 +51,3 @@ struct Website_v0: Storable, Identifiable {
             .rating(components: strings)
     }
 }
-
-private extension String {
-    func rating(components: [String]) -> Int {
-        components
-            .filter(localizedCaseInsensitiveContains)
-            .count
-    }
-}

@@ -28,19 +28,4 @@ public struct Website: Storable, Identifiable {
     func with(title: String) -> Self {
         .init(id: id, title: title)
     }
-    
-    func matches(strings: [String]) -> Int {
-        title
-            .rating(components: strings)
-        + id
-            .rating(components: strings)
-    }
-}
-
-private extension String {
-    func rating(components: [String]) -> Int {
-        components
-            .filter(localizedCaseInsensitiveContains)
-            .count
-    }
 }

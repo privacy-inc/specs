@@ -101,23 +101,14 @@ extension Cloud where Output == Archive {
         } (model.settings.policy(url))
     }
     
-    public func autocomplete(search: String) async -> [Complete] {
-        search
-            .components { components in
-                model
-                    .bookmarks
-                    .reduce(into: [Complete]()) {
-                        $0.add(website: $1, location: .bookmark, comparing: components)
-                    }
-                    .ordered
-                + model
-                    .history
-                    .map(\.website)
-                    .reduce(into: [Complete]()) {
-                        $0.add(website: $1, location: .history, comparing: components)
-                    }
-                    .ordered
-            }
+    public func autocomplete(search: String) async -> [Website] {
+        (model.bookmarks + model.history)
+            .filter(strings: search
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+                .components(separatedBy: " ")
+                .filter {
+                    !$0.isEmpty
+                })
     }
     
     public func update(search: Search.Engine) async {

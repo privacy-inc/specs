@@ -34,10 +34,20 @@ public struct Archive: Arch {
         
         if version == 0 {
             let legacy = await Archive_v0(version: 0, timestamp: 0, data: data)
-//            bookmarks = legacy.bookmarks
-//            history = legacy.history
-            bookmarks = []
-            history = []
+            bookmarks = legacy
+                .bookmarks
+                .map {
+                    .init(id: $0.access.value, title: $0.title)
+                }
+            history = legacy
+                .history
+                .filter {
+                    guard case .remote = $0.website.access.key else { return false }
+                    return true
+                }
+                .map {
+                    .init(id: $0.website.access.value, title: $0.website.title)
+                }
             settings = legacy.settings
             events = legacy.events
         } else {

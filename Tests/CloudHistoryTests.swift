@@ -60,4 +60,28 @@ final class CloudHistoryTests: XCTestCase {
         XCTAssertEqual(1, model.history.count)
         XCTAssertEqual("https://second.org", model.history.first?.id)
     }
+    
+    func testSearch() async {
+        let first = try! await cloud.search("hello world")
+        XCTAssertTrue(first.absoluteString.contains("hello"))
+        
+        var model = await cloud.model
+        XCTAssertEqual(1, model.history.count)
+        XCTAssertTrue(model.history.first?.id.contains("hello") ?? false)
+        
+        let second = try! await cloud.search("lorem ipsum")
+        XCTAssertTrue(second.absoluteString.contains("lorem"))
+        
+        model = await cloud.model
+        XCTAssertEqual(2, model.history.count)
+        XCTAssertTrue(model.history.first?.id.contains("lorem") ?? false)
+        XCTAssertTrue(model.history.last?.id.contains("hello") ?? false)
+    }
+    
+    func testInvalidSearch() async {
+        _ = try? await cloud.search("")
+
+        let model = await cloud.model
+        XCTAssertTrue(model.history.isEmpty)
+    }
 }

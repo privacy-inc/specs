@@ -16,15 +16,16 @@ final class MigrationTests: XCTestCase {
             .init(id: 36, website: .init(access: Access.Local(value: "some/local/file", bookmark: .init()))),
             .init(id: 1, website: .init(url: URL(string: "https://ttt.com")!))]
         
+        archive.events = .init()
+            .with(domains: ["avocado.org"])
+            .with(trackers: ["evil1.org", "evil2.org"])
+            .with(timestamps: [1, 2, 3])
+            .with(items: [.init(timestamp: 3, domain: 1)])
+        
         archive.bookmarks += [.init(url: URL(string: "https://fsfsdfsd.com")!).with(title: "hello world")]
         archive.index = 99
         archive.settings = archive.settings.with(search: .ecosia)
         archive.settings = archive.settings.with(policy: .standard)
-        
-        archive.events = archive.events.add(domain: "avocado.org")
-        archive.events = archive.events.block(tracker: "evil", domain: "something.com")
-        archive.events = archive.events.block(tracker: "evil2", domain: "something.com")
-        archive.events = archive.events.block(tracker: "evil3", domain: "hello.com")
         
         let migrated = await Archive.prototype(data: archive.compressed)
         XCTAssertEqual(2, migrated.history.count)

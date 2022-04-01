@@ -61,7 +61,7 @@ extension Cloud where Output == Archive {
     }
     
     public func policy(request: URL, from url: URL) async -> Policy.Response {
-        let response = model.settings.policy(url)
+        let response = model.settings.policy(request)
         if case let .block(tracker) = response {
             
         }
@@ -78,11 +78,11 @@ extension Cloud where Output == Archive {
                 })
     }
     
-    public func update(search: Search.Engine) async {
-        guard search != model.settings.search.engine else { return }
+    public func update(search: Search) async {
+        guard search != model.settings.search else { return }
         model.settings = model
             .settings
-            .with(search: .init(engine: search))
+            .with(search: search)
         await stream()
     }
     

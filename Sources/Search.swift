@@ -1,13 +1,25 @@
 import Foundation
 import Domains
 
-public struct Search {
-    public let engine: Engine
-    private let components: URLComponents
+public enum Search: UInt8 {
+    case
+    google,
+    ecosia
     
-    init(engine: Engine) {
-        self.engine = engine
-        components = engine.components
+    var components: URLComponents {
+        {
+            var components = URLComponents(string: "//www." + $0.rawValue + "." + $0.tld.rawValue)!
+            components.scheme = "https"
+            components.path = "/search"
+            return components
+        } (url)
+    }
+    
+    private var url: URL.Allow {
+        switch self {
+        case .google: return .google
+        case .ecosia: return .ecosia
+        }
     }
     
     func callAsFunction(_ search: String) -> String? {

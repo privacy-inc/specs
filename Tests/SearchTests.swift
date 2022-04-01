@@ -5,7 +5,7 @@ final class SearchTests: XCTestCase {
     private var search: Search!
     
     override func setUp() {
-        search = .init(engine: .google)
+        search = .google
     }
     
     func testEmpty() {
@@ -15,7 +15,7 @@ final class SearchTests: XCTestCase {
     }
     
     func testSearch() {
-        XCTAssertEqual("https://www.ecosia.org/search?q=hello%20world", Search(engine: .ecosia)("hello world"))
+        XCTAssertEqual("https://www.ecosia.org/search?q=hello%20world", Search.ecosia("hello world"))
         XCTAssertEqual("https://www.google.com/search?q=hello%20world", search("hello world"))
         XCTAssertEqual("https://www.google.com/search?q=Hello%20World", search("Hello World"))
     }

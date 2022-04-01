@@ -9,17 +9,14 @@ final class CloudPolicyTests: XCTestCase {
         cloud = .init()
     }
     
+    func testAllow() async {
+        let response = await cloud.policy(request: .init(string: "https://google.com")!, from: .init(string: "https://google.com")!)
+        XCTAssertEqual(.allow, response)
+    }
+    
     func testBlock() async {
-//        if case .block = await cloud.policy(history: id, url: URL(string: "https://something.googleapis.com")!) {
-//            
-//        } else {
-//            XCTFail()
-//        }
-//        
-//        if case .allow = await cloud.policy(history: id, url: URL(string: "https://google.com")!) {
-//
-//        } else {
-//            XCTFail()
-//        }
+        if case .block = await cloud.policy(request: .init(string: "https://something.googleapis.com")!, from: .init(string: "https://google.com")!) { } else {
+            XCTFail()
+        }
     }
 }

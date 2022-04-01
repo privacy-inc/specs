@@ -26,10 +26,10 @@ final class ArchiveTests: XCTestCase {
     }
     
     func testSettings() async {
-        XCTAssertEqual(.google, archive.settings.search.engine)
+        XCTAssertEqual(.google, archive.settings.search)
         archive.settings = archive.settings
-            .with(search: .init(engine: .ecosia))
+            .with(search: .ecosia)
         archive = await Archive.prototype(data: archive.compressed)
-        XCTAssertEqual(.ecosia, archive.settings.search.engine)
+        XCTAssertEqual(.ecosia, archive.settings.search)
     }
 }

@@ -9,10 +9,10 @@ final class SettingsTests: XCTestCase {
     }
     
     func testSearch() {
-        XCTAssertEqual(.google, settings.search.engine)
+        XCTAssertEqual(.google, settings.search)
         settings = settings
-            .with(search: .init(engine: .ecosia))
-        XCTAssertEqual(.ecosia, settings.data.prototype(Settings.self).search.engine)
+            .with(search: .ecosia)
+        XCTAssertEqual(.ecosia, settings.data.prototype(Settings.self).search)
     }
     
     func testPolicy() {

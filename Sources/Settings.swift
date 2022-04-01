@@ -8,19 +8,19 @@ public struct Settings: Storable {
     
     public var data: Data {
         .init()
-        .adding(search.engine.rawValue)
+        .adding(search.rawValue)
         .adding(policy.rawValue)
         .adding(configuration)
     }
     
     public init(data: inout Data) {
-        search = .init(engine: .init(rawValue: data.removeFirst())!)
+        search = .init(rawValue: data.removeFirst())!
         policy = .init(rawValue: data.removeFirst())!
         configuration = .init(data: &data)
     }
     
     init() {
-        search = .init(engine: .google)
+        search = .google
         policy = .secure
         configuration = .init()
     }

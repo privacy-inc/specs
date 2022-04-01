@@ -10,7 +10,7 @@ extension Data {
     
     #if os(macOS)
     
-    var url: URL? {
+    public var bookmark: URL? {
         var stale = false
         return (try? URL(resolvingBookmarkData: self, options: .withSecurityScope, bookmarkDataIsStale: &stale))
             .flatMap {
@@ -20,7 +20,7 @@ extension Data {
     
     #elseif os(iOS)
     
-    var url: URL? {
+    public var bookmark: URL? {
         var stale = false
         return (try? URL(resolvingBookmarkData: self, bookmarkDataIsStale: &stale))
             .flatMap {
@@ -30,7 +30,7 @@ extension Data {
     
     #else
     
-    var url: URL? {
+    public var bookmark: URL? {
         nil
     }
     

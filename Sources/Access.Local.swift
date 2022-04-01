@@ -12,18 +12,6 @@ extension Access {
             self.bookmark = bookmark
         }
         
-        func open(completion: (_ file: URL, _ directory: URL) -> Void) {
-            bookmark
-                .url
-                .flatMap { directory in
-                    URL(string: value)
-                        .map {
-                            ($0, directory)
-                        }
-                }
-                .map(completion)
-        }
-        
         var content: Data {
             .init()
             .adding(size: UInt16.self, string: value)

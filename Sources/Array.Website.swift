@@ -1,11 +1,20 @@
 import Foundation
+import Archivable
 
 extension Array where Element == Website {
-    func adding(_ element: Element) -> Self {
+    func prepending(_ element: Element) -> Self {
         { id in
-            [element] + filter {
+            element + filter {
                 $0.id.schemeless != id
             }
+        } (element.id.schemeless)
+    }
+    
+    func appending(_ element: Element) -> Self {
+        { id in
+            filter {
+                $0.id.schemeless != id
+            } + element
         } (element.id.schemeless)
     }
     

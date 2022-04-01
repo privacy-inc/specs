@@ -11,38 +11,27 @@ extension Cloud where Output == Archive {
     }
     
     public func open(url: URL) async {
+        await update(title: "", url: url)
+    }
+    
+    public func update(title: String, url: URL) async {
         guard case .remote = Router.with(url: url) else { return }
-        await open(website: .init(id: url.absoluteString, title: ""))
+        await open(website: .init(id: url.absoluteString, title: title))
     }
     
     public func open(website: Website) async {
         model.history = model
             .history
-            .adding(website)
+            .prepending(website)
         await stream()
     }
     
     public func bookmark(url: URL, title: String) async {
         guard case .remote = Router.with(url: url) else { return }
         
-        let bookmark = Website(id: url.absoluteString, title: title)
-        
         model.bookmarks = model
             .bookmarks
-            .filter {
-                $0.id != bookmark.id
-            }
-            + bookmark
-        
-        await stream()
-    }
-    
-    public func update(title: String, url: URL) async {
-        guard case .remote = Router.with(url: url) else { return }
-        
-        model.history = model
-            .history
-            .adding(.init(id: url.absoluteString, title: title))
+            .appending(.init(id: url.absoluteString, title: title))
         
         await stream()
     }

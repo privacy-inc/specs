@@ -1,15 +1,12 @@
 import XCTest
-import Combine
 @testable import Archivable
 @testable import Specs
 
 final class CloudHistoryTests: XCTestCase {
     private var cloud: Cloud<Archive, MockContainer>!
-    private var subs: Set<AnyCancellable>!
     
     override func setUp() {
         cloud = .init()
-        subs = []
     }
     
     func testOpenURL() async {

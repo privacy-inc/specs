@@ -1,147 +1,54 @@
 import XCTest
-import Combine
 @testable import Archivable
 @testable import Specs
-/*
+
 final class CloudBookmarksTests: XCTestCase {
     private var cloud: Cloud<Archive, MockContainer>!
-    private var subs: Set<AnyCancellable>!
     
     override func setUp() {
         cloud = .init()
-        subs = []
     }
     
     func testAdd() async {
-        _ = await cloud.open(url: URL(string: "https://lorem.com")!)
-        let id = await cloud.open(url: URL(string: "https://avocado.org")!)
-        _ = await cloud.open(url: URL(string: "https://ipsum.com")!)
-        
-        await cloud.update(title: "hello world", history: id)
-        await cloud.bookmark(history: id)
+        await cloud.bookmark(url: .init(string: "https://avocado.org")!, title: "Some avocado")
         
         let model = await cloud.model
         XCTAssertEqual(1, model.bookmarks.count)
-        XCTAssertEqual("hello world", model.bookmarks.first?.title)
-        XCTAssertTrue(model.bookmarks.first?.access.value.contains("avocado.org") ?? false)
-    }
-    
-    func testSave() {
-        let expect = expectation(description: "")
-        
-        cloud
-            .sink {
-                if !$0.bookmarks.isEmpty {
-                    expect.fulfill()
-                }
-            }
-            .store(in: &subs)
-        
-        Task {
-            let id = await cloud.open(url: URL(string: "https://avocado.org")!)
-            await cloud.bookmark(history: id)
-        }
-        
-        waitForExpectations(timeout: 1)
+        XCTAssertEqual("Some avocado", model.bookmarks.first?.title)
+        XCTAssertEqual("https://avocado.org", model.bookmarks.first?.id)
     }
     
     func testRemoveDuplicatedURL() async {
-        let id1 = await cloud.open(url: URL(string: "https://avocado.org")!)
-        _ = await cloud.open(url: URL(string: "https://lorem.org")!)
-        let id3 = await cloud.open(url: URL(string: "https://avocado.org")!)
-        
-        await cloud.update(title: "hello world", history: id1)
-        await cloud.update(title: "total recall", history: id3)
-        
-        await cloud.bookmark(history: id3)
-        await cloud.bookmark(history: id1)
+        await cloud.bookmark(url: .init(string: "https://avocado.org")!, title: "Some avocado a")
+        await cloud.bookmark(url: .init(string: "https://avocado.org")!, title: "Some avocado b")
+        await cloud.bookmark(url: .init(string: "avocado.org")!, title: "Some avocado c")
+        await cloud.bookmark(url: .init(string: "http://avocado.org")!, title: "Some avocado last")
         
         let model = await cloud.model
-        XCTAssertEqual(model.bookmarks.first?.access.value, model.bookmarks.last?.access.value)
         XCTAssertEqual(1, model.bookmarks.count)
+        XCTAssertEqual("Some avocado last", model.bookmarks.first?.title)
+        XCTAssertEqual("http://avocado.org", model.bookmarks.first?.id)
     }
     
-    func testDelete() {
-        let expect = expectation(description: "")
-        expect.expectedFulfillmentCount = 2
+    func testDelete() async {
+        await cloud.bookmark(url: .init(string: "https://first.org")!, title: "a")
+        await cloud.bookmark(url: .init(string: "https://second.org")!, title: "b")
+        await cloud.delete(bookmark: 1)
         
-        cloud
-            .sink {
-                if $0.bookmarks.isEmpty && $0.index == 1 {
-                    expect.fulfill()
-                }
-            }
-            .store(in: &subs)
-        
-        Task {
-            let id = await cloud.open(url: URL(string: "https://avocado.org")!)
-            await cloud.bookmark(history: id)
-            await cloud.delete(bookmark: 0)
-        }
-        
-        waitForExpectations(timeout: 1)
+        let model = await cloud.model
+        XCTAssertEqual(1, model.bookmarks.count)
+        XCTAssertEqual("https://first.org", model.bookmarks.first?.id)
     }
     
     func testMove() async {
-        let id1 = await cloud.open(url: URL(string: "https://lorem.com")!)
-        let id2 = await cloud.open(url: URL(string: "https://ipsum.com")!)
-        
-        await cloud.bookmark(history: id1)
-        await cloud.bookmark(history: id2)
+        await cloud.bookmark(url: .init(string: "https://first.org")!, title: "a")
+        await cloud.bookmark(url: .init(string: "https://second.org")!, title: "b")
         
         await cloud.move(bookmark: 1, to: 0)
         
         let model = await cloud.model
-        XCTAssertTrue(model.bookmarks.first?.access.value.contains("ipsum.com") ?? false)
-        XCTAssertTrue(model.bookmarks.last?.access.value.contains("lorem.com") ?? false)
-    }
-    
-    func testMoveSave() {
-        let expect = expectation(description: "")
-        
-        cloud
-            .sink {
-                if $0.bookmarks.first?.access.value.contains("ipsum.com") == true {
-                    expect.fulfill()
-                }
-            }
-            .store(in: &subs)
-        
-        Task {
-            let id1 = await cloud.open(url: URL(string: "https://lorem.com")!)
-            let id2 = await cloud.open(url: URL(string: "https://ipsum.com")!)
-            
-            await cloud.bookmark(history: id1)
-            await cloud.bookmark(history: id2)
-
-            await cloud.move(bookmark: 1, to: 0)
-        }
-        
-        waitForExpectations(timeout: 1)
-    }
-    
-    func testDontSaveSame() {
-        let expect = expectation(description: "")
-        
-        cloud
-            .sink {
-                if $0.bookmarks.count == 2 {
-                    expect.fulfill()
-                }
-            }
-            .store(in: &subs)
-        
-        Task {
-            let id1 = await cloud.open(url: URL(string: "https://lorem.com")!)
-            let id2 = await cloud.open(url: URL(string: "https://ipsum.com")!)
-            
-            await cloud.bookmark(history: id1)
-            await cloud.bookmark(history: id2)
-
-            await cloud.move(bookmark: 1, to: 1)
-        }
-        
-        waitForExpectations(timeout: 1)
+        XCTAssertEqual("https://second.org", model.bookmarks.first?.id)
+        XCTAssertEqual("https://first.org", model.bookmarks.last?.id)
     }
 }
-*/
+

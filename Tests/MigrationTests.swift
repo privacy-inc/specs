@@ -18,6 +18,7 @@ final class MigrationTests: XCTestCase {
         archive.bookmarks += [archive.history.first!.website]
         archive.index = 99
         archive.settings = archive.settings.with(search: .init(engine: .ecosia))
+        archive.settings = archive.settings.with(policy: .standard)
         
         archive.events = archive.events.add(domain: "avocado.org")
         archive.events = archive.events.block(tracker: "evil", domain: "something.com")
@@ -31,6 +32,7 @@ final class MigrationTests: XCTestCase {
         XCTAssertEqual(1, migrated.bookmarks.count)
         XCTAssertEqual("https://avocado.org", migrated.bookmarks.first?.id)
         XCTAssertEqual(.ecosia, migrated.settings.search.engine)
+        XCTAssertEqual(.standard, migrated.settings.policy)
     }
 }
 */

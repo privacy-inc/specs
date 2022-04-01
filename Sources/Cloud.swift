@@ -87,10 +87,11 @@ extension Cloud where Output == Archive {
     }
     
     public func update(policy: Policy) async {
-//        await update(configuration: model
-//                .settings
-//                .configuration
-//                .with(policy: policy))
+        guard policy != model.settings.policy else { return }
+        model.settings = model
+            .settings
+            .with(policy: policy)
+        await stream()
     }
     
     public func update(autoplay: Settings.Configuration.Autoplay) async {

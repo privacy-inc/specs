@@ -3,19 +3,19 @@ import Archivable
 
 extension Array where Element == Website {
     func prepending(_ element: Element) -> Self {
-        { id in
+        { historical in
             element + filter {
-                $0.id.schemeless != id
+                $0.id.historical != historical
             }
-        } (element.id.schemeless)
+        } (element.id.historical)
     }
     
     func appending(_ element: Element) -> Self {
-        { id in
+        { historical in
             filter {
-                $0.id.schemeless != id
+                $0.id.historical != historical
             } + element
-        } (element.id.schemeless)
+        } (element.id.historical)
     }
     
     func filter(strings: [String]) -> Self {

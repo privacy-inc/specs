@@ -37,6 +37,10 @@ final class CloudHistoryTests: XCTestCase {
         await cloud.open(url: .init(string: "https://first.org")!)
         await cloud.open(url: .init(string: "https://second.org")!)
         await cloud.open(url: .init(string: "https://third.org")!)
+        await cloud.open(url: .init(string: "http://first.org")!)
+        await cloud.open(url: .init(string: "https://www.first.org")!)
+        await cloud.open(url: .init(string: "https://mobile.first.org")!)
+        await cloud.open(url: .init(string: "https://a.b.c.d.first.org")!)
         await cloud.open(url: .init(string: "https://first.org")!)
         
         var model = await cloud.model
@@ -44,11 +48,11 @@ final class CloudHistoryTests: XCTestCase {
         XCTAssertEqual("https://first.org", model.history.first?.id)
         XCTAssertEqual("https://second.org", model.history.last?.id)
         
-        await cloud.open(url: .init(string: "http://first.org")!)
+        await cloud.open(url: .init(string: "http://first.org/as")!)
         
         model = await cloud.model
-        XCTAssertEqual(3, model.history.count)
-        XCTAssertEqual("http://first.org", model.history.first?.id)
+        XCTAssertEqual(4, model.history.count)
+        XCTAssertEqual("http://first.org/as", model.history.first?.id)
     }
     
     func testDelete() async {

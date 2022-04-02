@@ -12,7 +12,7 @@ if (_privacy_incognit_splitted.length > 1) {
             break;
     case "twitter":
             var style = document.createElement('style');
-            style.innerHTML = ":root, html { overflow-y: visible !important; }";
+            style.innerHTML = ":root, html, body { overflow-y: visible !important; }";
             document.head.appendChild(style);
             break;
     case "youtube":

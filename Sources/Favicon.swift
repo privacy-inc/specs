@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import Domains
 
 #if os(macOS)
 import AppKit
@@ -56,13 +57,11 @@ public final actor Favicon {
     }
     
     public func request(for website: String) -> Bool {
-        {
-            !$0.isEmpty && !received.contains($0)
-        } (website.domain)
+        !website.isEmpty && !received.contains(website.domainFull)
     }
     
     public func received(url: String, for website: String) async {
-        let domain = website.domain
+        let domain = website.domainFull
         validate(domain: domain)
         received.insert(domain)
         

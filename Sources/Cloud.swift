@@ -65,7 +65,7 @@ extension Cloud where Output == Archive {
         if case let .block(tracker) = response {
             model.tracking = model
                 .tracking
-                .with(tracker: tracker, on: url.absoluteString.domain)
+                .with(tracker: tracker, on: url.absoluteString.domainMinimal)
             
             await stream()
         }

@@ -14,12 +14,6 @@ extension Access {
                 .map(Tld.domain(host:))!
         }
         
-        var icon: String? {
-            domain
-                .minimal
-                .lowercased()
-        }
-        
         let key = Access.remote
         let value: String
         

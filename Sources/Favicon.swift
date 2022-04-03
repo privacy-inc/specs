@@ -40,15 +40,16 @@ public final actor Favicon {
         
     }
     
-    public func publisher(for icon: String) -> Pub? {
-        validate(domain: icon)
+    public func publisher(for website: String) -> Pub? {
+        let domain = website.domainFull
+        validate(domain: domain)
         
-        let publisher = publishers[icon]!
+        let publisher = publishers[domain]!
         
         Task
             .detached(priority: .utility) {
                 if await publisher.output == nil {
-                    guard let output = await self.output(for: icon) else { return }
+                    guard let output = await self.output(for: domain) else { return }
                     await publisher.received(output: output)
                 }
             }

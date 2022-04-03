@@ -72,14 +72,15 @@ extension Cloud where Output == Archive {
         return response
     }
     
-    public func autocomplete(search: String) async -> [Website] {
-        (model.bookmarks + model.history)
-            .filter(strings: search
-                .trimmingCharacters(in: .whitespacesAndNewlines)
-                .components(separatedBy: " ")
-                .filter {
-                    !$0.isEmpty
-                })
+    public func list(filter: String) async -> [Website] {
+        { websites, filters in
+            filters.isEmpty ? websites : websites.filter(strings: filters)
+        } (model.bookmarks + model.history, filter
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .components(separatedBy: " ")
+            .filter {
+                !$0.isEmpty
+            })
     }
     
     public func update(search: Search) async {

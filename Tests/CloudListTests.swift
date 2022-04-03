@@ -2,7 +2,7 @@ import XCTest
 @testable import Archivable
 @testable import Specs
 
-final class CloudAutocompleteTests: XCTestCase {
+final class CloudListTests: XCTestCase {
     private var cloud: Cloud<Archive, MockContainer>!
 
     override func setUp() {
@@ -13,18 +13,39 @@ final class CloudAutocompleteTests: XCTestCase {
         await cloud.open(url: URL(string: "https://aguacate.org")!)
         await cloud.update(title: "hello world", url: .init(string: "https://aguacate.org")!)
         
-        var result = await cloud.autocomplete(search: "")
-        XCTAssertTrue(result.isEmpty)
+        var result = await cloud.list(filter: "")
+        XCTAssertEqual(1, result.count)
+        XCTAssertEqual("hello world", result.first?.title)
         
-        result = await cloud.autocomplete(search: " ")
-        XCTAssertTrue(result.isEmpty)
+        result = await cloud.list(filter: " ")
+        XCTAssertEqual(1, result.count)
+        XCTAssertEqual("hello world", result.first?.title)
         
-        result = await cloud.autocomplete(search: "\n ")
-        XCTAssertTrue(result.isEmpty)
+        result = await cloud.list(filter: "\n ")
+        XCTAssertEqual(1, result.count)
+        XCTAssertEqual("hello world", result.first?.title)
+    }
+    
+    func testEmptySearchNoSort() async {
+        await cloud.update(title: "a", url: .init(string: "https://a.org")!)
+        await cloud.update(title: "b", url: .init(string: "https://b.org")!)
+        
+        let result = await cloud.list(filter: "")
+        XCTAssertEqual(2, result.count)
+        XCTAssertEqual("b", result.first?.title)
+        XCTAssertEqual("a", result.last?.title)
     }
     
     func testEmptyWebsites() async {
-        let result = await cloud.autocomplete(search: "hello world")
+        let result = await cloud.list(filter: "hello world")
+        XCTAssertTrue(result.isEmpty)
+    }
+    
+    func testNoMatch() async {
+        await cloud.open(url: .init(string: "https://aguacate.org")!)
+        await cloud.update(title: "lorem ipsum", url: .init(string: "https://aguacate.org")!)
+        
+        let result = await cloud.list(filter: "rekall")
         XCTAssertTrue(result.isEmpty)
     }
     
@@ -32,7 +53,7 @@ final class CloudAutocompleteTests: XCTestCase {
         await cloud.open(url: .init(string: "https://aguacate.org")!)
         await cloud.update(title: "lorem ipsum", url: .init(string: "https://aguacate.org")!)
         
-        let result = await cloud.autocomplete(search: "lorem")
+        let result = await cloud.list(filter: "lorem")
         XCTAssertEqual(1, result.count)
         XCTAssertEqual("https://aguacate.org", result.first?.id)
         XCTAssertEqual("lorem ipsum", result.first?.title)
@@ -41,7 +62,7 @@ final class CloudAutocompleteTests: XCTestCase {
     func testURL() async {
         await cloud.open(url: .init(string: "https://aguacate.org")!)
         
-        let result = await cloud.autocomplete(search: "agua")
+        let result = await cloud.list(filter: "agua")
         XCTAssertEqual(1, result.count)
         XCTAssertEqual("https://aguacate.org", result.first?.id)
         XCTAssertEqual("", result.first?.title)
@@ -70,7 +91,7 @@ final class CloudAutocompleteTests: XCTestCase {
         await cloud.open(url: .init(string: "https://orem.org")!)
         await cloud.open(url: .init(string: "https://im.org")!)
         
-        let result = await cloud.autocomplete(search: "lorem ipsum")
+        let result = await cloud.list(filter: "lorem ipsum")
         XCTAssertEqual(5, result.count)
         XCTAssertEqual(url4.absoluteString, result.first?.id)
         XCTAssertEqual("ipsum lorem", result.first?.title)
@@ -89,7 +110,7 @@ final class CloudAutocompleteTests: XCTestCase {
         await cloud.open(url: .init(string: "https://lorem.org")!)
         await cloud.update(title: "hello", url: .init(string: "https://lorem.org")!)
         
-        let result = await cloud.autocomplete(search: "hello world")
+        let result = await cloud.list(filter: "hello world")
         XCTAssertEqual("hello", result.first?.title)
         XCTAssertEqual("world", result.last?.title)
     }

@@ -1,18 +1,19 @@
 import Foundation
 
-enum Router: Equatable {
+public enum Router: Equatable {
     case
     remote,
     deeplink,
     local(Data),
-    embed(URL.Embed)
+    embed(Policy.Response)
     
-    static func with(url: URL) -> Router {
+    public static func with(url: URL) -> Router {
         url.isFileURL
         ? .local(url.deletingLastPathComponent().bookmark)
             : url
                 .scheme
                 .flatMap(URL.Embed.init(rawValue:))
+                .map(\.response)
                 .map(embed)
                 ?? { scheme -> Self in
                     switch scheme {

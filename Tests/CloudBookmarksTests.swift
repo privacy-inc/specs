@@ -50,5 +50,14 @@ final class CloudBookmarksTests: XCTestCase {
         XCTAssertEqual("https://second.org", model.bookmarks.first?.id)
         XCTAssertEqual("https://first.org", model.bookmarks.last?.id)
     }
+    
+    func testClearHistory() async {
+        let url = URL(string: "https://hello.world.app")!
+        await cloud.history(url: url, title: "world hello")
+        await cloud.bookmark(url: url, title: "hello world")
+        let model = await cloud.model
+        XCTAssertTrue(model.history.isEmpty)
+        XCTAssertEqual(1, model.bookmarks.count)
+    }
 }
 

@@ -10,15 +10,15 @@ final class CloudHistoryTests: XCTestCase {
     }
     
     func testOpenURL() async {
-        await cloud.open(url: .init(string: "avocado.org")!)
+        await cloud.history(url: .init(string: "avocado.org")!, title: "")
         var model = await cloud.model
         XCTAssertEqual(1, model.history.count)
         XCTAssertEqual("avocado.org", model.history.first?.id)
         XCTAssertEqual("", model.history.first?.title)
         
-        await cloud.open(url: .init(string: "data:some")!)
-        await cloud.open(url: .init(string: "file:///local/file.txt")!)
-        await cloud.open(url: .init(string: "hello://unfresh")!)
+        await cloud.history(url: .init(string: "data:some")!, title: "")
+        await cloud.history(url: .init(string: "file:///local/file.txt")!, title: "")
+        await cloud.history(url: .init(string: "hello://unfresh")!, title: "")
         
         model = await cloud.model
         XCTAssertEqual(1, model.history.count)
@@ -26,7 +26,7 @@ final class CloudHistoryTests: XCTestCase {
     
     func testUpdateTitle() async {
         let url = try! await cloud.search("something")
-        await cloud.update(title: "hello world", url: url)
+        await cloud.history(url: url, title: "hello world")
         let model = await cloud.model
         XCTAssertEqual(1, model.history.count)
         XCTAssertEqual(url.absoluteString, model.history.first?.id)
@@ -34,21 +34,21 @@ final class CloudHistoryTests: XCTestCase {
     }
     
     func testReplace() async {
-        await cloud.open(url: .init(string: "https://first.org")!)
-        await cloud.open(url: .init(string: "https://second.org")!)
-        await cloud.open(url: .init(string: "https://third.org")!)
-        await cloud.open(url: .init(string: "http://first.org")!)
-        await cloud.open(url: .init(string: "https://www.first.org")!)
-        await cloud.open(url: .init(string: "https://mobile.first.org")!)
-        await cloud.open(url: .init(string: "https://a.b.c.d.first.org")!)
-        await cloud.open(url: .init(string: "https://first.org")!)
+        await cloud.history(url: .init(string: "https://first.org")!, title: "")
+        await cloud.history(url: .init(string: "https://second.org")!, title: "")
+        await cloud.history(url: .init(string: "https://third.org")!, title: "")
+        await cloud.history(url: .init(string: "http://first.org")!, title: "")
+        await cloud.history(url: .init(string: "https://www.first.org")!, title: "")
+        await cloud.history(url: .init(string: "https://mobile.first.org")!, title: "")
+        await cloud.history(url: .init(string: "https://a.b.c.d.first.org")!, title: "")
+        await cloud.history(url: .init(string: "https://first.org")!, title: "")
         
         var model = await cloud.model
         XCTAssertEqual(3, model.history.count)
         XCTAssertEqual("https://first.org", model.history.first?.id)
         XCTAssertEqual("https://second.org", model.history.last?.id)
         
-        await cloud.open(url: .init(string: "http://first.org/as")!)
+        await cloud.history(url: .init(string: "http://first.org/as")!, title: "")
         
         model = await cloud.model
         XCTAssertEqual(4, model.history.count)
@@ -56,8 +56,8 @@ final class CloudHistoryTests: XCTestCase {
     }
     
     func testDelete() async {
-        await cloud.open(url: .init(string: "https://first.org")!)
-        await cloud.open(url: .init(string: "https://second.org")!)
+        await cloud.history(url: .init(string: "https://first.org")!, title: "")
+        await cloud.history(url: .init(string: "https://second.org")!, title: "")
         await cloud.delete(history: 1)
         
         let model = await cloud.model
@@ -87,5 +87,14 @@ final class CloudHistoryTests: XCTestCase {
 
         let model = await cloud.model
         XCTAssertTrue(model.history.isEmpty)
+    }
+    
+    func testNoHistoryIfBookmark() async {
+        let url = URL(string: "https://hello.world.app")!
+        await cloud.bookmark(url: url, title: "hello world")
+        await cloud.history(url: url, title: "world hello")
+        let model = await cloud.model
+        XCTAssertTrue(model.history.isEmpty)
+        XCTAssertEqual(1, model.bookmarks.count)
     }
 }

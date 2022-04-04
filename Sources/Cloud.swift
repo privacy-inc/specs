@@ -5,33 +5,42 @@ import Domains
 extension Cloud where Output == Archive {
     public func search(_ string: String) async throws -> URL {
         guard let string = model.settings.search(string) else { throw Fail.Invalid.search }
-        await open(website: .init(id: string, title: ""))
+        await history(website: .init(id: string, title: ""))
         guard let url = URL(string: string) else { throw Fail.Invalid.url }
         return url
     }
     
-    public func open(url: URL) async {
-        await update(title: "", url: url)
-    }
-    
-    public func update(title: String, url: URL) async {
+    public func history(url: URL, title: String) async {
         guard case .remote = Router.with(url: url) else { return }
-        await open(website: .init(id: url.absoluteString, title: title))
-    }
-    
-    public func open(website: Website) async {
-        model.history = model
-            .history
-            .prepending(website)
-        await stream()
+        await history(website: .init(id: url.absoluteString, title: title))
     }
     
     public func bookmark(url: URL, title: String) async {
         guard case .remote = Router.with(url: url) else { return }
         
+        let website = Website(id: url.absoluteString, title: title)
+        
+        model.history = model
+            .history
+            .filter(website)
+        
         model.bookmarks = model
             .bookmarks
-            .appending(.init(id: url.absoluteString, title: title))
+            .appending(website)
+        
+        await stream()
+    }
+    
+    public func history(website: Website) async {
+        let id = website.id.historical
+        
+        guard !model.bookmarks.contains(where: {
+            $0.id.historical == id
+        }) else { return }
+        
+        model.history = model
+            .history
+            .prepending(website)
         
         await stream()
     }

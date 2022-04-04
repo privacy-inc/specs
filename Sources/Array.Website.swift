@@ -2,20 +2,19 @@ import Foundation
 import Archivable
 
 extension Array where Element == Website {
+    func filter(_ element: Element) -> Self {
+        let historical = element.id.historical
+        return filter {
+            $0.id.historical != historical
+        }
+    }
+    
     func prepending(_ element: Element) -> Self {
-        { historical in
-            element + filter {
-                $0.id.historical != historical
-            }
-        } (element.id.historical)
+        element + filter(element)
     }
     
     func appending(_ element: Element) -> Self {
-        { historical in
-            filter {
-                $0.id.historical != historical
-            } + element
-        } (element.id.historical)
+        filter(element) + element
     }
     
     func filter(strings: [String]) -> Self {

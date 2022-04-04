@@ -10,8 +10,8 @@ final class CloudListTests: XCTestCase {
     }
     
     func testEmptySearch() async {
-        await cloud.open(url: URL(string: "https://aguacate.org")!)
-        await cloud.update(title: "hello world", url: .init(string: "https://aguacate.org")!)
+        await cloud.history(url: URL(string: "https://aguacate.org")!, title: "")
+        await cloud.history(url: .init(string: "https://aguacate.org")!, title: "hello world")
         
         var result = await cloud.list(filter: "")
         XCTAssertEqual(1, result.count)
@@ -27,8 +27,8 @@ final class CloudListTests: XCTestCase {
     }
     
     func testEmptySearchNoSort() async {
-        await cloud.update(title: "a", url: .init(string: "https://a.org")!)
-        await cloud.update(title: "b", url: .init(string: "https://b.org")!)
+        await cloud.history(url: .init(string: "https://a.org")!, title: "a")
+        await cloud.history(url: .init(string: "https://b.org")!, title: "b")
         
         let result = await cloud.list(filter: "")
         XCTAssertEqual(2, result.count)
@@ -42,16 +42,16 @@ final class CloudListTests: XCTestCase {
     }
     
     func testNoMatch() async {
-        await cloud.open(url: .init(string: "https://aguacate.org")!)
-        await cloud.update(title: "lorem ipsum", url: .init(string: "https://aguacate.org")!)
+        await cloud.history(url: .init(string: "https://aguacate.org")!, title: "")
+        await cloud.history(url: .init(string: "https://aguacate.org")!, title: "lorem ipsum")
         
         let result = await cloud.list(filter: "rekall")
         XCTAssertTrue(result.isEmpty)
     }
     
     func testTitle() async {
-        await cloud.open(url: .init(string: "https://aguacate.org")!)
-        await cloud.update(title: "lorem ipsum", url: .init(string: "https://aguacate.org")!)
+        await cloud.history(url: .init(string: "https://aguacate.org")!, title: "")
+        await cloud.history(url: .init(string: "https://aguacate.org")!, title: "lorem ipsum")
         
         let result = await cloud.list(filter: "lorem")
         XCTAssertEqual(1, result.count)
@@ -60,7 +60,7 @@ final class CloudListTests: XCTestCase {
     }
     
     func testURL() async {
-        await cloud.open(url: .init(string: "https://aguacate.org")!)
+        await cloud.history(url: .init(string: "https://aguacate.org")!, title: "")
         
         let result = await cloud.list(filter: "agua")
         XCTAssertEqual(1, result.count)
@@ -74,22 +74,22 @@ final class CloudListTests: XCTestCase {
         let url3 = URL(string: "https://loremipsum.org/1")!
         let url4 = URL(string: "https://loremipsum.org/0")!
         
-        await cloud.open(url: url1)
-        await cloud.update(title: "lorem ipsum", url: url1)
+        await cloud.history(url: url1, title: "")
+        await cloud.history(url: url1, title: "lorem ipsum")
         
-        await cloud.open(url: url2)
-        await cloud.update(title: "hello world", url: url2)
+        await cloud.history(url: url2, title: "")
+        await cloud.history(url: url2, title: "hello world")
         
-        await cloud.open(url: url3)
-        await cloud.update(title: "ipsum lorem", url: url3)
+        await cloud.history(url: url3, title: "")
+        await cloud.history(url: url3, title: "ipsum lorem")
         
-        await cloud.open(url: url4)
-        await cloud.update(title: "ipsum lorem", url: url4)
+        await cloud.history(url: url4, title: "")
+        await cloud.history(url: url4, title: "ipsum lorem")
         
-        await cloud.open(url: .init(string: "https://ipsum.org")!)
-        await cloud.open(url: .init(string: "https://fdafsas.org")!)
-        await cloud.open(url: .init(string: "https://orem.org")!)
-        await cloud.open(url: .init(string: "https://im.org")!)
+        await cloud.history(url: .init(string: "https://ipsum.org")!, title: "")
+        await cloud.history(url: .init(string: "https://fdafsas.org")!, title: "")
+        await cloud.history(url: .init(string: "https://orem.org")!, title: "")
+        await cloud.history(url: .init(string: "https://im.org")!, title: "")
         
         let result = await cloud.list(filter: "lorem ipsum")
         XCTAssertEqual(5, result.count)
@@ -104,11 +104,11 @@ final class CloudListTests: XCTestCase {
     }
     
     func testSortTitles() async {
-        await cloud.open(url: .init(string: "https://aguacate.org")!)
-        await cloud.update(title: "world", url: .init(string: "https://aguacate.org")!)
+        await cloud.history(url: .init(string: "https://aguacate.org")!, title: "")
+        await cloud.history(url: .init(string: "https://aguacate.org")!, title: "world")
         
-        await cloud.open(url: .init(string: "https://lorem.org")!)
-        await cloud.update(title: "hello", url: .init(string: "https://lorem.org")!)
+        await cloud.history(url: .init(string: "https://lorem.org")!, title: "")
+        await cloud.history(url: .init(string: "https://lorem.org")!, title: "hello")
         
         let result = await cloud.list(filter: "hello world")
         XCTAssertEqual("hello", result.first?.title)

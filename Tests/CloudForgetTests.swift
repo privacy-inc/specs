@@ -10,7 +10,7 @@ final class CloudForgetTests: XCTestCase {
     }
     
     func testClear() async {
-        await cloud.open(url: URL(string: "https://avocado.org")!)
+        await cloud.history(url: URL(string: "https://avocado.org")!, title: "")
         _ = await cloud.policy(request: .init(string: "https://something.googleapis.com")!, from: .init(string: "https://google.com")!)
         await cloud.forget()
         

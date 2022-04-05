@@ -10,10 +10,10 @@ final class CloudHistoryTests: XCTestCase {
     }
     
     func testOpenURL() async {
-        await cloud.history(url: .init(string: "avocado.org")!, title: "")
+        await cloud.history(url: .init(string: "http://avocado.org")!, title: "")
         var model = await cloud.model
         XCTAssertEqual(1, model.history.count)
-        XCTAssertEqual("avocado.org", model.history.first?.id)
+        XCTAssertEqual("http://avocado.org", model.history.first?.id)
         XCTAssertEqual("", model.history.first?.title)
         
         await cloud.history(url: .init(string: "data:some")!, title: "")

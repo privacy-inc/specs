@@ -10,9 +10,9 @@ extension Cloud where Output == Archive {
     }
     
     public func history(url: URL, title: String) async {
-        guard case .remote = Router.with(url: url) else { return }
+        guard let remote = url.remote else { return }
         
-        let website = Website(id: url.absoluteString, title: title)
+        let website = Website(id: remote, title: title)
         let id = website.id.historical
         
         guard !model.bookmarks.contains(where: {
@@ -27,9 +27,9 @@ extension Cloud where Output == Archive {
     }
     
     public func bookmark(url: URL, title: String) async {
-        guard case .remote = Router.with(url: url) else { return }
+        guard let remote = url.remote else { return }
         
-        let website = Website(id: url.absoluteString, title: title)
+        let website = Website(id: remote, title: title)
         
         model.history = model
             .history

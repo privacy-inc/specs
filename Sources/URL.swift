@@ -29,6 +29,20 @@ extension URL {
             }
     }
     
+    var remote: String? {
+        guard
+            !isFileURL,
+            let scheme = scheme.flatMap(Scheme.init(rawValue:))
+        else { return nil }
+        
+        switch scheme {
+        case .https, .http, .ftp:
+            return absoluteString
+        default:
+            return nil
+        }
+    }
+    
 #if os(macOS)
 
     var bookmark: Data {

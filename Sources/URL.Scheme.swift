@@ -6,7 +6,8 @@ extension URL {
         https,
         http,
         ftp,
-        gmsg
+        gmsg,
+        privacy
         
         var response: Policy.Response {
             switch self {
@@ -16,6 +17,8 @@ extension URL {
                 return .ignore
             case .gmsg:
                 return .block(Allow.Subdomain.mobileads.rawValue)
+            case .privacy:
+                return .privacy
             }
         }
     }

@@ -7,6 +7,7 @@ extension Policy {
         deeplink,
         ignore,
         allow,
+        privacy,
         block(String)
     }
 }

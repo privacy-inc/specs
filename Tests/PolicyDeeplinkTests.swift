@@ -14,7 +14,7 @@ final class PolicyDeeplinkTests: XCTestCase {
         policy = .secure
     }
     
-    func test() {
+    func testOthers() {
         list
             .map {
                 ($0, policy(.init(string: $0)!))
@@ -24,5 +24,9 @@ final class PolicyDeeplinkTests: XCTestCase {
                     XCTFail("\($0.1): \($0.0)")
                 }
             }
+    }
+    
+    func testPrivacy() {
+        XCTAssertEqual(.privacy, policy(.init(string: "privacy://trackers")!))
     }
 }

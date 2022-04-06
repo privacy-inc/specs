@@ -33,7 +33,7 @@ final class CloudBookmarksTests: XCTestCase {
     func testDelete() async {
         await cloud.bookmark(url: .init(string: "https://first.org")!, title: "a")
         await cloud.bookmark(url: .init(string: "https://second.org")!, title: "b")
-        await cloud.delete(bookmark: 1)
+        await cloud.delete(url: "https://second.org")
         
         let model = await cloud.model
         XCTAssertEqual(1, model.bookmarks.count)

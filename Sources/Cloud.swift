@@ -42,17 +42,13 @@ extension Cloud where Output == Archive {
         await stream()
     }
     
-    public func delete(history: Int) async {
-        model
-            .history
-            .remove(at: history)
-        await stream()
-    }
-    
-    public func delete(bookmark: Int) async {
-        model
+    public func delete(url: String) async {
+        model.bookmarks = model
             .bookmarks
-            .remove(at: bookmark)
+            .filter(.init(id: url, title: ""))
+        model.history = model
+            .history
+            .filter(.init(id: url, title: ""))
         await stream()
     }
     

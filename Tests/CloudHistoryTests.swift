@@ -58,7 +58,7 @@ final class CloudHistoryTests: XCTestCase {
     func testDelete() async {
         await cloud.history(url: .init(string: "https://first.org")!, title: "")
         await cloud.history(url: .init(string: "https://second.org")!, title: "")
-        await cloud.delete(history: 1)
+        await cloud.delete(url: "https://first.org")
         
         let model = await cloud.model
         XCTAssertEqual(1, model.history.count)

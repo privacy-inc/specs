@@ -1,7 +1,9 @@
 import Foundation
 
-public enum Invalid: Error {
+public enum Invalid: Int, Error {
     case
     search,
-    url
+    url,
+    urlCantBeShown = 101,
+    frameLoadInterrupted = 102
 }

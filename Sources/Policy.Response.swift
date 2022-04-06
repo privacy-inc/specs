@@ -4,7 +4,7 @@ import Domains
 extension Policy {
     public enum Response: Equatable {
         case
-        external,
+        deeplink,
         ignore,
         allow,
         block(String)

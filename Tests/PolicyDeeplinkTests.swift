@@ -1,7 +1,7 @@
 import XCTest
 @testable import Specs
 
-final class PolicyExternalTests: XCTestCase {
+final class PolicyDeeplinkTests: XCTestCase {
     private var policy: Policy!
     private let list = [
         "some://www.ecosia.org",
@@ -20,7 +20,7 @@ final class PolicyExternalTests: XCTestCase {
                 ($0, policy(.init(string: $0)!))
             }
             .forEach {
-                if case .external = $0.1 { } else {
+                if case .deeplink = $0.1 { } else {
                     XCTFail("\($0.1): \($0.0)")
                 }
             }

@@ -18,7 +18,7 @@ public enum Policy: UInt8 {
                         guard response == .allow else { return response }
                         return route(url: url)
                     }
-                ?? .external
+                ?? .deeplink
             }
             ?? .ignore
     }

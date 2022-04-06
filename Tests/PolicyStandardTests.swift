@@ -50,13 +50,13 @@ final class PolicyStandardTests: XCTestCase {
             }
     }
     
-    func testExternal() {
+    func testDeeplink() {
         listC
             .map {
                 ($0, policy(.init(string: $0)!))
             }
             .forEach {
-                if case .external = $0.1 { } else {
+                if case .deeplink = $0.1 { } else {
                     XCTFail("\($0.1): \($0.0)")
                 }
             }

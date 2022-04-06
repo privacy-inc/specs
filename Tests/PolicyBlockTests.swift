@@ -235,7 +235,9 @@ final class PolicyBlockTests: XCTestCase {
         "https://sourcepoint.theonion.com/index.html?message_id=626742&consentUUID=445a9456-d727-4b02-a012-62e4c1afdf05&requestUUID=2766b7a0-e590-418f-92e0-2f6266c26826&preload_message=true",
         "https://geo.dailymotion.com/player/xo73.html?video=x87d4eu&syndicationKey=123503&autostart=on&mute=true&pip=instant&customConfig%5BcustomParams%5D=env%3Dvp%26gdfp_req%3D1%26output%3Dvast%26unviewed_position_start%3D1%26correlator%3D1648642190370%26sz%3D640x480%26url%3Dhttps%253A%252F%252Frinconvampiro.foroactivo.com%252F%26iu%3D%252F4490027%252C2867722%252FForumactif_Video%26cust_params%3Dhb_uuid%253Dundefined%2526hb_cache_id%253Dundefined%2526player%253DDM%2BEMBED%2526slmadsId%253D1656%2526website%253Dforumactif.com%2526slmadshb_adx%253Dfalse%2526slm_floor%253D2.00%26ltd%3D0%26gdpr%3D1%26gdpr_consent%3DCPWpCcAPWpCcABcAIBENCICgAP_AAH_AAAYgIDkB7C9MTWNgcH5qGZsQQYxHwRAEImAADAAJgQABABJAMIQAAGAAIAFAAIAKAAAAIBJAAQEBCAlAAAAAIAAAACAIAAAAAAAAICAAAAARAgAACABIAQAAAAAAAABAAhAAgAAEYAoIQAQAAQAAAAAAAAAAAIABQAAEAAAAAAAQAAAAAAggOACIKkxAA2BQYEgQCRAAgBBAEAQAIAAIAAGAAAAAEAAghAAQQAAAAAAAgAgAAAAgAgAAAAEACEAAAAAgAEAAAAgAAAAAAAAAIAAAAAEAAAAAAAABAAAAAAAAAEAAAACAAEAgAABAAAAAAAAAAAAAAAAAgEAAAAQAAAAAAAAAAAAAAAAA%26addtl_consent%3D1%257E587.89.1201.338.272.2572",
         "https://adstune.com/ap/index.php?lang=de&dim=728x90",
-        "https://engine.blueistheneworanges.com/?361526344&iframe"
+        "https://engine.blueistheneworanges.com/?361526344&iframe",
+        "https://imgs.signifyd.com/fp/top_fp.html;CIS3SID=050761796620A94C359DA83B6ABD3BE0?org_id=w2txo5aa&session_id=89247252109neatoroboticsemeamyshopifycom&nonce=f3a38103adc882cb",
+        "https://consentcdn.cookiebot.com/sdk/bc-v4.min.html"
     ]
     
     override func setUp() {

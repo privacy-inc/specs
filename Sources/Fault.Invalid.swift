@@ -1,6 +1,6 @@
 import Foundation
 
-extension Fail {
+extension Fault {
     enum Invalid: Error {
         case
         search,

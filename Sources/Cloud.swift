@@ -4,8 +4,8 @@ import Domains
 
 extension Cloud where Output == Archive {
     public func search(_ string: String) async throws -> URL {
-        guard let string = model.settings.search(string) else { throw Fail.Invalid.search }
-        guard let url = URL(string: string) else { throw Fail.Invalid.url }
+        guard let string = model.settings.search(string) else { throw Fault.Invalid.search }
+        guard let url = URL(string: string) else { throw Fault.Invalid.url }
         return url
     }
     

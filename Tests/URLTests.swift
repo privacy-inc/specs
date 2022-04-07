@@ -19,4 +19,14 @@ final class URLTests: XCTestCase {
         XCTAssertEqual("https://www.aguacate.com", URL(string: "https://www.aguacate.com")?.remote)
         XCTAssertEqual("https://goprivacy.app", URL(string: "https://goprivacy.app")?.remote)
     }
+    
+    func testIcon() {
+        XCTAssertEqual("www.avocado.www.ck/hello", try? URL(string: "www.avocado.www.ck/hello")?.icon)
+        XCTAssertEqual("hello.com/a", try? URL(string: "https://hello.com/a")?.icon)
+        XCTAssertEqual("hello.com", try? URL(string: "http://hello.com")?.icon)
+        XCTAssertEqual("a.hello.com/a", try? URL(string: "https://a.hello.com/a?var=3231123")?.icon)
+        XCTAssertEqual("a.hello.com/a", try? URL(string: "https://a.hello.com/a/b/c?var=3231123")?.icon)
+        XCTAssertEqual("a.hello.com/", try? URL(string: "https://a.hello.com/?var=3231123")?.icon)
+        XCTAssertEqual("twitter.com/_vaux", try? URL(string: "twitter.com/_vaux")?.icon)
+    }
 }

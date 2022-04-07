@@ -40,16 +40,16 @@ public final actor Favicon {
         
     }
     
-    public func publisher(for website: String) -> Pub? {
-        let domain = website.domainFull
-        validate(domain: domain)
+    public func publisher(for website: URL) -> Pub? {
+        guard let icon = try? website.icon else { return nil }
+        validate(icon: icon)
         
-        let publisher = publishers[domain]!
+        let publisher = publishers[icon]!
         
         Task
             .detached(priority: .utility) {
                 if await publisher.output == nil {
-                    guard let output = await self.output(for: domain) else { return }
+                    guard let output = await self.output(for: icon) else { return }
                     await publisher.received(output: output)
                 }
             }
@@ -57,14 +57,18 @@ public final actor Favicon {
         return publisher
     }
     
-    public func request(for website: String) -> Bool {
-        !website.isEmpty && !received.contains(website.domainFull)
+    public func request(for website: URL) -> Bool {
+        guard
+            let icon = try? website.icon,
+            !received.contains(icon)
+        else { return false }
+        return true
     }
     
-    public func received(url: String, for website: String) async {
-        let domain = website.domainFull
-        validate(domain: domain)
-        received.insert(domain)
+    public func received(url: String, for website: URL) async {
+        guard let icon = try? website.icon else { return }
+        validate(icon: icon)
+        received.insert(icon)
         
         guard
             !url.isEmpty,
@@ -73,7 +77,7 @@ public final actor Favicon {
         
         Task
             .detached(priority: .utility) {
-                try? await self.fetch(url: url, for: domain)
+                try? await self.fetch(url: url, for: icon)
             }
     }
     
@@ -88,14 +92,14 @@ public final actor Favicon {
             }
     }
     
-    private func fetch(url: URL, for domain: String) async throws {
+    private func fetch(url: URL, for icon: String) async throws {
         let (location, response) = try await session.download(from: url)
         
         guard (response as? HTTPURLResponse)?.statusCode == 200 else {
             try? FileManager.default.removeItem(at: location)
             return
         }
-        let file = path.appendingPathComponent(domain)
+        let file = path.appendingPathComponent(icon)
         
         if FileManager.default.fileExists(atPath: file.path) {
             try? FileManager.default.removeItem(at: file)
@@ -103,18 +107,18 @@ public final actor Favicon {
         
         try? FileManager.default.moveItem(at: location, to: file)
         
-        guard let output = output(for: domain) else { return }
-        await publishers[domain]!.received(output: output)
+        guard let output = output(for: icon) else { return }
+        await publishers[icon]!.received(output: output)
     }
     
-    private func validate(domain: String) {
-        if publishers[domain] == nil {
-            publishers[domain] = .init()
+    private func validate(icon: String) {
+        if publishers[icon] == nil {
+            publishers[icon] = .init()
         }
     }
     
-    private func output(for domain: String) -> Pub.Output? {
-        let url = path.appendingPathComponent(domain)
+    private func output(for icon: String) -> Pub.Output? {
+        let url = path.appendingPathComponent(icon)
         
         guard
             FileManager.default.fileExists(atPath: url.path),

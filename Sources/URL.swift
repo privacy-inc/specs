@@ -43,6 +43,17 @@ extension URL {
         }
     }
     
+    var icon: String {
+        get throws {
+            guard var components = URLComponents(url: self, resolvingAgainstBaseURL: false) else { throw Invalid.url }
+            components.scheme = nil
+            components.query = nil
+            components.path = components.path.components(separatedBy: "/").prefix(2).joined(separator: "/")
+            guard let string = components.string?.replacingOccurrences(of: "//", with: "") else { throw Invalid.url }
+            return string
+        }
+    }
+    
 #if os(macOS)
 
     var bookmark: Data {

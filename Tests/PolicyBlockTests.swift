@@ -249,7 +249,8 @@ final class PolicyBlockTests: XCTestCase {
         "https://tg.socdm.com/aux/idsync?proto=gumgum",
         "https://pixel.servebom.com/partner?cb=3683&svc=us&id=32&uid=",
         "https://offer.slgnt.eu/static/cookie.html",
-        "https://events.release.narrativ.com/api/v0/session.html"
+        "https://events.release.narrativ.com/api/v0/session.html",
+        "https://app-eu1.hubspot.com/conversations-visitor/25361575/threads/utk/384ca923d70849e7867509a6469712f0?uuid=f6a8b3e746fa45dbad33a18eba7e7fca&mobile=false&mobileSafari=false&hideWelcomeMessage=false&hstc=100688798.1150e281618e0a9797bc56c2d8723499.1649347472436.1649347472436.1649347472436.1&domain=hellocarbo.com&inApp53=false&messagesUtk=384ca923d70849e7867509a6469712f0&url=https%3A%2F%2Fwww.hellocarbo.com%2F&inline=false&isFullscreen=false&globalCookieOptOut=null&isFirstVisitorSession=true&isAttachmentDisabled=false&enableWidgetCookieBanner=false&isInCMS=false&hubspotUtk=1150e281618e0a9797bc56c2d8723499"
     ]
     
     override func setUp() {

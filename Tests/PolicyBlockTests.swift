@@ -239,7 +239,17 @@ final class PolicyBlockTests: XCTestCase {
         "https://imgs.signifyd.com/fp/top_fp.html;CIS3SID=050761796620A94C359DA83B6ABD3BE0?org_id=w2txo5aa&session_id=89247252109neatoroboticsemeamyshopifycom&nonce=f3a38103adc882cb",
         "https://consentcdn.cookiebot.com/sdk/bc-v4.min.html",
         "https://consent.trustarc.com/get?name=crossdomain.html&domain=ibm.com",
-        "https://prefmgr-cookie.truste-svc.net/cookie_js/cookie_iframe.html?parent=https://consent-pref.trustarc.com/?type=jefftest_ibm&site=ibm.com&action=notice&country=de&locale=en&behavior=expressed&gtm=1&layout=default_eu&irm=undefined&from=https://consent.trustarc.com/"
+        "https://prefmgr-cookie.truste-svc.net/cookie_js/cookie_iframe.html?parent=https://consent-pref.trustarc.com/?type=jefftest_ibm&site=ibm.com&action=notice&country=de&locale=en&behavior=expressed&gtm=1&layout=default_eu&irm=undefined&from=https://consent.trustarc.com/",
+        "https://qds0l.publishers.tremorhub.com/pubsync?redir=https%3A%2F%2Fpixel.servebom.com%2Fpartner%3Fcb%3D3683%26svc%3Dus%26id%3D32%26uid%3D%5Btvid%5D",
+        "https://match.sharethrough.com/universal/v1?supply_id=dSvJjhJF",
+        "https://sync.bfmio.com/sync_iframe?ifpl=5&ifg=4&id=Purch&gdpr=1&gc=CPXFmQHPXFmQHAKAmAENCJCsAP_AAH_AAAwIIqNd_X__bX9j-_5_f_t0eY1P9_r3_-QzjhfNt-8F3L_W_L0X42E7NF36pq4KuR4Eu3LBIQNlHMHUTUmwaokVrzHsak2cpyNKJ7LEmnMZO2dYGHtPn9lDuYKY7_5___bz3j-v_t_-39T378Xf3_d5_2---vCfV599jbv9f3__39nP___9v-_8_______BFMAkw1LyALsyxwZNo0qhRAjCsJCqBQAUUAwtEVgA4OCnZWAT6ghYAIBUhGBECDEFGDAIABBIAkIiAkALBAIgCIBAACABEAhAARMAgsALAwCAAUA0LEAKAAQJCDI4IjlMCAqRKKCWysQSgr2NMIAyzwIoFEZFQAIkmgBYGQkLBzHAEgJeLJA0xQvkAIwAAAAA.f_gAAAAAAAAA&gce=1",
+        "https://g2.gumgum.com/usync/njqsk6ke?r=https%3A%2F%2Fpixel.servebom.com%2Fpartner%3Fcb%3D263%26svc%3Dus%26id%3D48%26uid%3D&gdpr=1&gdpr_consent=CPXFmQHPXFmQHAKAmAENCJCsAP_AAH_AAAwIIqNd_X__bX9j-_5_f_t0eY1P9_r3_-QzjhfNt-8F3L_W_L0X42E7NF36pq4KuR4Eu3LBIQNlHMHUTUmwaokVrzHsak2cpyNKJ7LEmnMZO2dYGHtPn9lDuYKY7_5___bz3j-v_t_-39T378Xf3_d5_2---vCfV599jbv9f3__39nP___9v-_8_______BFMAkw1LyALsyxwZNo0qhRAjCsJCqBQAUUAwtEVgA4OCnZWAT6ghYAIBUhGBECDEFGDAIABBIAkIiAkALBAIgCIBAACABEAhAARMAgsALAwCAAUA0LEAKAAQJCDI4IjlMCAqRKKCWysQSgr2NMIAyzwIoFEZFQAIkmgBYGQkLBzHAEgJeLJA0xQvkAIwAAAAA.f_gAAAAAAAAA",
+        "https://sync-tm.everesttech.net/upi/pid/URnmbSKM?redir=https%3A%2F%2Fusersync.gumgum.com%2Fusersync%3Fb%3Datm%26i%3D%24%7BTM_USER_ID%7D&gdpr=1&gdpr_consent=CPXFmQHPXFmQHAKAmAENCJCsAP_AAH_AAAwIIqNd_X__bX9j-_5_f_t0eY1P9_r3_-QzjhfNt-8F3L_W_L0X42E7NF36pq4KuR4Eu3LBIQNlHMHUTUmwaokVrzHsak2cpyNKJ7LEmnMZO2dYGHtPn9lDuYKY7_5___bz3j-v_t_-39T378Xf3_d5_2---vCfV599jbv9f3__39nP___9v-_8_______BFMAkw1LyALsyxwZNo0qhRAjCsJCqBQAUUAwtEVgA4OCnZWAT6ghYAIBUhGBECDEFGDAIABBIAkIiAkALBAIgCIBAACABEAhAARMAgsALAwCAAUA0LEAKAAQJCDI4IjlMCAqRKKCWysQSgr2NMIAyzwIoFEZFQAIkmgBYGQkLBzHAEgJeLJA0xQvkAIwAAAAA.f_gAAAAAAAAA",
+        "https://cs.emxdgt.com/um?redirect=https%3A%2F%2Fusersync.gumgum.com%2Fusersync%3Fb%3Demx%26i%3D%24UID&gdpr=1&gdpr_consent=CPXFmQHPXFmQHAKAmAENCJCsAP_AAH_AAAwIIqNd_X__bX9j-_5_f_t0eY1P9_r3_-QzjhfNt-8F3L_W_L0X42E7NF36pq4KuR4Eu3LBIQNlHMHUTUmwaokVrzHsak2cpyNKJ7LEmnMZO2dYGHtPn9lDuYKY7_5___bz3j-v_t_-39T378Xf3_d5_2---vCfV599jbv9f3__39nP___9v-_8_______BFMAkw1LyALsyxwZNo0qhRAjCsJCqBQAUUAwtEVgA4OCnZWAT6ghYAIBUhGBECDEFGDAIABBIAkIiAkALBAIgCIBAACABEAhAARMAgsALAwCAAUA0LEAKAAQJCDI4IjlMCAqRKKCWysQSgr2NMIAyzwIoFEZFQAIkmgBYGQkLBzHAEgJeLJA0xQvkAIwAAAAA.f_gAAAAAAAAA",
+        "https://tg.socdm.com/aux/idsync?proto=gumgum",
+        "https://pixel.servebom.com/partner?cb=3683&svc=us&id=32&uid=",
+        "https://offer.slgnt.eu/static/cookie.html",
+        "https://events.release.narrativ.com/api/v0/session.html"
     ]
     
     override func setUp() {

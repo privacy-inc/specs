@@ -1,4 +1,5 @@
 import Foundation
+import Domains
 import Archivable
 
 public struct Website: Storable, Identifiable {
@@ -27,5 +28,13 @@ public struct Website: Storable, Identifiable {
     
     func with(title: String) -> Self {
         .init(id: id, title: title)
+    }
+    
+    func filter(websites: [Self]) -> [Self] {
+        let comparable = id.comparable
+        return websites
+            .filter {
+                $0.id.comparable != comparable
+            }
     }
 }

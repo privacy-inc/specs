@@ -13,10 +13,10 @@ extension Cloud where Output == Archive {
         guard let remote = url.remote else { return }
         
         let website = Website(id: remote, title: title)
-        let id = website.id.historical
+        let comparable = website.id.comparable
         
         guard !model.bookmarks.contains(where: {
-            $0.id.historical == id
+            $0.id.comparable == comparable
         }) else { return }
         
         model.history = model
@@ -30,10 +30,7 @@ extension Cloud where Output == Archive {
         guard let remote = url.remote else { return }
         
         let website = Website(id: remote, title: title)
-        
-        model.history = model
-            .history
-            .filter(website)
+        await delete(website: website)
         
         model.bookmarks = model
             .bookmarks
@@ -43,12 +40,7 @@ extension Cloud where Output == Archive {
     }
     
     public func delete(url: String) async {
-        model.bookmarks = model
-            .bookmarks
-            .filter(.init(id: url, title: ""))
-        model.history = model
-            .history
-            .filter(.init(id: url, title: ""))
+        await delete(website: .init(id: url, title: ""))
         await stream()
     }
     
@@ -161,6 +153,14 @@ extension Cloud where Output == Archive {
         model.history = []
         model.tracking = .init()
         await stream()
+    }
+    
+    private func delete(website: Website) async {
+        model.history = website
+            .filter(websites: model.history)
+        
+        model.bookmarks = website
+            .filter(websites: model.bookmarks)
     }
     
     private func update(configuration: Settings.Configuration) async {

@@ -99,6 +99,7 @@ public final actor Favicon {
             try? FileManager.default.removeItem(at: location)
             return
         }
+        
         let file = path.appendingPathComponent(icon)
         
         if FileManager.default.fileExists(atPath: file.path) {

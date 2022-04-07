@@ -49,8 +49,11 @@ extension URL {
             components.scheme = nil
             components.query = nil
             components.path = components.path.components(separatedBy: "/").prefix(2).joined(separator: "/")
-            guard let string = components.string?.replacingOccurrences(of: "//", with: "") else { throw Invalid.url }
-            return string
+            guard
+                let string = components.string?.replacingOccurrences(of: "//", with: ""),
+                let encoded = string.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+            else { throw Invalid.url }
+            return encoded
         }
     }
     

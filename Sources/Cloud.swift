@@ -52,16 +52,6 @@ extension Cloud where Output == Archive {
         await stream()
     }
     
-    public func move(bookmark: Int, to index: Int) async {
-        guard bookmark != index else { return }
-        
-        model.bookmarks = model
-            .bookmarks
-            .moving(from: bookmark, to: index)
-        
-        await stream()
-    }
-    
     public func policy(request: URL, from url: URL) async -> Policy.Response {
         let response = model.settings.policy(request)
         if case let .block(tracker) = response {
@@ -72,17 +62,6 @@ extension Cloud where Output == Archive {
             await stream()
         }
         return response
-    }
-    
-    public func list(filter: String) async -> [Website] {
-        { websites, filters in
-            filters.isEmpty ? websites : websites.filter(strings: filters)
-        } (model.bookmarks + model.history, filter
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .components(separatedBy: " ")
-            .filter {
-                !$0.isEmpty
-            })
     }
     
     public func update(search: Search) async {

@@ -7,11 +7,11 @@ public struct Archive: Arch {
     }
     
     public var timestamp: UInt32
-    public internal(set) var bookmarks: [Website]
-    public internal(set) var history: [Website]
     public internal(set) var tracking: Tracking
     public internal(set) var settings: Settings
-    
+    var bookmarks: [Website]
+    var history: [Website]
+
     public var data: Data {
         .init()
         .adding(size: UInt16.self, collection: bookmarks)
@@ -56,5 +56,16 @@ public struct Archive: Arch {
             tracking = .init(data: &data)
             settings = .init(data: &data)
         }
+    }
+    
+    public func websites(filter: String) -> [Website] {
+        { websites, filters in
+            filters.isEmpty ? websites : websites.filter(strings: filters)
+        } (bookmarks + history, filter
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .components(separatedBy: " ")
+            .filter {
+                !$0.isEmpty
+            })
     }
 }

@@ -237,7 +237,9 @@ final class PolicyBlockTests: XCTestCase {
         "https://adstune.com/ap/index.php?lang=de&dim=728x90",
         "https://engine.blueistheneworanges.com/?361526344&iframe",
         "https://imgs.signifyd.com/fp/top_fp.html;CIS3SID=050761796620A94C359DA83B6ABD3BE0?org_id=w2txo5aa&session_id=89247252109neatoroboticsemeamyshopifycom&nonce=f3a38103adc882cb",
-        "https://consentcdn.cookiebot.com/sdk/bc-v4.min.html"
+        "https://consentcdn.cookiebot.com/sdk/bc-v4.min.html",
+        "https://consent.trustarc.com/get?name=crossdomain.html&domain=ibm.com",
+        "https://prefmgr-cookie.truste-svc.net/cookie_js/cookie_iframe.html?parent=https://consent-pref.trustarc.com/?type=jefftest_ibm&site=ibm.com&action=notice&country=de&locale=en&behavior=expressed&gtm=1&layout=default_eu&irm=undefined&from=https://consent.trustarc.com/"
     ]
     
     override func setUp() {

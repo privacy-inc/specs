@@ -53,6 +53,9 @@ final class CloudHistoryTests: XCTestCase {
         model = await cloud.model
         XCTAssertEqual(4, model.history.count)
         XCTAssertEqual("http://first.org/as", model.history.first?.id)
+//        let ur = URL(string: "https://www.google.com/maps/@13.0080775,47.5045485,2z?ucbcb=1")!
+//        print(ur.)
+//        print(ur)
     }
     
     func testDelete() async {

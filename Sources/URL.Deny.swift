@@ -189,6 +189,7 @@ extension URL {
         blueistheneworanges,
         signifyd,
         cookiebot,
+        trustarc,
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
         google_analytics = "google-analytics",
@@ -212,7 +213,8 @@ extension URL {
         doubleclick_analytics = "doubleclick-analytics",
         pix_cdn = "pix-cdn",
         saturn_j1407b = "saturn-j1407b",
-        hip_97166b = "hip-97166b"
+        hip_97166b = "hip-97166b",
+        truste_svc = "truste-svc"
         
         static func response(for domain: Domain, on: URL) -> Policy.Response? {
             Self(rawValue: domain.name)

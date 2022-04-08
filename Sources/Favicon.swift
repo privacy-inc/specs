@@ -75,12 +75,10 @@ public final actor Favicon {
     public func clear() {
         publishers = [:]
         received = []
-        path = directory()
-        let path = path
         
         Task
             .detached(priority: .utility) {
-                try? FileManager.default.removeItem(at: path)
+                await self.regenerate()
             }
     }
     
@@ -113,6 +111,11 @@ public final actor Favicon {
         else { return nil }
         
         return .init(data: data)
+    }
+    
+    private func regenerate() {
+        try? FileManager.default.removeItem(at: path)
+        path = directory()
     }
     
     private func directory() -> URL {

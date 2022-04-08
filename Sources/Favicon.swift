@@ -23,18 +23,7 @@ public final actor Favicon {
         return .init(configuration: configuration)
     } ()
     
-    private lazy var path: URL = {
-        var url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("favicons")
-        
-        if !FileManager.default.fileExists(atPath: url.path) {
-            var resources = URLResourceValues()
-            resources.isExcludedFromBackup = true
-            try? url.setResourceValues(resources)
-            try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
-        }
-        
-        return url
-    } ()
+    private lazy var path = directory()
     
     public init() {
         
@@ -42,7 +31,10 @@ public final actor Favicon {
     
     public func publisher(for website: URL) -> Pub? {
         guard let icon = try? website.icon else { return nil }
-        validate(icon: icon)
+        
+        if publishers[icon] == nil {
+            publishers[icon] = .init()
+        }
         
         let publisher = publishers[icon]!
         
@@ -67,7 +59,6 @@ public final actor Favicon {
     
     public func received(url: String, for website: URL) async {
         guard let icon = try? website.icon else { return }
-        validate(icon: icon)
         received.insert(icon)
         
         guard
@@ -84,7 +75,8 @@ public final actor Favicon {
     public func clear() {
         publishers = [:]
         received = []
-        let path = self.path
+        path = directory()
+        let path = path
         
         Task
             .detached(priority: .utility) {
@@ -112,12 +104,6 @@ public final actor Favicon {
         await publishers[icon]!.received(output: output)
     }
     
-    private func validate(icon: String) {
-        if publishers[icon] == nil {
-            publishers[icon] = .init()
-        }
-    }
-    
     private func output(for icon: String) -> Pub.Output? {
         let url = path.appendingPathComponent(icon)
         
@@ -127,6 +113,19 @@ public final actor Favicon {
         else { return nil }
         
         return .init(data: data)
+    }
+    
+    private func directory() -> URL {
+        var url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("favicons")
+        
+        if !FileManager.default.fileExists(atPath: url.path) {
+            var resources = URLResourceValues()
+            resources.isExcludedFromBackup = true
+            try? url.setResourceValues(resources)
+            try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
+        }
+        
+        return url
     }
 }
 

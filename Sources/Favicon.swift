@@ -31,12 +31,7 @@ public final actor Favicon {
     
     public func publisher(for website: URL) -> Pub? {
         guard let icon = try? website.icon else { return nil }
-        
-        if publishers[icon] == nil {
-            publishers[icon] = .init()
-        }
-        
-        let publisher = publishers[icon]!
+        let publisher = publishers[icon, default: .init()]
         
         Task
             .detached(priority: .utility) {
@@ -99,7 +94,7 @@ public final actor Favicon {
         try? FileManager.default.moveItem(at: location, to: file)
         
         guard let output = output(for: icon) else { return }
-        await publishers[icon]!.received(output: output)
+        await publishers[icon, default: .init()].received(output: output)
     }
     
     private func output(for icon: String) -> Pub.Output? {

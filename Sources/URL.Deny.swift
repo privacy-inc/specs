@@ -201,6 +201,8 @@ extension URL {
         slgnt,
         narrativ,
         hubspot,
+        lemonswan,
+        ebaystatic,
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
         google_analytics = "google-analytics",
@@ -225,7 +227,8 @@ extension URL {
         pix_cdn = "pix-cdn",
         saturn_j1407b = "saturn-j1407b",
         hip_97166b = "hip-97166b",
-        truste_svc = "truste-svc"
+        truste_svc = "truste-svc",
+        hs_edge = "hs-edge"
         
         static func response(for domain: Domain, on: URL) -> Policy.Response? {
             Self(rawValue: domain.name)

@@ -2,9 +2,9 @@ import Foundation
 import Archivable
 
 public struct Settings: Storable {
-    public let search: Search
-    public let configuration: Configuration
-    public let policy: Policy
+    public internal(set) var search: Search
+    public internal(set) var configuration: Configuration
+    public internal(set) var policy: Policy
     
     public var data: Data {
         .init()
@@ -23,23 +23,5 @@ public struct Settings: Storable {
         search = .google
         policy = .secure
         configuration = .init()
-    }
-    
-    private init(search: Search, policy: Policy, configuration: Configuration) {
-        self.search = search
-        self.policy = policy
-        self.configuration = configuration
-    }
-    
-    func with(search: Search) -> Self {
-        .init(search: search, policy: policy, configuration: configuration)
-    }
-    
-    func with(policy: Policy) -> Self {
-        .init(search: search, policy: policy, configuration: configuration)
-    }
-    
-    func with(configuration: Configuration) -> Self {
-        .init(search: search, policy: policy, configuration: configuration)
     }
 }

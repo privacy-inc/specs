@@ -24,8 +24,8 @@ final class MigrationTests: XCTestCase {
         
         archive.bookmarks += [.init(url: URL(string: "https://fsfsdfsd.com")!).with(title: "hello world")]
         archive.index = 99
-        archive.settings = archive.settings.with(search: .ecosia)
-        archive.settings = archive.settings.with(policy: .standard)
+        archive.settings.search = .ecosia
+        archive.settings.policy = .standard
         
         let migrated = await Archive.prototype(data: archive.compressed)
         XCTAssertEqual(2, migrated.history.count)

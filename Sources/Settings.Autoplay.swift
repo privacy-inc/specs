@@ -1,6 +1,6 @@
 import Foundation
 
-extension Settings.Configuration {
+extension Settings {
     public enum Autoplay: UInt8 {
         case
         none,

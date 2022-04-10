@@ -10,108 +10,105 @@ final class SettingsConfigurationTests: XCTestCase {
     
     func testAutoplay() {
         XCTAssertEqual(.none, configuration.autoplay)
-        
-        configuration = configuration
-            .with(autoplay: .audio)
+        configuration.autoplay = .audio
         XCTAssertEqual(.audio, configuration.data.prototype(Settings.Configuration.self).autoplay)
     }
     
     func testJavascript() {
         XCTAssertTrue(configuration.javascript)
-        
-        configuration = configuration
-            .with(javascript: false)
+        configuration.javascript = false
         XCTAssertFalse(configuration.data.prototype(Settings.Configuration.self).javascript)
     }
     
     func testPopups() {
         XCTAssertFalse(configuration.popups)
-        
-        configuration = configuration
-            .with(popups: true)
+        configuration.popups = true
         XCTAssertTrue(configuration.data.prototype(Settings.Configuration.self).popups)
     }
     
     func testLocation() {
         XCTAssertFalse(configuration.location)
-        
-        configuration = configuration
-            .with(location: true)
+        configuration.location = true
         XCTAssertTrue(configuration.data.prototype(Settings.Configuration.self).location)
     }
     
     func testTimers() {
         XCTAssertTrue(configuration.timers)
         XCTAssertFalse(configuration.scripts.contains(Script.timers))
-        
-        configuration = configuration
-            .with(timers: false)
+
+        configuration.timers = false
         XCTAssertTrue(configuration.scripts.contains(Script.timers))
         XCTAssertFalse(configuration.data.prototype(Settings.Configuration.self).timers)
     }
     
     func testDark() {
         XCTAssertTrue(configuration.dark)
-        XCTAssertTrue(configuration._blockers(dark: true).contains(.antidark))
-        XCTAssertFalse(configuration._blockers(dark: false).contains(.antidark))
+        XCTAssertTrue(configuration.blockList(dark: true).contains(.antidark))
+        XCTAssertFalse(configuration.blockList(dark: false).contains(.antidark))
         
-        configuration = configuration
-            .with(dark: false)
-        XCTAssertFalse(configuration._blockers(dark: true).contains(.antidark))
-        XCTAssertFalse(configuration._blockers(dark: false).contains(.antidark))
+        configuration.dark = false
+        XCTAssertFalse(configuration.blockList(dark: true).contains(.antidark))
+        XCTAssertFalse(configuration.blockList(dark: false).contains(.antidark))
         XCTAssertFalse(configuration.data.prototype(Settings.Configuration.self).dark)
     }
     
     func testAds() {
         XCTAssertFalse(configuration.ads)
-        XCTAssertTrue(configuration._blockers(dark: false).contains(.ads))
+        XCTAssertTrue(configuration.blockList(dark: false).contains(.ads))
         
-        configuration = configuration
-            .with(ads: true)
-        XCTAssertFalse(configuration._blockers(dark: false).contains(.ads))
+        configuration.ads = true
+        XCTAssertFalse(configuration.blockList(dark: false).contains(.ads))
         XCTAssertTrue(configuration.data.prototype(Settings.Configuration.self).ads)
     }
     
     func testScreen() {
         XCTAssertFalse(configuration.screen)
-        XCTAssertTrue(configuration._blockers(dark: false).contains(.screen))
+        XCTAssertTrue(configuration.blockList(dark: false).contains(.screen))
         XCTAssertTrue(configuration.scripts.contains(Script.scroll))
         
-        configuration = configuration
-            .with(screen: true)
-        XCTAssertFalse(configuration._blockers(dark: false).contains(.screen))
+        configuration.screen = true
+        XCTAssertFalse(configuration.blockList(dark: false).contains(.screen))
         XCTAssertFalse(configuration.scripts.contains(Script.scroll))
         XCTAssertTrue(configuration.data.prototype(Settings.Configuration.self).screen)
     }
     
     func testCookies() {
         XCTAssertFalse(configuration.cookies)
-        XCTAssertTrue(configuration._blockers(dark: false).contains(.cookies))
+        XCTAssertTrue(configuration.blockList(dark: false).contains(.cookies))
         
-        configuration = configuration
-            .with(cookies: true)
-        XCTAssertFalse(configuration._blockers(dark: false).contains(.cookies))
+        configuration.cookies = true
+        XCTAssertFalse(configuration.blockList(dark: false).contains(.cookies))
         XCTAssertTrue(configuration.data.prototype(Settings.Configuration.self).cookies)
     }
     
     func testHttp() {
         XCTAssertFalse(configuration.http)
-        XCTAssertTrue(configuration._blockers(dark: false).contains(.http))
+        XCTAssertTrue(configuration.blockList(dark: false).contains(.http))
         
-        configuration = configuration
-            .with(http: true)
-        XCTAssertFalse(configuration._blockers(dark: false).contains(.http))
+        configuration.http = true
+        XCTAssertFalse(configuration.blockList(dark: false).contains(.http))
         XCTAssertTrue(configuration.data.prototype(Settings.Configuration.self).http)
     }
     
     func testThird() {
         XCTAssertTrue(configuration.third)
-        XCTAssertFalse(configuration._blockers(dark: false).contains(.third))
+        XCTAssertFalse(configuration.blockList(dark: false).contains(.third))
         
-        configuration = configuration
-            .with(third: false)
-        XCTAssertTrue(configuration._blockers(dark: false).contains(.third))
+        configuration.third = false
+        XCTAssertTrue(configuration.blockList(dark: false).contains(.third))
         XCTAssertFalse(configuration.data.prototype(Settings.Configuration.self).third)
+    }
+    
+    func testHistory() {
+        XCTAssertTrue(configuration.history)
+        configuration.history = false
+        XCTAssertFalse(configuration.data.prototype(Settings.Configuration.self).history)
+    }
+    
+    func testFavicons() {
+        XCTAssertTrue(configuration.favicons)
+        configuration.favicons = false
+        XCTAssertFalse(configuration.data.prototype(Settings.Configuration.self).favicons)
     }
     
     func testBlockersInitial() {
@@ -119,6 +116,6 @@ final class SettingsConfigurationTests: XCTestCase {
                                 .allCases
                                 .filter {
                                     $0 != .third
-                        }), configuration._blockers(dark: true))
+                        }), configuration.blockList(dark: true))
     }
 }

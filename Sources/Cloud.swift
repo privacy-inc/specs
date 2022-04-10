@@ -58,95 +58,80 @@ extension Cloud where Output == Archive {
     
     public func update(search: Search) async {
         guard search != model.settings.search else { return }
-        model.settings = model
-            .settings
-            .with(search: search)
+        model.settings.search = search
         await stream()
     }
     
     public func update(policy: Policy) async {
         guard policy != model.settings.policy else { return }
-        model.settings = model
-            .settings
-            .with(policy: policy)
+        model.settings.policy = policy
         await stream()
     }
     
-    public func update(autoplay: Settings.Configuration.Autoplay) async {
-        await update(configuration: model
-                .settings
-                .configuration
-                .with(autoplay: autoplay))
+    public func update(autoplay: Settings.Autoplay) async {
+        guard autoplay != model.settings.configuration.autoplay else { return }
+        model.settings.configuration.autoplay = autoplay
+        await stream()
     }
     
     public func update(javascript: Bool) async {
-        await update(configuration: model
-                .settings
-                .configuration
-                .with(javascript: javascript))
+        guard javascript != model.settings.configuration.javascript else { return }
+        model.settings.configuration.javascript = javascript
+        await stream()
     }
     
     public func update(popups: Bool) async {
-        await update(configuration: model
-                .settings
-                .configuration
-                .with(popups: popups))
+        guard popups != model.settings.configuration.popups else { return }
+        model.settings.configuration.popups = popups
+        await stream()
     }
     
     public func update(location: Bool) async {
-        await update(configuration: model
-                .settings
-                .configuration
-                .with(location: location))
+        guard location != model.settings.configuration.location else { return }
+        model.settings.configuration.location = location
+        await stream()
     }
     
     public func update(timers: Bool) async {
-        await update(configuration: model
-                .settings
-                .configuration
-                .with(timers: timers))
+        guard timers != model.settings.configuration.timers else { return }
+        model.settings.configuration.timers = timers
+        await stream()
     }
     
     public func update(dark: Bool) async {
-        await update(configuration: model
-                .settings
-                .configuration
-                .with(dark: dark))
+        guard dark != model.settings.configuration.dark else { return }
+        model.settings.configuration.dark = dark
+        await stream()
     }
     
     public func update(ads: Bool) async {
-        await update(configuration: model
-                .settings
-                .configuration
-                .with(ads: ads))
+        guard ads != model.settings.configuration.ads else { return }
+        model.settings.configuration.ads = ads
+        await stream()
     }
     
     public func update(screen: Bool) async {
-        await update(configuration: model
-                .settings
-                .configuration
-                .with(screen: screen))
+        guard screen != model.settings.configuration.screen else { return }
+        model.settings.configuration.screen = screen
+        await stream()
     }
     
     public func update(cookies: Bool) async {
-        await update(configuration: model
-                .settings
-                .configuration
-                .with(cookies: cookies))
+        guard cookies != model.settings.configuration.cookies else { return }
+        model.settings.configuration.cookies = cookies
+        await stream()
     }
     
     public func update(http: Bool) async {
-        await update(configuration: model
-                .settings
-                .configuration
-                .with(http: http))
+        guard http != model.settings.configuration.http else { return }
+        model.settings.configuration.http = http
+        await stream()
     }
     
     public func update(third: Bool) async {
-        await update(configuration: model
-                .settings
-                .configuration
-                .with(third: third))
+        guard third != model.settings.configuration.third else { return }
+        model.settings.configuration.third = third
+        await stream()
     }
     
     public func forget() async {
@@ -161,13 +146,5 @@ extension Cloud where Output == Archive {
         
         model.bookmarks = website
             .filter(websites: model.bookmarks)
-    }
-    
-    private func update(configuration: Settings.Configuration) async {
-        guard configuration != model.settings.configuration else { return }
-        model.settings = model
-            .settings
-            .with(configuration: configuration)
-        await stream()
     }
 }

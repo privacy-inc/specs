@@ -9,7 +9,7 @@ struct Archive_v0: Arch {
     var history: [History]
     var cards: [Card]
     var events: Events
-    var settings: Settings
+    var settings: Settings_v0
     var index: UInt16
     
     var data: Data {

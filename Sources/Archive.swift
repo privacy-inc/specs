@@ -48,7 +48,20 @@ public struct Archive: Arch {
                 .map {
                     .init(id: $0.website.access.value, title: $0.website.title)
                 }
-            settings = legacy.settings
+            settings = .init()
+            settings.search = legacy.settings.search
+            settings.policy = legacy.settings.policy
+            settings.configuration.autoplay = legacy.settings.configuration.autoplay
+            settings.configuration.javascript = legacy.settings.configuration.javascript
+            settings.configuration.popups = legacy.settings.configuration.popups
+            settings.configuration.location = legacy.settings.configuration.location
+            settings.configuration.timers = legacy.settings.configuration.timers
+            settings.configuration.dark = legacy.settings.configuration.dark
+            settings.configuration.ads = legacy.settings.configuration.ads
+            settings.configuration.screen = legacy.settings.configuration.screen
+            settings.configuration.cookies = legacy.settings.configuration.cookies
+            settings.configuration.http = legacy.settings.configuration.http
+            settings.configuration.third = legacy.settings.configuration.third
             tracking = .init()
         } else {
             bookmarks = data.collection(size: UInt16.self)

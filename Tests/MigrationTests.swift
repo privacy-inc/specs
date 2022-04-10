@@ -26,6 +26,17 @@ final class MigrationTests: XCTestCase {
         archive.index = 99
         archive.settings.search = .ecosia
         archive.settings.policy = .standard
+        archive.settings.configuration.autoplay = .all
+        archive.settings.configuration.javascript = false
+        archive.settings.configuration.popups = true
+        archive.settings.configuration.location = true
+        archive.settings.configuration.timers = false
+        archive.settings.configuration.dark = false
+        archive.settings.configuration.ads = true
+        archive.settings.configuration.screen = true
+        archive.settings.configuration.cookies = true
+        archive.settings.configuration.http = true
+        archive.settings.configuration.third = false
         
         let migrated = await Archive.prototype(data: archive.compressed)
         XCTAssertEqual(2, migrated.history.count)
@@ -37,5 +48,16 @@ final class MigrationTests: XCTestCase {
         XCTAssertEqual("hello world", migrated.bookmarks.first?.title)
         XCTAssertEqual(.ecosia, migrated.settings.search)
         XCTAssertEqual(.standard, migrated.settings.policy)
+        XCTAssertEqual(.all, migrated.settings.configuration.autoplay)
+        XCTAssertFalse(migrated.settings.configuration.javascript)
+        XCTAssertTrue(migrated.settings.configuration.popups)
+        XCTAssertTrue(migrated.settings.configuration.location)
+        XCTAssertFalse(migrated.settings.configuration.timers)
+        XCTAssertFalse(migrated.settings.configuration.dark)
+        XCTAssertTrue(migrated.settings.configuration.ads)
+        XCTAssertTrue(migrated.settings.configuration.screen)
+        XCTAssertTrue(migrated.settings.configuration.cookies)
+        XCTAssertTrue(migrated.settings.configuration.http)
+        XCTAssertFalse(migrated.settings.configuration.third)
     }
 }

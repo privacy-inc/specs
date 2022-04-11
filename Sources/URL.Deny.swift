@@ -237,7 +237,8 @@ extension URL {
         hip_97166b = "hip-97166b",
         truste_svc = "truste-svc",
         hs_edge = "hs-edge",
-        podigee_cdn = "podigee-cdn"
+        podigee_cdn = "podigee-cdn",
+        privacy_mgmt = "privacy-mgmt"
         
         static func response(for domain: Domain, on: URL) -> Policy.Response? {
             Self(rawValue: domain.name)

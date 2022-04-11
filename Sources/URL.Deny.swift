@@ -205,6 +205,8 @@ extension URL {
         ebaystatic,
         nmrodam,
         homeday,
+        sensic,
+        wemass,
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
         google_analytics = "google-analytics",

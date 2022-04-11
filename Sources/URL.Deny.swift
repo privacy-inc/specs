@@ -209,6 +209,8 @@ extension URL {
         wemass,
         communicationads,
         o2online,
+        podigee,
+        revjet,
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
         google_analytics = "google-analytics",
@@ -234,7 +236,8 @@ extension URL {
         saturn_j1407b = "saturn-j1407b",
         hip_97166b = "hip-97166b",
         truste_svc = "truste-svc",
-        hs_edge = "hs-edge"
+        hs_edge = "hs-edge",
+        podigee_cdn = "podigee-cdn"
         
         static func response(for domain: Domain, on: URL) -> Policy.Response? {
             Self(rawValue: domain.name)

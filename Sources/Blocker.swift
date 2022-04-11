@@ -46,7 +46,9 @@ enum Blocker: CaseIterable {
                                                        "#ad-footer",
                                                        "[class*='ad-support']",
                                                        "[class*='-top-ad']",
-                                                       ".ad-container"]))]
+                                                       ".ad-container",
+                                                       ".tms-ad",
+                                                       ".m-inread-ad"]))]
         case .screen:
             return [.init(trigger: .url(.google), action: .css(["#consent-bump",
                                                                 "#lb",
@@ -81,8 +83,8 @@ enum Blocker: CaseIterable {
                                                                   ".tp-modal",
                                                                   ".tp-backdrop"])),
                     .init(trigger: .url(.pinterest), action: .css(
-                            [".Jea.LCN.Lej.PKX._he.dxm.fev.fte.gjz.jzS.ojN.p6V.qJc.zI7.iyn.Hsu",
-                             ".QLY.Rym.ZZS._he.ojN.p6V.zI7.iyn.Hsu"])),
+                        [".Jea.LCN.Lej.PKX._he.dxm.fev.fte.gjz.jzS.ojN.p6V.qJc.zI7.iyn.Hsu",
+                         ".QLY.Rym.ZZS._he.ojN.p6V.zI7.iyn.Hsu"])),
                     .init(trigger: .url(.bbc), action: .css([".fc-consent-root",
                                                              ".ssrcss-u3tmht-ConsentBanner.exhqgzu6",
                                                              "#cookiePrompt"])),

@@ -4,15 +4,15 @@ import XCTest
 final class BlockerTests: XCTestCase {
     func testAllCases() {
         XCTAssertTrue(Parser(content: Set(Blocker.allCases).rules)
-                        .cookies)
+            .cookies)
         XCTAssertTrue(Parser(content: Set(Blocker.allCases).rules)
-                        .http)
+            .http)
         XCTAssertEqual(1, Parser(content: Set(Blocker.allCases).rules)
-                        .amount(url: "google.com"))
+            .amount(url: "google.com"))
         XCTAssertTrue(Parser(content: Set(Blocker.allCases).rules)
-                        .css(url: "google.com", selectors: ["#taw",
-                                                            "#consent-bump",
-                                                            ".P1Ycoe"]))
+            .css(url: "google.com", selectors: ["#taw",
+                                                "#consent-bump",
+                                                ".P1Ycoe"]))
     }
     
     func testCookies() {
@@ -29,140 +29,142 @@ final class BlockerTests: XCTestCase {
     
     func testAds() {
         XCTAssertTrue(Parser(content: Set([.ads]).rules)
-                        .css(url: "ecosia.org", selectors: [".card-ad",
-                                                            ".card-productads"]))
+            .css(url: "ecosia.org", selectors: [".card-ad",
+                                                ".card-productads"]))
         
         XCTAssertTrue(Parser(content: Set([.ads]).rules)
-                        .css(url: "google.com", selectors: ["#taw",
-                                                            "#rhs",
-                                                            "#tadsb",
-                                                            ".commercial",
-                                                            ".Rn1jbe",
-                                                            ".kxhcC",
-                                                            ".isv-r.PNCib.BC7Tfc",
-                                                            ".isv-r.PNCib.o05QGe"]))
+            .css(url: "google.com", selectors: ["#taw",
+                                                "#rhs",
+                                                "#tadsb",
+                                                ".commercial",
+                                                ".Rn1jbe",
+                                                ".kxhcC",
+                                                ".isv-r.PNCib.BC7Tfc",
+                                                ".isv-r.PNCib.o05QGe"]))
         
         XCTAssertTrue(Parser(content: Set([.ads]).rules)
-                        .css(url: "youtube.com", selectors: [".ytd-search-pyv-renderer",
-                                                             ".video-ads.ytp-ad-module"]))
+            .css(url: "youtube.com", selectors: [".ytd-search-pyv-renderer",
+                                                 ".video-ads.ytp-ad-module"]))
         
         XCTAssertTrue(Parser(content: Set([.ads]).rules)
-                        .css(url: "bloomberg.com", selectors: [".leaderboard-wrapper"]))
+            .css(url: "bloomberg.com", selectors: [".leaderboard-wrapper"]))
         
         XCTAssertTrue(Parser(content: Set([.ads]).rules)
-                        .css(url: "forbes.com", selectors: [".top-ad-container"]))
+            .css(url: "forbes.com", selectors: [".top-ad-container"]))
         
         XCTAssertTrue(Parser(content: Set([.ads]).rules)
-                        .css(url: "huffpost.com", selectors: ["#advertisement-thamba"]))
+            .css(url: "huffpost.com", selectors: ["#advertisement-thamba"]))
         
         XCTAssertTrue(Parser(content: Set([.ads]).rules)
-                        .css(url: "wordpress.com", selectors: [".inline-ad-slot"]))
+            .css(url: "wordpress.com", selectors: [".inline-ad-slot"]))
         
         XCTAssertTrue(Parser(content: Set([.ads]).rules)
-                        .css(selectors: ["[id*='google_ads']",
-                                         "[id*='ezoic']",
-                                         "[class*='ezoic']",
-                                         "[id*='adngin']",
-                                         ".adwrapper",
-                                         ".ad-wrapper",
-                                         "[class*='ad_placeholder']",
-                                         ".traffic-stars",
-                                         "[class*='ads-block']",
-                                         "[class*='wio-']",
-                                         ".ad-footer",
-                                         "#ad-footer",
-                                         "[class*='ad-support']",
-                                         "[class*='-top-ad']",
-                                         ".ad-container"]))
+            .css(selectors: ["[id*='google_ads']",
+                             "[id*='ezoic']",
+                             "[class*='ezoic']",
+                             "[id*='adngin']",
+                             ".adwrapper",
+                             ".ad-wrapper",
+                             "[class*='ad_placeholder']",
+                             ".traffic-stars",
+                             "[class*='ads-block']",
+                             "[class*='wio-']",
+                             ".ad-footer",
+                             "#ad-footer",
+                             "[class*='ad-support']",
+                             "[class*='-top-ad']",
+                             ".ad-container",
+                             ".tms-ad",
+                             ".m-inread-ad"]))
     }
     
     func testScreen() {
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
-                        .css(url: "google.com", selectors: ["#consent-bump",
-                                                            "#lb",
-                                                            ".hww53CMqxtL__mobile-promo",
-                                                            "#Sx9Kwc",
-                                                            "#xe7COe",
-                                                            ".NIoIEf",
-                                                            ".QzsnAe.crIj3e",
-                                                            ".ml-promotion-container",
-                                                            ".USRMqe"]))
+            .css(url: "google.com", selectors: ["#consent-bump",
+                                                "#lb",
+                                                ".hww53CMqxtL__mobile-promo",
+                                                "#Sx9Kwc",
+                                                "#xe7COe",
+                                                ".NIoIEf",
+                                                ".QzsnAe.crIj3e",
+                                                ".ml-promotion-container",
+                                                ".USRMqe"]))
         
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
-                        .css(url: "ecosia.org", selectors: [".serp-cta-wrapper",
-                                                            ".js-whitelist-notice",
-                                                            ".callout-whitelist"]))
+            .css(url: "ecosia.org", selectors: [".serp-cta-wrapper",
+                                                ".js-whitelist-notice",
+                                                ".callout-whitelist"]))
         
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
-                        .css(url: "youtube.com", selectors: ["#consent-bump",
-                                                             ".opened",
-                                                             ".ytd-popup-container",
-                                                             ".upsell-dialog-lightbox",
-                                                             ".consent-bump-lightbox",
-                                                             "#lightbox",
-                                                             ".ytd-consent-bump-v2-renderer"]))
+            .css(url: "youtube.com", selectors: ["#consent-bump",
+                                                 ".opened",
+                                                 ".ytd-popup-container",
+                                                 ".upsell-dialog-lightbox",
+                                                 ".consent-bump-lightbox",
+                                                 "#lightbox",
+                                                 ".ytd-consent-bump-v2-renderer"]))
         
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
-                        .css(url: "instagram.com", selectors: [".RnEpo.Yx5HN",
-                                                               ".RnEpo._Yhr4",
-                                                               ".R361B",
-                                                               ".NXc7H.jLuN9.X6gVd",
-                                                               ".f11OC"]))
+            .css(url: "instagram.com", selectors: [".RnEpo.Yx5HN",
+                                                   ".RnEpo._Yhr4",
+                                                   ".R361B",
+                                                   ".NXc7H.jLuN9.X6gVd",
+                                                   ".f11OC"]))
         
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
-                        .css(url: "twitter.com", selectors: [
-                                ".css-1dbjc4n.r-aqfbo4.r-1p0dtai.r-1d2f490.r-12vffkv.r-1xcajam.r-zchlnj",
-                                "#layers"]))
+            .css(url: "twitter.com", selectors: [
+                ".css-1dbjc4n.r-aqfbo4.r-1p0dtai.r-1d2f490.r-12vffkv.r-1xcajam.r-zchlnj",
+                "#layers"]))
         
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
-                        .css(url: "reuters.com", selectors: ["#onetrust-consent-sdk",
-                                                             "#newReutersModal"]))
+            .css(url: "reuters.com", selectors: ["#onetrust-consent-sdk",
+                                                 "#newReutersModal"]))
         
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
-                        .css(url: "thelocal.de", selectors: ["#qc-cmp2-container",
-                                                             ".tp-modal",
-                                                             ".tp-backdrop"]))
+            .css(url: "thelocal.de", selectors: ["#qc-cmp2-container",
+                                                 ".tp-modal",
+                                                 ".tp-backdrop"]))
         
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
-                        .css(url: "pinterest.com", selectors: [
-                                ".Jea.LCN.Lej.PKX._he.dxm.fev.fte.gjz.jzS.ojN.p6V.qJc.zI7.iyn.Hsu",
-                                ".QLY.Rym.ZZS._he.ojN.p6V.zI7.iyn.Hsu"]))
+            .css(url: "pinterest.com", selectors: [
+                ".Jea.LCN.Lej.PKX._he.dxm.fev.fte.gjz.jzS.ojN.p6V.qJc.zI7.iyn.Hsu",
+                ".QLY.Rym.ZZS._he.ojN.p6V.zI7.iyn.Hsu"]))
         
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
-                        .css(url: "bbc.com", selectors: [".fc-consent-root",
-                                                         "#cookiePrompt",
-                                                         ".ssrcss-u3tmht-ConsentBanner.exhqgzu6"]))
+            .css(url: "bbc.com", selectors: [".fc-consent-root",
+                                             "#cookiePrompt",
+                                             ".ssrcss-u3tmht-ConsentBanner.exhqgzu6"]))
         
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
-                        .css(url: "reddit.com", selectors: ["._3q-XSJ2vokDQrvdG6mR__k",
-                                                            ".EUCookieNotice",
-                                                            ".XPromoPopup"]))
+            .css(url: "reddit.com", selectors: ["._3q-XSJ2vokDQrvdG6mR__k",
+                                                ".EUCookieNotice",
+                                                ".XPromoPopup"]))
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
-                        .css(url: "medium.com", selectors: [".branch-journeys-top",
-                                                            "#lo-highlight-meter-1-highlight-box",
-                                                            "#branch-banner-iframe"]))
+            .css(url: "medium.com", selectors: [".branch-journeys-top",
+                                                "#lo-highlight-meter-1-highlight-box",
+                                                "#branch-banner-iframe"]))
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
-                        .css(url: "bloomberg.com", selectors: ["#fortress-paywall-container-root",
-                                                               ".overlay-container",
-                                                               "#fortress-preblocked-container-root"]))
+            .css(url: "bloomberg.com", selectors: ["#fortress-paywall-container-root",
+                                                   ".overlay-container",
+                                                   "#fortress-preblocked-container-root"]))
         
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
-                        .css(url: "forbes.com", selectors: ["#consent_blackbar"]))
+            .css(url: "forbes.com", selectors: ["#consent_blackbar"]))
         
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
-                        .css(url: "huffpost.com", selectors: ["#qc-cmp2-container"]))
+            .css(url: "huffpost.com", selectors: ["#qc-cmp2-container"]))
         
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
-                        .css(url: "nytimes.com", selectors: [".expanded-dock"]))
+            .css(url: "nytimes.com", selectors: [".expanded-dock"]))
         
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
-                        .css(url: "wordpress.com", selectors: ["#cmp-app-container"]))
+            .css(url: "wordpress.com", selectors: ["#cmp-app-container"]))
     }
     
     func testAntidark() {
         XCTAssertTrue(Parser(content: Set([.antidark]).rules)
-                        .css(url: "google.com", selectors: [".P1Ycoe",
-                                                            "#sDeBje"]))
+            .css(url: "google.com", selectors: [".P1Ycoe",
+                                                "#sDeBje"]))
     }
 }
 
@@ -199,25 +201,25 @@ private struct Parser {
     func css(url: String, selectors: [String]) -> Bool {
         dictionary.contains {
             ($0["action"]!["type"] as! String) == "css-display-none"
-                && ($0["action"]!["selector"] as! String)
+            && ($0["action"]!["selector"] as! String)
                 .components(separatedBy: ", ")
                 .intersection(other: selectors).count == selectors.count
-                && ($0["trigger"]!["url-filter"] as! String).hasPrefix("^https?://+([^:/]+\\.)?")
-                && ($0["trigger"]!["url-filter"] as! String).hasSuffix("[:/]")
-                && ($0["trigger"]!["url-filter-is-case-sensitive"] as! Bool)
-                && ($0["trigger"]!["load-type"] as! [String]).first == "first-party"
-                && ($0["trigger"]!["resource-type"] as! [String]).first == "document"
-                && ($0["trigger"]!["if-domain"] as! [String]).first == "*" + url
+            && ($0["trigger"]!["url-filter"] as! String).hasPrefix("^https?://+([^:/]+\\.)?")
+            && ($0["trigger"]!["url-filter"] as! String).hasSuffix("[:/]")
+            && ($0["trigger"]!["url-filter-is-case-sensitive"] as! Bool)
+            && ($0["trigger"]!["load-type"] as! [String]).first == "first-party"
+            && ($0["trigger"]!["resource-type"] as! [String]).first == "document"
+            && ($0["trigger"]!["if-domain"] as! [String]).first == "*" + url
         }
     }
     
     func css(selectors: [String]) -> Bool {
         dictionary.contains {
             ($0["action"]!["type"] as! String) == "css-display-none"
-                && ($0["action"]!["selector"] as! String)
+            && ($0["action"]!["selector"] as! String)
                 .components(separatedBy: ", ")
                 .intersection(other: selectors).count == selectors.count
-                && ($0["trigger"]!["url-filter"] as! String) == ".*"
+            && ($0["trigger"]!["url-filter"] as! String) == ".*"
         }
     }
     
@@ -231,6 +233,6 @@ private struct Parser {
 private extension Array where Element : Hashable {
     func intersection(other: [Element]) -> Set<Element> {
         .init(self)
-            .intersection(other)
+        .intersection(other)
     }
 }

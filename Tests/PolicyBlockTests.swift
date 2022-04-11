@@ -257,7 +257,9 @@ final class PolicyBlockTests: XCTestCase {
         "https://cdn-gl.nmrodam.com/novms/html/ls.html",
         "https://widgets.homeday.de/spiegel/index.html?v=1457880408",
         "https://es-config.sensic.net/sui.html?m=1&ai=&o=&dt=&t=s2s-w&m=ElpaisWeb&r=elpais.com&optin=true",
-        "https://wemass.io/messenger"
+        "https://wemass.io/messenger",
+        "https://www.communicationads.net/tb.php?t=13530V16027725M",
+        "https://partner.o2online.de/a/?i=pview&client=o2&camp=pview&l=de&nw=coad&affiliate=13530&s_id=13530V16027725M"
     ]
     
     override func setUp() {

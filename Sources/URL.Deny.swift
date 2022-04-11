@@ -207,6 +207,8 @@ extension URL {
         homeday,
         sensic,
         wemass,
+        communicationads,
+        o2online,
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
         google_analytics = "google-analytics",

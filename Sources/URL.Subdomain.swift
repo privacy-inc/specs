@@ -5,7 +5,8 @@ extension URL {
     enum Subdomain: String, Responser {
         case
         sourcepoint,
-        sourcepointcmp
+        sourcepointcmp,
+        tcf2
         
         static func response(for domain: Domain, on: URL) -> Policy.Response? {
             domain

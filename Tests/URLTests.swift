@@ -28,5 +28,6 @@ final class URLTests: XCTestCase {
         XCTAssertEqual("a.hello.com%2Fa", try? URL(string: "https://a.hello.com/a/b/c?var=3231123")?.icon)
         XCTAssertEqual("a.hello.com%2F", try? URL(string: "https://a.hello.com/?var=3231123")?.icon)
         XCTAssertEqual("twitter.com%2F_vaux", try? URL(string: "twitter.com/_vaux")?.icon)
+        XCTAssertEqual("de.m.wikipedia.org%2Fwiki", try? URL(string: "https://de.m.wikipedia.org/wiki/Alan_Moore#/languages")?.icon)
     }
 }

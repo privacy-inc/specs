@@ -225,6 +225,8 @@ extension URL {
         akamaihd,
         junmediadirect,
         planningunavoidablenull,
+        guardianinvadecrept,
+        plarimoplus,
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
         google_analytics = "google-analytics",

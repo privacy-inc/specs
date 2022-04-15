@@ -236,6 +236,7 @@ extension URL {
         midgetincidentally,
         dissolveddittoteaspoon,
         sentimenthypocrisy,
+        thawbootsamplitude,
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
         google_analytics = "google-analytics",
@@ -265,7 +266,8 @@ extension URL {
         podigee_cdn = "podigee-cdn",
         media_amazon = "media-amazon",
         antio_nar = "antio-nar",
-        destore_daindmade = "destore-daindmade"
+        destore_daindmade = "destore-daindmade",
+        deebcards_themier = "deebcards-themier"
         
         static func response(for domain: Domain, on: URL) -> Policy.Response? {
             Self(rawValue: domain.name)

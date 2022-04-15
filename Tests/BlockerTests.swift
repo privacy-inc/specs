@@ -75,7 +75,8 @@ final class BlockerTests: XCTestCase {
                              "[class*='-top-ad']",
                              ".ad-container",
                              ".tms-ad",
-                             ".m-inread-ad"]))
+                             ".m-inread-ad",
+                             ".ads_container"]))
     }
     
     func testScreen() {

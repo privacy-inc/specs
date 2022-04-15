@@ -2,7 +2,7 @@ import Foundation
 import Domains
 import Archivable
 
-public struct Website: Storable, Identifiable {
+public struct Website: Storable, Identifiable, Equatable {
     public let id: String
     public let title: String
     

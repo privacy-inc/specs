@@ -35,7 +35,7 @@ enum Blocker: CaseIterable {
                     .init(trigger: .all, action: .css(["[id*='google_ads']",
                                                        "[id*='ezoic']",
                                                        "[id*='adngin']",
-                                                       "[id*='outbrain']",
+//                                                       "[id*='outbrain']",
                                                        "[class*='ezoic']",
                                                        "[class*='ad_placeholder']",
                                                        "[class*='ads-block']",

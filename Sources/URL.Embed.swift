@@ -5,11 +5,12 @@ extension URL {
         case
         about,
         data,
-        file
+        file,
+        blob
         
         var response: Policy.Response {
             switch self {
-            case .about:
+            case .about, .blob:
                 return .ignore
             case .data, .file:
                 return .allow

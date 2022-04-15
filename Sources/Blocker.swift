@@ -35,6 +35,7 @@ enum Blocker: CaseIterable {
                     .init(trigger: .all, action: .css(["[id*='google_ads']",
                                                        "[id*='ezoic']",
                                                        "[id*='adngin']",
+                                                       "[id*='outbrain']",
                                                        "[class*='ezoic']",
                                                        "[class*='ad_placeholder']",
                                                        "[class*='ads-block']",
@@ -58,6 +59,7 @@ enum Blocker: CaseIterable {
                                                        ".traffic-stars",
                                                        ".tms-ad",
                                                        ".m-inread-ad",
+                                                       ".outbrain"
                                                       ]))]
         case .screen:
             return [.init(trigger: .url(.google), action: .css(["#consent-bump",

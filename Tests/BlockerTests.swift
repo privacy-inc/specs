@@ -76,7 +76,9 @@ final class BlockerTests: XCTestCase {
                              ".ad-container",
                              ".tms-ad",
                              ".m-inread-ad",
-                             ".ads_container"]))
+                             ".ads_container",
+                             ".outbrain",
+                             "[id*='outbrain']"]))
     }
     
     func testScreen() {

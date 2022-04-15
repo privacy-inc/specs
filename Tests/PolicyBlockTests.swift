@@ -272,7 +272,14 @@ final class PolicyBlockTests: XCTestCase {
         "https://r.srvtrck.com/v1/redirect?type=linkId&id=b1c93c9d38a3479db4ef23793e4d3260&api_key=526ce45b25e1f6dcb86f05e8f2c94e64&site_id=cdfb4b7aab414f289dfa2d45805d36e1&dch=feed&ad_t=advertiser&yk_tag=V1ZDE00716500429937757R835058",
         "https://affphnx.com/c.php?k=mmfsqublthvuitty6c3e&eid=D2564FE0-BCDF-11EC-AAF9-7D2E766C15CA&c=0.00082&tsn=galaksion-wl&zid=115600&cid=157855",
         "https://out.sparer.biz/nlp/index.php?type=linkId&id=175788ca7a6749289f968272040a48f0&api_key=531f987e73866c7dc7e75b524486d6a3&site_id=989bcbfde8d24ae994ea3cdcffcdb685&dch=feed&ad_t=advertiser&yk_tag=7378fntp2vc17fea7e&duplication=1&url_bnm_redirect=https://r.srvtrck.com/v1/redirect",
-        "https://upgradenow24.coolwaytheupgradefree.info/gano?noga=i_Mo8quua1__1_bFeJTy5851cjsRvOHfqMgjkipn60U.&cid=E2393060-BCDF-11EC-90DD-8B963CEDDA3C&sid=38872"
+        "https://upgradenow24.coolwaytheupgradefree.info/gano?noga=i_Mo8quua1__1_bFeJTy5851cjsRvOHfqMgjkipn60U.&cid=E2393060-BCDF-11EC-90DD-8B963CEDDA3C&sid=38872",
+        "https://euark.com/?so=c1ffugGfB9MtPQdqw7mQ%2FkjEIDJ58zo3WjssdFL2f7bdUXN9AQvja86kRBRq%2BdJaKnh7OyEYoHYMLzDLozPYtAsG1KYvF%2BI6ZwYzUrJ7eNY%2FgMAhgE8hlLDxUVoiogYbEwq%2FZvo5rT4XKHl2QJL4lYVWajxkzgAQEpAWgNWNu8J0PpgLo1xRg8miIqwv7Sp%2Fr%2Fn5KouTgB5VDFZHi%2FDnN5KvAeaazpuM0PWp6jsr6LHnY4TguTnoexCgDzhvNfzUlK3td5cmpRHI0HHQhErlm5qGvdeJmnyadXx87TGFXviDY11FQDrGwic%2Bzg%2B%2BQMwU%2Bo2V9SNIdaJ%2Fd8BG2IN%2FpNdV4G7Gw4NiPv%2FaZK8i%2Fj6AEwWJVx%2B8DsH6f4Te",
+        "https://trk.spten.com/index.php?gid=14&trafficID=1&clickid=icterine-hyena&cost=0.000480&target=whiskey-rax-HadAeqst",
+        "http://antio-nar.com/zcvisitor/50dc4881-bce1-11ec-ac27-12b15de55fb7/d5723f30-6696-11e5-833f-0afe289da1cd?campaignid=27e05ee0-a284-11ea-aa5e-0a06ea97c507",
+        "https://peech2eecha.com/click?c=fb1e0fa6bce011ecb0fe0242ac110003&i=594&n=9&subid=407683_16865540&sid=209e7aca2196f0a57431d4697e13020b5c190da72",
+        "https://uuid-a.akamaihd.net/sb/?r=https%3A%2F%2Fpeech2eecha.com%2Fclick%3Fc%3Dfb1e0fa6bce011ecb0fe0242ac110003%26i%3D594%26n%3D9%26subid%3D407683_16865540%26sid%3D",
+        "http://click.junmediadirect.com/click?seat=219699&adid=219699&i=apyBoeVPL08_0",
+        "http://planningunavoidablenull.com/z6xc0p9n?iadka=33&refer=https%3A%2F%2F123moviesgo.io%2Fall-american-murder%2F&kw=%5B%22watch%22%2C%22all-american%22%2C%22murder%22%2C%22full%22%2C%22hd%22%2C%22movie%22%2C%22free%22%2C%22on%22%2C%22123movies%22%5D&key=4c87484f6cceb650a38bba4adf56496b&scrWidth=1728&scrHeight=1117&tz=2&v=22.2.v.2&ship=&res=12.13&dev=r&uuid=42becf57-2cd1-495d-8ba7-b0b4fee26418%3A1%3A1&adb=n&adb=n"
     ]
     
     override func setUp() {

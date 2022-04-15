@@ -219,6 +219,12 @@ extension URL {
         affphnx,
         sparer,
         coolwaytheupgradefree,
+        euark,
+        spten,
+        peech2eecha,
+        akamaihd,
+        junmediadirect,
+        planningunavoidablenull,
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
         google_analytics = "google-analytics",
@@ -246,7 +252,8 @@ extension URL {
         truste_svc = "truste-svc",
         hs_edge = "hs-edge",
         podigee_cdn = "podigee-cdn",
-        media_amazon = "media-amazon"
+        media_amazon = "media-amazon",
+        antio_nar = "antio-nar"
         
         static func response(for domain: Domain, on: URL) -> Policy.Response? {
             Self(rawValue: domain.name)

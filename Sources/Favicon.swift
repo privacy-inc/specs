@@ -32,7 +32,7 @@ public final actor Favicon {
     public func publisher(for website: URL) -> Pub? {
         guard let icon = try? website.icon else { return nil }
         let publisher = publishers[icon, default: .init()]
-        assert(publishers.isEmpty)
+        assert(!publishers.isEmpty)
         
         Task
             .detached(priority: .utility) {

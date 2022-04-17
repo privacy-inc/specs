@@ -88,7 +88,8 @@ extension URL {
             case .wp:
                 return [.widgets]
             case .wordpress:
-                return [.public_api]
+                return [.public_api,
+                        .r_login]
             case .yahoo:
                 return [.analytics]
             case ._1und1:

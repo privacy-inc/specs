@@ -14,6 +14,7 @@ extension URL.Allow {
         widgets,
         analytics,
         dsl,
-        public_api = "public-api"
+        public_api = "public-api",
+        r_login = "r-login"
     }
 }

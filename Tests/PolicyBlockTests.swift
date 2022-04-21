@@ -304,7 +304,9 @@ final class PolicyBlockTests: XCTestCase {
         "https://dntcl.qualaroo.com/frame.html",
         "https://app.picreel.com/api/get_template?source_url=https%253A%252F%252Fqualaroo.com%252F&source_host=https%253A%252F%252Fqualaroo.com&templateId=&userAgent=Mozilla%252F5.0%2520(Macintosh%253B%2520Intel%2520Mac%2520OS%2520X%252010_15_7)%2520AppleWebKit%252F605.1.15%2520(KHTML%252C%2520like%2520Gecko)%2520Version%252F15.4%2520Safari%252F605.1.15&referrer=&screenWight=964&screenHeight=938&pv=&pp=&sv=&sp=&nv=&np=&rb=&ret=&utm_source=Picreel&utm_medium=display&utm_campaign=Picreel",
         "https://cdn.privacy-mgmt.com/index.html?message_id=524524&consentUUID=4961ae82-8e83-4a13-b823-e078f7cb0f15&requestUUID=3b195a3c-c78d-4831-81eb-21a48f401ed7&preload_message=true&consentLanguage=en",
-        "https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=key&origin=aHR0cHM6Ly9tYXJ0aW5taXRyZXZza2kuY29t&wpcomid=85109326&time=1650186379"
+        "https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=key&origin=aHR0cHM6Ly9tYXJ0aW5taXRyZXZza2kuY29t&wpcomid=85109326&time=1650186379",
+        "https://cs.admanmedia.com/sync/openweb_ssp?to=https%3A%2F%2Fsync.spotim.market%2Fcsync%3Ft%3Da%26ep%3D526610%26extuid%3D%7B%24UID%7D&gdpr=%7Bgdpr%7D&gdpr_consent=%7Bgdpr_consent%7D&us_privacy=%7Bus_privacy%7D&coppa=%7Bcoppa%7D",
+        "https://p.nodserving.com/prebidlink/19103/j.html?i=11600"
     ]
     
     override func setUp() {

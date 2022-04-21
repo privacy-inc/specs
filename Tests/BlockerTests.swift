@@ -91,7 +91,8 @@ final class BlockerTests: XCTestCase {
                                                 ".NIoIEf",
                                                 ".QzsnAe.crIj3e",
                                                 ".ml-promotion-container",
-                                                ".USRMqe"]))
+                                                ".USRMqe",
+                                                ".n3tEjf-gNgoK-haAclf"]))
         
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
             .css(url: "ecosia.org", selectors: [".serp-cta-wrapper",

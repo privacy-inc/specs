@@ -248,6 +248,7 @@ extension URL {
         picreel,
         admanmedia,
         nodserving,
+        lytics,
         privacy_mgmt = "privacy-mgmt",
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",

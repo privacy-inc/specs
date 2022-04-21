@@ -306,7 +306,8 @@ final class PolicyBlockTests: XCTestCase {
         "https://cdn.privacy-mgmt.com/index.html?message_id=524524&consentUUID=4961ae82-8e83-4a13-b823-e078f7cb0f15&requestUUID=3b195a3c-c78d-4831-81eb-21a48f401ed7&preload_message=true&consentLanguage=en",
         "https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=key&origin=aHR0cHM6Ly9tYXJ0aW5taXRyZXZza2kuY29t&wpcomid=85109326&time=1650186379",
         "https://cs.admanmedia.com/sync/openweb_ssp?to=https%3A%2F%2Fsync.spotim.market%2Fcsync%3Ft%3Da%26ep%3D526610%26extuid%3D%7B%24UID%7D&gdpr=%7Bgdpr%7D&gdpr_consent=%7Bgdpr_consent%7D&us_privacy=%7Bus_privacy%7D&coppa=%7Bcoppa%7D",
-        "https://p.nodserving.com/prebidlink/19103/j.html?i=11600"
+        "https://p.nodserving.com/prebidlink/19103/j.html?i=11600",
+        "https://c.lytics.io/api/personalize/da6ecc9b47fdaed8ca59cf2c13f8695d/user/_uid/82f111f8-94ec-48f1-9695-7e71bf1e6b66/iframe?segments=true&mergestate=true&ts=1650538491568"
     ]
     
     override func setUp() {

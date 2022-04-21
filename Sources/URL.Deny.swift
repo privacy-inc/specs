@@ -249,6 +249,7 @@ extension URL {
         admanmedia,
         nodserving,
         lytics,
+        kxcdn,
         privacy_mgmt = "privacy-mgmt",
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",

@@ -307,7 +307,8 @@ final class PolicyBlockTests: XCTestCase {
         "https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=key&origin=aHR0cHM6Ly9tYXJ0aW5taXRyZXZza2kuY29t&wpcomid=85109326&time=1650186379",
         "https://cs.admanmedia.com/sync/openweb_ssp?to=https%3A%2F%2Fsync.spotim.market%2Fcsync%3Ft%3Da%26ep%3D526610%26extuid%3D%7B%24UID%7D&gdpr=%7Bgdpr%7D&gdpr_consent=%7Bgdpr_consent%7D&us_privacy=%7Bus_privacy%7D&coppa=%7Bcoppa%7D",
         "https://p.nodserving.com/prebidlink/19103/j.html?i=11600",
-        "https://c.lytics.io/api/personalize/da6ecc9b47fdaed8ca59cf2c13f8695d/user/_uid/82f111f8-94ec-48f1-9695-7e71bf1e6b66/iframe?segments=true&mergestate=true&ts=1650538491568"
+        "https://c.lytics.io/api/personalize/da6ecc9b47fdaed8ca59cf2c13f8695d/user/_uid/82f111f8-94ec-48f1-9695-7e71bf1e6b66/iframe?segments=true&mergestate=true&ts=1650538491568",
+        "https://toniknows-be91.kxcdn.com/v1/variant-a.html?clicktag=https://adclick.g.doubleclick.net/pcs/click%253Fxai%253DAKAOjstLZLCJu9nu4Viup-i8Ea8T0fsvFWWSowjSy76rgvV8Ofyk07LhUMX_ByfkrnhIfZLH-hq5MM8lEdxAPlWiWqUlxywSZYtjGkhiKlse-3eS78tMb3mEHAYHXJoE73ocjRdP5I_XsxsgylAwAtpl_4XbDuPX2hB655LhIbqhwSjGok-PHxR0dTGvegbC-g5SZjNdaJyY_xkHHvV85p6jhgv2-sanrRoJB9PKu83jHo6oJyRway7vO08GznmM1piJbY6HepJlr6UmFf1gy8d5fxA8DV7n4weSgZxQCgfWuJ8cwoq6Ax8%2526sai%253DAMfl-YSjCQQ5R96Yfvw0cdsFgBpU8qtQWk7tzYPvmqD4bBhqJ6A9VYGreAZBKSP6gnxqQyj3S_htrvivC52jKvleEaWBFrmok80QOMmmS6Xo_mA9F07C9k14bQzP0hxH9yg%2526sig%253DCg0ArKJSzGHip_ZySnADEAE%2526fbs_aeid%253D%255Bgw_fbsaeid%255D%2526urlfix%253D1%2526adurl%253Dhttps%3A%2F%2Fwww.toni-knows.de%2F%3Futm_source%3Dspiegel%26utm_medium%3Dwidget%26utm_campaign%3Dspiegel_widget%26utm_content%3Dwidget_a"
     ]
     
     override func setUp() {

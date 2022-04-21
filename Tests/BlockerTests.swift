@@ -98,7 +98,8 @@ final class BlockerTests: XCTestCase {
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
             .css(url: "ecosia.org", selectors: [".serp-cta-wrapper",
                                                 ".js-whitelist-notice",
-                                                ".callout-whitelist"]))
+                                                ".callout-whitelist",
+                                                ".cookie-notice"]))
         
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
             .css(url: "youtube.com", selectors: ["#consent-bump",

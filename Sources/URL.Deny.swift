@@ -250,6 +250,7 @@ extension URL {
         nodserving,
         lytics,
         kxcdn,
+        yimg,
         privacy_mgmt = "privacy-mgmt",
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",

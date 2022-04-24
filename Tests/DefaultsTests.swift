@@ -3,52 +3,40 @@ import XCTest
 
 final class DefaultsTests: XCTestCase {
     override func setUp() {
-        UserDefaults.standard.removeObject(forKey: Defaults.rated.rawValue)
         UserDefaults.standard.removeObject(forKey: Defaults.created.rawValue)
         UserDefaults.standard.removeObject(forKey: Defaults.premium.rawValue)
     }
     
     override func tearDown() {
-        UserDefaults.standard.removeObject(forKey: Defaults.rated.rawValue)
         UserDefaults.standard.removeObject(forKey: Defaults.created.rawValue)
         UserDefaults.standard.removeObject(forKey: Defaults.premium.rawValue)
     }
     
-    func testFirstTime() {
+    func testFirstTimeFroob() {
         XCTAssertNil(UserDefaults.standard.object(forKey: Defaults.created.rawValue))
-        XCTAssertEqual(.none, Defaults.action)
+        XCTAssertFalse(Defaults.froob)
+        XCTAssertNotNil(UserDefaults.standard.object(forKey: Defaults.created.rawValue))
+    }
+    
+    func testFirstTimeRate() {
+        XCTAssertNil(UserDefaults.standard.object(forKey: Defaults.created.rawValue))
+        XCTAssertFalse(Defaults.rate)
         XCTAssertNotNil(UserDefaults.standard.object(forKey: Defaults.created.rawValue))
     }
     
     func testRate() {
-        UserDefaults.standard.setValue(Calendar.current.date(byAdding: .day, value: -6, to: .now)!, forKey: Defaults.created.rawValue)
-        XCTAssertEqual(.none, Defaults.action)
-        XCTAssertFalse(Defaults.hasRated)
-        UserDefaults.standard.setValue(Calendar.current.date(byAdding: .day, value: -7, to: .now)!, forKey: Defaults.created.rawValue)
-        XCTAssertEqual(.rate, Defaults.action)
-        XCTAssertTrue(Defaults.hasRated)
-        XCTAssertEqual(.none, Defaults.action)
+        UserDefaults.standard.setValue(Calendar.current.date(byAdding: .day, value: -5, to: .now)!, forKey: Defaults.created.rawValue)
+        XCTAssertTrue(Defaults.rate)
     }
     
     func testFroob() {
-        UserDefaults.standard.setValue(Calendar.current.date(byAdding: .day, value: -8, to: .now)!, forKey: Defaults.created.rawValue)
-        UserDefaults.standard.setValue(true, forKey: Defaults.rated.rawValue)
-        XCTAssertEqual(.none, Defaults.action)
-        UserDefaults.standard.setValue(Calendar.current.date(byAdding: .day, value: -9, to: .now)!, forKey: Defaults.created.rawValue)
-        XCTAssertEqual(.froob, Defaults.action)
-        XCTAssertEqual(.froob, Defaults.action)
+        UserDefaults.standard.setValue(Calendar.current.date(byAdding: .day, value: -7, to: .now)!, forKey: Defaults.created.rawValue)
+        XCTAssertTrue(Defaults.froob)
     }
     
     func testPremium() {
-        UserDefaults.standard.setValue(Calendar.current.date(byAdding: .day, value: -9, to: .now)!, forKey: Defaults.created.rawValue)
+        UserDefaults.standard.setValue(Calendar.current.date(byAdding: .day, value: -7, to: .now)!, forKey: Defaults.created.rawValue)
         UserDefaults.standard.setValue(true, forKey: Defaults.premium.rawValue)
-        XCTAssertEqual(.rate, Defaults.action)
-    }
-    
-    func testCompleted() {
-        UserDefaults.standard.setValue(Calendar.current.date(byAdding: .day, value: -9, to: .now)!, forKey: Defaults.created.rawValue)
-        UserDefaults.standard.setValue(true, forKey: Defaults.premium.rawValue)
-        UserDefaults.standard.setValue(true, forKey: Defaults.rated.rawValue)
-        XCTAssertEqual(.none, Defaults.action)
+        XCTAssertFalse(Defaults.froob)
     }
 }

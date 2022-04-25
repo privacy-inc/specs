@@ -309,7 +309,10 @@ final class PolicyBlockTests: XCTestCase {
         "https://p.nodserving.com/prebidlink/19103/j.html?i=11600",
         "https://c.lytics.io/api/personalize/da6ecc9b47fdaed8ca59cf2c13f8695d/user/_uid/82f111f8-94ec-48f1-9695-7e71bf1e6b66/iframe?segments=true&mergestate=true&ts=1650538491568",
         "https://toniknows-be91.kxcdn.com/v1/variant-a.html?clicktag=https://adclick.g.doubleclick.net/pcs/click%253Fxai%253DAKAOjstLZLCJu9nu4Viup-i8Ea8T0fsvFWWSowjSy76rgvV8Ofyk07LhUMX_ByfkrnhIfZLH-hq5MM8lEdxAPlWiWqUlxywSZYtjGkhiKlse-3eS78tMb3mEHAYHXJoE73ocjRdP5I_XsxsgylAwAtpl_4XbDuPX2hB655LhIbqhwSjGok-PHxR0dTGvegbC-g5SZjNdaJyY_xkHHvV85p6jhgv2-sanrRoJB9PKu83jHo6oJyRway7vO08GznmM1piJbY6HepJlr6UmFf1gy8d5fxA8DV7n4weSgZxQCgfWuJ8cwoq6Ax8%2526sai%253DAMfl-YSjCQQ5R96Yfvw0cdsFgBpU8qtQWk7tzYPvmqD4bBhqJ6A9VYGreAZBKSP6gnxqQyj3S_htrvivC52jKvleEaWBFrmok80QOMmmS6Xo_mA9F07C9k14bQzP0hxH9yg%2526sig%253DCg0ArKJSzGHip_ZySnADEAE%2526fbs_aeid%253D%255Bgw_fbsaeid%255D%2526urlfix%253D1%2526adurl%253Dhttps%3A%2F%2Fwww.toni-knows.de%2F%3Futm_source%3Dspiegel%26utm_medium%3Dwidget%26utm_campaign%3Dspiegel_widget%26utm_content%3Dwidget_a",
-        "https://s.yimg.com/rq/darla/4-10-1/html/r-csc.html"
+        "https://s.yimg.com/rq/darla/4-10-1/html/r-csc.html",
+        "https://www.newzit.com/setABframe.html",
+        "https://cmp.dmgmediaprivacy.co.uk/cmp/1.2.0/storage/index.html#brokerId=4utq54acn6r",
+        "https://www.googletagmanager.com/ns.html?id=GTM-PL4PD49"
     ]
     
     override func setUp() {

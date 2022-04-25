@@ -36,6 +36,7 @@ enum Blocker: CaseIterable {
                                                        "[id*='ezoic']",
                                                        "[id*='adngin']",
                                                        "[id*='outbrain']",
+                                                       "[id*='taboola']",
                                                        "[class*='ezoic']",
                                                        "[class*='ad_placeholder']",
                                                        "[class*='ads-block']",

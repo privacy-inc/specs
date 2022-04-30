@@ -73,13 +73,13 @@ final class BlockerTests: XCTestCase {
                              "#ad-footer",
                              "[class*='ad-support']",
                              "[class*='-top-ad']",
-                             ".ad-container",
                              ".tms-ad",
                              ".m-inread-ad",
                              ".ads_container",
                              ".outbrain",
                              "[id*='outbrain']",
-                             "[id*='taboola']"]))
+                             "[id*='taboola']",
+                             "[class*='ad-container']"]))
     }
     
     func testScreen() {

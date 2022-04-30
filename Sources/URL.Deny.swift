@@ -311,7 +311,8 @@ extension URL {
         sc_static = "sc-static",
         go_mpulse = "go-mpulse",
         _2o7 = "2o7",
-        hs_analytics = "hs-analytics"
+        hs_analytics = "hs-analytics",
+        vox_cdn = "vox-cdn"
         
         static func response(for domain: Domain, on: URL) -> Policy.Response? {
             Self(rawValue: domain.name)

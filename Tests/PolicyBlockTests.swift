@@ -338,7 +338,8 @@ final class PolicyBlockTests: XCTestCase {
         "https://2o7.net",
         "https://hs-analytics.net",
         "https://segment.io",
-        "https://usemessages.com"
+        "https://usemessages.com",
+        "https://volume.vox-cdn.com/embed/9ee5f027a?autoplay=false&autoplay_with_sound=false&placement=lede&tracking=hub:river:3"
     ]
     
     override func setUp() {

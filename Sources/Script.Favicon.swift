@@ -31,10 +31,10 @@ function \(favicon.method) {
         return found;
     }
     
-    icon = find("apple-touch-icon-precomposed");
+    icon = find("apple-touch-icon");
     
     if (icon == null) {
-        icon = find("apple-touch-icon");
+        icon = find("apple-touch-icon-precomposed");
         
         if (icon == null) {
             icon = find("icon");

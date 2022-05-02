@@ -30,7 +30,6 @@ extension URL {
         wordpress,
         yahoo,
         newyorker,
-        macrumors,
         _1und1 = "1und1"
         
         var tld: Tld {

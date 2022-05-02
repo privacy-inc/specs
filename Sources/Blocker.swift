@@ -119,7 +119,8 @@ enum Blocker: CaseIterable {
                     .init(trigger: .url(.nytimes), action: .css([".expanded-dock"])),
                     .init(trigger: .url(.wordpress), action: .css(["#cmp-app-container"])),
                     .init(trigger: .url(.newyorker), action: .css([".bxc"])),
-                    .init(trigger: .url(.macrumors), action: .css(["#gdpr-consent-tool-wrapper"]))]
+                    .init(trigger: .all, action: .css(["#gdpr-consent-tool-wrapper"
+                                                      ]))]
         case .antidark:
             return [.init(trigger: .url(.google), action: .css([".P1Ycoe",
                                                                 "#sDeBje"]))]

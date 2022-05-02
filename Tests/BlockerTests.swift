@@ -172,7 +172,7 @@ final class BlockerTests: XCTestCase {
             .css(url: "newyorker.com", selectors: [".bxc"]))
         
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
-            .css(url: "macrumors.com", selectors: ["#gdpr-consent-tool-wrapper"]))
+            .css(selectors: ["#gdpr-consent-tool-wrapper"]))
     }
     
     func testAntidark() {

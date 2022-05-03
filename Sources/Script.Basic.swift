@@ -5,11 +5,11 @@ extension Script {
 localStorage.clear();
 sessionStorage.clear();
 
-function _privacy_incognit_finder(query) {
+function privacy_finder(query) {
     var result = null;
     var item = window.getSelection().anchorNode;
     
-    while (item != null) {
+    while (item != null && item.tagName != "BODY" && item.tagName != "HTML" && item.querySelectorAll != null) {
         const elements = item.querySelectorAll(query);
 
         for (var i = 0; i < elements.length; i++) {
@@ -30,5 +30,6 @@ function _privacy_incognit_finder(query) {
     
     return result;
 }
+
 """
 }

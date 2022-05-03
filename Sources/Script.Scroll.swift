@@ -53,11 +53,6 @@ if (_privacy_incognit_splitted.length > 1) {
             style.innerHTML = "body { overflow: unset !important; }";
             document.head.appendChild(style);
             break;
-    case "newyorker":
-            var style = document.createElement('style');
-            style.innerHTML = ":root, html, body { overflow-y: visible !important; }";
-            document.head.appendChild(style);
-            break;
     default:
             break;
     }

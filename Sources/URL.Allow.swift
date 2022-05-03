@@ -29,7 +29,6 @@ extension URL {
         wp,
         wordpress,
         yahoo,
-        newyorker,
         _1und1 = "1und1"
         
         var tld: Tld {

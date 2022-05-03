@@ -169,9 +169,6 @@ final class BlockerTests: XCTestCase {
             .css(url: "wordpress.com", selectors: ["#cmp-app-container"]))
         
         XCTAssertTrue(Parser(content: Set([.screen]).rules)
-            .css(url: "newyorker.com", selectors: [".bxc"]))
-        
-        XCTAssertTrue(Parser(content: Set([.screen]).rules)
             .css(selectors: ["#gdpr-consent-tool-wrapper"]))
     }
     

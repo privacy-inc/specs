@@ -7,7 +7,9 @@ public enum Script {
     unpromise,
     find,
     text,
-    location
+    location,
+    video,
+    image
     
     public var script: String {
         switch self {
@@ -23,6 +25,10 @@ public enum Script {
             return Self._text
         case .location:
             return Self._location
+        case .video:
+            return "_privacy_incognit_finder(\"video\");"
+        case .image:
+            return "_privacy_incognit_finder(\"img\");"
         }
     }
     

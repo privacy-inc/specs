@@ -20,6 +20,7 @@ extension Settings {
         public var scripts: String {
             (screen ? "" : Script.scroll)
             + (timers ? "" : Script.timers)
+            + Script.basic
         }
         
         public var data: Data {

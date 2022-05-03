@@ -8,8 +8,8 @@ sessionStorage.clear();
 function _privacy_incognit_finder(query) {
     var result = null;
     var item = window.getSelection().anchorNode;
-    
-    while (item != null && item.tagName != "BODY" && item.tagName != "HTML") {
+
+    while (item != null) {
         if (item.querySelectorAll != null) {
             const elements = item.querySelectorAll(query);
             
@@ -25,6 +25,12 @@ function _privacy_incognit_finder(query) {
     
         if (result == null) {
             item = item.parentNode;
+            
+            if (item != null, item.tagName != null) {
+                if (item.tagName == "BODY" || item.tagName == "HTML") {
+                    item = null;
+                }
+            }
         } else {
             item = null;
         }

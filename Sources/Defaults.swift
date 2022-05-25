@@ -4,16 +4,6 @@ public enum Defaults: String {
     case
     created,
     premium
-
-    public static var froob: Bool {
-        if let created = wasCreated {
-            let days = Calendar.current.dateComponents([.day], from: created, to: .init()).day!
-            return !isPremium && days > 6
-        } else {
-            wasCreated = .init()
-        }
-        return false
-    }
     
     public static var rate: Bool {
         if let created = wasCreated {

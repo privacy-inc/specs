@@ -282,6 +282,10 @@ extension URL {
         vidembed,
         excellernod,
         mybetterck,
+        newsformuse,
+        turnhub,
+        servehub,
+        linkchangesnow,
         privacy_mgmt = "privacy-mgmt",
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
@@ -320,7 +324,8 @@ extension URL {
         _2o7 = "2o7",
         hs_analytics = "hs-analytics",
         vox_cdn = "vox-cdn",
-        interstitial_08 = "interstitial-08"
+        interstitial_08 = "interstitial-08",
+        _4qdx69gg2d = "4qdx69gg2d"
         
         static func response(for domain: Domain, on: URL) -> Policy.Response? {
             Self(rawValue: domain.name)

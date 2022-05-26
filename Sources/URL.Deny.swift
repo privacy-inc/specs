@@ -288,6 +288,8 @@ extension URL {
         linkchangesnow,
         insanitynominate,
         aperushmo,
+        residenceseeingstanding,
+        gisttorn,
         privacy_mgmt = "privacy-mgmt",
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",

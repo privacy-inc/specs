@@ -277,6 +277,9 @@ extension URL {
         usemessages,
         awxcdn,
         shemedia,
+        firesonic,
+        membed,
+        vidembed,
         privacy_mgmt = "privacy-mgmt",
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
@@ -314,7 +317,8 @@ extension URL {
         go_mpulse = "go-mpulse",
         _2o7 = "2o7",
         hs_analytics = "hs-analytics",
-        vox_cdn = "vox-cdn"
+        vox_cdn = "vox-cdn",
+        interstitial_08 = "interstitial-08"
         
         static func response(for domain: Domain, on: URL) -> Policy.Response? {
             Self(rawValue: domain.name)

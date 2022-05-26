@@ -341,7 +341,11 @@ final class PolicyBlockTests: XCTestCase {
         "https://usemessages.com",
         "https://volume.vox-cdn.com/embed/9ee5f027a?autoplay=false&autoplay_with_sound=false&placement=lede&tracking=hub:river:3",
         "https://www.awxcdn.com/adc/3rdpartycheck.html",
-        "https://ads.shemedia.com/static/optoutstatus.html"
+        "https://ads.shemedia.com/static/optoutstatus.html",
+        "https://firesonic.sc/multi.php?id=3322407603&id2=1661203863&id3=MzI5NTEx&title=American+Murder%3A+The+Family+Next+Door&typesub=SUB&sub=&cover=Y292ZXIvYW1lcmljYW4tbXVyZGVyLXRoZS1mYW1pbHktbmV4dC1kb29yLWxhcmdlLnBuZw==",
+        "https://membed.net/streaming.php?id=MzI5NTEx&title=&typesub=SUB&sub=&cover=",
+        "https://vidembed.net/streaming.php?id=MzI5NTEx&title=&typesub=SUB&sub=&cover=",
+        "https://interstitial-08.com/?l=9PjAqTQETOzNIxm&cd_meta_crid=21588&trkintimp&target_url=https%3A%2F%2Ftoglooman.com%2F12%3Frnd%3D3585393840%26z%3D2891755%26b%3D5363094%26c%3D2755287%26var%3D%26d%3Dhttps%253A%252F%252Fdeshaici.net%252F%253Fb%253D%257Bbannerid%257D%2526ba%253D1%2526campid%253D%257Bcampaignid%257D%2526did%253D%257Bdeviceid%257D%2526dm%253D0%2526ep%253D1%2526fp%253D0%2526g%253D%257Bgeo%257D%2526i18db%253D1%2526l%253DEf3r9LOIFX3llkF%2526oaid%253D%257Boaid%257D%2526pshr%253D0%2526s%253D%2524%257BSUBID%257D%2526ssk%253D%257Btimestamp_key%257D%2526svar%253D%257Btimestamp%257D%2526vi%253D1%2526vo%253D1%2526z%253D%257Bzoneid%257D%2526tr%253Ddefault%26cln%3D1%26btp%3D7%26rb%3DLWei76QqrpPGG8N0wEVlWgFQnfnmL9CoBYL7OA71VUm_U6C5X9RAU7GURtwON1TMRzA71_ZBRZTlLslRt3kHTArxtc454MYCK4c9319IP2Z7vsq3AmbdqNddITt6M90l_yfAwsJBHx8tx5kb7m5rMtQa1dkxli-vQLCOs-YS8ipUvpObw9WcpgpzNOExBmABaVAG8OSFt3bgcctguAx6fiagLpmfGqR8o6vy8wSbrTOAXVySfmS-xzvoFKxPGkO4tQz_pRPKQ1mldkChWodjF-Foyqs%3D%26bag%3DydU9kaAfa6I%3D%26ruid%3Db41375d9-17f1-4fc6-98ea-f780aeea3801%26ng%3D1%26ix%3D1%26pt%3D0%26np%3D0%26gp%3D1%26bp%3D4%26nw%3D1%26nb%3D1%26sw%3D1728%26sh%3D1117%26pl%3Dhttps%253A%252F%252Fmembed.net%252Fstreaming.php%253Fid%253DMzI5NTEx%2526title%253D%2526typesub%253DSUB%2526sub%253D%2526cover%253D%26wy%3D1117%26wx%3D0%26ww%3D0%26wh%3D0%26cw%3D0%26wiw%3D0%26wih%3D0%26wfc%3D3%26sah%3D1001%26drf%3Dhttps%253A%252F%252Ffiresonic.sc%252F%26hil%3D1%26ist%3D0%26tbc%3D0%26X-Sc%3DtscTX_iBog1_R96LgmFLSUunZ_M2oFBZhpUVXMaRbGh2YamOdvgfJRSWFGO-9m7O8jRy5aIEtcTO6nqlgc9wmJnvVgw%3D"
     ]
     
     override func setUp() {

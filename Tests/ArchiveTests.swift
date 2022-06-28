@@ -12,7 +12,7 @@ final class ArchiveTests: XCTestCase {
     func testHistory() async {
         XCTAssertTrue(archive.history.isEmpty)
         archive.history = [.init(id: "https://avocado.org", title: "avoca")]
-        archive = await Archive.prototype(data: archive.compressed)
+        archive = await Archive(version: Archive.version, timestamp: archive.timestamp, data: archive.data)
         XCTAssertEqual("https://avocado.org", archive.history.first?.id)
         XCTAssertEqual("avoca", archive.history.first?.title)
     }
@@ -20,7 +20,7 @@ final class ArchiveTests: XCTestCase {
     func testBookmarks() async {
         XCTAssertTrue(archive.history.isEmpty)
         archive.bookmarks = [.init(id: "https://avocado.org", title: "avoca")]
-        archive = await Archive.prototype(data: archive.compressed)
+        archive = await Archive(version: Archive.version, timestamp: archive.timestamp, data: archive.data)
         XCTAssertEqual("https://avocado.org", archive.bookmarks.first?.id)
         XCTAssertEqual("avoca", archive.bookmarks.first?.title)
     }
@@ -28,7 +28,7 @@ final class ArchiveTests: XCTestCase {
     func testSettings() async {
         XCTAssertEqual(.google, archive.settings.search)
         archive.settings.search = .ecosia
-        archive = await Archive.prototype(data: archive.compressed)
+        archive = await Archive(version: Archive.version, timestamp: archive.timestamp, data: archive.data)
         XCTAssertEqual(.ecosia, archive.settings.search)
     }
 }

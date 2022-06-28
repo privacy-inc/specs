@@ -9,6 +9,13 @@ final class ArchiveTests: XCTestCase {
         archive = .init()
     }
     
+    func testDifferentVersion() async {
+        XCTAssertTrue(archive.history.isEmpty)
+        archive.history = [.init(id: "https://avocado.org", title: "avoca")]
+        archive = await Archive(version: 0, timestamp: archive.timestamp, data: archive.data)
+        XCTAssertTrue(archive.history.isEmpty)
+    }
+    
     func testHistory() async {
         XCTAssertTrue(archive.history.isEmpty)
         archive.history = [.init(id: "https://avocado.org", title: "avoca")]

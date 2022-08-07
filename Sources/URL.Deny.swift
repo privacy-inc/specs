@@ -293,6 +293,7 @@ extension URL {
         fimgs,
         flashnetic,
         tynt,
+        coralproject,
         privacy_mgmt = "privacy-mgmt",
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",

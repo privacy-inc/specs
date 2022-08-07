@@ -290,6 +290,7 @@ extension URL {
         aperushmo,
         residenceseeingstanding,
         gisttorn,
+        fimgs,
         privacy_mgmt = "privacy-mgmt",
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",
@@ -329,7 +330,8 @@ extension URL {
         hs_analytics = "hs-analytics",
         vox_cdn = "vox-cdn",
         interstitial_08 = "interstitial-08",
-        _4qdx69gg2d = "4qdx69gg2d"
+        _4qdx69gg2d = "4qdx69gg2d",
+        a_mo = "a-mo"
         
         static func response(for domain: Domain, on: URL) -> Policy.Response? {
             Self(rawValue: domain.name)

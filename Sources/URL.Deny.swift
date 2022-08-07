@@ -291,6 +291,8 @@ extension URL {
         residenceseeingstanding,
         gisttorn,
         fimgs,
+        flashnetic,
+        tynt,
         privacy_mgmt = "privacy-mgmt",
         cedexis_radar = "cedexis-radar",
         user_shield = "user-shield",

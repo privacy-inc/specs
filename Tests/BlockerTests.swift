@@ -109,6 +109,7 @@ final class BlockerTests: XCTestCase {
                                                  ".ytd-popup-container",
                                                  ".upsell-dialog-lightbox",
                                                  ".consent-bump-lightbox",
+                                                 ".consent-bump-v2-lightbox",
                                                  "#lightbox",
                                                  ".ytd-consent-bump-v2-renderer"]))
         

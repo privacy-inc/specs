@@ -84,6 +84,7 @@ enum Blocker: CaseIterable {
                                                                  ".ytd-popup-container",
                                                                  ".upsell-dialog-lightbox",
                                                                  ".consent-bump-lightbox",
+                                                                 ".consent-bump-v2-lightbox",
                                                                  "#lightbox",
                                                                  ".ytd-consent-bump-v2-renderer"])),
                     .init(trigger: .url(.instagram), action: .css([".RnEpo.Yx5HN",
